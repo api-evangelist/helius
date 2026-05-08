@@ -5,31 +5,55 @@ provider: Helius
 providerId: helius
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
 - Web3
+- Blockchain
 - Solana
 - RPC
 - DAS
-- Indexing
+- Streams
 - Rate Limiting
-- Quotas
-- Throttling
-description: Placeholder rate-limit artifact for Helius. Replace with real limits once researched.
-notes: Initial scaffold — limits have not yet been reconciled.
+description: Helius enforces per-API-key RPC requests-per-second and a monthly credit
+  cap.
+notes: DAS, sendTransaction, getProgramAccounts, Webhooks, WebSockets each consume
+  credits.
 sources:
-- https://www.helius.dev/
+- https://www.helius.dev/pricing
+- https://www.helius.dev/docs/rate-limits
 responseCodes:
   throttled: 429
 limits:
-- name: Default
+- name: Free RPC RPS
+  scope: api_key
+  metric: requests_per_second
+  limit: 10
+  notes: Free plan.
+- name: Developer RPC RPS
+  scope: api_key
+  metric: requests_per_second
+  limit: 50
+  notes: Developer plan.
+- name: Business RPC RPS
+  scope: api_key
+  metric: requests_per_second
+  limit: 200
+  notes: Business plan.
+- name: Professional RPC RPS
+  scope: api_key
+  metric: requests_per_second
+  limit: 500
+  notes: Professional plan.
+- name: Monthly Credits
   scope: account
-  metric: varies
-  limit: see provider documentation
-  notes: Pending reconciliation.
+  metric: credits
+  limit: see plan
+  notes: Monthly credit ceiling per plan.
 policies:
 - name: Backoff Strategy
-  description: Clients should implement exponential backoff with jitter and honor any Retry-After header.
+  description: Exponential backoff on 429.
+- name: Use Webhooks/LaserStream
+  description: Avoid RPC polling; subscribe via Webhooks or LaserStream gRPC.
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

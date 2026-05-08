@@ -1,6 +1,8 @@
 # Helius (helius)
 
-Helius is a Solana-focused Web3 developer platform offering RPC, enhanced transaction APIs, webhooks, the Digital Asset Standard (DAS) read API, and Solana indexing.
+Helius is a Solana developer platform offering Solana JSON-RPC, the Digital Asset Standard (DAS) API for NFTs/tokens, Enhanced Transactions, Webhooks, LaserStream gRPC streaming, Sender (transaction routing), Photon RPC, and Dedicated Nodes.
+
+Helius exposes documented JSON-RPC and REST endpoints; no public OpenAPI 3.0 file is published at this time. Specs referenced inline in https://www.helius.dev/docs.
 
 **URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/helius/refs/heads/main/apis.yml)
 
@@ -9,8 +11,17 @@ Helius is a Solana-focused Web3 developer platform offering RPC, enhanced transa
 ## Type
 - **x-type:** company
 
-## Tags:
- - Web3, Solana, RPC, DAS, Indexing
+## APIs
+- **Helius Solana RPC** - Solana JSON-RPC and WebSocket endpoints with enhanced WebSockets, archival data, and staked connections.
+- **Helius Digital Asset Standard (DAS) API** - Solana JSON-RPC API for unified asset queries (compressed NFTs, regular NFTs, tokens) including getAsset, getAssetsByOwner, searchAssets.
+- **Helius Enhanced Transactions API** - REST API for parsed and human-readable Solana transaction history with token metadata.
+- **Helius Webhooks** - REST API for managing webhook subscriptions for Solana on-chain events with parsed transaction payloads.
+- **Helius LaserStream** - Low-latency gRPC streaming of Solana account, slot, transaction, and block updates (Geyser-compatible).
+- **Helius Sender** - Parallel transaction routing through Helius and Jito for inclusion latency optimization.
+- **Helius Photon RPC (ZK Compression)** - Indexed RPC for Solana ZK compression (compressed accounts).
+
+## Tags
+ - Web3, Blockchain, Solana, RPC, DAS, Streams
 
 ## Timestamps
 - **Created:** 2026-05-08
@@ -18,9 +29,9 @@ Helius is a Solana-focused Web3 developer platform offering RPC, enhanced transa
 
 ## Common Properties
 - [Website](https://www.helius.dev/)
-- [Plans](plans/helius-plans-pricing.yml) — placeholder, pipeline reconciles later
-- [RateLimits](rate-limits/helius-rate-limits.yml) — placeholder
-- [FinOps](finops/helius-finops.yml) — FOCUS-aligned placeholder
+- [Plans](plans/helius-plans-pricing.yml)
+- [RateLimits](rate-limits/helius-rate-limits.yml)
+- [FinOps](finops/helius-finops.yml)
 
 ## Maintainers
 **FN:** Kin Lane

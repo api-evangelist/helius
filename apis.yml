@@ -2,28 +2,116 @@ aid: helius
 url: https://raw.githubusercontent.com/api-evangelist/helius/refs/heads/main/apis.yml
 name: Helius
 x-type: company
-description: >-
-  Helius is a Solana-focused Web3 developer platform offering RPC, enhanced transaction APIs, webhooks, the Digital Asset Standard (DAS) read API, and Solana indexing.
+description: Helius is a Solana developer platform offering Solana JSON-RPC, the Digital
+  Asset Standard (DAS) API for NFTs/tokens, Enhanced Transactions, Webhooks, LaserStream
+  gRPC streaming, Sender (transaction routing), Photon RPC, and Dedicated Nodes.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Web3
-  - Solana
-  - RPC
-  - DAS
-  - Indexing
+- Web3
+- Blockchain
+- Solana
+- RPC
+- DAS
+- Streams
 created: '2026-05-08'
 modified: '2026-05-08'
 specificationVersion: '0.19'
-apis: []
+apis:
+- aid: helius:rpc
+  name: Helius Solana RPC
+  description: Solana JSON-RPC and WebSocket endpoints with enhanced WebSockets, archival
+    data, and staked connections.
+  humanURL: https://www.helius.dev/docs/rpc
+  baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
+  tags:
+  - JSON-RPC
+  - Solana
+  - WebSocket
+  properties:
+  - type: Documentation
+    url: https://www.helius.dev/docs/rpc
+- aid: helius:das
+  name: Helius Digital Asset Standard (DAS) API
+  description: Solana JSON-RPC API for unified asset queries (compressed NFTs, regular
+    NFTs, tokens) including getAsset, getAssetsByOwner, searchAssets.
+  humanURL: https://www.helius.dev/docs/das-api
+  baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
+  tags:
+  - JSON-RPC
+  - DAS
+  - NFT
+  properties:
+  - type: Documentation
+    url: https://www.helius.dev/docs/das-api
+- aid: helius:enhanced-tx
+  name: Helius Enhanced Transactions API
+  description: REST API for parsed and human-readable Solana transaction history with
+    token metadata.
+  humanURL: https://www.helius.dev/docs/api-reference/enhanced-transactions-api
+  baseURL: https://api.helius.xyz/v0
+  tags:
+  - REST
+  - Transactions
+  properties:
+  - type: Documentation
+    url: https://www.helius.dev/docs/api-reference/enhanced-transactions-api
+- aid: helius:webhooks
+  name: Helius Webhooks
+  description: REST API for managing webhook subscriptions for Solana on-chain events
+    with parsed transaction payloads.
+  humanURL: https://www.helius.dev/docs/webhooks
+  baseURL: https://api.helius.xyz/v0/webhooks
+  tags:
+  - REST
+  - Webhooks
+  properties:
+  - type: Documentation
+    url: https://www.helius.dev/docs/webhooks
+- aid: helius:laserstream
+  name: Helius LaserStream
+  description: Low-latency gRPC streaming of Solana account, slot, transaction, and
+    block updates (Geyser-compatible).
+  humanURL: https://www.helius.dev/docs/laserstream
+  baseURL: grpc://laserstream-mainnet.helius-rpc.com
+  tags:
+  - gRPC
+  - Streaming
+  properties:
+  - type: Documentation
+    url: https://www.helius.dev/docs/laserstream
+- aid: helius:sender
+  name: Helius Sender
+  description: Parallel transaction routing through Helius and Jito for inclusion
+    latency optimization.
+  humanURL: https://www.helius.dev/docs/sender
+  baseURL: https://sender.helius-rpc.com
+  tags:
+  - JSON-RPC
+  - Transactions
+  - Jito
+  properties:
+  - type: Documentation
+    url: https://www.helius.dev/docs/sender
+- aid: helius:photon
+  name: Helius Photon RPC (ZK Compression)
+  description: Indexed RPC for Solana ZK compression (compressed accounts).
+  humanURL: https://www.helius.dev/docs/photon
+  baseURL: https://mainnet.helius-rpc.com
+  tags:
+  - JSON-RPC
+  - ZK Compression
+  properties:
+  - type: Documentation
+    url: https://www.helius.dev/docs/photon
 common:
-  - type: Website
-    url: https://www.helius.dev/
-  - type: Plans
-    url: plans/helius-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/helius-rate-limits.yml
-  - type: FinOps
-    url: finops/helius-finops.yml
+- type: Website
+  url: https://www.helius.dev/
+- type: Plans
+  url: plans/helius-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/helius-rate-limits.yml
+- type: FinOps
+  url: finops/helius-finops.yml
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -5,37 +5,144 @@ provider: Helius
 providerId: helius
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
 - Web3
+- Blockchain
 - Solana
 - RPC
 - DAS
-- Indexing
+- Streams
 - Plans
-description: Placeholder plans/pricing artifact for Helius. Replace with real published pricing once
-  the pipeline researches the provider's plans page.
-notes: Initial scaffold — plans/pricing have not yet been reconciled against the provider's documentation.
+description: Helius uses tiered subscriptions with monthly credit allotments and per-second
+  RPC rate limits.
+notes: Pricing as published 2026-05.
 sources:
-- https://www.helius.dev/
+- https://www.helius.dev/pricing
 plans:
-- id: helius-default
-  name: To Be Reconciled
-  type: enterprise
-  description: Initial scaffold; replace with provider plan tiers once pricing is reconciled.
+- id: helius-free
+  name: Free
+  type: free
+  description: Free plan with 1M monthly credits and 10 RPC req/sec.
   entries:
-  - label: API Access
-    name: api_access
-    type: flat
-    metric: varies
-    limit: -1
-    timeFrame: usage
+  - label: Monthly Credits
+    name: monthly_credits
+    type: included
+    metric: credits
+    limit: 1000000
+    timeFrame: month
     geo: global
     unit: 1
-    price: see https://www.helius.dev/
+    price: 0
     userMultiplied: false
   elements:
-  - name: Pending Reconciliation
+  - name: Community Support
+- id: helius-developer
+  name: Developer
+  type: paid
+  description: Developer tier with 10M monthly credits and 50 RPC req/sec.
+  entries:
+  - label: Monthly Subscription
+    name: monthly_subscription
+    type: flat
+    metric: subscription
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 49
+    userMultiplied: false
+  - label: Monthly Credits
+    name: monthly_credits
+    type: included
+    metric: credits
+    limit: 10000000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 0
+    userMultiplied: false
+  elements:
+  - name: Staked Connections
+  - name: Enhanced WebSockets
+  - name: Chat Support
+- id: helius-business
+  name: Business
+  type: paid
+  description: Business tier with 100M monthly credits and 200 RPC req/sec.
+  entries:
+  - label: Monthly Subscription
+    name: monthly_subscription
+    type: flat
+    metric: subscription
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 499
+    userMultiplied: false
+  - label: Monthly Credits
+    name: monthly_credits
+    type: included
+    metric: credits
+    limit: 100000000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 0
+    userMultiplied: false
+  elements:
+  - name: LaserStream
+  - name: Priority Chat
+  - name: sendBundle 5/sec
+- id: helius-professional
+  name: Professional
+  type: paid
+  description: Professional tier with 200M monthly credits and 500 RPC req/sec.
+  entries:
+  - label: Monthly Subscription
+    name: monthly_subscription
+    type: flat
+    metric: subscription
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 999
+    userMultiplied: false
+  - label: Monthly Credits
+    name: monthly_credits
+    type: included
+    metric: credits
+    limit: 200000000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 0
+    userMultiplied: false
+  elements:
+  - name: Telegram/Slack Support
+  - name: LaserStream Add-ons
+- id: helius-enterprise
+  name: Enterprise
+  type: enterprise
+  description: Enterprise contracts with custom credits, 4-hour SLA, and dedicated
+    nodes.
+  entries:
+  - label: Custom
+    name: custom
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Dedicated Nodes from $2,900/month
+  - name: 4-hour SLA
+  - name: LaserStream Data Add-ons
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

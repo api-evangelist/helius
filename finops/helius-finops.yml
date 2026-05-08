@@ -5,20 +5,22 @@ provider: Helius
 providerId: helius
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
 - Web3
+- Blockchain
 - Solana
 - RPC
 - DAS
-- Indexing
+- Streams
 - FinOps
-- Cost Management
 - FOCUS
-description: FOCUS-aligned FinOps placeholder for Helius. Pipeline will replace with real billing details.
-notes: Initial scaffold — billing model has not yet been reconciled.
+description: Helius bills as monthly subscription with included credits. LaserStream
+  data add-ons ($500-$4,500/month) and Dedicated Nodes ($2,900+/month) are line-itemed
+  separately.
+notes: Usage in dashboard.
 sources:
-- https://www.helius.dev/
+- https://www.helius.dev/pricing
 - https://focus.finops.org/focus-specification/v1-3/
 alignedWith:
   framework: FinOps Foundation Framework
@@ -26,16 +28,15 @@ alignedWith:
   dataSpec: FOCUS
   dataSpecVersion: '1.3'
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
-publisherName: Helius
+publisherName: Helius Labs, Inc.
 serviceCategory: Web3
 billingModel:
-  pricingCategory: To Be Reconciled
+  pricingCategory: Subscription + Usage
   billingFrequency: Monthly
   billingCurrency: USD
   chargeCategories:
   - Usage
   - Purchase
-  - Adjustment
 focusColumns:
   ServiceName: Helius
   ServiceCategory: Web3
@@ -45,22 +46,35 @@ focusColumns:
   BillingCurrency: USD
   ChargeCategory: Usage
 meters:
-- name: api_usage
-  description: Catch-all meter pending reconciliation.
-  unit: varies
+- name: credits
+  description: Helius credits consumed per request, weighted by method.
+  unit: credit
   aggregation: sum
   dimensions:
-  - account
-  - resource
+  - api_key
+  - method
+- name: laserstream_bandwidth
+  description: LaserStream gRPC bandwidth consumed.
+  unit: byte
+  aggregation: sum
+  dimensions:
+  - stream
+- name: dedicated_nodes
+  description: Dedicated node hours.
+  unit: hour
+  aggregation: sum
+  dimensions:
+  - node
 principles:
 - name: Visibility
-  description: Pull provider invoices or usage exports until a self-serve usage feed is documented.
+  description: Monitor credit consumption in the Helius dashboard.
 - name: Allocation
-  description: Tag invoice line items to consuming business units in your FinOps store.
+  description: API key per service; tag environments.
 - name: Optimization
-  description: Levers depend on the provider's billing model; review at renewal once reconciled.
+  description: Use DAS instead of getProgramAccounts; subscribe instead of poll; size
+    LaserStream filters.
 - name: Accountability
-  description: Assign a contract owner to review billing against negotiated terms.
+  description: API-key owners review monthly credit usage.
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
