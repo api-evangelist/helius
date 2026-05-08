@@ -1,0 +1,29 @@
+aid: helius
+url: https://raw.githubusercontent.com/api-evangelist/helius/refs/heads/main/apis.yml
+name: Helius
+x-type: company
+description: >-
+  Helius is a Solana-focused Web3 developer platform offering RPC, enhanced transaction APIs, webhooks, the Digital Asset Standard (DAS) read API, and Solana indexing.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Web3
+  - Solana
+  - RPC
+  - DAS
+  - Indexing
+created: '2026-05-08'
+modified: '2026-05-08'
+specificationVersion: '0.19'
+apis: []
+common:
+  - type: Website
+    url: https://www.helius.dev/
+  - type: Plans
+    url: plans/helius-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/helius-rate-limits.yml
+  - type: FinOps
+    url: finops/helius-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
