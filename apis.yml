@@ -1,7 +1,7 @@
 aid: helius
 url: https://raw.githubusercontent.com/api-evangelist/helius/refs/heads/main/apis.yml
 name: Helius
-x-type: company
+kind: company
 description: Helius is a Solana developer platform offering Solana JSON-RPC, the Digital
   Asset Standard (DAS) API for NFTs/tokens, Enhanced Transactions, Webhooks, LaserStream
   gRPC streaming, Sender (transaction routing), Photon RPC, and Dedicated Nodes.
