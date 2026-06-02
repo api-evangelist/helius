@@ -14,7 +14,7 @@ tags:
   - DAS
   - Streams
 created: '2026-05-08'
-modified: '2026-05-08'
+modified: '2026-05-29'
 specificationVersion: '0.19'
 apis:
   - aid: helius:rpc
@@ -30,6 +30,8 @@ apis:
     properties:
     - type: Documentation
       url: https://www.helius.dev/docs/rpc
+    - type: AsyncAPI
+      url: asyncapi/helius-asyncapi.yml
   - aid: helius:das
     name: Helius Digital Asset Standard (DAS) API
     description: Solana JSON-RPC API for unified asset queries (compressed NFTs, regular

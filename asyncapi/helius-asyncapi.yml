@@ -1,0 +1,1194 @@
+asyncapi: '2.6.0'
+id: 'urn:helius:websockets'
+info:
+  title: Helius WebSocket APIs
+  version: '2026-05-29'
+  description: |
+    AsyncAPI 2.6 description of Helius's real-time WebSocket interfaces for Solana.
+
+    Coverage:
+      * Standard Solana JSON-RPC PubSub subscriptions exposed by Helius RPC.
+      * Helius enhanced subscriptions (transactionSubscribe, enhanced accountSubscribe).
+      * LaserStream WebSocket (same wire protocol as standard Helius WS; runs on the
+        same infrastructure and exposes the standard Solana subscription methods plus
+        Helius-specific extensions, with lower latency).
+
+    Out of scope (not modeled here):
+      * LaserStream gRPC (Yellowstone-compatible). gRPC is not a transport supported
+        by AsyncAPI 2.6; use the official LaserStream gRPC protobuf definitions.
+      * Webhooks (REST/HTTP push) — see Helius Webhooks REST API.
+
+    Notes on stability (per Helius LaserStream WS docs as of 2026-05-29):
+      * Unsupported / unstable on LaserStream WS: blockSubscribe / blockUnsubscribe,
+        slotsUpdatesSubscribe / slotsUpdatesUnsubscribe, voteSubscribe / voteUnsubscribe.
+        These remain reachable on standard Helius RPC WS endpoints.
+  contact:
+    name: Helius Developer Support
+    url: https://www.helius.dev/docs
+  license:
+    name: Proprietary (Helius Terms)
+    url: https://www.helius.dev/terms
+  termsOfService: https://www.helius.dev/terms
+  tags:
+    - name: Solana
+    - name: WebSocket
+    - name: JSON-RPC
+    - name: PubSub
+    - name: Helius
+
+defaultContentType: application/json
+
+servers:
+  mainnet:
+    url: 'mainnet.helius-rpc.com/?api-key={apiKey}'
+    protocol: wss
+    description: |
+      Helius Solana mainnet WebSocket endpoint. Exposes both standard Solana
+      JSON-RPC PubSub subscriptions and Helius enhanced subscriptions
+      (transactionSubscribe, enhanced accountSubscribe).
+    variables:
+      apiKey:
+        description: Helius API key provisioned from the Helius dashboard.
+        default: YOUR_API_KEY
+    bindings:
+      ws:
+        bindingVersion: '0.1.0'
+  devnet:
+    url: 'devnet.helius-rpc.com/?api-key={apiKey}'
+    protocol: wss
+    description: Helius Solana devnet WebSocket endpoint.
+    variables:
+      apiKey:
+        description: Helius API key.
+        default: YOUR_API_KEY
+    bindings:
+      ws:
+        bindingVersion: '0.1.0'
+  beta:
+    url: 'beta.helius-rpc.com/?api-key={apiKey}'
+    protocol: wss
+    description: |
+      Helius beta (Gatekeeper) WebSocket endpoint. Same wire protocol as mainnet;
+      used for testing newer LaserStream WS / gatekeeper features.
+    variables:
+      apiKey:
+        description: Helius API key.
+        default: YOUR_API_KEY
+    bindings:
+      ws:
+        bindingVersion: '0.1.0'
+  atlas-mainnet:
+    url: 'atlas-mainnet.helius-rpc.com/?api-key={apiKey}'
+    protocol: wss
+    description: |
+      Legacy Atlas WebSocket endpoint historically used for Helius enhanced
+      subscriptions (transactionSubscribe). Helius has unified these methods
+      onto the standard mainnet endpoint; the Atlas host is preserved here for
+      compatibility with existing clients still pointing at it.
+    variables:
+      apiKey:
+        description: Helius API key.
+        default: YOUR_API_KEY
+    bindings:
+      ws:
+        bindingVersion: '0.1.0'
+  laserstream-mainnet-ws:
+    url: 'mainnet.helius-rpc.com/?api-key={apiKey}'
+    protocol: wss
+    description: |
+      LaserStream WebSocket (mainnet). Runs on the same backend as the standard
+      Helius WS endpoint and exposes the standard Solana subscription methods
+      plus Helius-specific extensions, with up to ~200 ms lower latency than
+      Agave RPC-based WebSockets. Requires Developer tier or higher; mainnet
+      access requires Business/Professional plans.
+    variables:
+      apiKey:
+        description: Helius API key.
+        default: YOUR_API_KEY
+    bindings:
+      ws:
+        bindingVersion: '0.1.0'
+
+channels:
+
+  accountSubscribe:
+    description: |
+      Subscribe to changes for a single Solana account. Notifications are emitted
+      when the account's lamports or data change at the configured commitment level.
+      Helius's accountSubscribe is "enhanced" on Helius WS — it accepts the standard
+      Solana parameters and runs on the same unified endpoint as transactionSubscribe.
+    bindings:
+      ws:
+        bindingVersion: '0.1.0'
+    subscribe:
+      operationId: accountNotification
+      summary: Account change notifications.
+      message:
+        $ref: '#/components/messages/AccountNotification'
+    publish:
+      operationId: accountSubscribe
+      summary: Open an accountSubscribe subscription.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/AccountSubscribeRequest'
+          - $ref: '#/components/messages/AccountUnsubscribeRequest'
+          - $ref: '#/components/messages/JsonRpcResponse'
+
+  blockSubscribe:
+    description: |
+      Subscribe to new blocks at a given commitment. Standard Solana PubSub method.
+      Marked unstable by Solana; per Helius docs this is NOT supported on LaserStream WS,
+      but is available on standard Helius mainnet/devnet WS endpoints.
+    bindings:
+      ws:
+        bindingVersion: '0.1.0'
+    subscribe:
+      operationId: blockNotification
+      summary: Block notifications.
+      message:
+        $ref: '#/components/messages/BlockNotification'
+    publish:
+      operationId: blockSubscribe
+      summary: Open a blockSubscribe subscription.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/BlockSubscribeRequest'
+          - $ref: '#/components/messages/BlockUnsubscribeRequest'
+          - $ref: '#/components/messages/JsonRpcResponse'
+
+  logsSubscribe:
+    description: Subscribe to transaction logs matching a filter (all, allWithVotes, or a specific mentions list).
+    bindings:
+      ws:
+        bindingVersion: '0.1.0'
+    subscribe:
+      operationId: logsNotification
+      summary: Log notifications.
+      message:
+        $ref: '#/components/messages/LogsNotification'
+    publish:
+      operationId: logsSubscribe
+      summary: Open a logsSubscribe subscription.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/LogsSubscribeRequest'
+          - $ref: '#/components/messages/LogsUnsubscribeRequest'
+          - $ref: '#/components/messages/JsonRpcResponse'
+
+  programSubscribe:
+    description: Subscribe to all account changes owned by a given program.
+    bindings:
+      ws:
+        bindingVersion: '0.1.0'
+    subscribe:
+      operationId: programNotification
+      summary: Program account notifications.
+      message:
+        $ref: '#/components/messages/ProgramNotification'
+    publish:
+      operationId: programSubscribe
+      summary: Open a programSubscribe subscription.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/ProgramSubscribeRequest'
+          - $ref: '#/components/messages/ProgramUnsubscribeRequest'
+          - $ref: '#/components/messages/JsonRpcResponse'
+
+  signatureSubscribe:
+    description: Subscribe to confirmation status of a single transaction signature.
+    bindings:
+      ws:
+        bindingVersion: '0.1.0'
+    subscribe:
+      operationId: signatureNotification
+      summary: Signature confirmation notifications.
+      message:
+        $ref: '#/components/messages/SignatureNotification'
+    publish:
+      operationId: signatureSubscribe
+      summary: Open a signatureSubscribe subscription.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/SignatureSubscribeRequest'
+          - $ref: '#/components/messages/SignatureUnsubscribeRequest'
+          - $ref: '#/components/messages/JsonRpcResponse'
+
+  slotSubscribe:
+    description: Subscribe to slot processing notifications.
+    bindings:
+      ws:
+        bindingVersion: '0.1.0'
+    subscribe:
+      operationId: slotNotification
+      summary: Slot notifications.
+      message:
+        $ref: '#/components/messages/SlotNotification'
+    publish:
+      operationId: slotSubscribe
+      summary: Open a slotSubscribe subscription.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/SlotSubscribeRequest'
+          - $ref: '#/components/messages/SlotUnsubscribeRequest'
+          - $ref: '#/components/messages/JsonRpcResponse'
+
+  slotsUpdatesSubscribe:
+    description: |
+      Subscribe to detailed slot status updates (firstShredReceived, completed,
+      createdBank, frozen, dead, optimisticConfirmation, root). Marked unstable.
+      Per Helius docs this is NOT supported on LaserStream WS, but is reachable
+      on standard Helius mainnet/devnet WS endpoints.
+    bindings:
+      ws:
+        bindingVersion: '0.1.0'
+    subscribe:
+      operationId: slotsUpdatesNotification
+      summary: Slot update notifications.
+      message:
+        $ref: '#/components/messages/SlotsUpdatesNotification'
+    publish:
+      operationId: slotsUpdatesSubscribe
+      summary: Open a slotsUpdatesSubscribe subscription.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/SlotsUpdatesSubscribeRequest'
+          - $ref: '#/components/messages/SlotsUpdatesUnsubscribeRequest'
+          - $ref: '#/components/messages/JsonRpcResponse'
+
+  voteSubscribe:
+    description: |
+      Subscribe to vote notifications from the gossip network. Marked unstable.
+      Per Helius docs this is NOT supported on LaserStream WS, but is reachable
+      on standard Helius mainnet/devnet WS endpoints.
+    bindings:
+      ws:
+        bindingVersion: '0.1.0'
+    subscribe:
+      operationId: voteNotification
+      summary: Vote notifications.
+      message:
+        $ref: '#/components/messages/VoteNotification'
+    publish:
+      operationId: voteSubscribe
+      summary: Open a voteSubscribe subscription.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/VoteSubscribeRequest'
+          - $ref: '#/components/messages/VoteUnsubscribeRequest'
+          - $ref: '#/components/messages/JsonRpcResponse'
+
+  rootSubscribe:
+    description: Subscribe to root slot notifications.
+    bindings:
+      ws:
+        bindingVersion: '0.1.0'
+    subscribe:
+      operationId: rootNotification
+      summary: Root slot notifications.
+      message:
+        $ref: '#/components/messages/RootNotification'
+    publish:
+      operationId: rootSubscribe
+      summary: Open a rootSubscribe subscription.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/RootSubscribeRequest'
+          - $ref: '#/components/messages/RootUnsubscribeRequest'
+          - $ref: '#/components/messages/JsonRpcResponse'
+
+  transactionSubscribe:
+    description: |
+      Helius enhanced subscription. Streams transactions matched by a
+      TransactionSubscribeFilter (vote, failed, signature, accountInclude up to 50,000,
+      accountExclude up to 50,000, accountRequired up to 50,000) and shaped by
+      TransactionSubscribeOptions (commitment, encoding, transactionDetails, showRewards,
+      maxSupportedTransactionVersion).
+
+      Available on Helius mainnet/devnet WS endpoints (and the legacy atlas-mainnet
+      endpoint). LaserStream WS supports transactionSubscribe with lower latency.
+    bindings:
+      ws:
+        bindingVersion: '0.1.0'
+    subscribe:
+      operationId: transactionNotification
+      summary: Filtered transaction notifications.
+      message:
+        $ref: '#/components/messages/TransactionNotification'
+    publish:
+      operationId: transactionSubscribe
+      summary: Open a transactionSubscribe subscription.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/TransactionSubscribeRequest'
+          - $ref: '#/components/messages/TransactionUnsubscribeRequest'
+          - $ref: '#/components/messages/JsonRpcResponse'
+
+components:
+
+  messages:
+
+    # -------- Standard Solana subscription requests --------
+
+    AccountSubscribeRequest:
+      name: accountSubscribe
+      title: accountSubscribe request
+      summary: JSON-RPC request opening an accountSubscribe subscription.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/AccountSubscribeRequestPayload'
+
+    AccountUnsubscribeRequest:
+      name: accountUnsubscribe
+      title: accountUnsubscribe request
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/UnsubscribeRequestPayload'
+
+    BlockSubscribeRequest:
+      name: blockSubscribe
+      title: blockSubscribe request
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/BlockSubscribeRequestPayload'
+
+    BlockUnsubscribeRequest:
+      name: blockUnsubscribe
+      title: blockUnsubscribe request
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/UnsubscribeRequestPayload'
+
+    LogsSubscribeRequest:
+      name: logsSubscribe
+      title: logsSubscribe request
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/LogsSubscribeRequestPayload'
+
+    LogsUnsubscribeRequest:
+      name: logsUnsubscribe
+      title: logsUnsubscribe request
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/UnsubscribeRequestPayload'
+
+    ProgramSubscribeRequest:
+      name: programSubscribe
+      title: programSubscribe request
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ProgramSubscribeRequestPayload'
+
+    ProgramUnsubscribeRequest:
+      name: programUnsubscribe
+      title: programUnsubscribe request
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/UnsubscribeRequestPayload'
+
+    SignatureSubscribeRequest:
+      name: signatureSubscribe
+      title: signatureSubscribe request
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SignatureSubscribeRequestPayload'
+
+    SignatureUnsubscribeRequest:
+      name: signatureUnsubscribe
+      title: signatureUnsubscribe request
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/UnsubscribeRequestPayload'
+
+    SlotSubscribeRequest:
+      name: slotSubscribe
+      title: slotSubscribe request
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SlotSubscribeRequestPayload'
+
+    SlotUnsubscribeRequest:
+      name: slotUnsubscribe
+      title: slotUnsubscribe request
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/UnsubscribeRequestPayload'
+
+    SlotsUpdatesSubscribeRequest:
+      name: slotsUpdatesSubscribe
+      title: slotsUpdatesSubscribe request
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SlotsUpdatesSubscribeRequestPayload'
+
+    SlotsUpdatesUnsubscribeRequest:
+      name: slotsUpdatesUnsubscribe
+      title: slotsUpdatesUnsubscribe request
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/UnsubscribeRequestPayload'
+
+    VoteSubscribeRequest:
+      name: voteSubscribe
+      title: voteSubscribe request
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/VoteSubscribeRequestPayload'
+
+    VoteUnsubscribeRequest:
+      name: voteUnsubscribe
+      title: voteUnsubscribe request
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/UnsubscribeRequestPayload'
+
+    RootSubscribeRequest:
+      name: rootSubscribe
+      title: rootSubscribe request
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/RootSubscribeRequestPayload'
+
+    RootUnsubscribeRequest:
+      name: rootUnsubscribe
+      title: rootUnsubscribe request
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/UnsubscribeRequestPayload'
+
+    TransactionSubscribeRequest:
+      name: transactionSubscribe
+      title: transactionSubscribe request
+      summary: Helius enhanced subscription opening a filtered transaction stream.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/TransactionSubscribeRequestPayload'
+
+    TransactionUnsubscribeRequest:
+      name: transactionUnsubscribe
+      title: transactionUnsubscribe request
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/UnsubscribeRequestPayload'
+
+    # -------- Generic JSON-RPC response (subscription id or unsubscribe ack) --------
+
+    JsonRpcResponse:
+      name: jsonRpcResponse
+      title: JSON-RPC response
+      summary: Response to a subscribe / unsubscribe request — carries the subscription id (subscribe) or a boolean (unsubscribe).
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/JsonRpcResponse'
+
+    # -------- Notification messages --------
+
+    AccountNotification:
+      name: accountNotification
+      title: accountNotification
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/AccountNotificationPayload'
+
+    BlockNotification:
+      name: blockNotification
+      title: blockNotification
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/BlockNotificationPayload'
+
+    LogsNotification:
+      name: logsNotification
+      title: logsNotification
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/LogsNotificationPayload'
+
+    ProgramNotification:
+      name: programNotification
+      title: programNotification
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ProgramNotificationPayload'
+
+    SignatureNotification:
+      name: signatureNotification
+      title: signatureNotification
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SignatureNotificationPayload'
+
+    SlotNotification:
+      name: slotNotification
+      title: slotNotification
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SlotNotificationPayload'
+
+    SlotsUpdatesNotification:
+      name: slotsUpdatesNotification
+      title: slotsUpdatesNotification
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SlotsUpdatesNotificationPayload'
+
+    VoteNotification:
+      name: voteNotification
+      title: voteNotification
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/VoteNotificationPayload'
+
+    RootNotification:
+      name: rootNotification
+      title: rootNotification
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/RootNotificationPayload'
+
+    TransactionNotification:
+      name: transactionNotification
+      title: transactionNotification
+      summary: Helius enhanced transactionNotification payload.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/TransactionNotificationPayload'
+
+  schemas:
+
+    # ----- JSON-RPC envelopes -----
+
+    JsonRpcRequestBase:
+      type: object
+      required: [jsonrpc, id, method]
+      properties:
+        jsonrpc:
+          type: string
+          const: '2.0'
+        id:
+          oneOf:
+            - { type: integer }
+            - { type: string }
+        method:
+          type: string
+        params:
+          type: array
+
+    JsonRpcResponse:
+      type: object
+      required: [jsonrpc, id]
+      properties:
+        jsonrpc:
+          type: string
+          const: '2.0'
+        id:
+          oneOf:
+            - { type: integer }
+            - { type: string }
+        result:
+          description: For subscribe — a subscription id (integer). For unsubscribe — a boolean.
+          oneOf:
+            - { type: integer, description: Subscription id. }
+            - { type: boolean, description: Unsubscribe acknowledgement. }
+        error:
+          $ref: '#/components/schemas/JsonRpcError'
+
+    JsonRpcError:
+      type: object
+      required: [code, message]
+      properties:
+        code: { type: integer }
+        message: { type: string }
+        data: {}
+
+    JsonRpcNotificationBase:
+      type: object
+      required: [jsonrpc, method, params]
+      properties:
+        jsonrpc:
+          type: string
+          const: '2.0'
+        method: { type: string }
+        params:
+          type: object
+          required: [subscription]
+          properties:
+            subscription: { type: integer }
+            result: {}
+
+    # ----- Common Solana types -----
+
+    Commitment:
+      type: string
+      enum: [processed, confirmed, finalized]
+
+    Encoding:
+      type: string
+      enum: [base58, base64, base64+zstd, jsonParsed]
+
+    Context:
+      type: object
+      required: [slot]
+      properties:
+        slot: { type: integer, format: int64 }
+        apiVersion: { type: string }
+
+    AccountInfo:
+      type: object
+      required: [lamports, owner, executable, rentEpoch]
+      properties:
+        lamports: { type: integer, format: int64 }
+        owner: { type: string, description: Base58 program owner. }
+        data:
+          description: Encoded account data — string + encoding tuple, jsonParsed object, or base64+zstd encoded array.
+        executable: { type: boolean }
+        rentEpoch: { type: integer, format: int64 }
+        space: { type: integer }
+
+    UnsubscribeRequestPayload:
+      allOf:
+        - $ref: '#/components/schemas/JsonRpcRequestBase'
+        - type: object
+          properties:
+            method:
+              type: string
+              enum:
+                - accountUnsubscribe
+                - blockUnsubscribe
+                - logsUnsubscribe
+                - programUnsubscribe
+                - signatureUnsubscribe
+                - slotUnsubscribe
+                - slotsUpdatesUnsubscribe
+                - voteUnsubscribe
+                - rootUnsubscribe
+                - transactionUnsubscribe
+            params:
+              type: array
+              minItems: 1
+              maxItems: 1
+              items:
+                type: integer
+                description: Subscription id returned by the corresponding subscribe call.
+
+    # ----- accountSubscribe -----
+
+    AccountSubscribeRequestPayload:
+      allOf:
+        - $ref: '#/components/schemas/JsonRpcRequestBase'
+        - type: object
+          properties:
+            method:
+              type: string
+              const: accountSubscribe
+            params:
+              type: array
+              minItems: 1
+              maxItems: 2
+              items:
+                oneOf:
+                  - type: string
+                    description: Base58 account public key.
+                  - type: object
+                    properties:
+                      commitment: { $ref: '#/components/schemas/Commitment' }
+                      encoding: { $ref: '#/components/schemas/Encoding' }
+
+    AccountNotificationPayload:
+      allOf:
+        - $ref: '#/components/schemas/JsonRpcNotificationBase'
+        - type: object
+          properties:
+            method:
+              type: string
+              const: accountNotification
+            params:
+              type: object
+              required: [subscription, result]
+              properties:
+                subscription: { type: integer }
+                result:
+                  type: object
+                  required: [context, value]
+                  properties:
+                    context: { $ref: '#/components/schemas/Context' }
+                    value: { $ref: '#/components/schemas/AccountInfo' }
+
+    # ----- blockSubscribe -----
+
+    BlockSubscribeRequestPayload:
+      allOf:
+        - $ref: '#/components/schemas/JsonRpcRequestBase'
+        - type: object
+          properties:
+            method:
+              type: string
+              const: blockSubscribe
+            params:
+              type: array
+              minItems: 1
+              maxItems: 2
+              items:
+                oneOf:
+                  - type: string
+                    enum: [all]
+                  - type: object
+                    properties:
+                      mentionsAccountOrProgram: { type: string }
+                  - type: object
+                    properties:
+                      commitment: { $ref: '#/components/schemas/Commitment' }
+                      encoding: { $ref: '#/components/schemas/Encoding' }
+                      transactionDetails:
+                        type: string
+                        enum: [full, accounts, signatures, none]
+                      showRewards: { type: boolean }
+                      maxSupportedTransactionVersion: { type: integer, enum: [0] }
+
+    BlockNotificationPayload:
+      allOf:
+        - $ref: '#/components/schemas/JsonRpcNotificationBase'
+        - type: object
+          properties:
+            method:
+              type: string
+              const: blockNotification
+            params:
+              type: object
+              required: [subscription, result]
+              properties:
+                subscription: { type: integer }
+                result:
+                  type: object
+                  required: [context, value]
+                  properties:
+                    context: { $ref: '#/components/schemas/Context' }
+                    value:
+                      type: object
+                      properties:
+                        slot: { type: integer, format: int64 }
+                        err: {}
+                        block:
+                          type: object
+                          properties:
+                            blockhash: { type: string }
+                            previousBlockhash: { type: string }
+                            parentSlot: { type: integer, format: int64 }
+                            transactions:
+                              type: array
+                              items: { type: object }
+                            rewards:
+                              type: array
+                              items: { type: object }
+                            blockTime: { type: integer, format: int64 }
+                            blockHeight: { type: integer, format: int64 }
+
+    # ----- logsSubscribe -----
+
+    LogsSubscribeRequestPayload:
+      allOf:
+        - $ref: '#/components/schemas/JsonRpcRequestBase'
+        - type: object
+          properties:
+            method:
+              type: string
+              const: logsSubscribe
+            params:
+              type: array
+              minItems: 1
+              maxItems: 2
+              items:
+                oneOf:
+                  - type: string
+                    enum: [all, allWithVotes]
+                  - type: object
+                    properties:
+                      mentions:
+                        type: array
+                        maxItems: 1
+                        items: { type: string }
+                  - type: object
+                    properties:
+                      commitment: { $ref: '#/components/schemas/Commitment' }
+
+    LogsNotificationPayload:
+      allOf:
+        - $ref: '#/components/schemas/JsonRpcNotificationBase'
+        - type: object
+          properties:
+            method:
+              type: string
+              const: logsNotification
+            params:
+              type: object
+              required: [subscription, result]
+              properties:
+                subscription: { type: integer }
+                result:
+                  type: object
+                  required: [context, value]
+                  properties:
+                    context: { $ref: '#/components/schemas/Context' }
+                    value:
+                      type: object
+                      properties:
+                        signature: { type: string }
+                        err: {}
+                        logs:
+                          type: array
+                          items: { type: string }
+
+    # ----- programSubscribe -----
+
+    ProgramSubscribeRequestPayload:
+      allOf:
+        - $ref: '#/components/schemas/JsonRpcRequestBase'
+        - type: object
+          properties:
+            method:
+              type: string
+              const: programSubscribe
+            params:
+              type: array
+              minItems: 1
+              maxItems: 2
+              items:
+                oneOf:
+                  - type: string
+                    description: Base58 program id.
+                  - type: object
+                    properties:
+                      commitment: { $ref: '#/components/schemas/Commitment' }
+                      encoding: { $ref: '#/components/schemas/Encoding' }
+                      filters:
+                        type: array
+                        items:
+                          oneOf:
+                            - type: object
+                              properties:
+                                dataSize: { type: integer }
+                            - type: object
+                              properties:
+                                memcmp:
+                                  type: object
+                                  properties:
+                                    offset: { type: integer }
+                                    bytes: { type: string }
+
+    ProgramNotificationPayload:
+      allOf:
+        - $ref: '#/components/schemas/JsonRpcNotificationBase'
+        - type: object
+          properties:
+            method:
+              type: string
+              const: programNotification
+            params:
+              type: object
+              required: [subscription, result]
+              properties:
+                subscription: { type: integer }
+                result:
+                  type: object
+                  required: [context, value]
+                  properties:
+                    context: { $ref: '#/components/schemas/Context' }
+                    value:
+                      type: object
+                      properties:
+                        pubkey: { type: string }
+                        account: { $ref: '#/components/schemas/AccountInfo' }
+
+    # ----- signatureSubscribe -----
+
+    SignatureSubscribeRequestPayload:
+      allOf:
+        - $ref: '#/components/schemas/JsonRpcRequestBase'
+        - type: object
+          properties:
+            method:
+              type: string
+              const: signatureSubscribe
+            params:
+              type: array
+              minItems: 1
+              maxItems: 2
+              items:
+                oneOf:
+                  - type: string
+                    description: Transaction signature (base58).
+                  - type: object
+                    properties:
+                      commitment: { $ref: '#/components/schemas/Commitment' }
+                      enableReceivedNotification: { type: boolean }
+
+    SignatureNotificationPayload:
+      allOf:
+        - $ref: '#/components/schemas/JsonRpcNotificationBase'
+        - type: object
+          properties:
+            method:
+              type: string
+              const: signatureNotification
+            params:
+              type: object
+              required: [subscription, result]
+              properties:
+                subscription: { type: integer }
+                result:
+                  type: object
+                  required: [context, value]
+                  properties:
+                    context: { $ref: '#/components/schemas/Context' }
+                    value:
+                      oneOf:
+                        - type: object
+                          properties:
+                            err: {}
+                        - type: string
+                          enum: [receivedSignature]
+
+    # ----- slotSubscribe -----
+
+    SlotSubscribeRequestPayload:
+      allOf:
+        - $ref: '#/components/schemas/JsonRpcRequestBase'
+        - type: object
+          properties:
+            method:
+              type: string
+              const: slotSubscribe
+            params:
+              type: array
+              maxItems: 0
+
+    SlotNotificationPayload:
+      allOf:
+        - $ref: '#/components/schemas/JsonRpcNotificationBase'
+        - type: object
+          properties:
+            method:
+              type: string
+              const: slotNotification
+            params:
+              type: object
+              required: [subscription, result]
+              properties:
+                subscription: { type: integer }
+                result:
+                  type: object
+                  properties:
+                    parent: { type: integer, format: int64 }
+                    root: { type: integer, format: int64 }
+                    slot: { type: integer, format: int64 }
+
+    # ----- slotsUpdatesSubscribe -----
+
+    SlotsUpdatesSubscribeRequestPayload:
+      allOf:
+        - $ref: '#/components/schemas/JsonRpcRequestBase'
+        - type: object
+          properties:
+            method:
+              type: string
+              const: slotsUpdatesSubscribe
+            params:
+              type: array
+              maxItems: 0
+
+    SlotsUpdatesNotificationPayload:
+      allOf:
+        - $ref: '#/components/schemas/JsonRpcNotificationBase'
+        - type: object
+          properties:
+            method:
+              type: string
+              const: slotsUpdatesNotification
+            params:
+              type: object
+              required: [subscription, result]
+              properties:
+                subscription: { type: integer }
+                result:
+                  type: object
+                  properties:
+                    parent: { type: integer, format: int64 }
+                    slot: { type: integer, format: int64 }
+                    timestamp: { type: integer, format: int64 }
+                    type:
+                      type: string
+                      enum:
+                        - firstShredReceived
+                        - completed
+                        - createdBank
+                        - frozen
+                        - dead
+                        - optimisticConfirmation
+                        - root
+
+    # ----- voteSubscribe -----
+
+    VoteSubscribeRequestPayload:
+      allOf:
+        - $ref: '#/components/schemas/JsonRpcRequestBase'
+        - type: object
+          properties:
+            method:
+              type: string
+              const: voteSubscribe
+            params:
+              type: array
+              maxItems: 0
+
+    VoteNotificationPayload:
+      allOf:
+        - $ref: '#/components/schemas/JsonRpcNotificationBase'
+        - type: object
+          properties:
+            method:
+              type: string
+              const: voteNotification
+            params:
+              type: object
+              required: [subscription, result]
+              properties:
+                subscription: { type: integer }
+                result:
+                  type: object
+                  properties:
+                    hash: { type: string }
+                    slots:
+                      type: array
+                      items: { type: integer, format: int64 }
+                    timestamp: { type: integer, format: int64 }
+                    signature: { type: string }
+                    votePubkey: { type: string }
+
+    # ----- rootSubscribe -----
+
+    RootSubscribeRequestPayload:
+      allOf:
+        - $ref: '#/components/schemas/JsonRpcRequestBase'
+        - type: object
+          properties:
+            method:
+              type: string
+              const: rootSubscribe
+            params:
+              type: array
+              maxItems: 0
+
+    RootNotificationPayload:
+      allOf:
+        - $ref: '#/components/schemas/JsonRpcNotificationBase'
+        - type: object
+          properties:
+            method:
+              type: string
+              const: rootNotification
+            params:
+              type: object
+              required: [subscription, result]
+              properties:
+                subscription: { type: integer }
+                result:
+                  type: integer
+                  format: int64
+                  description: New root slot.
+
+    # ----- transactionSubscribe (Helius enhanced) -----
+
+    TransactionSubscribeFilter:
+      type: object
+      description: |
+        Filter controlling which transactions trigger transactionNotification.
+        All fields optional; combine for precise matching. Account lists support
+        up to 50,000 addresses each per the Helius docs.
+      properties:
+        vote:
+          type: boolean
+          description: Include or exclude voting transactions.
+        failed:
+          type: boolean
+          description: Include or exclude failed transactions.
+        signature:
+          type: string
+          description: Filter to a specific transaction signature.
+        accountInclude:
+          type: array
+          maxItems: 50000
+          items: { type: string }
+          description: List of accounts for which you want to receive transaction updates.
+        accountExclude:
+          type: array
+          maxItems: 50000
+          items: { type: string }
+          description: Accounts to exclude from notifications.
+        accountRequired:
+          type: array
+          maxItems: 50000
+          items: { type: string }
+          description: Transactions must include all of the specified accounts to match.
+
+    TransactionSubscribeOptions:
+      type: object
+      description: Optional shaping of the notification payload.
+      properties:
+        commitment: { $ref: '#/components/schemas/Commitment' }
+        encoding:
+          type: string
+          enum: [base58, base64, jsonParsed]
+        transactionDetails:
+          type: string
+          enum: [full, signatures, accounts, none]
+        showRewards:
+          type: boolean
+        maxSupportedTransactionVersion:
+          type: integer
+          enum: [0]
+          description: Required for accounts/full detail levels; 0 yields both legacy and v0 transactions.
+
+    TransactionSubscribeRequestPayload:
+      allOf:
+        - $ref: '#/components/schemas/JsonRpcRequestBase'
+        - type: object
+          properties:
+            method:
+              type: string
+              const: transactionSubscribe
+            params:
+              type: array
+              minItems: 1
+              maxItems: 2
+              items:
+                oneOf:
+                  - $ref: '#/components/schemas/TransactionSubscribeFilter'
+                  - $ref: '#/components/schemas/TransactionSubscribeOptions'
+
+    TransactionNotificationPayload:
+      allOf:
+        - $ref: '#/components/schemas/JsonRpcNotificationBase'
+        - type: object
+          properties:
+            method:
+              type: string
+              const: transactionNotification
+            params:
+              type: object
+              required: [subscription, result]
+              properties:
+                subscription: { type: integer }
+                result:
+                  type: object
+                  properties:
+                    signature:
+                      type: string
+                      description: Transaction signature (base58).
+                    slot:
+                      type: integer
+                      format: int64
+                    transaction:
+                      description: Transaction payload — shape depends on encoding/transactionDetails.
+                    transactionIndex:
+                      type: integer
+                      description: Index of the transaction within its slot.
