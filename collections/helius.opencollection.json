@@ -1,0 +1,1045 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Helius API Catalog",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "NFTs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns all NFT related events associated with the given address.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v0/addresses/:address/nft-events",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Start searching backwards from this transaction signature."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "Search until this transaction signature."
+              },
+              {
+                "name": "commitment",
+                "value": "",
+                "type": "query",
+                "description": "How finalized a block must be to be included in the search. If not provided, will default to \"finalized\" commitment. Note that \"processed\" level commitment is not supported."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "The address to query for."
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "The TransactionSource to filter by. For a list of possible options, see the Transaction Types section."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The TransactionType to filter by. For a list of possible options, see the Transaction Types section."
+              }
+            ]
+          },
+          "docs": "Retrieve comprehensive NFT events data for any Solana address. Filter by event types, \ntransaction sources, and time ranges to get precise NFT activity including mints, \nsales, listings, and transfers.\n"
+        },
+        {
+          "info": {
+            "name": "Returns the NFTs held for a given address.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v0/addresses/:address/nfts",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "The address to query for."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The page number used for pagination."
+              }
+            ]
+          },
+          "docs": "Returns the NFTs held for a given address."
+        },
+        {
+          "info": {
+            "name": "Queries for NFT events.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/v1/nft-events",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Queries for NFT events."
+        },
+        {
+          "info": {
+            "name": "Describes the provided NFTs.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/v1/nfts",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Describes the provided NFTs."
+        },
+        {
+          "info": {
+            "name": "Returns a list of mint accounts for a given NFT collection.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/v1/mintlist",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a list of mint accounts for a given NFT collection."
+        },
+        {
+          "info": {
+            "name": "Query for active NFT listings.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/v1/active-listings",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Query for active NFT listings."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns an enhanced transaction history for a given address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v0/addresses/:address/transactions",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              },
+              {
+                "name": "before-signature",
+                "value": "",
+                "type": "query",
+                "description": "Start searching backwards from this transaction signature."
+              },
+              {
+                "name": "after-signature",
+                "value": "",
+                "type": "query",
+                "description": "Start searching forwards from this transaction signature."
+              },
+              {
+                "name": "commitment",
+                "value": "",
+                "type": "query",
+                "description": "How finalized a block must be to be included in the search. If not provided, will default to \"finalized\" commitment. Note that \"processed\" level commitment is not supported."
+              },
+              {
+                "name": "token-accounts",
+                "value": "",
+                "type": "query",
+                "description": "Filter transactions for related token accounts. Controls whether to include transactions involving token accounts owned by the address."
+              },
+              {
+                "name": "sort-order",
+                "value": "",
+                "type": "query",
+                "description": "The order to sort the results in."
+              },
+              {
+                "name": "gt-slot",
+                "value": "",
+                "type": "query",
+                "description": "Only return transactions with a slot greater than this value."
+              },
+              {
+                "name": "gte-slot",
+                "value": "",
+                "type": "query",
+                "description": "Only return transactions with a slot greater than or equal to this value."
+              },
+              {
+                "name": "lt-slot",
+                "value": "",
+                "type": "query",
+                "description": "Only return transactions with a slot less than this value."
+              },
+              {
+                "name": "lte-slot",
+                "value": "",
+                "type": "query",
+                "description": "Only return transactions with a slot less than or equal to this value."
+              },
+              {
+                "name": "gt-time",
+                "value": "",
+                "type": "query",
+                "description": "Only return transactions with a block time greater than this value."
+              },
+              {
+                "name": "gte-time",
+                "value": "",
+                "type": "query",
+                "description": "Only return transactions with a block time greater than or equal to this value."
+              },
+              {
+                "name": "lt-time",
+                "value": "",
+                "type": "query",
+                "description": "Only return transactions with a block time less than this value."
+              },
+              {
+                "name": "lte-time",
+                "value": "",
+                "type": "query",
+                "description": "Only return transactions with a block time less than or equal to this value."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "The address to query for."
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "The TransactionSource to filter by. For a list of possible options, see the Transaction Types section."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The TransactionType to filter by. For a list of possible options, see the Transaction Types section."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of transactions to retrieve. The value should be between 1 and 100."
+              }
+            ]
+          },
+          "docs": "Access comprehensive transaction history for any Solana address with human-readable \ndecoded data. Filter by transaction types, sources, and time ranges to get detailed\ninsights into wallet activity with context and decoded instructions.\n"
+        },
+        {
+          "info": {
+            "name": "Returns raw transaction history for a given address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v0/addresses/:address/raw-transactions",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Start searching backwards from this transaction signature."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "Search until this transaction signature."
+              },
+              {
+                "name": "commitment",
+                "value": "",
+                "type": "query",
+                "description": "How finalized a block must be to be included in the search. If not provided, will default to \"finalized\" commitment. Note that \"processed\" level commitment is not supported."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "The address to query for."
+              }
+            ]
+          },
+          "docs": "Retrieve complete raw transaction data for any Solana address with full\ntransaction details in their original format. Access historical transaction \ndata with precise time filtering options.\n"
+        },
+        {
+          "info": {
+            "name": "Returns an array of enhanced, human-readable versions of the given transactions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/v0/transactions",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              },
+              {
+                "name": "commitment",
+                "value": "",
+                "type": "query",
+                "description": "How finalized a block must be to be included in the search. If not provided, will default to \"finalized\" commitment. Note that \"processed\" level commitment is not supported."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Convert raw Solana transactions into enhanced, human-readable formats with\ndecoded instruction data and contextual information. Process multiple transactions\nin a single request for efficient data analysis and display.\n"
+        },
+        {
+          "info": {
+            "name": "Returns an array of raw (directly from RPC) transactions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/v0/raw-transactions",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              },
+              {
+                "name": "commitment",
+                "value": "",
+                "type": "query",
+                "description": "How finalized a block must be to be included in the search. If not provided, will default to \"finalized\" commitment. Note that \"processed\" level commitment is not supported."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns an array of raw (directly from RPC) transactions."
+        },
+        {
+          "info": {
+            "name": "Returns an array of raw transactions for the given accounts.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/v1/raw-transactions",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns an array of raw transactions for the given accounts."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns token metadata (whether NFT or Fungible) for a given token address.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/v0/tokens/metadata",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns token metadata (whether NFT or Fungible) for a given token address."
+        },
+        {
+          "info": {
+            "name": "Returns all metadata associated with an account, including data from the old token list.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/v0/token-metadata",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all metadata associated with an account, including data from the old token list."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Addresses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns the Solana Naming Service name for a given address.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v0/addresses/:address/names",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "The address to query for."
+              }
+            ]
+          },
+          "docs": "Returns the Solana Naming Service name for a given address."
+        },
+        {
+          "info": {
+            "name": "Returns the native balance and token balances for a given address.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v0/addresses/:address/balances",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "The address to query for."
+              }
+            ]
+          },
+          "docs": "Returns the native balance and token balances for a given address."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns all webhooks.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v0/webhooks",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              }
+            ]
+          },
+          "docs": "Retrieve a complete list of all configured webhooks for your API key with detailed\nconfiguration information including trigger conditions, delivery endpoints, and status.\n"
+        },
+        {
+          "info": {
+            "name": "Creates a webhook.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/v0/webhooks",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new webhook for real-time Solana blockchain notifications. Configure triggers \nbased on addresses, transaction types, or specific on-chain events. Customize delivery \noptions and notification formatting for seamless integration with your application.\n"
+        },
+        {
+          "info": {
+            "name": "Returns given Webhook.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v0/webhooks/:webhookID",
+            "params": [
+              {
+                "name": "webhookID",
+                "value": "",
+                "type": "path",
+                "description": "The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+              },
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information about a specific webhook configuration by its unique ID.\nAccess complete webhook settings including trigger conditions, delivery endpoints, and status metrics.\n"
+        },
+        {
+          "info": {
+            "name": "Edits a webhook.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://mainnet.helius-rpc.com/v0/webhooks/:webhookID",
+            "params": [
+              {
+                "name": "webhookID",
+                "value": "",
+                "type": "path",
+                "description": "The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+              },
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing webhook configuration with new trigger conditions, delivery endpoints,\nor notification formatting. Modify your real-time blockchain notification settings to adapt\nto changing application requirements without service interruption.\n"
+        },
+        {
+          "info": {
+            "name": "Toggle a webhook on or off.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://mainnet.helius-rpc.com/v0/webhooks/:webhookID",
+            "params": [
+              {
+                "name": "webhookID",
+                "value": "",
+                "type": "path",
+                "description": "The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+              },
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enable or disable a webhook without deleting it. Use this to re-enable a webhook that\nwas automatically disabled due to a high endpoint failure rate, or to temporarily pause\ndeliveries. After re-enabling, the webhook enters a 24-hour grace period during which it\nwill not be automatically disabled again.\n"
+        },
+        {
+          "info": {
+            "name": "Deletes a webhook.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://mainnet.helius-rpc.com/v0/webhooks/:webhookID",
+            "params": [
+              {
+                "name": "webhookID",
+                "value": "",
+                "type": "path",
+                "description": "The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+              },
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              }
+            ]
+          },
+          "docs": "Permanently remove a webhook configuration from your account. Immediately stop\nreceiving notifications for the specified webhook trigger conditions and free up\nresources for other webhook configurations.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Identity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get wallet identity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v1/wallet/:wallet/identity",
+            "params": [
+              {
+                "name": "wallet",
+                "value": "",
+                "type": "path",
+                "description": "Solana wallet address (base58 encoded) or SNS/ANS domain name (e.g. `toly.sol`,\n`miester.bonk`). Domain resolution is mainnet-only. Any non-`.sol` domain is treated\nas an ANS custom TLD — there is no fixed TLD whitelist.\n"
+              }
+            ]
+          },
+          "docs": "Retrieve identity information for a known wallet (exchanges, protocols, etc.). Accepts\neither a Solana wallet address or an SNS (`.sol`) / ANS custom TLD domain name\n(e.g. `toly.sol`, `miester.bonk`). Domain resolution is mainnet-only.\n\nThe response is the standard identity object for the **resolved address**. No domain\nmarker (`inputDomain`) is attached on this endpoint — use `POST /v1/wallet/batch-identity`\nif you need to correlate inputs with outputs.\n\nReturns `404` if the wallet has no ident"
+        },
+        {
+          "info": {
+            "name": "Batch identity lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/v1/wallet/batch-identity",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve identity information for multiple entries in a single request. Each entry may be\neither a Solana wallet address or an SNS (`.sol`) / ANS custom TLD domain name. Domain\nresolution is mainnet-only.\n\nUnresolvable domain entries do not fail the batch — they come back as\n`{ \"address\": null, \"type\": \"unknown\", \"inputDomain\": \"...\", \"unresolved\": true }`\nin request order. Resolved domain entries carry an `inputDomain` field so callers can\ncorrelate responses with the original input.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Balances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get wallet balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v1/wallet/:wallet/balances",
+            "params": [
+              {
+                "name": "wallet",
+                "value": "GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz",
+                "type": "path",
+                "description": "Solana wallet address (base58 encoded)"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Page number for pagination (1-indexed)"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "Maximum number of tokens per page"
+              },
+              {
+                "name": "showZeroBalance",
+                "value": "",
+                "type": "query",
+                "description": "Include tokens with zero balance"
+              },
+              {
+                "name": "showNative",
+                "value": "",
+                "type": "query",
+                "description": "Include native SOL in results"
+              },
+              {
+                "name": "showNfts",
+                "value": "",
+                "type": "query",
+                "description": "Include NFTs in results (max 100, first page only)"
+              }
+            ]
+          },
+          "docs": "Retrieve token and NFT balances for a wallet. **Pagination is manual** - the API returns up to 100 tokens per request.\n\nResults are sorted by USD value in descending order. Tokens with pricing data appear first, followed by tokens without prices.\n\n**Pagination:** Use the `page` parameter to fetch additional pages. The response includes `pagination.hasMore`\nto indicate if more results are available. Each request makes a single API call and costs 100 credits.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "History",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get transaction history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v1/wallet/:wallet/history",
+            "params": [
+              {
+                "name": "wallet",
+                "value": "GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz",
+                "type": "path",
+                "description": "Solana wallet address (base58 encoded)"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "Maximum number of transactions per request"
+              },
+              {
+                "name": "before",
+                "value": "5wHu1qwD7Jsj3xqWjdSEJmYr3Q5f5RjXqjqQJ7jqEj7jqEj7jqEj7jqEj7jqEj7jqE",
+                "type": "query",
+                "description": "Fetch transactions before this signature (use `pagination.nextCursor` from previous response)"
+              },
+              {
+                "name": "after",
+                "value": "5wHu1qwD7Jsj3xqWjdSEJmYr3Q5f5RjXqjqQJ7jqEj7jqEj7jqEj7jqEj7jqEj7jqE",
+                "type": "query",
+                "description": "Fetch transactions after this signature (for ascending order pagination)"
+              },
+              {
+                "name": "type",
+                "value": "SWAP",
+                "type": "query",
+                "description": "Filter by transaction type. Available types: SWAP, TRANSFER, NFT_SALE, NFT_BID, NFT_LISTING,\nNFT_MINT, NFT_CANCEL_LISTING, TOKEN_MINT, BURN, COMPRESSED_NFT_MINT, COMPRESSED_NFT_TRANSFER,\nCOMPRESSED_NFT_BURN, CREATE_STORE, WHITELIST_CREATOR, ADD_TO_WHITELIST, REMOVE_FROM_WHITELIST,\nAUCTION_MANAGER_CLAIM_BID, EMPTY_PAYMENT_ACCOUNT, UPDATE_PRIMARY_SALE_METADATA, ADD_TOKEN_TO_VAULT,\nACTIVATE_VAULT, INIT_VAULT, INIT_BANK, INIT_STAKE, MERGE_STAKE, SPLIT_STAKE, CREATE_AUCTION_MANAGER,\nSTART_AUCTION, CREATE_AUCTION_MANAGER_V2, UPDATE_EXTERNAL_PRICE_ACCOUNT, EXECUTE_TRANSACTION\n"
+              },
+              {
+                "name": "tokenAccounts",
+                "value": "balanceChanged",
+                "type": "query",
+                "description": "Filter transactions involving token accounts owned by the wallet.\n- `balanceChanged` (recommended): Includes transactions that changed token balances, filters spam\n- `none`: Only transactions directly referencing the wallet\n- `all`: All transactions including token accounts (may include spam)\n"
+              }
+            ]
+          },
+          "docs": "Retrieve transaction history for a wallet using the Enhanced Transactions API.\nReturns human-readable, parsed transactions with balance changes for each transaction.\n**Pagination is manual** - the API returns up to 100 transactions per request.\n\nReturns transactions in reverse chronological order (newest first).\n\n**Associated Token Accounts (ATAs):** The `tokenAccounts` parameter controls whether transactions\ninvolving token accounts owned by the wallet are included:\n- `balanceChanged` (recommen"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get token transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v1/wallet/:wallet/transfers",
+            "params": [
+              {
+                "name": "wallet",
+                "value": "GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz",
+                "type": "path",
+                "description": "Solana wallet address (base58 encoded)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of transfers to return"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor from previous response"
+              }
+            ]
+          },
+          "docs": "Retrieve all token transfer activity for a wallet including sender/recipient information.\nReturns transfers in reverse chronological order (newest first).\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Funding",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get wallet funding source",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v1/wallet/:wallet/funded-by",
+            "params": [
+              {
+                "name": "wallet",
+                "value": "GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz",
+                "type": "path",
+                "description": "Solana wallet address (base58 encoded)"
+              }
+            ]
+          },
+          "docs": "Discover the original funding source of a wallet by analyzing its first incoming SOL transfer.\nUseful for identifying if a wallet was funded by an exchange, another wallet, etc.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Sender",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "sendTransaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/fast",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Standard users do not require an API key. Only users with custom TPS limits need to provide an API key."
+              },
+              {
+                "name": "swqos_only",
+                "value": "",
+                "type": "query",
+                "description": "When true, routes exclusively through SWQOS infrastructure, but has a lower minimal tip requirement."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit transactions via Helius Sender for ultra-low latency transaction submission with dual routing to both Solana validators and Jito infrastructure.\n"
+        },
+        {
+          "info": {
+            "name": "ping",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/ping"
+          },
+          "docs": "Ping request to Helius Sender to maintain a warm connection\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Default",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Solana priority fee estimates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "query"
+            }
+          },
+          "docs": "Calculate optimal priority fee recommendations for Solana transactions based on real-time \nnetwork conditions. This advanced API analyzes historical fee data and current congestion \nlevels to provide precise fee estimates for different priority levels.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Admin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Project Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v0/admin/projects/:id/usage",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The project ID to retrieve usage for. Must match the project associated with the API key."
+              }
+            ]
+          },
+          "docs": "Retrieve credit usage, subscription details, and per-service request counts for a project within the current billing cycle.\n\nThe API key used for authentication must belong to the project specified in the path. Requests where the API key's project does not match the `id` parameter will return a `400` error.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
