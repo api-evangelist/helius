@@ -5,7 +5,7 @@ kind: company
 description: Helius is a Solana developer platform offering Solana JSON-RPC, the Digital
   Asset Standard (DAS) API for NFTs/tokens, Enhanced Transactions, Webhooks, LaserStream
   gRPC streaming, Sender (transaction routing), Photon RPC, and Dedicated Nodes.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Web3
   - Blockchain
