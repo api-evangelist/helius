@@ -1,0 +1,24 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/helius-openapi.json
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  - query
+schemes:
+- name: ApiKeyQuery
+  type: apiKey
+  in: query
+  parameter: api-key
+  description: Your Helius API key. You can get one for free in the [dashboard](https://dashboard.helius.dev/api-keys).
+  sources:
+  - openapi/helius-openapi.json
+- name: ApiKeyHeader
+  type: apiKey
+  in: header
+  parameter: X-Api-Key
+  description: API key passed in request header
+  sources:
+  - openapi/helius-openapi.json

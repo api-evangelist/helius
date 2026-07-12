@@ -106,6 +106,12 @@ apis:
     - type: Documentation
       url: https://www.helius.dev/docs/photon
 common:
+  - type: VulnerabilityDisclosure
+    url: security/helius-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/helius-domain-security.yml
+  - type: Authentication
+    url: authentication/helius-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/helius-labs
   - type: LinkedIn
