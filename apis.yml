@@ -106,6 +106,8 @@ apis:
     - type: Documentation
       url: https://www.helius.dev/docs/photon
 common:
+  - type: AgenticAccess
+    url: agentic-access/helius-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/helius-vulnerability-disclosure.yml
   - type: DomainSecurity
