@@ -1,0 +1,515 @@
+openapi: 3.1.0
+info:
+  title: Helius API Catalog Addresses History API
+  version: 1.0.0
+  summary: Machine-readable discovery document for every Helius API surface on Solana.
+  description: 'This document is a discovery catalog — not an operational spec. It exists so
+
+    AI agents, codegen tools, and SDK generators can locate the canonical
+
+    OpenAPI document for every Helius API in one request instead of crawling
+
+    the docs site.
+
+
+    Start with the `x-apis` array: each entry links a Helius API surface to its
+
+    canonical OpenAPI spec (`specUrl`) and human-readable docs (`docsUrl`).
+
+    Follow `externalDocs` for the full developer documentation site.
+
+
+    ## A note on JSON-RPC APIs
+
+
+    Several Helius APIs (Solana RPC, DAS, Sender, Mint, Priority Fee,
+
+    ZK Compression) follow the JSON-RPC 2.0 convention where every method POSTs
+
+    to `/` with a `method` field in the request body. For each such API the
+
+    repository ships both per-method fragment YAMLs (used to render the
+
+    Mintlify reference pages) and an auto-generated `_combined.yaml` that
+
+    merges every method into a single OpenAPI document. In the combined
+
+    documents, colliding paths are disambiguated with a URL-fragment suffix
+
+    (e.g. `/#getAccountInfo`) and each operation carries an `x-actual-path`
+
+    extension that records the real request path (`/`). The fragment syntax is
+
+    schema-only — real calls still go to the `url` in `servers`.
+
+
+    All `specUrl` values below point to raw GitHub files on the `main` branch
+
+    of `helius-labs/docs`. They are stable URLs suitable for downstream tools
+
+    to pin or fetch.
+
+    '
+  contact:
+    name: Helius Support
+    url: https://www.helius.dev/contact
+    email: support@helius.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://mainnet.helius-rpc.com
+  description: Solana mainnet RPC endpoint (Solana RPC, DAS, Priority Fee, ZK Compression)
+- url: https://devnet.helius-rpc.com
+  description: Solana devnet RPC endpoint
+- url: https://sender.helius-rpc.com
+  description: Helius Sender — global transaction submission
+- url: https://api.helius.xyz
+  description: Helius REST APIs (Wallet API, Enhanced API, Webhooks)
+- url: https://admin-api.helius.xyz
+  description: Helius Admin API — project usage and billing
+- url: https://api-mainnet.helius-rpc.com
+  description: Mainnet RPC endpoint
+- url: https://api-devnet.helius-rpc.com
+  description: Devnet RPC endpoint
+- url: http://slc-sender.helius-rpc.com
+  description: Salt Lake City
+- url: http://ewr-sender.helius-rpc.com
+  description: Newark
+- url: http://lon-sender.helius-rpc.com
+  description: London
+- url: http://fra-sender.helius-rpc.com
+  description: Frankfurt
+- url: http://ams-sender.helius-rpc.com
+  description: Amsterdam
+- url: http://sg-sender.helius-rpc.com
+  description: Singapore
+- url: http://tyo-sender.helius-rpc.com
+  description: Tokyo
+tags:
+- name: History
+  description: Transaction history and balance changes
+paths:
+  /v1/wallet/{wallet}/history:
+    get:
+      tags:
+      - History
+      summary: Get transaction history
+      description: 'Retrieve transaction history for a wallet using the Enhanced Transactions API.
+
+        Returns human-readable, parsed transactions with balance changes for each transaction.
+
+        **Pagination is manual** - the API returns up to 100 transactions per request.
+
+
+        Returns transactions in reverse chronological order (newest first).
+
+
+        **Associated Token Accounts (ATAs):** The `tokenAccounts` parameter controls whether transactions
+
+        involving token accounts owned by the wallet are included:
+
+        - `balanceChanged` (recommended): Includes transactions that changed token account balances, filtering spam
+
+        - `none`: Only direct wallet interactions
+
+        - `all`: All token account transactions including spam
+
+
+        **Pagination:** Use the `before` parameter with `pagination.nextCursor` to fetch the next page.
+
+        The response includes `pagination.hasMore` to indicate if more results are available.
+
+        Each request makes a single API call and costs 100 credits.
+
+        '
+      operationId: walletApi_getWalletHistory
+      parameters:
+      - $ref: '#/components/parameters/WalletApi_WalletAddress'
+      - name: limit
+        in: query
+        description: Maximum number of transactions per request
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 100
+        example: 100
+      - name: before
+        in: query
+        description: Fetch transactions before this signature (use `pagination.nextCursor` from previous response)
+        schema:
+          type: string
+        example: 5wHu1qwD7Jsj3xqWjdSEJmYr3Q5f5RjXqjqQJ7jqEj7jqEj7jqEj7jqEj7jqEj7jqE
+      - name: after
+        in: query
+        description: Fetch transactions after this signature (for ascending order pagination)
+        schema:
+          type: string
+        example: 5wHu1qwD7Jsj3xqWjdSEJmYr3Q5f5RjXqjqQJ7jqEj7jqEj7jqEj7jqEj7jqEj7jqE
+      - name: type
+        in: query
+        description: 'Filter by transaction type. Available types: SWAP, TRANSFER, NFT_SALE, NFT_BID, NFT_LISTING,
+
+          NFT_MINT, NFT_CANCEL_LISTING, TOKEN_MINT, BURN, COMPRESSED_NFT_MINT, COMPRESSED_NFT_TRANSFER,
+
+          COMPRESSED_NFT_BURN, CREATE_STORE, WHITELIST_CREATOR, ADD_TO_WHITELIST, REMOVE_FROM_WHITELIST,
+
+          AUCTION_MANAGER_CLAIM_BID, EMPTY_PAYMENT_ACCOUNT, UPDATE_PRIMARY_SALE_METADATA, ADD_TOKEN_TO_VAULT,
+
+          ACTIVATE_VAULT, INIT_VAULT, INIT_BANK, INIT_STAKE, MERGE_STAKE, SPLIT_STAKE, CREATE_AUCTION_MANAGER,
+
+          START_AUCTION, CREATE_AUCTION_MANAGER_V2, UPDATE_EXTERNAL_PRICE_ACCOUNT, EXECUTE_TRANSACTION
+
+          '
+        schema:
+          type: string
+          enum:
+          - SWAP
+          - TRANSFER
+          - NFT_SALE
+          - NFT_BID
+          - NFT_LISTING
+          - NFT_MINT
+          - NFT_CANCEL_LISTING
+          - TOKEN_MINT
+          - BURN
+          - COMPRESSED_NFT_MINT
+          - COMPRESSED_NFT_TRANSFER
+          - COMPRESSED_NFT_BURN
+          - CREATE_STORE
+          - WHITELIST_CREATOR
+          - ADD_TO_WHITELIST
+          - REMOVE_FROM_WHITELIST
+          - AUCTION_MANAGER_CLAIM_BID
+          - EMPTY_PAYMENT_ACCOUNT
+          - UPDATE_PRIMARY_SALE_METADATA
+          - ADD_TOKEN_TO_VAULT
+          - ACTIVATE_VAULT
+          - INIT_VAULT
+          - INIT_BANK
+          - INIT_STAKE
+          - MERGE_STAKE
+          - SPLIT_STAKE
+          - CREATE_AUCTION_MANAGER
+          - START_AUCTION
+          - CREATE_AUCTION_MANAGER_V2
+          - UPDATE_EXTERNAL_PRICE_ACCOUNT
+          - EXECUTE_TRANSACTION
+        example: SWAP
+      - name: tokenAccounts
+        in: query
+        description: 'Filter transactions involving token accounts owned by the wallet.
+
+          - `balanceChanged` (recommended): Includes transactions that changed token balances, filters spam
+
+          - `none`: Only transactions directly referencing the wallet
+
+          - `all`: All transactions including token accounts (may include spam)
+
+          '
+        schema:
+          type: string
+          enum:
+          - none
+          - balanceChanged
+          - all
+          default: balanceChanged
+        example: balanceChanged
+      responses:
+        '200':
+          description: Transaction history retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalletApi_HistoryResponse'
+        '400':
+          $ref: '#/components/responses/WalletApi_BadRequest'
+        '401':
+          $ref: '#/components/responses/WalletApi_Unauthorized'
+        '429':
+          $ref: '#/components/responses/WalletApi_RateLimited'
+        '500':
+          $ref: '#/components/responses/WalletApi_InternalError'
+      servers:
+      - url: https://api.helius.xyz
+        description: Production server
+components:
+  schemas:
+    WalletApi_HistoryTransaction:
+      type: object
+      properties:
+        signature:
+          type: string
+          description: Transaction signature
+          example: 5wHu1qwD7Jsj3xqWjdSEJmYr3Q5f5RjXqjqQJ7jqEj7jqEj7jqEj7jqEj7jqEj7jqE
+        timestamp:
+          type: integer
+          nullable: true
+          description: Unix timestamp in seconds
+          example: 1704067200
+        slot:
+          type: integer
+          description: Slot number
+          example: 250000000
+        fee:
+          type: number
+          description: Transaction fee in SOL
+          example: 5.0e-06
+        feePayer:
+          type: string
+          description: Address that paid the transaction fee
+          example: GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz
+        error:
+          type: string
+          nullable: true
+          description: Error message if transaction failed
+          example: null
+        balanceChanges:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletApi_BalanceChange'
+          description: All balance changes in this transaction
+      required:
+      - signature
+      - slot
+      - fee
+      - feePayer
+      - balanceChanges
+    WalletApi_Pagination:
+      type: object
+      properties:
+        hasMore:
+          type: boolean
+          description: Whether more results are available
+          example: true
+        nextCursor:
+          type: string
+          nullable: true
+          description: Cursor to fetch the next page of results
+          example: 5wHu1qwD7Jsj3xqWjdSEJmYr3Q5f5RjXqjqQJ7jqEj7jqEj7jqEj7jqEj7jqEj7jqE
+      required:
+      - hasMore
+    WalletApi_HistoryResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletApi_HistoryTransaction'
+        pagination:
+          $ref: '#/components/schemas/WalletApi_Pagination'
+      required:
+      - data
+      - pagination
+    WalletApi_Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+          example: Invalid wallet address
+        code:
+          type: integer
+          description: HTTP status code
+          example: 400
+        details:
+          type: string
+          description: Additional error details
+          example: '''invalid-address'' is not a valid Solana address'
+      required:
+      - error
+      - code
+    WalletApi_BalanceChange:
+      type: object
+      properties:
+        mint:
+          type: string
+          description: Token mint address (or 'SOL' for native)
+          example: So11111111111111111111111111111111111111112
+        amount:
+          type: number
+          description: Change amount (positive for increase, negative for decrease)
+          example: -0.05
+        decimals:
+          type: integer
+          description: Token decimals
+          example: 9
+      required:
+      - mint
+      - amount
+      - decimals
+  responses:
+    WalletApi_RateLimited:
+      description: Rate limit exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: RATE_LIMIT_EXCEEDED
+            code: 429
+            details: Too many requests. Retry after 2 seconds.
+    WalletApi_InternalError:
+      description: Transient server error. Retryable with exponential backoff.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: INTERNAL_ERROR
+            code: 500
+            details: An unexpected error occurred. Please retry.
+    WalletApi_Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: API key required. Pass via ?api-key=xxx or X-Api-Key header
+            code: 401
+    WalletApi_BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: Invalid wallet address
+            code: 400
+            details: '''invalid-address'' is not a valid Solana address'
+  parameters:
+    WalletApi_WalletAddress:
+      name: wallet
+      in: path
+      required: true
+      description: Solana wallet address (base58 encoded)
+      schema:
+        type: string
+        pattern: ^[1-9A-HJ-NP-Za-km-z]{32,44}$
+      example: GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: api-key
+      description: Your Helius API key. You can get one for free in the [dashboard](https://dashboard.helius.dev/api-keys).
+    ApiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: API key passed in request header
+externalDocs:
+  description: Helius Documentation (canonical)
+  url: https://www.helius.dev/docs
+x-apis:
+- id: rpc-http
+  name: Solana RPC (HTTP)
+  description: JSON-RPC 2.0 methods for Solana mainnet and devnet, plus Helius extensions such as `getTransactionsForAddress` with server-side filtering and token account helpers (`getTokenAccountsByOwnerV2`, `getProgramAccountsV2`).
+  specUrl: https://www.helius.dev/openapi/rpc-http.json
+  docsUrl: https://www.helius.dev/docs/rpc/overview
+  tags:
+  - rpc
+  - json-rpc
+  - solana
+  - accounts
+  - transactions
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/rpc-http
+- id: das-api
+  name: Digital Asset Standard (DAS) API
+  description: Unified NFT and token queries for Solana — regular NFTs, compressed NFTs, and fungible tokens — indexed for fast lookups by owner, creator, authority, collection, or search.
+  specUrl: https://www.helius.dev/openapi/das-api.json
+  docsUrl: https://www.helius.dev/docs/das-api
+  tags:
+  - nft
+  - tokens
+  - compressed-nft
+  - digital-assets
+  - json-rpc
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/das-api
+- id: sender-api
+  name: Helius Sender
+  description: Ultra-low-latency transaction submission with dual routing to validators and Jito infrastructure. Regional endpoints for Salt Lake City, Newark, London, Frankfurt, Amsterdam, Singapore, and Tokyo.
+  specUrl: https://www.helius.dev/openapi/sender-api.json
+  docsUrl: https://www.helius.dev/docs/sending-transactions/sender
+  tags:
+  - transactions
+  - sender
+  - low-latency
+  - jito
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/sender-api
+- id: wallet-api
+  name: Wallet API
+  description: High-performance REST API for Solana wallet data — identity, balances, transaction history, transfers, and funding lineage. Returns pre-indexed results suitable for wallet and portfolio UIs.
+  specUrl: https://www.helius.dev/openapi/wallet-api.json
+  docsUrl: https://www.helius.dev/docs/wallet-api/overview
+  tags:
+  - wallet
+  - portfolio
+  - history
+  - rest
+  status: beta
+- id: priority-fee-api
+  name: Priority Fee API
+  description: Real-time priority fee recommendations across multiple priority levels, derived from recent network activity. Accepts either account keys or a serialized transaction.
+  specUrl: https://www.helius.dev/openapi/priority-fee-api.json
+  docsUrl: https://www.helius.dev/docs/priority-fee-api
+  tags:
+  - priority-fee
+  - transactions
+  - fees
+  - json-rpc
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/priority-fee-api
+- id: zk-compression
+  name: ZK Compression Indexer
+  description: Indexer API for Solana state compression — compressed accounts, compressed token balances, Merkle proofs, and validity proofs. Enables up to 1000x lower storage costs relative to regular accounts.
+  specUrl: https://www.helius.dev/openapi/zk-compression.json
+  docsUrl: https://www.helius.dev/docs/zk-compression/introduction
+  tags:
+  - zk-compression
+  - state-compression
+  - accounts
+  - proofs
+  - json-rpc
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/zk-compression
+- id: admin-api
+  name: Admin API
+  description: Programmatic access to Helius project usage and billing data — credits consumed, credits remaining, prepaid balances, and subscription details for the current billing cycle.
+  specUrl: https://www.helius.dev/openapi/admin-api.json
+  docsUrl: https://www.helius.dev/docs/api-reference/admin
+  tags:
+  - admin
+  - billing
+  - usage
+  - rest
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/admin-api
+- id: enhanced-api
+  name: Enhanced API
+  description: Decoded, human-readable transaction history, NFT events, and address activity on Solana. Returns typed, parsed data instead of raw instruction bytes.
+  specUrl: https://www.helius.dev/openapi/enhanced-api.json
+  docsUrl: https://www.helius.dev/docs/enhanced-transactions/overview
+  tags:
+  - enhanced
+  - parsed-transactions
+  - nft-events
+  - history
+  - rest
+  status: stable
+- id: webhooks
+  name: Helius Webhooks
+  description: Real-time HTTP notifications for Solana on-chain events — configure account, transaction, or NFT event subscriptions and receive parsed payloads via HTTPS POST.
+  specUrl: https://www.helius.dev/openapi/webhooks.json
+  docsUrl: https://www.helius.dev/docs/webhooks
+  tags:
+  - webhooks
+  - events
+  - notifications
+  - rest
+  status: stable

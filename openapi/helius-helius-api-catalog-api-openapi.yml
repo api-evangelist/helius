@@ -1,0 +1,534 @@
+openapi: 3.1.0
+info:
+  title: Addresses Helius API Catalog API
+  version: 1.0.0
+  summary: Machine-readable discovery document for every Helius API surface on Solana.
+  description: 'This document is a discovery catalog — not an operational spec. It exists so
+
+    AI agents, codegen tools, and SDK generators can locate the canonical
+
+    OpenAPI document for every Helius API in one request instead of crawling
+
+    the docs site.
+
+
+    Start with the `x-apis` array: each entry links a Helius API surface to its
+
+    canonical OpenAPI spec (`specUrl`) and human-readable docs (`docsUrl`).
+
+    Follow `externalDocs` for the full developer documentation site.
+
+
+    ## A note on JSON-RPC APIs
+
+
+    Several Helius APIs (Solana RPC, DAS, Sender, Mint, Priority Fee,
+
+    ZK Compression) follow the JSON-RPC 2.0 convention where every method POSTs
+
+    to `/` with a `method` field in the request body. For each such API the
+
+    repository ships both per-method fragment YAMLs (used to render the
+
+    Mintlify reference pages) and an auto-generated `_combined.yaml` that
+
+    merges every method into a single OpenAPI document. In the combined
+
+    documents, colliding paths are disambiguated with a URL-fragment suffix
+
+    (e.g. `/#getAccountInfo`) and each operation carries an `x-actual-path`
+
+    extension that records the real request path (`/`). The fragment syntax is
+
+    schema-only — real calls still go to the `url` in `servers`.
+
+
+    All `specUrl` values below point to raw GitHub files on the `main` branch
+
+    of `helius-labs/docs`. They are stable URLs suitable for downstream tools
+
+    to pin or fetch.
+
+    '
+  contact:
+    name: Helius Support
+    url: https://www.helius.dev/contact
+    email: support@helius.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://mainnet.helius-rpc.com
+  description: Solana mainnet RPC endpoint (Solana RPC, DAS, Priority Fee, ZK Compression)
+- url: https://devnet.helius-rpc.com
+  description: Solana devnet RPC endpoint
+- url: https://sender.helius-rpc.com
+  description: Helius Sender — global transaction submission
+- url: https://api.helius.xyz
+  description: Helius REST APIs (Wallet API, Enhanced API, Webhooks)
+- url: https://admin-api.helius.xyz
+  description: Helius Admin API — project usage and billing
+- url: https://api-mainnet.helius-rpc.com
+  description: Mainnet RPC endpoint
+- url: https://api-devnet.helius-rpc.com
+  description: Devnet RPC endpoint
+- url: http://slc-sender.helius-rpc.com
+  description: Salt Lake City
+- url: http://ewr-sender.helius-rpc.com
+  description: Newark
+- url: http://lon-sender.helius-rpc.com
+  description: London
+- url: http://fra-sender.helius-rpc.com
+  description: Frankfurt
+- url: http://ams-sender.helius-rpc.com
+  description: Amsterdam
+- url: http://sg-sender.helius-rpc.com
+  description: Singapore
+- url: http://tyo-sender.helius-rpc.com
+  description: Tokyo
+tags:
+- name: Helius API Catalog
+paths:
+  /:
+    post:
+      summary: Get Solana priority fee estimates
+      description: "Calculate optimal priority fee recommendations for Solana transactions based on real-time \nnetwork conditions. This advanced API analyzes historical fee data and current congestion \nlevels to provide precise fee estimates for different priority levels.\n"
+      operationId: priorityFeeApi_getPriorityFeeEstimate
+      security:
+      - ApiKeyQuery: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PriorityFeeApi_PriorityFeeEstimateRequest'
+            examples:
+              transactionExample:
+                value:
+                  jsonrpc: '2.0'
+                  id: '1'
+                  method: getPriorityFeeEstimate
+                  params:
+                  - transaction: LxzhDW7TapzziJVHEGPh1QjmZB6kjNqmvuJ9gmihBGEkzw2N8ospDq32UZdVmKWzRZqKuyvhp7xmLvsmmHa3MfxVKpYoLV9cPkw5isHnHgDUwLSMsDaZ4dLEULexXAvuV9k6fLD2LMhFKM6gqH6j69GQLAm1g4e3z5ZVZN6pmJdSmZ4PqKcwNn4sS7E3Abp1hV59uBJB9i4jEdEAh28rZ8WCeNizzEmrJZFhatFFFGSDsk23jDPEjbkMcoRWXKf1WthFScC2S6Wz284Dtjqp7kW8eybV3DpmN9DtBbcfFNQPtUwmiBZCKszdYym5AjJvRHiUKUdMwFpC3toPnMvTmKZ9iHQtzZRkg5xBufRtUN5eVYJfdw2DxzH6RfqhC2rAjfSbfJA4wmaq9f5eUe2iEjmqvne6r85PPcHBJzyqkVtAyUFtTc9DfU8UiM9rFhQ2UB71M6m5UCsC6EwowMw5k8iF8rL7iPCLdubVdy8S58DPLNG4E4rdosev1T63YdRWSgEwBZh7iX4zGBA9AKAm3B9itCSxLSL46Y6uZgVku9UXsMcWWz3URoa6hRbo55CYPLhrVeqjqX5DsXpaG6QkngbEaESQUnkakE1AFkYXmNXEd2m3sLRTYB2o5UTkwkJS2u5sJHyYqAvXr3vFZr7qAYFLD3LwS5tsdb45ZQVQwsbnNddMHgkpmSqLHS6Fv1epxqHbzpRCU1tgMsriApVWC3pj2LLD41HxkV8aKvkVyHgJFACUtbvRBZAasHf1F71Gz3qZNTdh3efWsZJRXnfxKPbATU7NTMaMUL8JjknfoVwp3/SsAUIMHFzjQMQmoiQMSL1q+S+r9dLR55BgaWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG3fbh12Whk9nL4UbO63msHLSF7V9bN5E6jPWFfv8AqQECAwABDAIAAAAEAAAAAAAA
+              accountKeysExample:
+                value:
+                  jsonrpc: '2.0'
+                  id: '1'
+                  method: getPriorityFeeEstimate
+                  params:
+                  - accountKeys:
+                    - 2CiBfRKcERi2GgYn83UaGo1wFaYHHrXGGfnDaa2hxdEA
+                    options:
+                      includeAllPriorityFeeLevels: true
+      responses:
+        '200':
+          description: Successfully retrieved Solana priority fee estimates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriorityFeeApi_PriorityFeeEstimateResponse'
+              examples:
+                singleEstimateResponse:
+                  value:
+                    jsonrpc: '2.0'
+                    result:
+                      priorityFeeEstimate: 120000
+                    id: '1'
+                allLevelsResponse:
+                  value:
+                    jsonrpc: '2.0'
+                    result:
+                      priorityFeeLevels:
+                        min: 0
+                        low: 2
+                        medium: 10082
+                        high: 100000
+                        veryHigh: 1000000
+                        unsafeMax: 50000000
+                    id: '1'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jsonrpc:
+                    type: string
+                    enum:
+                    - '2.0'
+                    description: JSON-RPC version identifier
+                  error:
+                    type: object
+                    description: Error information
+                    properties:
+                      code:
+                        type: integer
+                        example: -32602
+                        description: Error code
+                      message:
+                        type: string
+                        example: Invalid params
+                        description: Error message
+                  id:
+                    type: string
+                    description: Client-generated identifier matching the request
+        '401':
+          description: Unauthorized — missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jsonrpc:
+                    type: string
+                    enum:
+                    - '2.0'
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: integer
+                        example: -32001
+                      message:
+                        type: string
+                        example: Unauthorized
+                  id:
+                    type: string
+        '429':
+          description: Too Many Requests — rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jsonrpc:
+                    type: string
+                    enum:
+                    - '2.0'
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: integer
+                        example: -32005
+                      message:
+                        type: string
+                        example: Too many requests
+                  id:
+                    type: string
+        '500':
+          description: Internal server error. Retryable with exponential backoff.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jsonrpc:
+                    type: string
+                    enum:
+                    - '2.0'
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: integer
+                        example: -32603
+                      message:
+                        type: string
+                        example: Internal error
+                  id:
+                    type: string
+      servers:
+      - url: https://mainnet.helius-rpc.com
+        description: Mainnet RPC endpoint
+      - url: https://devnet.helius-rpc.com
+        description: Devnet RPC endpoint
+      tags:
+      - Helius API Catalog
+components:
+  schemas:
+    PriorityFeeApi_PriorityFeeEstimateRequest:
+      type: object
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          default: '2.0'
+          description: JSON-RPC version identifier for the Solana RPC API request, must be "2.0"
+        id:
+          type: string
+          default: '1'
+          description: Client-generated identifier for the request
+        method:
+          type: string
+          enum:
+          - getPriorityFeeEstimate
+          default: getPriorityFeeEstimate
+          description: The RPC method name
+        params:
+          type: array
+          description: Parameters for the method call
+          default:
+          - transaction: LxzhDW7TapzziJVHEGPh1QjmZB6kjNqmvuJ9gmihBGEkzw2N8ospDq32UZdVmKWzRZqKuyvhp7xmLvsmmHa3MfxVKpYoLV9cPkw5isHnHgDUwLSMsDaZ4dLEULexXAvuV9k6fLD2LMhFKM6gqH6j69GQLAm1g4e3z5ZVZN6pmJdSmZ4PqKcwNn4sS7E3Abp1hV59uBJB9i4jEdEAh28rZ8WCeNizzEmrJZFhatFFFGSDsk23jDPEjbkMcoRWXKf1WthFScC2S6Wz284Dtjqp7kW8eybV3DpmN9DtBbcfFNQPtUwmiBZCKszdYym5AjJvRHiUKUdMwFpC3toPnMvTmKZ9iHQtzZRkg5xBufRtUN5eVYJfdw2DxzH6RfqhC2rAjfSbfJA4wmaq9f5eUe2iEjmqvne6r85PPcHBJzyqkVtAyUFtTc9DfU8UiM9rFhQ2UB71M6m5UCsC6EwowMw5k8iF8rL7iPCLdubVdy8S58DPLNG4E4rdosev1T63YdRWSgEwBZh7iX4zGBA9AKAm3B9itCSxLSL46Y6uZgVku9UXsMcWWz3URoa6hRbo55CYPLhrVeqjqX5DsXpaG6QkngbEaESQUnkakE1AFkYXmNXEd2m3sLRTYB2o5UTkwkJS2u5sJHyYqAvXr3vFZr7qAYFLD3LwS5tsdb45ZQVQwsbnNddMHgkpmSqLHS6Fv1epxqHbzpRCU1tgMsriApVWC3pj2LLD41HxkV8aKvkVyHgJFACUtbvRBZAasHf1F71Gz3qZNTdh3efWsZJRXnfxKPbATU7NTMaMUL8JjknfoVwp3
+          items:
+            type: object
+            properties:
+              transaction:
+                type: string
+                description: 'Base58 or Base64 encoded Solana transaction for which to estimate optimal priority fees.
+
+                  The API will analyze the specific instructions and accounts in this transaction to provide
+
+                  accurate fee estimates based on current network conditions and computational complexity.
+
+                  '
+              accountKeys:
+                type: array
+                description: Array of Solana account public keys to estimate priority fees for (alternative to providing a transaction)
+                items:
+                  type: string
+                  description: Base58 encoded public key of a Solana account
+              options:
+                $ref: '#/components/schemas/PriorityFeeApi_PriorityFeeOptions'
+    PriorityFeeApi_PriorityFeeEstimateResponse:
+      type: object
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: JSON-RPC version identifier
+        id:
+          type: string
+          description: Client-generated identifier matching the request
+        result:
+          type: object
+          description: Result object containing comprehensive Solana priority fee estimates
+          properties:
+            priorityFeeEstimate:
+              type: number
+              format: float
+              description: 'Estimated optimal priority fee in microlamports for the requested Solana transaction,
+
+                calculated based on recent blockchain activity and computational requirements.
+
+                '
+            priorityFeeLevels:
+              type: object
+              description: 'Detailed fee estimates for different priority levels on the Solana blockchain (in microlamports),
+
+                allowing developers to choose the optimal balance between cost and confirmation speed.
+
+                '
+              properties:
+                min:
+                  type: number
+                  format: float
+                  description: 'Minimum viable fee for Solana transactions - suitable for non-urgent transactions during low congestion periods
+
+                    (may result in transaction failure during network congestion)
+
+                    '
+                low:
+                  type: number
+                  format: float
+                  description: 'Low priority fee for Solana transactions - economical option for transactions that aren''t time-sensitive
+
+                    (longer confirmation time, lower cost)
+
+                    '
+                medium:
+                  type: number
+                  format: float
+                  description: 'Medium priority fee for Solana transactions - balanced option for most standard transactions
+
+                    (reasonable confirmation time with moderate cost)
+
+                    '
+                high:
+                  type: number
+                  format: float
+                  description: 'High priority fee for Solana transactions - prioritized processing for time-sensitive operations
+
+                    like DeFi trades or NFT mints (faster confirmation, higher cost)
+
+                    '
+                veryHigh:
+                  type: number
+                  format: float
+                  description: 'Very high priority fee for Solana transactions - premium option for critical transactions requiring
+
+                    near-immediate confirmation (very fast confirmation, premium cost)
+
+                    '
+                unsafeMax:
+                  type: number
+                  format: float
+                  description: 'Maximum observed fee on Solana - the highest fee seen in the analysis window, representing
+
+                    an upper bound during extreme congestion (fastest possible confirmation, but potentially unnecessarily high)
+
+                    '
+    PriorityFeeApi_PriorityFeeOptions:
+      type: object
+      description: Advanced options for customizing Solana priority fee estimation based on network conditions
+      properties:
+        transactionEncoding:
+          type: string
+          enum:
+          - Base58
+          - Base64
+          description: Encoding format of the provided Solana transaction
+        priorityLevel:
+          type: string
+          enum:
+          - Min
+          - Low
+          - Medium
+          - High
+          - VeryHigh
+          - UnsafeMax
+          description: Specific priority level to estimate fees for based on current Solana network congestion
+        includeAllPriorityFeeLevels:
+          type: boolean
+          description: When true, returns comprehensive estimates for all priority levels from minimum to maximum
+        lookbackSlots:
+          type: integer
+          minimum: 1
+          maximum: 150
+          description: Number of recent Solana blockchain slots to analyze for accurate fee estimation (1-150)
+        includeVote:
+          type: boolean
+          description: When true, includes vote transactions in the fee calculation for more comprehensive analysis
+        recommended:
+          type: boolean
+          description: When true, returns the recommended optimal fee based on current Solana network conditions
+        evaluateEmptySlotAsZero:
+          type: boolean
+          description: When true, slots with no transactions are counted as zero-fee slots in the calculation
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: api-key
+      description: Your Helius API key. You can get one for free in the [dashboard](https://dashboard.helius.dev/api-keys).
+    ApiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: API key passed in request header
+externalDocs:
+  description: Helius Documentation (canonical)
+  url: https://www.helius.dev/docs
+x-apis:
+- id: rpc-http
+  name: Solana RPC (HTTP)
+  description: JSON-RPC 2.0 methods for Solana mainnet and devnet, plus Helius extensions such as `getTransactionsForAddress` with server-side filtering and token account helpers (`getTokenAccountsByOwnerV2`, `getProgramAccountsV2`).
+  specUrl: https://www.helius.dev/openapi/rpc-http.json
+  docsUrl: https://www.helius.dev/docs/rpc/overview
+  tags:
+  - rpc
+  - json-rpc
+  - solana
+  - accounts
+  - transactions
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/rpc-http
+- id: das-api
+  name: Digital Asset Standard (DAS) API
+  description: Unified NFT and token queries for Solana — regular NFTs, compressed NFTs, and fungible tokens — indexed for fast lookups by owner, creator, authority, collection, or search.
+  specUrl: https://www.helius.dev/openapi/das-api.json
+  docsUrl: https://www.helius.dev/docs/das-api
+  tags:
+  - nft
+  - tokens
+  - compressed-nft
+  - digital-assets
+  - json-rpc
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/das-api
+- id: sender-api
+  name: Helius Sender
+  description: Ultra-low-latency transaction submission with dual routing to validators and Jito infrastructure. Regional endpoints for Salt Lake City, Newark, London, Frankfurt, Amsterdam, Singapore, and Tokyo.
+  specUrl: https://www.helius.dev/openapi/sender-api.json
+  docsUrl: https://www.helius.dev/docs/sending-transactions/sender
+  tags:
+  - transactions
+  - sender
+  - low-latency
+  - jito
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/sender-api
+- id: wallet-api
+  name: Wallet API
+  description: High-performance REST API for Solana wallet data — identity, balances, transaction history, transfers, and funding lineage. Returns pre-indexed results suitable for wallet and portfolio UIs.
+  specUrl: https://www.helius.dev/openapi/wallet-api.json
+  docsUrl: https://www.helius.dev/docs/wallet-api/overview
+  tags:
+  - wallet
+  - portfolio
+  - history
+  - rest
+  status: beta
+- id: priority-fee-api
+  name: Priority Fee API
+  description: Real-time priority fee recommendations across multiple priority levels, derived from recent network activity. Accepts either account keys or a serialized transaction.
+  specUrl: https://www.helius.dev/openapi/priority-fee-api.json
+  docsUrl: https://www.helius.dev/docs/priority-fee-api
+  tags:
+  - priority-fee
+  - transactions
+  - fees
+  - json-rpc
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/priority-fee-api
+- id: zk-compression
+  name: ZK Compression Indexer
+  description: Indexer API for Solana state compression — compressed accounts, compressed token balances, Merkle proofs, and validity proofs. Enables up to 1000x lower storage costs relative to regular accounts.
+  specUrl: https://www.helius.dev/openapi/zk-compression.json
+  docsUrl: https://www.helius.dev/docs/zk-compression/introduction
+  tags:
+  - zk-compression
+  - state-compression
+  - accounts
+  - proofs
+  - json-rpc
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/zk-compression
+- id: admin-api
+  name: Admin API
+  description: Programmatic access to Helius project usage and billing data — credits consumed, credits remaining, prepaid balances, and subscription details for the current billing cycle.
+  specUrl: https://www.helius.dev/openapi/admin-api.json
+  docsUrl: https://www.helius.dev/docs/api-reference/admin
+  tags:
+  - admin
+  - billing
+  - usage
+  - rest
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/admin-api
+- id: enhanced-api
+  name: Enhanced API
+  description: Decoded, human-readable transaction history, NFT events, and address activity on Solana. Returns typed, parsed data instead of raw instruction bytes.
+  specUrl: https://www.helius.dev/openapi/enhanced-api.json
+  docsUrl: https://www.helius.dev/docs/enhanced-transactions/overview
+  tags:
+  - enhanced
+  - parsed-transactions
+  - nft-events
+  - history
+  - rest
+  status: stable
+- id: webhooks
+  name: Helius Webhooks
+  description: Real-time HTTP notifications for Solana on-chain events — configure account, transaction, or NFT event subscriptions and receive parsed payloads via HTTPS POST.
+  specUrl: https://www.helius.dev/openapi/webhooks.json
+  docsUrl: https://www.helius.dev/docs/webhooks
+  tags:
+  - webhooks
+  - events
+  - notifications
+  - rest
+  status: stable

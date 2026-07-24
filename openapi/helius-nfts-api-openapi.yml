@@ -1,0 +1,2187 @@
+openapi: 3.1.0
+info:
+  title: Helius API Catalog Addresses NFTs API
+  version: 1.0.0
+  summary: Machine-readable discovery document for every Helius API surface on Solana.
+  description: 'This document is a discovery catalog — not an operational spec. It exists so
+
+    AI agents, codegen tools, and SDK generators can locate the canonical
+
+    OpenAPI document for every Helius API in one request instead of crawling
+
+    the docs site.
+
+
+    Start with the `x-apis` array: each entry links a Helius API surface to its
+
+    canonical OpenAPI spec (`specUrl`) and human-readable docs (`docsUrl`).
+
+    Follow `externalDocs` for the full developer documentation site.
+
+
+    ## A note on JSON-RPC APIs
+
+
+    Several Helius APIs (Solana RPC, DAS, Sender, Mint, Priority Fee,
+
+    ZK Compression) follow the JSON-RPC 2.0 convention where every method POSTs
+
+    to `/` with a `method` field in the request body. For each such API the
+
+    repository ships both per-method fragment YAMLs (used to render the
+
+    Mintlify reference pages) and an auto-generated `_combined.yaml` that
+
+    merges every method into a single OpenAPI document. In the combined
+
+    documents, colliding paths are disambiguated with a URL-fragment suffix
+
+    (e.g. `/#getAccountInfo`) and each operation carries an `x-actual-path`
+
+    extension that records the real request path (`/`). The fragment syntax is
+
+    schema-only — real calls still go to the `url` in `servers`.
+
+
+    All `specUrl` values below point to raw GitHub files on the `main` branch
+
+    of `helius-labs/docs`. They are stable URLs suitable for downstream tools
+
+    to pin or fetch.
+
+    '
+  contact:
+    name: Helius Support
+    url: https://www.helius.dev/contact
+    email: support@helius.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://mainnet.helius-rpc.com
+  description: Solana mainnet RPC endpoint (Solana RPC, DAS, Priority Fee, ZK Compression)
+- url: https://devnet.helius-rpc.com
+  description: Solana devnet RPC endpoint
+- url: https://sender.helius-rpc.com
+  description: Helius Sender — global transaction submission
+- url: https://api.helius.xyz
+  description: Helius REST APIs (Wallet API, Enhanced API, Webhooks)
+- url: https://admin-api.helius.xyz
+  description: Helius Admin API — project usage and billing
+- url: https://api-mainnet.helius-rpc.com
+  description: Mainnet RPC endpoint
+- url: https://api-devnet.helius-rpc.com
+  description: Devnet RPC endpoint
+- url: http://slc-sender.helius-rpc.com
+  description: Salt Lake City
+- url: http://ewr-sender.helius-rpc.com
+  description: Newark
+- url: http://lon-sender.helius-rpc.com
+  description: London
+- url: http://fra-sender.helius-rpc.com
+  description: Frankfurt
+- url: http://ams-sender.helius-rpc.com
+  description: Amsterdam
+- url: http://sg-sender.helius-rpc.com
+  description: Singapore
+- url: http://tyo-sender.helius-rpc.com
+  description: Tokyo
+tags:
+- name: NFTs
+  description: Access comprehensive NFT data including events, collection aggregations, real-time stats, and complete historical activity on Solana.
+paths:
+  /v0/addresses/{address}/nft-events:
+    get:
+      tags:
+      - NFTs
+      summary: Returns all NFT related events associated with the given address.
+      operationId: enhancedApi_getNftEvents
+      description: "Retrieve comprehensive NFT events data for any Solana address. Filter by event types, \ntransaction sources, and time ranges to get precise NFT activity including mints, \nsales, listings, and transfers.\n"
+      parameters:
+      - $ref: '#/components/parameters/apiKeyParam'
+      - $ref: '#/components/parameters/EnhancedApi_beforeParam'
+      - $ref: '#/components/parameters/EnhancedApi_untilParam'
+      - $ref: '#/components/parameters/EnhancedApi_commitmentParam'
+      - $ref: '#/components/parameters/EnhancedApi_addressParam'
+      - $ref: '#/components/parameters/EnhancedApi_transactionSourceParam'
+      - $ref: '#/components/parameters/EnhancedApi_transactionTypeParam'
+      responses:
+        '200':
+          description: Returns an array of NFTEvents.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnhancedApi_NFTEvent'
+        '400':
+          $ref: '#/components/responses/EnhancedApi_400-BadRequest'
+        '401':
+          $ref: '#/components/responses/EnhancedApi_401-Unauthorized'
+        '403':
+          $ref: '#/components/responses/EnhancedApi_403-Forbidden'
+        '404':
+          $ref: '#/components/responses/EnhancedApi_404-NotFound'
+        '429':
+          $ref: '#/components/responses/EnhancedApi_429-TooManyRequests'
+        '500':
+          $ref: '#/components/responses/EnhancedApi_500-InternalServerError'
+        '503':
+          $ref: '#/components/responses/EnhancedApi_503-ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/EnhancedApi_504-GatewayTimeout'
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        type: http_proxy
+        uri: http://PLACEHOLDER_VIEW_LAYER_DNS_NAME/addresses/{address}/nft-events
+        connectionType: VPC_LINK
+        connectionId: PLACEHOLDER_VPC_LINK_ID
+        requestParameters:
+          integration.request.path.address: method.request.path.address
+      servers:
+      - url: https://api-mainnet.helius-rpc.com
+        description: Mainnet RPC endpoint
+      - url: https://api-devnet.helius-rpc.com
+        description: Devnet RPC endpoint
+  /v0/tokens/metadata:
+    post:
+      tags:
+      - NFTs
+      summary: Returns token metadata (whether NFT or Fungible) for a given token address.
+      operationId: enhancedApi_getTokenMetadata
+      parameters:
+      - $ref: '#/components/parameters/apiKeyParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnhancedApi_TokensMetadataRequest'
+      responses:
+        '200':
+          description: Returns the token metadata.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnhancedApi_TokenMetadataResponse'
+        '400':
+          $ref: '#/components/responses/EnhancedApi_400-BadRequest'
+        '401':
+          $ref: '#/components/responses/EnhancedApi_401-Unauthorized'
+        '403':
+          $ref: '#/components/responses/EnhancedApi_403-Forbidden'
+        '404':
+          $ref: '#/components/responses/EnhancedApi_404-NotFound'
+        '429':
+          $ref: '#/components/responses/EnhancedApi_429-TooManyRequests'
+        '500':
+          $ref: '#/components/responses/EnhancedApi_500-InternalServerError'
+        '503':
+          $ref: '#/components/responses/EnhancedApi_503-ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/EnhancedApi_504-GatewayTimeout'
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        type: http_proxy
+        uri: http://PLACEHOLDER_VIEW_LAYER_DNS_NAME/tokens/metadata
+        connectionType: VPC_LINK
+        connectionId: PLACEHOLDER_VPC_LINK_ID
+      servers:
+      - url: https://api-mainnet.helius-rpc.com
+        description: Mainnet RPC endpoint
+      - url: https://api-devnet.helius-rpc.com
+        description: Devnet RPC endpoint
+  /v0/addresses/{address}/nfts:
+    get:
+      tags:
+      - NFTs
+      summary: Returns the NFTs held for a given address.
+      operationId: enhancedApi_getNFTs
+      parameters:
+      - $ref: '#/components/parameters/apiKeyParam'
+      - $ref: '#/components/parameters/EnhancedApi_addressParam'
+      - $ref: '#/components/parameters/EnhancedApi_pageNumberParam'
+      responses:
+        '200':
+          description: Returns the current NFTs that this address owns.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnhancedApi_NFTsResponse'
+        '400':
+          $ref: '#/components/responses/EnhancedApi_400-BadRequest'
+        '401':
+          $ref: '#/components/responses/EnhancedApi_401-Unauthorized'
+        '403':
+          $ref: '#/components/responses/EnhancedApi_403-Forbidden'
+        '404':
+          $ref: '#/components/responses/EnhancedApi_404-NotFound'
+        '429':
+          $ref: '#/components/responses/EnhancedApi_429-TooManyRequests'
+        '500':
+          $ref: '#/components/responses/EnhancedApi_500-InternalServerError'
+        '503':
+          $ref: '#/components/responses/EnhancedApi_503-ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/EnhancedApi_504-GatewayTimeout'
+      x-amazon-apigateway-integration:
+        httpMethod: GET
+        type: http_proxy
+        uri: http://PLACEHOLDER_VIEW_LAYER_DNS_NAME/addresses/{address}/nfts
+        connectionType: VPC_LINK
+        connectionId: PLACEHOLDER_VPC_LINK_ID
+        requestParameters:
+          integration.request.path.address: method.request.path.address
+      servers:
+      - url: https://api-mainnet.helius-rpc.com
+        description: Mainnet RPC endpoint
+      - url: https://api-devnet.helius-rpc.com
+        description: Devnet RPC endpoint
+  /v1/nft-events:
+    post:
+      tags:
+      - NFTs
+      summary: Queries for NFT events.
+      operationId: enhancedApi_queryNftEvents
+      parameters:
+      - $ref: '#/components/parameters/apiKeyParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnhancedApi_QueryNftEventsRequest'
+      responses:
+        '200':
+          description: Query result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnhancedApi_QueryNftEventsResponse'
+        '400':
+          $ref: '#/components/responses/EnhancedApi_400-BadRequest'
+        '401':
+          $ref: '#/components/responses/EnhancedApi_401-Unauthorized'
+        '403':
+          $ref: '#/components/responses/EnhancedApi_403-Forbidden'
+        '404':
+          $ref: '#/components/responses/EnhancedApi_404-NotFound'
+        '429':
+          $ref: '#/components/responses/EnhancedApi_429-TooManyRequests'
+        '500':
+          $ref: '#/components/responses/EnhancedApi_500-InternalServerError'
+        '503':
+          $ref: '#/components/responses/EnhancedApi_503-ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/EnhancedApi_504-GatewayTimeout'
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        type: http_proxy
+        uri: http://PLACEHOLDER_VIEW_LAYER_DNS_NAME/nft-events
+        connectionType: VPC_LINK
+        connectionId: PLACEHOLDER_VPC_LINK_ID
+      servers:
+      - url: https://api-mainnet.helius-rpc.com
+        description: Mainnet RPC endpoint
+      - url: https://api-devnet.helius-rpc.com
+        description: Devnet RPC endpoint
+  /v1/nfts:
+    post:
+      tags:
+      - NFTs
+      summary: Describes the provided NFTs.
+      operationId: enhancedApi_describeNfts
+      parameters:
+      - $ref: '#/components/parameters/apiKeyParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnhancedApi_DescribeNftsRequest'
+      responses:
+        '200':
+          description: Query result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnhancedApi_DescribeNftsResponse'
+        '400':
+          $ref: '#/components/responses/EnhancedApi_400-BadRequest'
+        '401':
+          $ref: '#/components/responses/EnhancedApi_401-Unauthorized'
+        '403':
+          $ref: '#/components/responses/EnhancedApi_403-Forbidden'
+        '404':
+          $ref: '#/components/responses/EnhancedApi_404-NotFound'
+        '429':
+          $ref: '#/components/responses/EnhancedApi_429-TooManyRequests'
+        '500':
+          $ref: '#/components/responses/EnhancedApi_500-InternalServerError'
+        '503':
+          $ref: '#/components/responses/EnhancedApi_503-ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/EnhancedApi_504-GatewayTimeout'
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        type: http_proxy
+        uri: http://PLACEHOLDER_VIEW_LAYER_DNS_NAME/nfts
+        connectionType: VPC_LINK
+        connectionId: PLACEHOLDER_VPC_LINK_ID
+      servers:
+      - url: https://api-mainnet.helius-rpc.com
+        description: Mainnet RPC endpoint
+      - url: https://api-devnet.helius-rpc.com
+        description: Devnet RPC endpoint
+  /v1/mintlist:
+    post:
+      tags:
+      - NFTs
+      summary: Returns a list of mint accounts for a given NFT collection.
+      operationId: enhancedApi_mintlist
+      parameters:
+      - $ref: '#/components/parameters/apiKeyParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnhancedApi_MintlistRequest'
+      responses:
+        '200':
+          description: Query result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnhancedApi_MintlistResponse'
+        '400':
+          $ref: '#/components/responses/EnhancedApi_400-BadRequest'
+        '401':
+          $ref: '#/components/responses/EnhancedApi_401-Unauthorized'
+        '403':
+          $ref: '#/components/responses/EnhancedApi_403-Forbidden'
+        '404':
+          $ref: '#/components/responses/EnhancedApi_404-NotFound'
+        '429':
+          $ref: '#/components/responses/EnhancedApi_429-TooManyRequests'
+        '500':
+          $ref: '#/components/responses/EnhancedApi_500-InternalServerError'
+        '503':
+          $ref: '#/components/responses/EnhancedApi_503-ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/EnhancedApi_504-GatewayTimeout'
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        type: http_proxy
+        uri: http://PLACEHOLDER_VIEW_LAYER_DNS_NAME/mintlist
+        connectionType: VPC_LINK
+        connectionId: PLACEHOLDER_VPC_LINK_ID
+      servers:
+      - url: https://api-mainnet.helius-rpc.com
+        description: Mainnet RPC endpoint
+      - url: https://api-devnet.helius-rpc.com
+        description: Devnet RPC endpoint
+  /v1/active-listings:
+    post:
+      tags:
+      - NFTs
+      summary: Query for active NFT listings.
+      operationId: enhancedApi_queryActiveListings
+      parameters:
+      - $ref: '#/components/parameters/apiKeyParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnhancedApi_ActiveListingsRequest'
+      responses:
+        '200':
+          description: Query result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnhancedApi_ActiveListingsResponse'
+        '400':
+          $ref: '#/components/responses/EnhancedApi_400-BadRequest'
+        '401':
+          $ref: '#/components/responses/EnhancedApi_401-Unauthorized'
+        '403':
+          $ref: '#/components/responses/EnhancedApi_403-Forbidden'
+        '404':
+          $ref: '#/components/responses/EnhancedApi_404-NotFound'
+        '429':
+          $ref: '#/components/responses/EnhancedApi_429-TooManyRequests'
+        '500':
+          $ref: '#/components/responses/EnhancedApi_500-InternalServerError'
+        '503':
+          $ref: '#/components/responses/EnhancedApi_503-ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/EnhancedApi_504-GatewayTimeout'
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        type: http_proxy
+        uri: http://PLACEHOLDER_VIEW_LAYER_DNS_NAME/active-listings
+        connectionType: VPC_LINK
+        connectionId: PLACEHOLDER_VPC_LINK_ID
+      servers:
+      - url: https://api-mainnet.helius-rpc.com
+        description: Mainnet RPC endpoint
+      - url: https://api-devnet.helius-rpc.com
+        description: Devnet RPC endpoint
+  /v0/token-metadata:
+    post:
+      tags:
+      - NFTs
+      summary: Returns all metadata associated with an account, including data from the old token list.
+      operationId: enhancedApi_queryMetadataV1
+      parameters:
+      - $ref: '#/components/parameters/apiKeyParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnhancedApi_TokensMetadataRequestV1'
+      responses:
+        '200':
+          description: Query result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnhancedApi_TokensMetadataResponseV1'
+        '400':
+          $ref: '#/components/responses/EnhancedApi_400-BadRequest'
+        '401':
+          $ref: '#/components/responses/EnhancedApi_401-Unauthorized'
+        '403':
+          $ref: '#/components/responses/EnhancedApi_403-Forbidden'
+        '404':
+          $ref: '#/components/responses/EnhancedApi_404-NotFound'
+        '429':
+          $ref: '#/components/responses/EnhancedApi_429-TooManyRequests'
+        '500':
+          $ref: '#/components/responses/EnhancedApi_500-InternalServerError'
+        '503':
+          $ref: '#/components/responses/EnhancedApi_503-ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/EnhancedApi_504-GatewayTimeout'
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        type: http_proxy
+        uri: http://PLACEHOLDER_VIEW_LAYER_DNS_NAME/tokens/metadata-v1
+        connectionType: VPC_LINK
+        connectionId: PLACEHOLDER_VPC_LINK_ID
+      servers:
+      - url: https://api-mainnet.helius-rpc.com
+        description: Mainnet RPC endpoint
+      - url: https://api-devnet.helius-rpc.com
+        description: Devnet RPC endpoint
+components:
+  schemas:
+    EnhancedApi_ActiveListing:
+      type: object
+      properties:
+        transactionSignature:
+          type: string
+          description: Signature of the listing transaction.
+          example: 27W41DrnxGFJGX7yEGuKBtRb7oMwFdGdPwffBTTeakV8nTQTgWR2hzFKmrt8QnxaMEbw4pS2NoiLmiuB2VfqxVn7
+        marketplace:
+          $ref: '#/components/schemas/EnhancedApi_Marketplace'
+        amount:
+          type: integer
+          example: 1000000
+          description: Listed price of the NFT (in lamports).
+        seller:
+          type: string
+          description: Address of the NFT seller.
+          example: 3ngLS7Y64DoMAHJ6k6XYh8vo5nSiG66AP1yLvbckfKrc
+    EnhancedApi_TransactionType:
+      type: string
+      enum:
+      - ACCEPT_ESCROW_ARTIST
+      - ACCEPT_ESCROW_USER
+      - ACCEPT_PROPOSAL
+      - ACCEPT_REQUEST_ARTIST
+      - ACTIVATE_PROPOSAL
+      - ACTIVATE_TRANSACTION
+      - ACTIVATE_VAULT
+      - ADD_AUTHORITY
+      - ADD_BALANCE_LIQUIDITY
+      - ADD_BATCH_TRANSACTION
+      - ADD_IMBALANCE_LIQUIDITY
+      - ADD_INSTRUCTION
+      - ADD_ITEM
+      - ADD_LIQUIDITY
+      - ADD_LIQUIDITY_BY_STRATEGY
+      - ADD_LIQUIDITY_BY_STRATEGY_ONE_SIDE
+      - ADD_LIQUIDITY_BY_WEIGHT
+      - ADD_LIQUIDITY_ONE_SIDE
+      - ADD_LIQUIDITY_ONE_SIDE_PRECISE
+      - ADD_MEMBER
+      - ADD_MEMBER_AND_CHANGE_THRESHOLD
+      - ADD_METADATA
+      - ADD_PAYMENT_MINT_PAYMENT_METHOD
+      - ADD_RARITIES_TO_BANK
+      - ADD_REWARDS
+      - ADD_SPENDING_LIMIT
+      - ADD_TO_POOL
+      - ADD_TO_WHITELIST
+      - ADD_TOKEN_TO_VAULT
+      - ADD_TRAIT_CONFLICTS
+      - ADMIN_SYNC_LIQUIDITY
+      - APPROVE
+      - APPROVE_PROPOSAL
+      - APPROVE_TRANSACTION
+      - ATTACH_METADATA
+      - AUCTION_HOUSE_CREATE
+      - AUCTION_MANAGER_CLAIM_BID
+      - AUTHORIZE_FUNDER
+      - BACKFILL_TOTAL_BLOCKS
+      - BEGIN_TRAIT_UPDATE
+      - BEGIN_VARIANT_UPDATE
+      - BOOTSTRAP_LIQUIDITY
+      - BORROW_CNFT_PERPETUAL
+      - BORROW_FOX
+      - BORROW_OBLIGATION_LIQUIDITY
+      - BORROW_PERPETUAL
+      - BORROW_SOL_FOR_NFT
+      - BORROW_STAKED_BANX_PERPETUAL
+      - BOT_CLAIM_SALE
+      - BOT_DELIST
+      - BOT_LIQUIDATE
+      - BOT_LIQUIDATE_SELL
+      - BOT_UNFREEZE
+      - BOUND_HADO_MARKET_TO_FRAKT_MARKET
+      - BURN
+      - BURN_NFT
+      - BURN_PAYMENT
+      - BURN_PAYMENT_TREE
+      - BUY_ITEM
+      - BUY_LOAN
+      - BUY_SUBSCRIPTION
+      - BUY_TICKETS
+      - CANCEL
+      - CANCEL_ALL_AND_PLACE_ORDERS
+      - CANCEL_ALL_ORDERS
+      - CANCEL_ESCROW
+      - CANCEL_LOAN_REQUEST
+      - CANCEL_MULTIPLE_ORDERS
+      - CANCEL_OFFER
+      - CANCEL_ORDER
+      - CANCEL_ORDER_BY_CLIENT_ORDER_ID
+      - CANCEL_PROPOSAL
+      - CANCEL_REWARD
+      - CANCEL_SWAP
+      - CANCEL_TRANSACTION
+      - CANCEL_UP_TO
+      - CANCEL_UPDATE
+      - CANDY_MACHINE_ROUTE
+      - CANDY_MACHINE_UNWRAP
+      - CANDY_MACHINE_UPDATE
+      - CANDY_MACHINE_WRAP
+      - CHANGE_BLOCK_BUILDER
+      - CHANGE_COMIC_STATE
+      - CHANGE_FEE_RECIPIENT
+      - CHANGE_MARKET_STATUS
+      - CHANGE_SEAT_STATUS
+      - CHANGE_THRESHOLD
+      - CHANGE_TIP_RECEIVER
+      - CLAIM_AUTHORITY
+      - CLAIM_CNFT_PERPETUAL_LOAN
+      - CLAIM_FEE
+      - CLAIM_NFT
+      - CLAIM_NFT_BY_LENDER_CNFT
+      - CLAIM_NFT_BY_LENDER_PNFT
+      - CLAIM_PERPETUAL_LOAN
+      - CLAIM_REWARD
+      - CLAIM_REWARDS
+      - CLAIM_SALE
+      - CLAIM_TIPS
+      - CLEAN
+      - CLOSE_ACCOUNT
+      - CLOSE_BATCH_ACCOUNTS
+      - CLOSE_BUNDLED_POSITION
+      - CLOSE_CLAIM_STATUS
+      - CLOSE_CONFIG
+      - CLOSE_CONFIG_TRANSACTION_ACCOUNTS
+      - CLOSE_ESCROW_ACCOUNT
+      - CLOSE_ITEM
+      - CLOSE_MARKET
+      - CLOSE_OPEN_ORDERS_ACCOUNT
+      - CLOSE_OPEN_ORDERS_INDEXER
+      - CLOSE_ORDER
+      - CLOSE_POOL
+      - CLOSE_POSITION
+      - CLOSE_PRESET_PARAMETER
+      - CLOSE_TIP_DISTRIBUTION_ACCOUNT
+      - CLOSE_VAULT_BATCH_TRANSACTION_ACCOUNT
+      - CLOSE_VAULT_TRANSACTION_ACCOUNTS
+      - COLLECT_FEES
+      - COLLECT_REWARD
+      - COMPRESS_NFT
+      - COMPRESSED_NFT_BURN
+      - COMPRESSED_NFT_CANCEL_REDEEM
+      - COMPRESSED_NFT_DELEGATE
+      - COMPRESSED_NFT_MINT
+      - COMPRESSED_NFT_REDEEM
+      - COMPRESSED_NFT_SET_VERIFY_COLLECTION
+      - COMPRESSED_NFT_TRANSFER
+      - COMPRESSED_NFT_UNVERIFY_COLLECTION
+      - COMPRESSED_NFT_UNVERIFY_CREATOR
+      - COMPRESSED_NFT_UPDATE_METADATA
+      - COMPRESSED_NFT_VERIFY_COLLECTION
+      - COMPRESSED_NFT_VERIFY_CREATOR
+      - CONSUME_EVENTS
+      - CONSUME_GIVEN_EVENTS
+      - COPY_CLUSTER_INFO
+      - COPY_GOSSIP_CONTACT_INFO
+      - COPY_TIP_DISTRIBUTION_ACCOUNT
+      - COPY_VOTE_ACCOUNT
+      - CRANK
+      - CRANK_EVENT_QUEUE
+      - CREATE
+      - CREATE_AMM
+      - CREATE_APPRAISAL
+      - CREATE_AVATAR
+      - CREATE_AVATAR_CLASS
+      - CREATE_BATCH
+      - CREATE_BET
+      - CREATE_BOND_AND_SELL_TO_OFFERS
+      - CREATE_BOND_AND_SELL_TO_OFFERS_CNFT
+      - CREATE_BOND_AND_SELL_TO_OFFERS_FOR_TEST
+      - CREATE_BOND_OFFER_STANDARD
+      - CREATE_COLLECTION
+      - CREATE_CONFIG
+      - CREATE_CONFIG_TRANSACTION
+      - CREATE_ESCROW
+      - CREATE_LOCK_ESCROW
+      - CREATE_MARKET
+      - CREATE_MASTER_EDITION
+      - CREATE_MERKLE_TREE
+      - CREATE_MINT_METADATA
+      - CREATE_MULTISIG
+      - CREATE_OPEN_ORDERS_ACCOUNT
+      - CREATE_OPEN_ORDERS_INDEXER
+      - CREATE_ORDER
+      - CREATE_PAYMENT_METHOD
+      - CREATE_PERPETUAL_BOND_OFFER
+      - CREATE_POOL
+      - CREATE_PROPOSAL
+      - CREATE_RAFFLE
+      - CREATE_STATS
+      - CREATE_STORE
+      - CREATE_TOKEN_POOL
+      - CREATE_TRAIT
+      - CREATE_TRANSACTION
+      - CREATE_UNCHECKED
+      - CREATE_VAULT_TRANSACTION
+      - DEAUTHORIZE_FUNDER
+      - DECOMPRESS_NFT
+      - DECREASE_LIQUIDITY
+      - DELEGATE_MERKLE_TREE
+      - DELETE_COLLECTION
+      - DELETE_POSITION_BUNDLE
+      - DELETE_REFERRER_STATE_AND_SHORT_URL
+      - DELETE_TOKEN_BADGE
+      - DELIST_ITEM
+      - DELIST_NFT
+      - DEPOSIT
+      - DEPOSIT_FRACTIONAL_POOL
+      - DEPOSIT_GEM
+      - DEPOSIT_OBLIGATION_COLLATERAL
+      - DEPOSIT_RESERVE_LIQUIDITY
+      - DEPOSIT_RESERVE_LIQUIDITY_AND_OBLIGATION_COLLATERAL
+      - DEPOSIT_SOL_TO_FLASH_LOAN_POOL
+      - DEPOSIT_TO_BOND_OFFER_STANDARD
+      - DEPOSIT_TO_FARM_VAULT
+      - DEPOSIT_TO_REWARDS_VAULT
+      - DISTRIBUTE_COMPRESSION_REWARDS
+      - EDIT_ORDER
+      - EDIT_ORDER_PEGGED
+      - EMPTY_PAYMENT_ACCOUNT
+      - ENABLE_OR_DISABLE_POOL
+      - EQUIP_TRAIT
+      - EQUIP_TRAIT_AUTHORITY
+      - EVICT_SEAT
+      - EXECUTE_BATCH_TRANSACTION
+      - EXECUTE_CONFIG_TRANSACTION
+      - EXECUTE_INSTRUCTION
+      - EXECUTE_LOAN
+      - EXECUTE_MORTGAGE
+      - EXECUTE_TRANSACTION
+      - EXECUTE_VAULT_TRANSACTION
+      - EXIT_VALIDATE_AND_SELL_TO_BOND_OFFERS_V2
+      - EXPIRE
+      - EXTEND_LOAN
+      - EXTENSION_EXECUTE
+      - FILL_ORDER
+      - FINALIZE_PROGRAM_INSTRUCTION
+      - FINISH_HADO_MARKET
+      - FIX_POOL
+      - FLASH_BORROW_RESERVE_LIQUIDITY
+      - FLASH_REPAY_RESERVE_LIQUIDITY
+      - FORCE_CANCEL_ORDERS
+      - FORECLOSE_LOAN
+      - FRACTIONALIZE
+      - FREEZE
+      - FUND_REWARD
+      - FUSE
+      - GET_POOL_INFO
+      - GO_TO_A_BIN
+      - HARVEST_REWARD
+      - IDL_MISSING_TYPES
+      - INCREASE_LIQUIDITY
+      - INCREASE_ORACLE_LENGTH
+      - INIT_AUCTION_MANAGER_V2
+      - INIT_BANK
+      - INIT_CLUSTER_HISTORY_ACCOUNT
+      - INIT_CONFIG
+      - INIT_CONFIG_EXTENSION
+      - INIT_CUSTOMIZABLE_PERMISSIONLESS_CONSTANT_PRODUCT_POOL
+      - INIT_FARM
+      - INIT_FARMER
+      - INIT_FARMS_FOR_RESERVE
+      - INIT_FEE_TIER
+      - INIT_LENDING_MARKET
+      - INIT_OBLIGATION
+      - INIT_OBLIGATION_FARMS_FOR_RESERVE
+      - INIT_PERMISSIONED_POOL
+      - INIT_PERMISSIONLESS_CONSTANT_PRODUCT_POOL_WITH_CONFIG
+      - INIT_PERMISSIONLESS_CONSTANT_PRODUCT_POOL_WITH_CONFIG_2
+      - INIT_PERMISSIONLESS_POOL
+      - INIT_PERMISSIONLESS_POOL_WITH_FEE_TIER
+      - INIT_POOL
+      - INIT_POOL_V2
+      - INIT_POSITION_BUNDLE
+      - INIT_POSITION_BUNDLE_WITH_METADATA
+      - INIT_REFERRER_STATE_AND_SHORT_URL
+      - INIT_REFERRER_TOKEN_STATE
+      - INIT_RENT
+      - INIT_RESERVE
+      - INIT_REWARD
+      - INIT_REWARD_V2
+      - INIT_STAKE
+      - INIT_SWAP
+      - INIT_TICK_ARRAY
+      - INIT_TIP_DISTRIBUTION_ACCOUNT
+      - INIT_TOKEN_BADGE
+      - INIT_USER_METADATA
+      - INIT_VALIDATOR_HISTORY_ACCOUNT
+      - INIT_VAULT
+      - INITIALIZE
+      - INITIALIZE_ACCOUNT
+      - INITIALIZE_BIN_ARRAY
+      - INITIALIZE_BIN_ARRAY_BITMAP_EXTENSION
+      - INITIALIZE_CUSTOMIZABLE_PERMISSIONLESS_LB_PAIR
+      - INITIALIZE_FARM
+      - INITIALIZE_FARM_DELEGATED
+      - INITIALIZE_FLASH_LOAN_POOL
+      - INITIALIZE_GLOBAL_CONFIG
+      - INITIALIZE_HADO_MARKET
+      - INITIALIZE_LB_PAIR
+      - INITIALIZE_MARKET
+      - INITIALIZE_PERMISSION_LB_PAIR
+      - INITIALIZE_POSITION
+      - INITIALIZE_POSITION_BY_OPERATOR
+      - INITIALIZE_POSITION_PDA
+      - INITIALIZE_PRESET_PARAMETER
+      - INITIALIZE_REWARD
+      - INITIALIZE_USER
+      - INSTANT_REFINANCE_PERPETUAL_LOAN
+      - KICK_ITEM
+      - LEND_FOR_NFT
+      - LIMIT_ORDER
+      - LIQUIDATE
+      - LIQUIDATE_BOND_ON_AUCTION_CNFT
+      - LIQUIDATE_BOND_ON_AUCTION_PNFT
+      - LIQUIDATE_OBLIGATION_AND_REDEEM_RESERVE_COLLATERAL
+      - LIST_ITEM
+      - LIST_NFT
+      - LOAN
+      - LOAN_FOX
+      - LOCK
+      - LOCK_REWARD
+      - LOG
+      - MAKE_PERPETUAL_MARKET
+      - MAP_BANX_TO_POINTS
+      - MERGE_CONDITIONAL_TOKENS
+      - MERGE_STAKE
+      - MIGRATE_BIN_ARRAY
+      - MIGRATE_POSITION
+      - MIGRATE_TO_PNFT
+      - MINT_TO
+      - NAME_SUCCESSOR
+      - NFT_AUCTION_CANCELLED
+      - NFT_AUCTION_CREATED
+      - NFT_AUCTION_UPDATED
+      - NFT_BID
+      - NFT_BID_CANCELLED
+      - NFT_CANCEL_LISTING
+      - NFT_GLOBAL_BID
+      - NFT_GLOBAL_BID_CANCELLED
+      - NFT_LISTING
+      - NFT_MINT
+      - NFT_MINT_REJECTED
+      - NFT_PARTICIPATION_REWARD
+      - NFT_RENT_ACTIVATE
+      - NFT_RENT_CANCEL_LISTING
+      - NFT_RENT_END
+      - NFT_RENT_LISTING
+      - NFT_RENT_UPDATE_LISTING
+      - NFT_SALE
+      - OFFER_LOAN
+      - OPEN_BUNDLED_POSITION
+      - OPEN_POSITION
+      - OPEN_POSITION_WITH_METADATA
+      - OVERRIDE_CURVE_PARAM
+      - PARTNER_CLAIM_FEE
+      - PATCH_BROKEN_USER_STAKES
+      - PAUSE
+      - PAYOUT
+      - PLACE_AND_TAKE_PERP_ORDER
+      - PLACE_BET
+      - PLACE_MULTIPLE_POST_ONLY_ORDERS
+      - PLACE_ORDER
+      - PLACE_ORDER_PEGGED
+      - PLACE_ORDERS
+      - PLACE_SOL_BET
+      - PLACE_TAKE_ORDER
+      - PLATFORM_FEE
+      - POOL_CANCEL_PROPOSAL
+      - POST_MULTI_PYTH
+      - POST_PYTH
+      - PROGRAM_CONFIG_INIT
+      - PROGRAM_CONFIG_SET_AUTH
+      - PROGRAM_CONFIG_SET_CREATION_FEE
+      - PROGRAM_CONFIG_SET_TREASURY
+      - PROPOSE_LOAN
+      - PRUNE_ORDERS
+      - REALLOC_CLUSTER_HISTORY_ACCOUNT
+      - REALLOC_VALIDATOR_HISTORY_ACCOUNT
+      - REBORROW_SOL_FOR_NFT
+      - RECORD_RARITY_POINTS
+      - REDEEM_CONDITIONAL_TOKENS
+      - REDEEM_FEES
+      - REDEEM_RESERVE_COLLATERAL
+      - REDUCE_ORDER
+      - REFILL
+      - REFINANCE_FBOND_BY_LENDER
+      - REFINANCE_PERPETUAL_LOAN
+      - REFINANCE_TO_BOND_OFFERS_V2
+      - REFINANCE_TO_BOND_OFFERS_V2_CNFT
+      - REFRESH_FARM
+      - REFRESH_FARMER
+      - REFRESH_OBLIGATION
+      - REFRESH_OBLIGATION_FARMS_FOR_RESERVE
+      - REFRESH_RESERVE
+      - REFRESH_RESERVES_BATCH
+      - REFRESH_USER_STATE
+      - REJECT_PROPOSAL
+      - REJECT_SWAP
+      - REJECT_TRANSACTION
+      - REMOVE_ALL_LIQUIDITY
+      - REMOVE_BALANCE_LIQUIDITY
+      - REMOVE_BOND_OFFER_V2
+      - REMOVE_FROM_POOL
+      - REMOVE_FROM_WHITELIST
+      - REMOVE_LIQUIDITY
+      - REMOVE_LIQUIDITY_BY_RANGE
+      - REMOVE_LIQUIDITY_SINGLE_SIDE
+      - REMOVE_MEMBER
+      - REMOVE_MEMBER_AND_CHANGE_THRESHOLD
+      - REMOVE_PERPETUAL_OFFER
+      - REMOVE_SPENDING_LIMIT
+      - REMOVE_TRAIT
+      - REMOVE_TRAIT_AUTHORITY
+      - REPAY
+      - REPAY_CNFT_PERPETUAL_LOAN
+      - REPAY_COMPRESSED
+      - REPAY_FBOND_TO_TRADE_TRANSACTIONS
+      - REPAY_FBOND_TO_TRADE_TRANSACTIONS_CNFT
+      - REPAY_FLASH_LOAN
+      - REPAY_LOAN
+      - REPAY_OBLIGATION_LIQUIDITY
+      - REPAY_PARTIAL_PERPETUAL_LOAN
+      - REPAY_PERPETUAL_LOAN
+      - REPAY_STAKED_BANX
+      - REPAY_STAKED_BANX_PERPETUAL_LOAN
+      - REQUEST_ELEVATION_GROUP
+      - REQUEST_LOAN
+      - REQUEST_PNFT_MIGRATION
+      - REQUEST_SEAT
+      - REQUEST_SEAT_AUTHORIZED
+      - RESCIND_LOAN
+      - REVOKE
+      - REWARD_USER_ONCE
+      - SELL_LOAN
+      - SELL_NFT
+      - SELL_STAKED_BANX_TO_OFFERS
+      - SET_ACTIVATION_POINT
+      - SET_AUTHORITY
+      - SET_BANK_FLAGS
+      - SET_COLLECT_PROTOCOL_FEES_AUTHORITY
+      - SET_CONFIG_AUTH
+      - SET_CONFIG_EXTENSION_AUTHORITY
+      - SET_DEFAULT_FEE_RATE
+      - SET_DEFAULT_PROTOCOL_FEE_RATE
+      - SET_DELEGATE
+      - SET_FEE_AUTHORITY
+      - SET_FEE_RATE
+      - SET_MARKET_EXPIRED
+      - SET_NEW_ADMIN
+      - SET_NEW_ORACLE_AUTHORITY
+      - SET_NEW_TIP_DISTRIBUTION_PROGRAM
+      - SET_PARAMS
+      - SET_POOL_FEES
+      - SET_PRE_ACTIVATION_DURATION
+      - SET_PRE_ACTIVATION_SWAP_ADDRESS
+      - SET_PROTOCOL_FEE_RATE
+      - SET_RENT_COLLECTOR
+      - SET_REWARD_AUTHORITY
+      - SET_REWARD_AUTHORITY_BY_SUPER_AUTHORITY
+      - SET_REWARD_EMISSIONS
+      - SET_REWARD_EMISSIONS_SUPER_AUTHORITY
+      - SET_REWARD_EMISSIONS_V2
+      - SET_STAKE_DELEGATED
+      - SET_TIME_LOCK
+      - SET_TOKEN_BADGE_AUTHORITY
+      - SET_VAULT_LOCK
+      - SET_WHITELISTED_VAULT
+      - SETTLE_CONDITIONAL_VAULT
+      - SETTLE_FUNDS
+      - SETTLE_FUNDS_EXPIRED
+      - SETTLE_PNL
+      - SOCIALIZE_LOSS
+      - SPLIT_STAKE
+      - STAKE
+      - STAKE_BANX
+      - STAKE_SOL
+      - STAKE_TOKEN
+      - START_PNFT_MIGRATION
+      - STUB_ID_BUILD
+      - STUB_ORACLE_CLOSE
+      - STUB_ORACLE_CREATE
+      - STUB_ORACLE_SET
+      - SWAP
+      - SWAP_EXACT_OUT
+      - SWAP_WITH_PRICE_IMPACT
+      - SWEEP_FEES
+      - SWITCH_FOX
+      - SWITCH_FOX_REQUEST
+      - SYNC_LIQUIDITY
+      - TAKE_COMPRESSED_LOAN
+      - TAKE_FLASH_LOAN
+      - TAKE_LOAN
+      - TAKE_MORTGAGE
+      - TERMINATE_PERPETUAL_LOAN
+      - THAW
+      - TOGGLE_PAIR_STATUS
+      - TOKEN_MINT
+      - TOPUP
+      - TRANSFER
+      - TRANSFER_OWNERSHIP
+      - TRANSFER_PAYMENT
+      - TRANSFER_PAYMENT_TREE
+      - TRANSFER_RECIPIENT
+      - UNFREEZE
+      - UNKNOWN
+      - UNLABELED
+      - UNPAUSE
+      - UNSTAKE
+      - UNSTAKE_BANX
+      - UNSTAKE_SOL
+      - UNSTAKE_TOKEN
+      - UNSUB_OR_HARVEST_WEEKS
+      - UNSUB_OR_HARVEST_WEEKS_ENHANCED
+      - UPDATE
+      - UPDATE_ACTIVATION_POINT
+      - UPDATE_BANK_MANAGER
+      - UPDATE_BOND_OFFER_STANDARD
+      - UPDATE_CLASS_VARIANT_AUTHORITY
+      - UPDATE_CLASS_VARIANT_METADATA
+      - UPDATE_COLLECTION
+      - UPDATE_COLLECTION_OR_CREATOR
+      - UPDATE_CONFIG
+      - UPDATE_EXTERNAL_PRICE_ACCOUNT
+      - UPDATE_FARM
+      - UPDATE_FARM_ADMIN
+      - UPDATE_FARM_CONFIG
+      - UPDATE_FEE_PARAMETERS
+      - UPDATE_FEES_AND_REWARDS
+      - UPDATE_FLOOR
+      - UPDATE_GLOBAL_CONFIG
+      - UPDATE_GLOBAL_CONFIG_ADMIN
+      - UPDATE_HADO_MARKET_FEE
+      - UPDATE_INTEREST_PERPETUAL_MARKET
+      - UPDATE_ITEM
+      - UPDATE_LENDING_MARKET
+      - UPDATE_LENDING_MARKET_OWNER
+      - UPDATE_OFFER
+      - UPDATE_ORDER
+      - UPDATE_PERPETUAL_MARKET
+      - UPDATE_PERPETUAL_OFFER
+      - UPDATE_POOL
+      - UPDATE_POOL_COLLECTIONS
+      - UPDATE_POOL_MORTGAGE
+      - UPDATE_POOL_STATUS
+      - UPDATE_POOL_WHITELIST
+      - UPDATE_POSITION_OPERATOR
+      - UPDATE_PRICING_V2
+      - UPDATE_PRIMARY_SALE_METADATA
+      - UPDATE_RAFFLE
+      - UPDATE_RECORD_AUTHORITY_DATA
+      - UPDATE_RESERVE_CONFIG
+      - UPDATE_REWARD_DURATION
+      - UPDATE_REWARD_FUNDER
+      - UPDATE_STAKE_HISTORY
+      - UPDATE_STAKING_SETTINGS
+      - UPDATE_STATS
+      - UPDATE_TRAIT_VARIANT
+      - UPDATE_TRAIT_VARIANT_AUTHORITY
+      - UPDATE_TRAIT_VARIANT_METADATA
+      - UPDATE_USABLE_AMOUNT
+      - UPDATE_VARIANT
+      - UPDATE_VAULT_OWNER
+      - UPGRADE_FOX
+      - UPGRADE_FOX_REQUEST
+      - UPGRADE_PROGRAM_INSTRUCTION
+      - UPLOAD_MERKLE_ROOT
+      - USE_SPENDING_LIMIT
+      - VALIDATE_SAFETY_DEPOSIT_BOX_V2
+      - VERIFY_PAYMENT_MINT
+      - VERIFY_PAYMENT_MINT_TEST
+      - VOTE
+      - WHITELIST_CREATOR
+      - WITHDRAW
+      - WITHDRAW_FROM_BOND_OFFER_STANDARD
+      - WITHDRAW_FROM_FARM_VAULT
+      - WITHDRAW_GEM
+      - WITHDRAW_INELIGIBLE_REWARD
+      - WITHDRAW_LIQUIDITY
+      - WITHDRAW_OBLIGATION_COLLATERAL
+      - WITHDRAW_OBLIGATION_COLLATERAL_AND_REDEEM_RESERVE_COLLATERAL
+      - WITHDRAW_PROTOCOL_FEE
+      - WITHDRAW_PROTOCOL_FEES
+      - WITHDRAW_REFERRER_FEES
+      - WITHDRAW_REWARD
+      - WITHDRAW_REWARDS_FROM_VAULT
+      - WITHDRAW_SLASHED_AMOUNT
+      - WITHDRAW_SOL_FROM_FLASH_LOAN_POOL
+      - WITHDRAW_TREASURY
+      - WITHDRAW_UNSTAKED_DEPOSITS
+    EnhancedApi_DescribeNftsRequest:
+      type: object
+      properties:
+        mints:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnhancedApi_NftMintAccount'
+    EnhancedApi_ActiveListingsRequest:
+      type: object
+      properties:
+        query:
+          type: object
+          properties:
+            marketplaces:
+              items:
+                $ref: '#/components/schemas/EnhancedApi_Marketplace'
+            firstVerifiedCreators:
+              type: array
+              items:
+                $ref: '#/components/schemas/EnhancedApi_FirstVerifiedCreator'
+            verifiedCollectionAddresses:
+              type: array
+              items:
+                $ref: '#/components/schemas/EnhancedApi_VerifiedCollectionAddress'
+        options:
+          type: object
+          properties:
+            limit:
+              type: integer
+              description: Maximum number of items to return. Must be between 1 and 1000. Default is 100.
+              minimum: 1
+              maximum: 1000
+              default: 100
+            paginationToken:
+              $ref: '#/components/schemas/EnhancedApi_PaginationToken'
+    EnhancedApi_OffChainMetadata:
+      type: object
+      description: Metaplex metadata that is stored off-chain.
+      properties:
+        name:
+          type: string
+        symbol:
+          type: string
+        attributes:
+          type: array
+          items:
+            properties:
+              traitType:
+                type: string
+              value:
+                type: string
+        sellerFeeBasisPoints:
+          type: integer
+        image:
+          type: string
+        properties:
+          type: object
+          properties:
+            category:
+              type: string
+            files:
+              type: array
+              items:
+                properties:
+                  uri:
+                    type: string
+                  type:
+                    type: string
+            creators:
+              type: array
+              items:
+                properties:
+                  address:
+                    type: string
+                  share:
+                    type: string
+    EnhancedApi_NFTsResponse:
+      type: object
+      properties:
+        numberOfPages:
+          type: number
+        nfts:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnhancedApi_Asset'
+    EnhancedApi_NFTEvent:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Human readable interpretation of the transaction
+        type:
+          $ref: '#/components/schemas/EnhancedApi_NFTEventType'
+        source:
+          $ref: '#/components/schemas/EnhancedApi_TransactionSource'
+        amount:
+          type: integer
+          example: 1000000
+          description: The amount of the NFT transaction (in lamports).
+        fee:
+          type: integer
+          example: 5000
+        feePayer:
+          type: string
+          example: 8cRrU1NzNpjL3k2BwjW3VixAcX6VFc29KHr4KZg8cs2Y
+        signature:
+          type: string
+          example: 4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf
+        slot:
+          type: integer
+          example: 148277128
+        timestamp:
+          type: integer
+          example: 1656442333
+        saleType:
+          $ref: '#/components/schemas/EnhancedApi_SaleType'
+        buyer:
+          type: string
+          description: The buyer of the NFT.
+        seller:
+          type: string
+          description: The seller of the NFT.
+        staker:
+          type: string
+          description: The staker of the NFT.
+        nfts:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnhancedApi_Token'
+          description: NFTs that are a part of this NFT event.
+    EnhancedApi_NftName:
+      type: string
+      description: The name of the NFT.
+      example: 'y00t #2940'
+    EnhancedApi_TokenTransfer:
+      type: object
+      properties:
+        fromUserAccount:
+          type: string
+          description: The user account the tokens are sent from.
+        toUserAccount:
+          type: string
+          description: The user account the tokens are sent to.
+        fromTokenAccount:
+          type: string
+          description: The token account the tokens are sent from.
+        toTokenAccount:
+          type: string
+          description: The token account the tokens are sent to.
+        tokenAmount:
+          type: number
+          description: The number of tokens sent.
+        mint:
+          type: string
+          description: The mint account of the token.
+          example: DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx
+    EnhancedApi_SortOrder:
+      type: string
+      description: Order of the returned results. Must be 'ASC' or 'DESC'. Results are descending by default.
+      enum:
+      - ASC
+      - DESC
+      default: DESC
+    EnhancedApi_TokensMetadataRequest:
+      type: object
+      properties:
+        mintAccounts:
+          type: array
+          items:
+            type: string
+            description: The mint account of the token to retrieve metadata for.
+          maxItems: 100
+    EnhancedApi_NftEventV2:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Human readable interpretation of the transaction
+        type:
+          $ref: '#/components/schemas/EnhancedApi_NFTEventType'
+        source:
+          $ref: '#/components/schemas/EnhancedApi_TransactionSource'
+        amount:
+          type: integer
+          example: 1000000
+          description: The amount of the NFT transaction (in lamports).
+        fee:
+          type: integer
+          example: 5000
+        feePayer:
+          type: string
+          example: 8cRrU1NzNpjL3k2BwjW3VixAcX6VFc29KHr4KZg8cs2Y
+        signature:
+          type: string
+          example: 4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf
+        slot:
+          type: integer
+          example: 148277128
+        timestamp:
+          type: integer
+          example: 1656442333
+        saleType:
+          $ref: '#/components/schemas/EnhancedApi_SaleType'
+        buyer:
+          type: string
+          description: The buyer of the NFT.
+        seller:
+          type: string
+          description: The seller of the NFT.
+        staker:
+          type: string
+          description: The staker of the NFT.
+        nfts:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnhancedApi_NftV2'
+          description: Associated NFTs
+        nativeTransfers:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnhancedApi_NativeTransfer'
+        tokenTransfers:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnhancedApi_TokenTransfer'
+    EnhancedApi_NativeTransfer:
+      type: object
+      properties:
+        fromUserAccount:
+          type: string
+          description: The user account the sol is sent from.
+        toUserAccount:
+          type: string
+          description: The user account the sol is sent to.
+        amount:
+          type: integer
+          description: The amount of sol sent (in lamports).
+    EnhancedApi_TokensMetadataResponseV1:
+      type: array
+      items:
+        type: object
+        description: Token metadata stored both on-chain and in the old token list.
+        properties:
+          account:
+            type: string
+          onChainAccountInfo:
+            $ref: '#/components/schemas/EnhancedApi_OnChainAccountInfoResult'
+          onChainMetadata:
+            $ref: '#/components/schemas/EnhancedApi_OnChainMetadataResult'
+          offChainMetadata:
+            $ref: '#/components/schemas/EnhancedApi_OffChainMetadataResult'
+          legacyMetadata:
+            $ref: '#/components/schemas/EnhancedApi_LegacyMetadata'
+    EnhancedApi_TransactionSource:
+      type: string
+      enum:
+      - FORM_FUNCTION
+      - EXCHANGE_ART
+      - CANDY_MACHINE_V3
+      - CANDY_MACHINE_V2
+      - CANDY_MACHINE_V1
+      - UNKNOWN
+      - SOLANART
+      - SOLSEA
+      - MAGIC_EDEN
+      - HOLAPLEX
+      - METAPLEX
+      - OPENSEA
+      - SOLANA_PROGRAM_LIBRARY
+      - ANCHOR
+      - PHANTOM
+      - SYSTEM_PROGRAM
+      - STAKE_PROGRAM
+      - COINBASE
+      - CORAL_CUBE
+      - HEDGE
+      - LAUNCH_MY_NFT
+      - GEM_BANK
+      - GEM_FARM
+      - DEGODS
+      - BSL
+      - YAWWW
+      - ATADIA
+      - DIGITAL_EYES
+      - HYPERSPACE
+      - TENSOR
+      - BIFROST
+      - JUPITER
+      - MERCURIAL
+      - SABER
+      - SERUM
+      - STEP_FINANCE
+      - CROPPER
+      - RAYDIUM
+      - ALDRIN
+      - CREMA
+      - LIFINITY
+      - CYKURA
+      - ORCA
+      - MARINADE
+      - STEPN
+      - SENCHA
+      - SAROS
+      - ENGLISH_AUCTION
+      - FOXY
+      - HADESWAP
+      - FOXY_STAKING
+      - FOXY_RAFFLE
+      - FOXY_TOKEN_MARKET
+      - FOXY_MISSIONS
+      - FOXY_MARMALADE
+      - FOXY_COINFLIP
+      - FOXY_AUCTION
+      - CITRUS
+      - ZETA
+      - ELIXIR
+      - ELIXIR_LAUNCHPAD
+      - CARDINAL_RENT
+      - CARDINAL_STAKING
+      - BPF_LOADER
+      - BPF_UPGRADEABLE_LOADER
+      - SQUADS
+      - SHARKY_FI
+      - OPEN_CREATOR_PROTOCOL
+      - BUBBLEGUM
+      - NOVA
+      - D_READER
+      - RAINDROPS
+      - W_SOL
+      - DUST
+      - SOLI
+      - USDC
+      - FLWR
+      - HDG
+      - MEAN
+      - UXD
+      - SHDW
+      - POLIS
+      - ATLAS
+      - USH
+      - TRTLS
+      - RUNNER
+      - INVICTUS
+    EnhancedApi_Token:
+      type: object
+      properties:
+        mint:
+          type: string
+          example: DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx
+          description: The mint account of the token.
+        tokenStandard:
+          $ref: '#/components/schemas/EnhancedApi_TokenStandard'
+    EnhancedApi_PaginationToken:
+      type: string
+      description: Token used for pagination. Provide the token to the API to retrieve the results from the next page. If no token exists, the query has no results remaining.
+      example: V1_162262948_99
+    EnhancedApi_MintlistResponse:
+      type: object
+      properties:
+        result:
+          type: array
+          items:
+            type: object
+            properties:
+              mint:
+                $ref: '#/components/schemas/EnhancedApi_NftMintAccount'
+              name:
+                $ref: '#/components/schemas/EnhancedApi_NftName'
+        paginationToken:
+          $ref: '#/components/schemas/EnhancedApi_PaginationToken'
+    EnhancedApi_OnChainMetadata:
+      type: object
+      description: Metaplex metadata that is stored on-chain.
+      properties:
+        key:
+          type: string
+        mint:
+          type: string
+        updateAuthority:
+          type: string
+        data:
+          type: object
+          properties:
+            name:
+              type: string
+            symbol:
+              type: string
+            uri:
+              type: string
+            sellerFeeBasisPoints:
+              type: integer
+            creators:
+              type: array
+              items:
+                type: object
+                properties:
+                  address:
+                    type: string
+                  share:
+                    type: string
+                  verified:
+                    type: boolean
+        tokenStandard:
+          type: string
+        primarySaleHappened:
+          type: boolean
+        isMutable:
+          type: boolean
+        editionNonce:
+          type: integer
+        collection:
+          type: object
+          properties:
+            key:
+              type: string
+            verified:
+              type: boolean
+        collectionDetails:
+          type: object
+          properties:
+            size:
+              type: integer
+        uses:
+          type: object
+          properties:
+            useMethod:
+              type: string
+            remaining:
+              type: integer
+            total:
+              type: integer
+    EnhancedApi_OnChainAccountInfoResult:
+      type: object
+      properties:
+        accountInfo:
+          $ref: '#/components/schemas/EnhancedApi_OnChainAccountInfo'
+        error:
+          $ref: '#/components/schemas/EnhancedApi_AccountErrorType'
+    EnhancedApi_ActiveListingsResponse:
+      type: object
+      properties:
+        result:
+          type: array
+          items:
+            type: object
+            properties:
+              mint:
+                $ref: '#/components/schemas/EnhancedApi_NftMintAccount'
+              name:
+                $ref: '#/components/schemas/EnhancedApi_NftName'
+              firstVerifiedCreator:
+                $ref: '#/components/schemas/EnhancedApi_FirstVerifiedCreator'
+              verifiedCollectionAddress:
+                $ref: '#/components/schemas/EnhancedApi_VerifiedCollectionAddress'
+              activeListings:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnhancedApi_ActiveListing'
+        paginationToken:
+          $ref: '#/components/schemas/EnhancedApi_PaginationToken'
+    EnhancedApi_OnChainMetadataResult:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/EnhancedApi_OnChainMetadata'
+        error:
+          $ref: '#/components/schemas/EnhancedApi_AccountErrorType'
+    EnhancedApi_TokenStandard:
+      type: string
+      enum:
+      - NonFungible
+      - FungibleAsset
+      - Fungible
+      - NonFungibleEdition
+    EnhancedApi_SaleType:
+      type: string
+      enum:
+      - AUCTION
+      - INSTANT_SALE
+      - OFFER
+      - GLOBAL_OFFER
+      - MINT
+      - UNKNOWN
+    EnhancedApi_TokensMetadataRequestV1:
+      type: object
+      properties:
+        mintAccounts:
+          type: array
+          items:
+            type: string
+            description: The mint account of the token to retrieve metadata for.
+          maxItems: 100
+        includeOffChain:
+          type: boolean
+          default: false
+          description: Include offchain data referenced in the uri of the metadata account. Omitting defaults to false.
+        disableCache:
+          type: boolean
+          default: false
+          description: Disable usage of cache, useful for monitoring metadata changes.
+    EnhancedApi_LegacyMetadata:
+      type: object
+      description: Data from the old SPL token list.
+      properties:
+        chainId:
+          type: integer
+        address:
+          type: string
+        symbol:
+          type: string
+        name:
+          type: string
+        decimals:
+          type: integer
+        logoURI:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        extensions:
+          type: object
+    EnhancedApi_Commitment:
+      type: string
+      enum:
+      - finalized
+      - confirmed
+    EnhancedApi_NFTEventType:
+      type: string
+      enum:
+      - NFT_BID
+      - NFT_BID_CANCELLED
+      - NFT_GLOBAL_BID
+      - NFT_GLOBAL_BID_CANCELLED
+      - NFT_LISTING
+      - NFT_CANCEL_LISTING
+      - NFT_SALE
+      - NFT_MINT
+      - NFT_MINT_REJECTED
+      - NFT_AUCTION_CREATED
+      - NFT_AUCTION_UPDATED
+      - NFT_AUCTION_CANCELLED
+      - NFT_PARTICIPATION_REWARD
+      - BURN_NFT
+      - NFT_RENT_LISTING
+      - NFT_RENT_CANCEL_LISTING
+      - NFT_RENT_UPDATE_LISTING
+      - NFT_RENT_ACTIVATE
+      - NFT_RENT_END
+      - ATTACH_METADATA
+      - MIGRATE_TO_PNFT
+      - CREATE_POOL
+    EnhancedApi_QueryNftEventsRequest:
+      type: object
+      properties:
+        query:
+          type: object
+          properties:
+            accounts:
+              type: array
+              items:
+                type: string
+                example: 79FjnnXFpSajugwpx3FfQbV7hJJTe7QXAusF7R4CMf6c
+                maxItems: 100
+            types:
+              type: array
+              items:
+                $ref: '#/components/schemas/EnhancedApi_NFTEventType'
+            sources:
+              type: array
+              items:
+                $ref: '#/components/schemas/EnhancedApi_TransactionSource'
+            startSlot:
+              type: integer
+              example: 162368570
+              description: Earliest slot to include in the query (inclusive). Cannot be combined with "startTime".
+            endSlot:
+              type: integer
+              example: 162368580
+              description: Latest slot to include in the query (inclusive). Cannot be combined with "endTime".
+            startTime:
+              type: integer
+              example: 1669055189
+              description: Earliest event time (unix seconds). Cannot be combined with "startSlot".
+            endTime:
+              type: integer
+              example: 1669070189
+              description: Latest event time (unix seconds). Cannot be combined with "endSlot".
+            nftCollectionFilters:
+              type: object
+              properties:
+                firstVerifiedCreator:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/EnhancedApi_FirstVerifiedCreator'
+                verifiedCollectionAddress:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/EnhancedApi_VerifiedCollectionAddress'
+        options:
+          type: object
+          properties:
+            limit:
+              type: integer
+              description: Maximum number of items to return. Must be between 1 and 1000. Default is 100.
+              minimum: 1
+              maximum: 1000
+              default: 100
+            sortOrder:
+              $ref: '#/components/schemas/EnhancedApi_SortOrder'
+            paginationToken:
+              $ref: '#/components/schemas/EnhancedApi_PaginationToken'
+    EnhancedApi_NftBurned:
+      type: boolean
+      description: If the NFT was was burned. Burned NFTs have no name, firstVerifiedCreator, or verifiedCollectionAddress.
+      example: false
+    EnhancedApi_VerifiedCollectionAddress:
+      type: string
+      description: Verified Metaplex collection address. Does not exist for all NFT collections.
+      example: 4mKSoDDqApmF1DqXvVTSL6tu2zixrSSNjqMxUnwvVzy2
+    EnhancedApi_Asset:
+      type: object
+      properties:
+        name:
+          type: string
+        tokenAddress:
+          type: string
+        collectionAddress:
+          type: string
+        collectionName:
+          type: string
+        imageURL:
+          type: string
+        traits:
+          type: array
+          items:
+            type: object
+            properties:
+              trait_type:
+                type: string
+              value:
+                type: string
+    EnhancedApi_Marketplace:
+      type: string
+      description: Marketplace where the NFT is being listed.
+      example: MAGIC_EDEN
+      enum:
+      - MAGIC_EDEN
+      - OPENSEA
+      - FORM_FUNCTION
+      - EXCHANGE_ART
+      - SOLANART
+      - SOLSEA
+      - HOLAPLEX
+      - CORAL_CUBE
+      - YAWWW
+      - SOLPORT
+      - HYPERSPACE
+      - DIGITAL_EYES
+      - CORAL_CUBE
+      - UNKNOWN
+    EnhancedApi_AccountErrorType:
+      type: string
+      example: ''
+      enum:
+      - UNKNOWN
+      - EMPTY_ACCOUNT
+      - TIMEOUT
+      - INVALID_ACCOUNT
+      - INVALID_PUBKEY
+    EnhancedApi_OffChainMetadataResult:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/EnhancedApi_OffChainMetadata'
+        uri:
+          type: string
+        error:
+          $ref: '#/components/schemas/EnhancedApi_AccountErrorType'
+    EnhancedApi_QueryNftEventsResponse:
+      type: object
+      properties:
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnhancedApi_NftEventV2'
+        paginationToken:
+          $ref: '#/components/schemas/EnhancedApi_PaginationToken'
+    EnhancedApi_DescribeNftsResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          mint:
+            $ref: '#/components/schemas/EnhancedApi_NftMintAccount'
+          name:
+            $ref: '#/components/schemas/EnhancedApi_NftName'
+          burned:
+            $ref: '#/components/schemas/EnhancedApi_NftBurned'
+          firstVerifiedCreator:
+            $ref: '#/components/schemas/EnhancedApi_FirstVerifiedCreator'
+          verifiedCollectionAddress:
+            $ref: '#/components/schemas/EnhancedApi_VerifiedCollectionAddress'
+          activeListings:
+            type: array
+            items:
+              $ref: '#/components/schemas/EnhancedApi_ActiveListing'
+    EnhancedApi_NftV2:
+      type: object
+      properties:
+        mint:
+          $ref: '#/components/schemas/EnhancedApi_NftMintAccount'
+        name:
+          $ref: '#/components/schemas/EnhancedApi_NftName'
+        burned:
+          $ref: '#/components/schemas/EnhancedApi_NftBurned'
+        firstVerifiedCreator:
+          $ref: '#/components/schemas/EnhancedApi_FirstVerifiedCreator'
+        verifiedCollectionAddress:
+          $ref: '#/components/schemas/EnhancedApi_VerifiedCollectionAddress'
+    EnhancedApi_TokenMetadataResponse:
+      type: object
+      description: Metaplex metadata stored both on-chain and off-chain.
+      properties:
+        mint:
+          type: string
+        onChainData:
+          $ref: '#/components/schemas/EnhancedApi_OnChainMetadata'
+        offChainData:
+          $ref: '#/components/schemas/EnhancedApi_OffChainMetadata'
+    EnhancedApi_OnChainAccountInfo:
+      type: object
+      description: Account data that is stored on-chain.
+      properties:
+        key:
+          type: string
+        isSigner:
+          type: boolean
+        isWritable:
+          type: boolean
+        lamports:
+          type: integer
+        data:
+          type: object
+          properties:
+            parsed:
+              type: object
+              properties:
+                info:
+                  type: object
+                  properties:
+                    decimals:
+                      type: integer
+                    freezeAuthority:
+                      type: string
+                    isInitialized:
+                      type: boolean
+                    mintAuthority:
+                      type: string
+                    supply:
+                      type: string
+                type:
+                  type: string
+            program:
+              type: string
+            space:
+              type: integer
+        owner:
+          type: string
+        executable:
+          type: boolean
+        rentEpoch:
+          type: integer
+    EnhancedApi_ErrorResponse:
+      type: object
+      description: JSON-RPC error response format
+      properties:
+        jsonrpc:
+          type: string
+          example: '2.0'
+          description: JSON-RPC version
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: Error code
+              example: -32602
+            message:
+              type: string
+              description: Error message
+              example: Invalid params
+        id:
+          type: string
+          description: Request identifier
+          example: '1'
+      required:
+      - jsonrpc
+      - error
+      - id
+    EnhancedApi_MintlistRequest:
+      type: object
+      properties:
+        query:
+          type: object
+          properties:
+            firstVerifiedCreators:
+              type: array
+              items:
+                $ref: '#/components/schemas/EnhancedApi_FirstVerifiedCreator'
+            verifiedCollectionAddresses:
+              type: array
+              items:
+                $ref: '#/components/schemas/EnhancedApi_VerifiedCollectionAddress'
+        options:
+          type: object
+          properties:
+            limit:
+              type: integer
+              description: Maximum number of items to return. Must be between 1 and 10,000. Default is 1000.
+              minimum: 1
+              maximum: '10_000'
+              default: 1000
+            paginationToken:
+              $ref: '#/components/schemas/EnhancedApi_PaginationToken'
+    EnhancedApi_FirstVerifiedCreator:
+      type: string
+      description: First verified creator of the NFT. Used to reference NFT collections.
+      example: A4FM6h8T5Fmh9z2g3fKUrKfZn6BNFEgByR8QGpdbQhk1
+    EnhancedApi_NftMintAccount:
+      type: string
+      description: NFT mint account address.
+      example: KG6f4Fa6YxAW8cG2Dhb18DiMn3rQ3rSLa1Eo2FYM4gi
+  parameters:
+    EnhancedApi_pageNumberParam:
+      name: pageNumber
+      in: query
+      description: The page number used for pagination.
+      required: false
+      schema:
+        type: number
+    EnhancedApi_transactionTypeParam:
+      name: type
+      in: query
+      description: The TransactionType to filter by. For a list of possible options, see the Transaction Types section.
+      required: false
+      schema:
+        $ref: '#/components/schemas/EnhancedApi_TransactionType'
+    EnhancedApi_addressParam:
+      name: address
+      in: path
+      description: The address to query for.
+      required: true
+      schema:
+        type: string
+        example: 86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY
+        default: 86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY
+    EnhancedApi_transactionSourceParam:
+      name: source
+      in: query
+      description: The TransactionSource to filter by. For a list of possible options, see the Transaction Types section.
+      required: false
+      schema:
+        $ref: '#/components/schemas/EnhancedApi_TransactionSource'
+    EnhancedApi_beforeParam:
+      name: before
+      in: query
+      description: Start searching backwards from this transaction signature.
+      required: false
+      schema:
+        type: string
+    apiKeyParam:
+      name: api-key
+      in: query
+      required: true
+      description: Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`.
+      schema:
+        type: string
+    EnhancedApi_commitmentParam:
+      name: commitment
+      in: query
+      description: How finalized a block must be to be included in the search. If not provided, will default to "finalized" commitment. Note that "processed" level commitment is not supported.
+      required: false
+      schema:
+        $ref: '#/components/schemas/EnhancedApi_Commitment'
+    EnhancedApi_untilParam:
+      name: until
+      in: query
+      description: Search until this transaction signature.
+      required: false
+      schema:
+        type: string
+  responses:
+    EnhancedApi_401-Unauthorized:
+      description: Unauthorized request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32001
+              message: Unauthorized
+            id: '1'
+    EnhancedApi_404-NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32601
+              message: Method not found
+            id: '1'
+    EnhancedApi_400-BadRequest:
+      description: Invalid request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32602
+              message: Invalid params
+            id: '1'
+    EnhancedApi_503-ServiceUnavailable:
+      description: The service is temporarily unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32002
+              message: Service unavailable
+            id: '1'
+    EnhancedApi_504-GatewayTimeout:
+      description: The request timed out.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32003
+              message: Gateway timeout
+            id: '1'
+    EnhancedApi_500-InternalServerError:
+      description: The server encountered an unexpected condition that prevented it from fulfilling the request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32603
+              message: Internal error
+            id: '1'
+    EnhancedApi_403-Forbidden:
+      description: Request was forbidden.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32003
+              message: Forbidden
+            id: '1'
+    EnhancedApi_429-TooManyRequests:
+      description: Exceeded rate limit.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32005
+              message: Rate limit exceeded
+            id: '1'
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: api-key
+      description: Your Helius API key. You can get one for free in the [dashboard](https://dashboard.helius.dev/api-keys).
+    ApiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: API key passed in request header
+externalDocs:
+  description: Helius Documentation (canonical)
+  url: https://www.helius.dev/docs
+x-apis:
+- id: rpc-http
+  name: Solana RPC (HTTP)
+  description: JSON-RPC 2.0 methods for Solana mainnet and devnet, plus Helius extensions such as `getTransactionsForAddress` with server-side filtering and token account helpers (`getTokenAccountsByOwnerV2`, `getProgramAccountsV2`).
+  specUrl: https://www.helius.dev/openapi/rpc-http.json
+  docsUrl: https://www.helius.dev/docs/rpc/overview
+  tags:
+  - rpc
+  - json-rpc
+  - solana
+  - accounts
+  - transactions
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/rpc-http
+- id: das-api
+  name: Digital Asset Standard (DAS) API
+  description: Unified NFT and token queries for Solana — regular NFTs, compressed NFTs, and fungible tokens — indexed for fast lookups by owner, creator, authority, collection, or search.
+  specUrl: https://www.helius.dev/openapi/das-api.json
+  docsUrl: https://www.helius.dev/docs/das-api
+  tags:
+  - nft
+  - tokens
+  - compressed-nft
+  - digital-assets
+  - json-rpc
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/das-api
+- id: sender-api
+  name: Helius Sender
+  description: Ultra-low-latency transaction submission with dual routing to validators and Jito infrastructure. Regional endpoints for Salt Lake City, Newark, London, Frankfurt, Amsterdam, Singapore, and Tokyo.
+  specUrl: https://www.helius.dev/openapi/sender-api.json
+  docsUrl: https://www.helius.dev/docs/sending-transactions/sender
+  tags:
+  - transactions
+  - sender
+  - low-latency
+  - jito
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/sender-api
+- id: wallet-api
+  name: Wallet API
+  description: High-performance REST API for Solana wallet data — identity, balances, transaction history, transfers, and funding lineage. Returns pre-indexed results suitable for wallet and portfolio UIs.
+  specUrl: https://www.helius.dev/openapi/wallet-api.json
+  docsUrl: https://www.helius.dev/docs/wallet-api/overview
+  tags:
+  - wallet
+  - portfolio
+  - history
+  - rest
+  status: beta
+- id: priority-fee-api
+  name: Priority Fee API
+  description: Real-time priority fee recommendations across multiple priority levels, derived from recent network activity. Accepts either account keys or a serialized transaction.
+  specUrl: https://www.helius.dev/openapi/priority-fee-api.json
+  docsUrl: https://www.helius.dev/docs/priority-fee-api
+  tags:
+  - priority-fee
+  - transactions
+  - fees
+  - json-rpc
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/priority-fee-api
+- id: zk-compression
+  name: ZK Compression Indexer
+  description: Indexer API for Solana state compression — compressed accounts, compressed token balances, Merkle proofs, and validity proofs. Enables up to 1000x lower storage costs relative to regular accounts.
+  specUrl: https://www.helius.dev/openapi/zk-compression.json
+  docsUrl: https://www.helius.dev/docs/zk-compression/introduction
+  tags:
+  - zk-compression
+  - state-compression
+  - accounts
+  - proofs
+  - json-rpc
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/zk-compression
+- id: admin-api
+  name: Admin API
+  description: Programmatic access to Helius project usage and billing data — credits consumed, credits remaining, prepaid balances, and subscription details for the current billing cycle.
+  specUrl: https://www.helius.dev/openapi/admin-api.json
+  docsUrl: https://www.helius.dev/docs/api-reference/admin
+  tags:
+  - admin
+  - billing
+  - usage
+  - rest
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/admin-api
+- id: enhanced-api
+  name: Enhanced API
+  description: Decoded, human-readable transaction history, NFT events, and address activity on Solana. Returns typed, parsed data instead of raw instruction bytes.
+  specUrl: https://www.helius.dev/openapi/enhanced-api.json
+  docsUrl: https://www.helius.dev/docs/enhanced-transactions/overview
+  tags:
+  - enhanced
+  - parsed-transactions
+  - nft-events
+  - history
+  - rest
+  status: stable
+- id: webhooks
+  name: Helius Webhooks
+  description: Real-time HTTP notifications for Solana on-chain events — configure account, transaction, or NFT event subscriptions and receive parsed payloads via HTTPS POST.
+  specUrl: https://www.helius.dev/openapi/webhooks.json
+  docsUrl: https://www.helius.dev/docs/webhooks
+  tags:
+  - webhooks
+  - events
+  - notifications
+  - rest
+  status: stable

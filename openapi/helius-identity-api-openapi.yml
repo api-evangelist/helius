@@ -1,0 +1,519 @@
+openapi: 3.1.0
+info:
+  title: Helius API Catalog Addresses Identity API
+  version: 1.0.0
+  summary: Machine-readable discovery document for every Helius API surface on Solana.
+  description: 'This document is a discovery catalog — not an operational spec. It exists so
+
+    AI agents, codegen tools, and SDK generators can locate the canonical
+
+    OpenAPI document for every Helius API in one request instead of crawling
+
+    the docs site.
+
+
+    Start with the `x-apis` array: each entry links a Helius API surface to its
+
+    canonical OpenAPI spec (`specUrl`) and human-readable docs (`docsUrl`).
+
+    Follow `externalDocs` for the full developer documentation site.
+
+
+    ## A note on JSON-RPC APIs
+
+
+    Several Helius APIs (Solana RPC, DAS, Sender, Mint, Priority Fee,
+
+    ZK Compression) follow the JSON-RPC 2.0 convention where every method POSTs
+
+    to `/` with a `method` field in the request body. For each such API the
+
+    repository ships both per-method fragment YAMLs (used to render the
+
+    Mintlify reference pages) and an auto-generated `_combined.yaml` that
+
+    merges every method into a single OpenAPI document. In the combined
+
+    documents, colliding paths are disambiguated with a URL-fragment suffix
+
+    (e.g. `/#getAccountInfo`) and each operation carries an `x-actual-path`
+
+    extension that records the real request path (`/`). The fragment syntax is
+
+    schema-only — real calls still go to the `url` in `servers`.
+
+
+    All `specUrl` values below point to raw GitHub files on the `main` branch
+
+    of `helius-labs/docs`. They are stable URLs suitable for downstream tools
+
+    to pin or fetch.
+
+    '
+  contact:
+    name: Helius Support
+    url: https://www.helius.dev/contact
+    email: support@helius.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://mainnet.helius-rpc.com
+  description: Solana mainnet RPC endpoint (Solana RPC, DAS, Priority Fee, ZK Compression)
+- url: https://devnet.helius-rpc.com
+  description: Solana devnet RPC endpoint
+- url: https://sender.helius-rpc.com
+  description: Helius Sender — global transaction submission
+- url: https://api.helius.xyz
+  description: Helius REST APIs (Wallet API, Enhanced API, Webhooks)
+- url: https://admin-api.helius.xyz
+  description: Helius Admin API — project usage and billing
+- url: https://api-mainnet.helius-rpc.com
+  description: Mainnet RPC endpoint
+- url: https://api-devnet.helius-rpc.com
+  description: Devnet RPC endpoint
+- url: http://slc-sender.helius-rpc.com
+  description: Salt Lake City
+- url: http://ewr-sender.helius-rpc.com
+  description: Newark
+- url: http://lon-sender.helius-rpc.com
+  description: London
+- url: http://fra-sender.helius-rpc.com
+  description: Frankfurt
+- url: http://ams-sender.helius-rpc.com
+  description: Amsterdam
+- url: http://sg-sender.helius-rpc.com
+  description: Singapore
+- url: http://tyo-sender.helius-rpc.com
+  description: Tokyo
+tags:
+- name: Identity
+  description: Lookup wallet identities and known addresses
+paths:
+  /v1/wallet/{wallet}/identity:
+    get:
+      tags:
+      - Identity
+      summary: Get wallet identity
+      description: 'Retrieve identity information for a known wallet (exchanges, protocols, etc.). Accepts
+
+        either a Solana wallet address or an SNS (`.sol`) / ANS custom TLD domain name
+
+        (e.g. `toly.sol`, `miester.bonk`). Domain resolution is mainnet-only.
+
+
+        The response is the standard identity object for the **resolved address**. No domain
+
+        marker (`inputDomain`) is attached on this endpoint — use `POST /v1/wallet/batch-identity`
+
+        if you need to correlate inputs with outputs.
+
+
+        Returns `404` if the wallet has no identity entry, or if a domain input cannot be resolved.
+
+        Returns `400` if the input is neither a valid address nor a valid domain name, or if a
+
+        domain input is sent on a non-mainnet deployment.
+
+        '
+      operationId: walletApi_getWalletIdentity
+      parameters:
+      - $ref: '#/components/parameters/WalletApi_WalletOrDomain'
+      responses:
+        '200':
+          description: Identity information found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalletApi_Identity'
+        '400':
+          $ref: '#/components/responses/WalletApi_BadRequest'
+        '401':
+          $ref: '#/components/responses/WalletApi_Unauthorized'
+        '404':
+          description: No identity information available, or domain could not be resolved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalletApi_Error'
+        '429':
+          $ref: '#/components/responses/WalletApi_RateLimited'
+        '500':
+          $ref: '#/components/responses/WalletApi_InternalError'
+      servers:
+      - url: https://api.helius.xyz
+        description: Production server
+  /v1/wallet/batch-identity:
+    post:
+      tags:
+      - Identity
+      summary: Batch identity lookup
+      description: 'Retrieve identity information for multiple entries in a single request. Each entry may be
+
+        either a Solana wallet address or an SNS (`.sol`) / ANS custom TLD domain name. Domain
+
+        resolution is mainnet-only.
+
+
+        Unresolvable domain entries do not fail the batch — they come back as
+
+        `{ "address": null, "type": "unknown", "inputDomain": "...", "unresolved": true }`
+
+        in request order. Resolved domain entries carry an `inputDomain` field so callers can
+
+        correlate responses with the original input.
+
+        '
+      operationId: walletApi_batchIdentityLookup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - addresses
+              properties:
+                addresses:
+                  type: array
+                  items:
+                    type: string
+                  minItems: 1
+                  maxItems: 100
+                  description: Array of Solana wallet addresses and/or SNS/ANS domain names to look up (up to 100 per request).
+                  example:
+                  - HXsKP7wrBWaQ8T2Vtjry3Nj3oUgwYcqq9vrHDM12G664
+                  - toly.sol
+                  - miester.bonk
+      responses:
+        '200':
+          description: Identity information for requested entries, in request order
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WalletApi_BatchIdentityEntry'
+        '400':
+          $ref: '#/components/responses/WalletApi_BadRequest'
+        '401':
+          $ref: '#/components/responses/WalletApi_Unauthorized'
+        '429':
+          $ref: '#/components/responses/WalletApi_RateLimited'
+        '500':
+          $ref: '#/components/responses/WalletApi_InternalError'
+      servers:
+      - url: https://api.helius.xyz
+        description: Production server
+components:
+  schemas:
+    WalletApi_BatchResolvedIdentity:
+      description: 'A resolved entry in a batch identity response. Extends `Identity` with an optional
+
+        `inputDomain` field that is present when the original batch input for this entry was a
+
+        domain name. Returned only from `POST /v1/wallet/batch-identity`.
+
+        '
+      allOf:
+      - $ref: '#/components/schemas/WalletApi_Identity'
+      - type: object
+        properties:
+          inputDomain:
+            type: string
+            description: The domain name the caller queried. Present only when a domain (not an address) was provided as input for this batch entry.
+            example: toly.sol
+    WalletApi_BatchIdentityEntry:
+      description: 'One element of the array returned by `POST /v1/wallet/batch-identity`. Resolved entries
+
+        match `BatchResolvedIdentity` (possibly with `inputDomain`); unresolvable domain entries
+
+        match `UnresolvedDomainEntry`. Distinguish at runtime by checking `unresolved === true`
+
+        or `address === null`.
+
+        '
+      oneOf:
+      - $ref: '#/components/schemas/WalletApi_BatchResolvedIdentity'
+      - $ref: '#/components/schemas/WalletApi_UnresolvedDomainEntry'
+    WalletApi_Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+          example: Invalid wallet address
+        code:
+          type: integer
+          description: HTTP status code
+          example: 400
+        details:
+          type: string
+          description: Additional error details
+          example: '''invalid-address'' is not a valid Solana address'
+      required:
+      - error
+      - code
+    WalletApi_UnresolvedDomainEntry:
+      description: 'A batch entry returned when a domain name could not be resolved. Only appears as an
+
+        element of the array returned by `POST /v1/wallet/batch-identity` — the single-endpoint
+
+        returns `404` instead of this shape.
+
+        '
+      type: object
+      properties:
+        address:
+          type: string
+          nullable: true
+          enum:
+          - null
+          description: Always `null` for unresolved entries.
+        type:
+          type: string
+          enum:
+          - unknown
+          description: Always the literal string `"unknown"` for unresolved entries.
+        inputDomain:
+          type: string
+          description: The domain name the caller queried that could not be resolved.
+          example: nonexistent-xyz.sol
+        unresolved:
+          type: boolean
+          enum:
+          - true
+          description: Always `true` for unresolved entries.
+      required:
+      - address
+      - type
+      - inputDomain
+      - unresolved
+    WalletApi_Identity:
+      type: object
+      properties:
+        address:
+          type: string
+          description: Solana wallet address
+          example: HXsKP7wrBWaQ8T2Vtjry3Nj3oUgwYcqq9vrHDM12G664
+        type:
+          type: string
+          description: Type of entity
+          example: exchange
+        name:
+          type: string
+          description: Display name
+          example: Binance 1
+        category:
+          type: string
+          description: Category classification
+          example: Centralized Exchange
+        tags:
+          type: array
+          items:
+            type: string
+          description: Additional classification tags
+          example:
+          - Centralized Exchange
+        domainNames:
+          type: array
+          items:
+            type: string
+          description: All on-chain domain names owned by this address, including SNS (.sol) and ANS custom TLDs (.bonk, .wen, etc.). The favorite .sol domain is first if set; remaining domains are sorted alphabetically. Omitted if the wallet owns no domains.
+          example:
+          - toly.sol
+          - kash.superteam
+      required:
+      - address
+      - type
+      - name
+      - category
+      - tags
+  responses:
+    WalletApi_BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: Invalid wallet address
+            code: 400
+            details: '''invalid-address'' is not a valid Solana address'
+    WalletApi_RateLimited:
+      description: Rate limit exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: RATE_LIMIT_EXCEEDED
+            code: 429
+            details: Too many requests. Retry after 2 seconds.
+    WalletApi_InternalError:
+      description: Transient server error. Retryable with exponential backoff.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: INTERNAL_ERROR
+            code: 500
+            details: An unexpected error occurred. Please retry.
+    WalletApi_Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: API key required. Pass via ?api-key=xxx or X-Api-Key header
+            code: 401
+  parameters:
+    WalletApi_WalletOrDomain:
+      name: wallet
+      in: path
+      required: true
+      description: 'Solana wallet address (base58 encoded) or SNS/ANS domain name (e.g. `toly.sol`,
+
+        `miester.bonk`). Domain resolution is mainnet-only. Any non-`.sol` domain is treated
+
+        as an ANS custom TLD — there is no fixed TLD whitelist.
+
+        '
+      schema:
+        type: string
+      examples:
+        address:
+          summary: Solana address
+          value: GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz
+        snsDomain:
+          summary: SNS (.sol) domain
+          value: toly.sol
+        ansDomain:
+          summary: ANS custom TLD
+          value: miester.bonk
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: api-key
+      description: Your Helius API key. You can get one for free in the [dashboard](https://dashboard.helius.dev/api-keys).
+    ApiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: API key passed in request header
+externalDocs:
+  description: Helius Documentation (canonical)
+  url: https://www.helius.dev/docs
+x-apis:
+- id: rpc-http
+  name: Solana RPC (HTTP)
+  description: JSON-RPC 2.0 methods for Solana mainnet and devnet, plus Helius extensions such as `getTransactionsForAddress` with server-side filtering and token account helpers (`getTokenAccountsByOwnerV2`, `getProgramAccountsV2`).
+  specUrl: https://www.helius.dev/openapi/rpc-http.json
+  docsUrl: https://www.helius.dev/docs/rpc/overview
+  tags:
+  - rpc
+  - json-rpc
+  - solana
+  - accounts
+  - transactions
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/rpc-http
+- id: das-api
+  name: Digital Asset Standard (DAS) API
+  description: Unified NFT and token queries for Solana — regular NFTs, compressed NFTs, and fungible tokens — indexed for fast lookups by owner, creator, authority, collection, or search.
+  specUrl: https://www.helius.dev/openapi/das-api.json
+  docsUrl: https://www.helius.dev/docs/das-api
+  tags:
+  - nft
+  - tokens
+  - compressed-nft
+  - digital-assets
+  - json-rpc
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/das-api
+- id: sender-api
+  name: Helius Sender
+  description: Ultra-low-latency transaction submission with dual routing to validators and Jito infrastructure. Regional endpoints for Salt Lake City, Newark, London, Frankfurt, Amsterdam, Singapore, and Tokyo.
+  specUrl: https://www.helius.dev/openapi/sender-api.json
+  docsUrl: https://www.helius.dev/docs/sending-transactions/sender
+  tags:
+  - transactions
+  - sender
+  - low-latency
+  - jito
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/sender-api
+- id: wallet-api
+  name: Wallet API
+  description: High-performance REST API for Solana wallet data — identity, balances, transaction history, transfers, and funding lineage. Returns pre-indexed results suitable for wallet and portfolio UIs.
+  specUrl: https://www.helius.dev/openapi/wallet-api.json
+  docsUrl: https://www.helius.dev/docs/wallet-api/overview
+  tags:
+  - wallet
+  - portfolio
+  - history
+  - rest
+  status: beta
+- id: priority-fee-api
+  name: Priority Fee API
+  description: Real-time priority fee recommendations across multiple priority levels, derived from recent network activity. Accepts either account keys or a serialized transaction.
+  specUrl: https://www.helius.dev/openapi/priority-fee-api.json
+  docsUrl: https://www.helius.dev/docs/priority-fee-api
+  tags:
+  - priority-fee
+  - transactions
+  - fees
+  - json-rpc
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/priority-fee-api
+- id: zk-compression
+  name: ZK Compression Indexer
+  description: Indexer API for Solana state compression — compressed accounts, compressed token balances, Merkle proofs, and validity proofs. Enables up to 1000x lower storage costs relative to regular accounts.
+  specUrl: https://www.helius.dev/openapi/zk-compression.json
+  docsUrl: https://www.helius.dev/docs/zk-compression/introduction
+  tags:
+  - zk-compression
+  - state-compression
+  - accounts
+  - proofs
+  - json-rpc
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/zk-compression
+- id: admin-api
+  name: Admin API
+  description: Programmatic access to Helius project usage and billing data — credits consumed, credits remaining, prepaid balances, and subscription details for the current billing cycle.
+  specUrl: https://www.helius.dev/openapi/admin-api.json
+  docsUrl: https://www.helius.dev/docs/api-reference/admin
+  tags:
+  - admin
+  - billing
+  - usage
+  - rest
+  status: stable
+  x-specFragments: https://github.com/helius-labs/docs/tree/main/openapi/admin-api
+- id: enhanced-api
+  name: Enhanced API
+  description: Decoded, human-readable transaction history, NFT events, and address activity on Solana. Returns typed, parsed data instead of raw instruction bytes.
+  specUrl: https://www.helius.dev/openapi/enhanced-api.json
+  docsUrl: https://www.helius.dev/docs/enhanced-transactions/overview
+  tags:
+  - enhanced
+  - parsed-transactions
+  - nft-events
+  - history
+  - rest
+  status: stable
+- id: webhooks
+  name: Helius Webhooks
+  description: Real-time HTTP notifications for Solana on-chain events — configure account, transaction, or NFT event subscriptions and receive parsed payloads via HTTPS POST.
+  specUrl: https://www.helius.dev/openapi/webhooks.json
+  docsUrl: https://www.helius.dev/docs/webhooks
+  tags:
+  - webhooks
+  - events
+  - notifications
+  - rest
+  status: stable
