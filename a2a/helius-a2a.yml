@@ -1,0 +1,37 @@
+generated: '2026-07-28'
+method: probed
+source: https://www.helius.dev/.well-known/agent-card.json
+description: 'A2A Agent Card observed at /.well-known/agent-card.json on helius.dev. Grade is measured
+  against the A2A 1.0.0 AgentCard object: ''conformant'' passes every structural check, ''near-conformant''
+  is correctly shaped but omits optional fields, ''flavored'' fails a hard check and is an agent card
+  in spirit rather than in schema. Provider-published by construction — served from the provider''s own
+  host; nothing here is derived or generated.'
+discovery:
+  path: /.well-known/agent-card.json
+  canonical: true
+  host: helius.dev
+conformance:
+  spec: A2A 1.0.0
+  grade: near-conformant
+  protocol_version: 0.3.0
+  preferred_transport: null
+  deviations:
+  - no-preferredTransport
+card:
+  name: Helius for Agents
+  description: Helius is the Solana toolkit for AI agents. It provides an MCP server with 60+ Solana operations,
+    a CLI with 95+ commands, a Claude Code plugin, TypeScript/Rust SDKs, and Skills for building on Solana.
+    Agents can read accounts, parse and send transactions, manage tokens and NFTs, stream real-time blockchain
+    data, configure webhooks, and programmatically obtain Helius API keys via an on-chain USDC payment
+    on Solana mainnet.
+  url: https://www.helius.dev
+  version: 1.0.0
+  documentation_url: https://www.helius.dev/docs/agents/overview
+  skills: 8
+  file: helius-agent-card.json
+x-evidence:
+  fetched: '2026-07-28'
+  url: https://www.helius.dev/.well-known/agent-card.json
+  http_status: 200
+  content_type: application/json
+  note: Verbatim body saved alongside this manifest. No field inferred.

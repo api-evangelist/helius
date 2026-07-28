@@ -1,0 +1,281 @@
+{
+  "protocolVersion": "0.3.0",
+  "name": "Helius for Agents",
+  "description": "Helius is the Solana toolkit for AI agents. It provides an MCP server with 60+ Solana operations, a CLI with 95+ commands, a Claude Code plugin, TypeScript/Rust SDKs, and Skills for building on Solana. Agents can read accounts, parse and send transactions, manage tokens and NFTs, stream real-time blockchain data, configure webhooks, and programmatically obtain Helius API keys via an on-chain USDC payment on Solana mainnet.",
+  "url": "https://www.helius.dev",
+  "iconUrl": "https://www.helius.dev/logo-mark.svg",
+  "provider": {
+    "organization": "Helius Labs",
+    "url": "https://www.helius.dev"
+  },
+  "version": "1.0.0",
+  "documentationUrl": "https://www.helius.dev/docs/agents/overview",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": true,
+    "stateTransitionHistory": false
+  },
+  "defaultInputModes": [
+    "text/plain",
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "text/plain",
+    "application/json"
+  ],
+  "securitySchemes": {
+    "apiKey": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api-key",
+      "description": "Helius API key. Obtain programmatically with `helius signup --json` or from https://dashboard.helius.dev."
+    }
+  },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ],
+  "skills": [
+    {
+      "id": "solana-rpc",
+      "name": "Solana RPC",
+      "description": "High-performance Solana RPC on mainnet and devnet. Query accounts, balances, blocks, slots, transaction signatures, token supply, and program data.",
+      "tags": [
+        "solana",
+        "rpc",
+        "blockchain",
+        "accounts",
+        "read"
+      ],
+      "examples": [
+        "Get the SOL balance for this wallet address.",
+        "Fetch the latest blockhash on Solana mainnet.",
+        "Read the raw account data for this program-derived address."
+      ],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "digital-asset-standard",
+      "name": "Digital Asset Standard (DAS) API",
+      "description": "Unified API for Solana NFTs, compressed NFTs, and tokens. Fetch asset metadata, search assets, retrieve Merkle proofs, and list assets by owner, collection, creator, or authority.",
+      "tags": [
+        "nft",
+        "das",
+        "compressed-nfts",
+        "tokens",
+        "metadata"
+      ],
+      "examples": [
+        "List all NFTs owned by this wallet.",
+        "Get the Merkle proof for this compressed NFT.",
+        "Search for assets in this collection by creator address."
+      ],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "transaction-sending",
+      "name": "Helius Sender & Priority Fees",
+      "description": "Submit Solana transactions with Helius Sender (routed across every available high-speed pathway, with atomic bundle support) and query recommended priority fees for reliable landing under network load.",
+      "tags": [
+        "transactions",
+        "send",
+        "priority-fees",
+        "bundles"
+      ],
+      "examples": [
+        "Estimate a priority fee for this transaction.",
+        "Send this signed transaction and wait for confirmation.",
+        "Submit an atomic bundle for multi-transaction execution."
+      ],
+      "inputModes": [
+        "application/json"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "transaction-parsing",
+      "name": "Enhanced Transactions",
+      "description": "Parse Solana transactions into structured, human- and agent-readable events (transfers, swaps, NFT mints, stake activity). Fetch enriched per-wallet history (including token account activity) via Helius-exclusive endpoints like `getTransactionsForAddress`.",
+      "tags": [
+        "transactions",
+        "parsing",
+        "history",
+        "wallet",
+        "enhanced"
+      ],
+      "examples": [
+        "Parse this transaction signature into structured events.",
+        "Fetch the entire transaction history for this wallet including token account activity via `getTransactionsForAddress`.",
+        "Find all token transfers between these two wallets."
+      ],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "realtime-streaming",
+      "name": "LaserStream gRPC & WebSockets",
+      "description": "Subscribe to Solana state in real time: account updates, transactions, program logs, and shred-level data via LaserStream gRPC or WebSockets.",
+      "tags": [
+        "websockets",
+        "laserstream",
+        "streaming",
+        "realtime",
+        "grpc",
+        "shreds"
+      ],
+      "examples": [
+        "Subscribe to all transactions touching this program.",
+        "Stream account updates for this wallet in real time.",
+        "Open a shred-level stream for MEV-sensitive workflows."
+      ],
+      "inputModes": [
+        "application/json"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "webhooks",
+      "name": "Webhooks",
+      "description": "Create, update, list, and delete Helius webhooks that push transaction and account events to an agent-controlled HTTPS endpoint.",
+      "tags": [
+        "webhooks",
+        "events",
+        "pipelines",
+        "push",
+        "notifications"
+      ],
+      "examples": [
+        "Create a webhook that fires when this address receives USDC.",
+        "Update a webhook to include additional transaction types.",
+        "List all webhooks configured on my Helius account."
+      ],
+      "inputModes": [
+        "application/json"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "wallet-intelligence",
+      "name": "Wallet Intelligence",
+      "description": "Analyze Solana wallets: portfolio value with USD pricing, token holdings, transfer history, funding source, and cross-wallet identity resolution.",
+      "tags": [
+        "wallet",
+        "portfolio",
+        "analytics",
+        "identity"
+      ],
+      "examples": [
+        "Get the full USD portfolio value for this wallet.",
+        "Find who funded this wallet and when.",
+        "Resolve identities across a batch of wallet addresses."
+      ],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "agentic-signup",
+      "name": "Agentic API Key Signup",
+      "description": "Agents can obtain a Helius API key end-to-end via the Helius CLI by paying 1 USDC on Solana mainnet. Includes keypair generation, balance checks, idempotent signup, and API key retrieval.",
+      "tags": [
+        "onboarding",
+        "api-key",
+        "cli",
+        "usdc",
+        "self-service",
+        "autonomous"
+      ],
+      "examples": [
+        "Install the Helius CLI and create a new API key for me.",
+        "Check my wallet balance and complete the Helius signup.",
+        "Retrieve the API key for my existing Helius project."
+      ],
+      "inputModes": [
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    }
+  ],
+  "x-sdks": [
+    {
+      "language": "typescript",
+      "package": "helius-sdk",
+      "registry": "npm",
+      "registryUrl": "https://www.npmjs.com/package/helius-sdk",
+      "repository": "https://github.com/helius-labs/helius-sdk"
+    },
+    {
+      "language": "rust",
+      "package": "helius",
+      "registry": "crates.io",
+      "registryUrl": "https://crates.io/crates/helius",
+      "repository": "https://github.com/helius-labs/helius-rust-sdk",
+      "documentation": "https://docs.rs/helius"
+    }
+  ],
+  "x-integrations": [
+    {
+      "name": "Model Context Protocol (MCP) Server",
+      "description": "Drop-in MCP server exposing 10 routed tools covering 60+ Solana operations to any MCP-compatible AI assistant or agent framework (Claude, Codex, Cursor, Cline, Windsurf, OpenClaw, OpenCode, Gemini).",
+      "install": "npx helius-mcp@latest",
+      "documentationUrl": "https://www.helius.dev/docs/agents/mcp"
+    },
+    {
+      "name": "Helius CLI",
+      "description": "Command-line interface with 95+ commands for authentication, reads, and writes. Ideal for scripting, CI/CD, and local agent tooling.",
+      "install": "npm install -g helius-cli",
+      "documentationUrl": "https://www.helius.dev/docs/agents/cli"
+    },
+    {
+      "name": "Claude Code Plugin",
+      "description": "Official Helius plugin for Claude Code \u2014 verified and listed in Anthropic's official plugin marketplace. Bundles the Helius MCP server (60+ Solana operations), DFlow MCP server, and six expert skills with deep reference files for building on Solana.",
+      "install": "/plugin marketplace add helius-labs/core-ai && /plugin install helius@helius-labs",
+      "marketplace": "https://github.com/anthropics/claude-plugins-official",
+      "marketplaceEntry": "https://github.com/anthropics/claude-plugins-official/blob/main/.claude-plugin/marketplace.json",
+      "verified": true,
+      "platforms": [
+        "claude-code"
+      ],
+      "documentationUrl": "https://www.helius.dev/docs/agents/claude-code-plugin"
+    },
+    {
+      "name": "Agent Instructions",
+      "description": "Machine-readable signup instructions for agents obtaining a Helius API key autonomously.",
+      "endpoints": {
+        "markdown": "https://www.helius.dev/api/agents.md",
+        "json": "https://www.helius.dev/api/agents.json"
+      }
+    }
+  ],
+  "supportsAuthenticatedExtendedCard": false
+}
