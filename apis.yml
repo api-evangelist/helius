@@ -17,94 +17,230 @@ created: '2026-05-08'
 modified: '2026-05-29'
 specificationVersion: '0.19'
 apis:
-  - aid: helius:rpc
-    name: Helius Solana RPC
-    description: Solana JSON-RPC and WebSocket endpoints with enhanced WebSockets, archival
-      data, and staked connections.
-    humanURL: https://www.helius.dev/docs/rpc
-    baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
-    tags:
-    - JSON-RPC
-    - Solana
-    - WebSocket
-    properties:
-    - type: Documentation
-      url: https://www.helius.dev/docs/rpc
-    - type: AsyncAPI
-      url: asyncapi/helius-asyncapi.yml
-  - aid: helius:das
-    name: Helius Digital Asset Standard (DAS) API
-    description: Solana JSON-RPC API for unified asset queries (compressed NFTs, regular
-      NFTs, tokens) including getAsset, getAssetsByOwner, searchAssets.
-    humanURL: https://www.helius.dev/docs/das-api
-    baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
-    tags:
-    - JSON-RPC
-    - DAS
-    - NFT
-    properties:
-    - type: Documentation
-      url: https://www.helius.dev/docs/das-api
-  - aid: helius:enhanced-tx
-    name: Helius Enhanced Transactions API
-    description: REST API for parsed and human-readable Solana transaction history with
-      token metadata.
-    humanURL: https://www.helius.dev/docs/api-reference/enhanced-transactions-api
-    baseURL: https://api.helius.xyz/v0
-    tags:
-    - REST
-    - Transactions
-    properties:
-    - type: Documentation
-      url: https://www.helius.dev/docs/api-reference/enhanced-transactions-api
-  - aid: helius:webhooks
-    name: Helius Webhooks
-    description: REST API for managing webhook subscriptions for Solana on-chain events
-      with parsed transaction payloads.
-    humanURL: https://www.helius.dev/docs/webhooks
-    baseURL: https://api.helius.xyz/v0/webhooks
-    tags:
-    - REST
-    - Webhooks
-    properties:
-    - type: Documentation
-      url: https://www.helius.dev/docs/webhooks
-  - aid: helius:laserstream
-    name: Helius LaserStream
-    description: Low-latency gRPC streaming of Solana account, slot, transaction, and
-      block updates (Geyser-compatible).
-    humanURL: https://www.helius.dev/docs/laserstream
-    baseURL: grpc://laserstream-mainnet.helius-rpc.com
-    tags:
-    - gRPC
-    - Streaming
-    properties:
-    - type: Documentation
-      url: https://www.helius.dev/docs/laserstream
-  - aid: helius:sender
-    name: Helius Sender
-    description: Parallel transaction routing through Helius and Jito for inclusion
-      latency optimization.
-    humanURL: https://www.helius.dev/docs/sender
-    baseURL: https://sender.helius-rpc.com
-    tags:
-    - JSON-RPC
-    - Transactions
-    - Jito
-    properties:
-    - type: Documentation
-      url: https://www.helius.dev/docs/sender
-  - aid: helius:photon
-    name: Helius Photon RPC (ZK Compression)
-    description: Indexed RPC for Solana ZK compression (compressed accounts).
-    humanURL: https://www.helius.dev/docs/photon
-    baseURL: https://mainnet.helius-rpc.com
-    tags:
-    - JSON-RPC
-    - ZK Compression
-    properties:
-    - type: Documentation
-      url: https://www.helius.dev/docs/photon
+- aid: helius:rpc
+  name: Helius Solana RPC
+  description: >-
+    Solana JSON-RPC and WebSocket endpoints with enhanced WebSockets, archival data, and staked connections.
+  humanURL: https://www.helius.dev/docs/rpc
+  baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
+  tags:
+  - JSON-RPC
+  - Solana
+  - WebSocket
+  properties:
+  - type: Documentation
+    url: https://www.helius.dev/docs/rpc
+  - type: AsyncAPI
+    url: asyncapi/helius-asyncapi.yml
+- aid: helius:das
+  name: Helius Digital Asset Standard (DAS) API
+  description: >-
+    Solana JSON-RPC API for unified asset queries (compressed NFTs, regular NFTs, tokens) including getAsset,
+    getAssetsByOwner, searchAssets.
+  humanURL: https://www.helius.dev/docs/das-api
+  baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
+  tags:
+  - JSON-RPC
+  - DAS
+  - NFT
+  properties:
+  - type: Documentation
+    url: https://www.helius.dev/docs/das-api
+- aid: helius:enhanced-tx
+  name: Helius Enhanced Transactions API
+  description: REST API for parsed and human-readable Solana transaction history with token metadata.
+  humanURL: https://www.helius.dev/docs/api-reference/enhanced-transactions-api
+  baseURL: https://api.helius.xyz/v0
+  tags:
+  - REST
+  - Transactions
+  properties:
+  - type: Documentation
+    url: https://www.helius.dev/docs/api-reference/enhanced-transactions-api
+- aid: helius:webhooks
+  name: Helius Webhooks
+  description: >-
+    REST API for managing webhook subscriptions for Solana on-chain events with parsed transaction payloads.
+  humanURL: https://www.helius.dev/docs/webhooks
+  baseURL: https://api.helius.xyz/v0/webhooks
+  tags:
+  - REST
+  - Webhooks
+  properties:
+  - type: Documentation
+    url: https://www.helius.dev/docs/webhooks
+- aid: helius:laserstream
+  name: Helius LaserStream
+  description: >-
+    Low-latency gRPC streaming of Solana account, slot, transaction, and block updates (Geyser-compatible).
+  humanURL: https://www.helius.dev/docs/laserstream
+  baseURL: grpc://laserstream-mainnet.helius-rpc.com
+  tags:
+  - gRPC
+  - Streaming
+  properties:
+  - type: Documentation
+    url: https://www.helius.dev/docs/laserstream
+- aid: helius:sender
+  name: Helius Sender
+  description: Parallel transaction routing through Helius and Jito for inclusion latency optimization.
+  humanURL: https://www.helius.dev/docs/sender
+  baseURL: https://sender.helius-rpc.com
+  tags:
+  - JSON-RPC
+  - Transactions
+  - Jito
+  properties:
+  - type: Documentation
+    url: https://www.helius.dev/docs/sender
+- aid: helius:photon
+  name: Helius Photon RPC (ZK Compression)
+  description: Indexed RPC for Solana ZK compression (compressed accounts).
+  humanURL: https://www.helius.dev/docs/photon
+  baseURL: https://mainnet.helius-rpc.com
+  tags:
+  - JSON-RPC
+  - ZK Compression
+  properties:
+  - type: Documentation
+    url: https://www.helius.dev/docs/photon
+- aid: helius:helius-addresses-api
+  name: Helius Addresses API
+  description: Enhanced on-chain identity data with complete wallet activity and ownership information.
+  humanURL: https://www.helius.dev/docs/rpc
+  baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
+  tags:
+  - Addresses
+  properties:
+  - type: OpenAPI
+    url: openapi/helius-addresses-api-openapi.yml
+- aid: helius:helius-admin-api
+  name: Helius Admin API
+  description: The Admin API from Helius — 1 operation(s) for admin.
+  humanURL: https://www.helius.dev/docs/rpc
+  baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
+  tags:
+  - Admin
+  properties:
+  - type: OpenAPI
+    url: openapi/helius-admin-api-openapi.yml
+- aid: helius:helius-balances-api
+  name: Helius Balances API
+  description: Query token and NFT balances
+  humanURL: https://www.helius.dev/docs/rpc
+  baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
+  tags:
+  - Balances
+  properties:
+  - type: OpenAPI
+    url: openapi/helius-balances-api-openapi.yml
+- aid: helius:helius-funding-api
+  name: Helius Funding API
+  description: Wallet funding information
+  humanURL: https://www.helius.dev/docs/rpc
+  baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
+  tags:
+  - Funding
+  properties:
+  - type: OpenAPI
+    url: openapi/helius-funding-api-openapi.yml
+- aid: helius:helius-helius-api-catalog-api
+  name: Helius Helius API Catalog API
+  description: The Helius API Catalog API from Helius — 1 operation(s) for helius api catalog.
+  humanURL: https://www.helius.dev/docs/rpc
+  baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
+  tags:
+  - Helius API Catalog
+  properties:
+  - type: OpenAPI
+    url: openapi/helius-helius-api-catalog-api-openapi.yml
+- aid: helius:helius-history-api
+  name: Helius History API
+  description: Transaction history and balance changes
+  humanURL: https://www.helius.dev/docs/rpc
+  baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
+  tags:
+  - History
+  properties:
+  - type: OpenAPI
+    url: openapi/helius-history-api-openapi.yml
+- aid: helius:helius-identity-api
+  name: Helius Identity API
+  description: Lookup wallet identities and known addresses
+  humanURL: https://www.helius.dev/docs/rpc
+  baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
+  tags:
+  - Identity
+  properties:
+  - type: OpenAPI
+    url: openapi/helius-identity-api-openapi.yml
+- aid: helius:helius-nfts-api
+  name: Helius NFTs API
+  description: >-
+    Access comprehensive NFT data including events, collection aggregations, real-time stats, and complete
+    historical activity on Solana.
+  humanURL: https://www.helius.dev/docs/rpc
+  baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
+  tags:
+  - NFTs
+  properties:
+  - type: OpenAPI
+    url: openapi/helius-nfts-api-openapi.yml
+- aid: helius:helius-sender-api
+  name: Helius Sender API
+  description: The Sender API from Helius — 2 operation(s) for sender.
+  humanURL: https://www.helius.dev/docs/rpc
+  baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
+  tags:
+  - Sender
+  properties:
+  - type: OpenAPI
+    url: openapi/helius-sender-api-openapi.yml
+- aid: helius:helius-tokens-api
+  name: Helius Tokens API
+  description: >-
+    Complete token account data, on-chain and off-chain metadata, and detailed information for both fungible
+    and non-fungible Solana tokens.
+  humanURL: https://www.helius.dev/docs/rpc
+  baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
+  tags:
+  - Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/helius-tokens-api-openapi.yml
+- aid: helius:helius-transactions-api
+  name: Helius Transactions API
+  description: >-
+    Enhanced and human-readable transaction histories with decoded instruction data and detailed context.
+  humanURL: https://www.helius.dev/docs/rpc
+  baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/helius-transactions-api-openapi.yml
+- aid: helius:helius-transfers-api
+  name: Helius Transfers API
+  description: Token transfer activity
+  humanURL: https://www.helius.dev/docs/rpc
+  baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
+  tags:
+  - Transfers
+  properties:
+  - type: OpenAPI
+    url: openapi/helius-transfers-api-openapi.yml
+- aid: helius:helius-webhooks-api
+  name: Helius Webhooks API
+  description: >-
+    Configure real-time blockchain notifications for any Solana address, transaction type, or on-chain
+    event with customizable delivery options.
+  humanURL: https://www.helius.dev/docs/rpc
+  baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/helius-webhooks-api-openapi.yml
 common:
   - type: AgentCard
     url: a2a/helius-a2a.yml
