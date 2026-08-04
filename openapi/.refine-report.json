@@ -1,0 +1,38 @@
+{
+  "provider": "helius",
+  "sources": [
+    "helius-addresses-api-openapi.yml",
+    "helius-admin-api-openapi.yml",
+    "helius-balances-api-openapi.yml",
+    "helius-funding-api-openapi.yml",
+    "helius-helius-api-catalog-api-openapi.yml",
+    "helius-history-api-openapi.yml",
+    "helius-identity-api-openapi.yml",
+    "helius-nfts-api-openapi.yml",
+    "helius-sender-api-openapi.yml",
+    "helius-tokens-api-openapi.yml",
+    "helius-transactions-api-openapi.yml",
+    "helius-transfers-api-openapi.yml",
+    "helius-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "helius-addresses-api-openapi.yml",
+    "helius-admin-api-openapi.yml",
+    "helius-balances-api-openapi.yml",
+    "helius-funding-api-openapi.yml",
+    "helius-helius-api-catalog-api-openapi.yml",
+    "helius-history-api-openapi.yml",
+    "helius-identity-api-openapi.yml",
+    "helius-nfts-api-openapi.yml",
+    "helius-sender-api-openapi.yml",
+    "helius-tokens-api-openapi.yml",
+    "helius-transactions-api-openapi.yml",
+    "helius-transfers-api-openapi.yml",
+    "helius-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
