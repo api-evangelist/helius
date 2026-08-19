@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Helius API Catalog Addresses Transfers API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get token transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v1/wallet/:wallet/transfers",
+            "params": [
+              {
+                "name": "wallet",
+                "value": "GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz",
+                "type": "path",
+                "description": "Solana wallet address (base58 encoded)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of transfers to return"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor from previous response"
+              }
+            ]
+          },
+          "docs": "Retrieve all token transfer activity for a wallet including sender/recipient information.\nReturns transfers in reverse chronological order (newest first).\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

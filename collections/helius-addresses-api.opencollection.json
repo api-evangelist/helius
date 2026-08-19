@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Helius API Catalog Addresses API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Addresses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns the Solana Naming Service name for a given address.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v0/addresses/:address/names",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "The address to query for."
+              }
+            ]
+          },
+          "docs": "Returns the Solana Naming Service name for a given address."
+        },
+        {
+          "info": {
+            "name": "Returns the native balance and token balances for a given address.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v0/addresses/:address/balances",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "The address to query for."
+              }
+            ]
+          },
+          "docs": "Returns the native balance and token balances for a given address."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

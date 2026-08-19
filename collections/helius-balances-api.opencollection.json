@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Helius API Catalog Addresses Balances API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Balances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get wallet balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v1/wallet/:wallet/balances",
+            "params": [
+              {
+                "name": "wallet",
+                "value": "GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz",
+                "type": "path",
+                "description": "Solana wallet address (base58 encoded)"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Page number for pagination (1-indexed)"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "Maximum number of tokens per page"
+              },
+              {
+                "name": "showZeroBalance",
+                "value": "",
+                "type": "query",
+                "description": "Include tokens with zero balance"
+              },
+              {
+                "name": "showNative",
+                "value": "",
+                "type": "query",
+                "description": "Include native SOL in results"
+              },
+              {
+                "name": "showNfts",
+                "value": "",
+                "type": "query",
+                "description": "Include NFTs in results (max 100, first page only)"
+              }
+            ]
+          },
+          "docs": "Retrieve token and NFT balances for a wallet. **Pagination is manual** - the API returns up to 100 tokens per request.\n\nResults are sorted by USD value in descending order. Tokens with pricing data appear first, followed by tokens without prices.\n\n**Pagination:** Use the `page` parameter to fetch additional pages. The response includes `pagination.hasMore`\nto indicate if more results are available. Each request makes a single API call and costs 100 credits.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

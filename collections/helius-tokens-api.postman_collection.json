@@ -1,0 +1,1090 @@
+{
+  "item": [
+    {
+      "id": "a7ea2c05-070d-4a61-bf7a-bef532a39447",
+      "name": "Tokens",
+      "description": {
+        "content": "Complete token account data, on-chain and off-chain metadata, and detailed information for both fungible and non-fungible Solana tokens.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f7931e2f-cec7-47e8-aaea-2cd56f17e8fa",
+          "name": "Returns token metadata (whether NFT or Fungible) for a given token address.",
+          "request": {
+            "name": "Returns token metadata (whether NFT or Fungible) for a given token address.",
+            "description": {},
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v0",
+                "tokens",
+                "metadata"
+              ],
+              "host": [
+                "api-mainnet",
+                "helius-rpc",
+                "com"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api-key",
+                  "value": "<string>",
+                  "description": "(Required) Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mintAccounts\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6abc5aa5-7746-477b-a91b-4259ac2fbe8e",
+              "name": "Returns the token metadata.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "tokens",
+                    "metadata"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mintAccounts\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"mint\": \"string\",\n    \"onChainData\": {\n      \"key\": \"string\",\n      \"mint\": \"string\",\n      \"updateAuthority\": \"string\",\n      \"data\": {\n        \"name\": \"string\",\n        \"symbol\": \"string\",\n        \"uri\": \"string\",\n        \"sellerFeeBasisPoints\": 6544,\n        \"creators\": [\n          {\n            \"address\": \"string\",\n            \"share\": \"string\",\n            \"verified\": true\n          },\n          {\n            \"address\": \"string\",\n            \"share\": \"string\",\n            \"verified\": true\n          }\n        ]\n      },\n      \"tokenStandard\": \"string\",\n      \"primarySaleHappened\": true,\n      \"isMutable\": true,\n      \"editionNonce\": 56,\n      \"collection\": {\n        \"key\": \"string\",\n        \"verified\": false\n      },\n      \"collectionDetails\": {\n        \"size\": 3076\n      },\n      \"uses\": {\n        \"useMethod\": \"string\",\n        \"remaining\": 758,\n        \"total\": 6908\n      }\n    },\n    \"offChainData\": {\n      \"name\": \"string\",\n      \"symbol\": \"string\",\n      \"attributes\": [\n        {\n          \"traitType\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"traitType\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"sellerFeeBasisPoints\": 4649,\n      \"image\": \"string\",\n      \"properties\": {\n        \"category\": \"string\",\n        \"files\": [\n          {\n            \"uri\": \"string\",\n            \"type\": \"string\"\n          },\n          {\n            \"uri\": \"string\",\n            \"type\": \"string\"\n          }\n        ],\n        \"creators\": [\n          {\n            \"address\": \"string\",\n            \"share\": \"string\"\n          },\n          {\n            \"address\": \"string\",\n            \"share\": \"string\"\n          }\n        ]\n      }\n    }\n  },\n  {\n    \"mint\": \"string\",\n    \"onChainData\": {\n      \"key\": \"string\",\n      \"mint\": \"string\",\n      \"updateAuthority\": \"string\",\n      \"data\": {\n        \"name\": \"string\",\n        \"symbol\": \"string\",\n        \"uri\": \"string\",\n        \"sellerFeeBasisPoints\": 4918,\n        \"creators\": [\n          {\n            \"address\": \"string\",\n            \"share\": \"string\",\n            \"verified\": true\n          },\n          {\n            \"address\": \"string\",\n            \"share\": \"string\",\n            \"verified\": false\n          }\n        ]\n      },\n      \"tokenStandard\": \"string\",\n      \"primarySaleHappened\": false,\n      \"isMutable\": false,\n      \"editionNonce\": 5585,\n      \"collection\": {\n        \"key\": \"string\",\n        \"verified\": false\n      },\n      \"collectionDetails\": {\n        \"size\": 1298\n      },\n      \"uses\": {\n        \"useMethod\": \"string\",\n        \"remaining\": 3729,\n        \"total\": 9045\n      }\n    },\n    \"offChainData\": {\n      \"name\": \"string\",\n      \"symbol\": \"string\",\n      \"attributes\": [\n        {\n          \"traitType\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"traitType\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"sellerFeeBasisPoints\": 1123,\n      \"image\": \"string\",\n      \"properties\": {\n        \"category\": \"string\",\n        \"files\": [\n          {\n            \"uri\": \"string\",\n            \"type\": \"string\"\n          },\n          {\n            \"uri\": \"string\",\n            \"type\": \"string\"\n          }\n        ],\n        \"creators\": [\n          {\n            \"address\": \"string\",\n            \"share\": \"string\"\n          },\n          {\n            \"address\": \"string\",\n            \"share\": \"string\"\n          }\n        ]\n      }\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "baec06bb-10b6-4e43-8234-c7c66e8ee40a",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "tokens",
+                    "metadata"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mintAccounts\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32602,\n    \"message\": \"Invalid params\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2c8c6e3-c116-4994-bbee-e026ad2f8501",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "tokens",
+                    "metadata"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mintAccounts\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32001,\n    \"message\": \"Unauthorized\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "900e9f24-1bf4-441a-b18d-22cbe9c27609",
+              "name": "Request was forbidden.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "tokens",
+                    "metadata"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mintAccounts\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Forbidden\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b9fc0c7-0d96-4d36-9382-ab1d88df351a",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "tokens",
+                    "metadata"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mintAccounts\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32601,\n    \"message\": \"Method not found\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e229c27-3eba-478f-ad9b-ff836f660144",
+              "name": "Exceeded rate limit.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "tokens",
+                    "metadata"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mintAccounts\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32005,\n    \"message\": \"Rate limit exceeded\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c8556bda-ffde-4a6a-abc9-6888e451eb61",
+              "name": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "tokens",
+                    "metadata"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mintAccounts\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32603,\n    \"message\": \"Internal error\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87735f34-5a95-4c8e-be16-0190c2130ffb",
+              "name": "The service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "tokens",
+                    "metadata"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mintAccounts\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32002,\n    \"message\": \"Service unavailable\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "870b5230-790a-4220-b495-4444b42fd928",
+              "name": "The request timed out.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "tokens",
+                    "metadata"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mintAccounts\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Gateway timeout\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b860c708-da0a-4c22-a490-339ed4c7f53f",
+          "name": "Returns all metadata associated with an account, including data from the old token list.",
+          "request": {
+            "name": "Returns all metadata associated with an account, including data from the old token list.",
+            "description": {},
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v0",
+                "token-metadata"
+              ],
+              "host": [
+                "api-mainnet",
+                "helius-rpc",
+                "com"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api-key",
+                  "value": "<string>",
+                  "description": "(Required) Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mintAccounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"includeOffChain\": false,\n  \"disableCache\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c52c82c0-5b7a-4309-8ba2-b9c98cb7985c",
+              "name": "Query result.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "token-metadata"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mintAccounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"includeOffChain\": false,\n  \"disableCache\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"account\": \"string\",\n    \"onChainAccountInfo\": {\n      \"accountInfo\": {\n        \"key\": \"string\",\n        \"isSigner\": true,\n        \"isWritable\": true,\n        \"lamports\": 7215,\n        \"data\": {\n          \"parsed\": {\n            \"info\": {\n              \"decimals\": 233,\n              \"freezeAuthority\": \"string\",\n              \"isInitialized\": false,\n              \"mintAuthority\": \"string\",\n              \"supply\": \"string\"\n            },\n            \"type\": \"string\"\n          },\n          \"program\": \"string\",\n          \"space\": 5931\n        },\n        \"owner\": \"string\",\n        \"executable\": false,\n        \"rentEpoch\": 8116\n      },\n      \"error\": \"INVALID_ACCOUNT\"\n    },\n    \"onChainMetadata\": {\n      \"metadata\": {\n        \"key\": \"string\",\n        \"mint\": \"string\",\n        \"updateAuthority\": \"string\",\n        \"data\": {\n          \"name\": \"string\",\n          \"symbol\": \"string\",\n          \"uri\": \"string\",\n          \"sellerFeeBasisPoints\": 8672,\n          \"creators\": [\n            {\n              \"address\": \"string\",\n              \"share\": \"string\",\n              \"verified\": true\n            },\n            {\n              \"address\": \"string\",\n              \"share\": \"string\",\n              \"verified\": false\n            }\n          ]\n        },\n        \"tokenStandard\": \"string\",\n        \"primarySaleHappened\": true,\n        \"isMutable\": false,\n        \"editionNonce\": 2456,\n        \"collection\": {\n          \"key\": \"string\",\n          \"verified\": true\n        },\n        \"collectionDetails\": {\n          \"size\": 1005\n        },\n        \"uses\": {\n          \"useMethod\": \"string\",\n          \"remaining\": 6390,\n          \"total\": 6424\n        }\n      },\n      \"error\": \"EMPTY_ACCOUNT\"\n    },\n    \"offChainMetadata\": {\n      \"metadata\": {\n        \"name\": \"string\",\n        \"symbol\": \"string\",\n        \"attributes\": [\n          {\n            \"traitType\": \"string\",\n            \"value\": \"string\"\n          },\n          {\n            \"traitType\": \"string\",\n            \"value\": \"string\"\n          }\n        ],\n        \"sellerFeeBasisPoints\": 8235,\n        \"image\": \"string\",\n        \"properties\": {\n          \"category\": \"string\",\n          \"files\": [\n            {\n              \"uri\": \"string\",\n              \"type\": \"string\"\n            },\n            {\n              \"uri\": \"string\",\n              \"type\": \"string\"\n            }\n          ],\n          \"creators\": [\n            {\n              \"address\": \"string\",\n              \"share\": \"string\"\n            },\n            {\n              \"address\": \"string\",\n              \"share\": \"string\"\n            }\n          ]\n        }\n      },\n      \"uri\": \"string\",\n      \"error\": \"EMPTY_ACCOUNT\"\n    },\n    \"legacyMetadata\": {\n      \"chainId\": 9061,\n      \"address\": \"string\",\n      \"symbol\": \"string\",\n      \"name\": \"string\",\n      \"decimals\": 7000,\n      \"logoURI\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"extensions\": {}\n    }\n  },\n  {\n    \"account\": \"string\",\n    \"onChainAccountInfo\": {\n      \"accountInfo\": {\n        \"key\": \"string\",\n        \"isSigner\": false,\n        \"isWritable\": true,\n        \"lamports\": 7625,\n        \"data\": {\n          \"parsed\": {\n            \"info\": {\n              \"decimals\": 1772,\n              \"freezeAuthority\": \"string\",\n              \"isInitialized\": true,\n              \"mintAuthority\": \"string\",\n              \"supply\": \"string\"\n            },\n            \"type\": \"string\"\n          },\n          \"program\": \"string\",\n          \"space\": 5791\n        },\n        \"owner\": \"string\",\n        \"executable\": true,\n        \"rentEpoch\": 6944\n      },\n      \"error\": \"EMPTY_ACCOUNT\"\n    },\n    \"onChainMetadata\": {\n      \"metadata\": {\n        \"key\": \"string\",\n        \"mint\": \"string\",\n        \"updateAuthority\": \"string\",\n        \"data\": {\n          \"name\": \"string\",\n          \"symbol\": \"string\",\n          \"uri\": \"string\",\n          \"sellerFeeBasisPoints\": 2602,\n          \"creators\": [\n            {\n              \"address\": \"string\",\n              \"share\": \"string\",\n              \"verified\": true\n            },\n            {\n              \"address\": \"string\",\n              \"share\": \"string\",\n              \"verified\": true\n            }\n          ]\n        },\n        \"tokenStandard\": \"string\",\n        \"primarySaleHappened\": false,\n        \"isMutable\": false,\n        \"editionNonce\": 4713,\n        \"collection\": {\n          \"key\": \"string\",\n          \"verified\": false\n        },\n        \"collectionDetails\": {\n          \"size\": 8018\n        },\n        \"uses\": {\n          \"useMethod\": \"string\",\n          \"remaining\": 3795,\n          \"total\": 657\n        }\n      },\n      \"error\": \"INVALID_PUBKEY\"\n    },\n    \"offChainMetadata\": {\n      \"metadata\": {\n        \"name\": \"string\",\n        \"symbol\": \"string\",\n        \"attributes\": [\n          {\n            \"traitType\": \"string\",\n            \"value\": \"string\"\n          },\n          {\n            \"traitType\": \"string\",\n            \"value\": \"string\"\n          }\n        ],\n        \"sellerFeeBasisPoints\": 2470,\n        \"image\": \"string\",\n        \"properties\": {\n          \"category\": \"string\",\n          \"files\": [\n            {\n              \"uri\": \"string\",\n              \"type\": \"string\"\n            },\n            {\n              \"uri\": \"string\",\n              \"type\": \"string\"\n            }\n          ],\n          \"creators\": [\n            {\n              \"address\": \"string\",\n              \"share\": \"string\"\n            },\n            {\n              \"address\": \"string\",\n              \"share\": \"string\"\n            }\n          ]\n        }\n      },\n      \"uri\": \"string\",\n      \"error\": \"INVALID_ACCOUNT\"\n    },\n    \"legacyMetadata\": {\n      \"chainId\": 5067,\n      \"address\": \"string\",\n      \"symbol\": \"string\",\n      \"name\": \"string\",\n      \"decimals\": 6023,\n      \"logoURI\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"extensions\": {}\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cefa6a40-f948-4d41-b662-012543dba767",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "token-metadata"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mintAccounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"includeOffChain\": false,\n  \"disableCache\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32602,\n    \"message\": \"Invalid params\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f18470c-2aa3-48bd-b3ed-cccf55942a89",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "token-metadata"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mintAccounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"includeOffChain\": false,\n  \"disableCache\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32001,\n    \"message\": \"Unauthorized\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "145ee61a-cd06-475d-a2fb-52b6e6dc019d",
+              "name": "Request was forbidden.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "token-metadata"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mintAccounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"includeOffChain\": false,\n  \"disableCache\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Forbidden\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a892764-a498-4b80-b573-39beb40f2db0",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "token-metadata"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mintAccounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"includeOffChain\": false,\n  \"disableCache\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32601,\n    \"message\": \"Method not found\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42db614c-ead5-49e4-974a-1c2d0c3be901",
+              "name": "Exceeded rate limit.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "token-metadata"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mintAccounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"includeOffChain\": false,\n  \"disableCache\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32005,\n    \"message\": \"Rate limit exceeded\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c8d84fc2-03b9-4332-9f77-4214ffe1f7bb",
+              "name": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "token-metadata"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mintAccounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"includeOffChain\": false,\n  \"disableCache\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32603,\n    \"message\": \"Internal error\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "137462f2-8260-4600-98c1-bdbe0c9758e4",
+              "name": "The service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "token-metadata"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mintAccounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"includeOffChain\": false,\n  \"disableCache\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32002,\n    \"message\": \"Service unavailable\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33a0cc6d-fac9-4aea-aec0-3cb8a0023735",
+              "name": "The request timed out.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "token-metadata"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mintAccounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"includeOffChain\": false,\n  \"disableCache\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Gateway timeout\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://mainnet.helius-rpc.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4917d3be-d05c-4323-9734-dd7317c01532",
+    "name": "Helius API Catalog Addresses Tokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This document is a discovery catalog — not an operational spec. It exists so\nAI agents, codegen tools, and SDK generators can locate the canonical\nOpenAPI document for every Helius API in one request instead of crawling\nthe docs site.\n\nStart with the `x-apis` array: each entry links a Helius API surface to its\ncanonical OpenAPI spec (`specUrl`) and human-readable docs (`docsUrl`).\nFollow `externalDocs` for the full developer documentation site.\n\n## A note on JSON-RPC APIs\n\nSeveral Helius APIs (Solana RPC, DAS, Sender, Mint, Priority Fee,\nZK Compression) follow the JSON-RPC 2.0 convention where every method POSTs\nto `/` with a `method` field in the request body. For each such API the\nrepository ships both per-method fragment YAMLs (used to render the\nMintlify reference pages) and an auto-generated `_combined.yaml` that\nmerges every method into a single OpenAPI document. In the combined\ndocuments, colliding paths are disambiguated with a URL-fragment suffix\n(e.g. `/#getAccountInfo`) and each operation carries an `x-actual-path`\nextension that records the real request path (`/`). The fragment syntax is\nschema-only — real calls still go to the `url` in `servers`.\n\nAll `specUrl` values below point to raw GitHub files on the `main` branch\nof `helius-labs/docs`. They are stable URLs suitable for downstream tools\nto pin or fetch.\n\n\nContact Support:\n Name: Helius Support\n Email: support@helius.dev",
+      "type": "text/plain"
+    }
+  }
+}

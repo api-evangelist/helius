@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Helius API Catalog Addresses Sender API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sender",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "sendTransaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/fast",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Standard users do not require an API key. Only users with custom TPS limits need to provide an API key."
+              },
+              {
+                "name": "swqos_only",
+                "value": "",
+                "type": "query",
+                "description": "When true, routes exclusively through SWQOS infrastructure, but has a lower minimal tip requirement."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit transactions via Helius Sender for ultra-low latency transaction submission with dual routing to both Solana validators and Jito infrastructure.\n"
+        },
+        {
+          "info": {
+            "name": "ping",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/ping"
+          },
+          "docs": "Ping request to Helius Sender to maintain a warm connection\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

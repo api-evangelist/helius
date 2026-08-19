@@ -1,0 +1,540 @@
+{
+  "item": [
+    {
+      "id": "faec20b8-58cb-4cb3-af24-b9537b88f2a1",
+      "name": "Sender",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "38ab40ba-2886-47ad-ac34-7e7540848228",
+          "name": "sendTransaction",
+          "request": {
+            "name": "sendTransaction",
+            "description": {
+              "content": "Submit transactions via Helius Sender for ultra-low latency transaction submission with dual routing to both Solana validators and Jito infrastructure.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "fast"
+              ],
+              "host": [
+                "sender",
+                "helius-rpc",
+                "com"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api-key",
+                  "value": "<string>",
+                  "description": "Standard users do not require an API key. Only users with custom TPS limits need to provide an API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "swqos_only",
+                  "value": "false",
+                  "description": "When true, routes exclusively through SWQOS infrastructure, but has a lower minimal tip requirement."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"1\",\n  \"method\": \"sendTransaction\",\n  \"params\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a274f43c-1a81-4348-8793-9c7ee11c74b1",
+              "name": "Transaction submitted successfully. Since we're skipping preflight checks, a 200 response does not guarantee that the transaction is valid or that it will land onchain.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "fast"
+                  ],
+                  "host": [
+                    "sender",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "swqos_only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"1\",\n  \"method\": \"sendTransaction\",\n  \"params\": [\n    \"Ab/WBgJxCprwWlK2fCxSwm9KrWlJQW8TdnYqXMvg5KropeLqHaa5yJeoWUb+LsGi6zlfs1Z/jA/RgJW++tBhPAKAAQACBGuePYZrXq9Jj+DwkquiMvsrNU5rlcAbmRfuAYui/CwAQr437DqfrFoSt1BSgM/2/0Iqja1QMefnu1hTYX96AA0DBkZv5SEXMv/srbpyw5vnvIzlu8X3EmssQ5s6QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhWHa4WfUT12o+cyi2WGwfBvngyurXf5VQd4Ukn+5ZSIDAgAFAqCGAQACAAkDQA0DAAAAAAADAgABDAIAAABAQg8AAAAAAAA=\",\n    {\n      \"encoding\": \"base64\",\n      \"skipPreflight\": true,\n      \"maxRetries\": 0\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"1\",\n  \"result\": \"4qTLpN1sBrp5SzZUKfrSH2897FmxA7AB4EbN4ccgSgEjG9RG2686pSKWhEbz65q4bvaRsdpKRJKZ3dkdGZA78u5s\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "295a36c5-559b-4432-8118-07a3f637acd3",
+              "name": "Bad Request - Missing tip, priority fee, or invalid submission parameters.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "fast"
+                  ],
+                  "host": [
+                    "sender",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "swqos_only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"1\",\n  \"method\": \"sendTransaction\",\n  \"params\": [\n    \"Ab/WBgJxCprwWlK2fCxSwm9KrWlJQW8TdnYqXMvg5KropeLqHaa5yJeoWUb+LsGi6zlfs1Z/jA/RgJW++tBhPAKAAQACBGuePYZrXq9Jj+DwkquiMvsrNU5rlcAbmRfuAYui/CwAQr437DqfrFoSt1BSgM/2/0Iqja1QMefnu1hTYX96AA0DBkZv5SEXMv/srbpyw5vnvIzlu8X3EmssQ5s6QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhWHa4WfUT12o+cyi2WGwfBvngyurXf5VQd4Ukn+5ZSIDAgAFAqCGAQACAAkDQA0DAAAAAAADAgABDAIAAABAQg8AAAAAAAA=\",\n    {\n      \"encoding\": \"base64\",\n      \"skipPreflight\": true,\n      \"maxRetries\": 0\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32602,\n    \"message\": \"Invalid request\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51013831-4703-49fe-bccd-614602ee7724",
+              "name": "Too Many Requests - Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "fast"
+                  ],
+                  "host": [
+                    "sender",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "swqos_only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"1\",\n  \"method\": \"sendTransaction\",\n  \"params\": [\n    \"Ab/WBgJxCprwWlK2fCxSwm9KrWlJQW8TdnYqXMvg5KropeLqHaa5yJeoWUb+LsGi6zlfs1Z/jA/RgJW++tBhPAKAAQACBGuePYZrXq9Jj+DwkquiMvsrNU5rlcAbmRfuAYui/CwAQr437DqfrFoSt1BSgM/2/0Iqja1QMefnu1hTYX96AA0DBkZv5SEXMv/srbpyw5vnvIzlu8X3EmssQ5s6QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhWHa4WfUT12o+cyi2WGwfBvngyurXf5VQd4Ukn+5ZSIDAgAFAqCGAQACAAkDQA0DAAAAAAADAgABDAIAAABAQg8AAAAAAAA=\",\n    {\n      \"encoding\": \"base64\",\n      \"skipPreflight\": true,\n      \"maxRetries\": 0\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32005,\n    \"message\": \"Too many requests\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55790a5a-d201-4730-9052-815baea057d0",
+              "name": "Internal Server Error - An error occurred on the server.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "fast"
+                  ],
+                  "host": [
+                    "sender",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "swqos_only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"1\",\n  \"method\": \"sendTransaction\",\n  \"params\": [\n    \"Ab/WBgJxCprwWlK2fCxSwm9KrWlJQW8TdnYqXMvg5KropeLqHaa5yJeoWUb+LsGi6zlfs1Z/jA/RgJW++tBhPAKAAQACBGuePYZrXq9Jj+DwkquiMvsrNU5rlcAbmRfuAYui/CwAQr437DqfrFoSt1BSgM/2/0Iqja1QMefnu1hTYX96AA0DBkZv5SEXMv/srbpyw5vnvIzlu8X3EmssQ5s6QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhWHa4WfUT12o+cyi2WGwfBvngyurXf5VQd4Ukn+5ZSIDAgAFAqCGAQACAAkDQA0DAAAAAAADAgABDAIAAABAQg8AAAAAAAA=\",\n    {\n      \"encoding\": \"base64\",\n      \"skipPreflight\": true,\n      \"maxRetries\": 0\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32603,\n    \"message\": \"Internal error\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8291ecac-35a2-45f4-ab4f-ab2dbb6c9f82",
+              "name": "Service Unavailable - The service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "fast"
+                  ],
+                  "host": [
+                    "sender",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "swqos_only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"1\",\n  \"method\": \"sendTransaction\",\n  \"params\": [\n    \"Ab/WBgJxCprwWlK2fCxSwm9KrWlJQW8TdnYqXMvg5KropeLqHaa5yJeoWUb+LsGi6zlfs1Z/jA/RgJW++tBhPAKAAQACBGuePYZrXq9Jj+DwkquiMvsrNU5rlcAbmRfuAYui/CwAQr437DqfrFoSt1BSgM/2/0Iqja1QMefnu1hTYX96AA0DBkZv5SEXMv/srbpyw5vnvIzlu8X3EmssQ5s6QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhWHa4WfUT12o+cyi2WGwfBvngyurXf5VQd4Ukn+5ZSIDAgAFAqCGAQACAAkDQA0DAAAAAAADAgABDAIAAABAQg8AAAAAAAA=\",\n    {\n      \"encoding\": \"base64\",\n      \"skipPreflight\": true,\n      \"maxRetries\": 0\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32002,\n    \"message\": \"Service unavailable\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31d7fb38-8c63-43da-a098-d1e59720e1d3",
+              "name": "Gateway Timeout - The request timed out.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "fast"
+                  ],
+                  "host": [
+                    "sender",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "swqos_only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"1\",\n  \"method\": \"sendTransaction\",\n  \"params\": [\n    \"Ab/WBgJxCprwWlK2fCxSwm9KrWlJQW8TdnYqXMvg5KropeLqHaa5yJeoWUb+LsGi6zlfs1Z/jA/RgJW++tBhPAKAAQACBGuePYZrXq9Jj+DwkquiMvsrNU5rlcAbmRfuAYui/CwAQr437DqfrFoSt1BSgM/2/0Iqja1QMefnu1hTYX96AA0DBkZv5SEXMv/srbpyw5vnvIzlu8X3EmssQ5s6QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhWHa4WfUT12o+cyi2WGwfBvngyurXf5VQd4Ukn+5ZSIDAgAFAqCGAQACAAkDQA0DAAAAAAADAgABDAIAAABAQg8AAAAAAAA=\",\n    {\n      \"encoding\": \"base64\",\n      \"skipPreflight\": true,\n      \"maxRetries\": 0\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Gateway timeout\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b239b061-c81d-4225-b259-c29e5a544f61",
+          "name": "ping",
+          "request": {
+            "name": "ping",
+            "description": {
+              "content": "Ping request to Helius Sender to maintain a warm connection\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "ping"
+              ],
+              "host": [
+                "sender",
+                "helius-rpc",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8ce0f219-0ea1-4d1c-baf0-0c68ac568b0b",
+              "name": "Connection is alive.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "ping"
+                  ],
+                  "host": [
+                    "sender",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "ok",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fee58be3-6012-4ef7-8661-fe984243dd0d",
+              "name": "Service Unavailable - The service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "ping"
+                  ],
+                  "host": [
+                    "sender",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://mainnet.helius-rpc.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "33a34dcb-0f60-4772-8564-816d984b2cef",
+    "name": "Helius API Catalog Addresses Sender API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This document is a discovery catalog — not an operational spec. It exists so\nAI agents, codegen tools, and SDK generators can locate the canonical\nOpenAPI document for every Helius API in one request instead of crawling\nthe docs site.\n\nStart with the `x-apis` array: each entry links a Helius API surface to its\ncanonical OpenAPI spec (`specUrl`) and human-readable docs (`docsUrl`).\nFollow `externalDocs` for the full developer documentation site.\n\n## A note on JSON-RPC APIs\n\nSeveral Helius APIs (Solana RPC, DAS, Sender, Mint, Priority Fee,\nZK Compression) follow the JSON-RPC 2.0 convention where every method POSTs\nto `/` with a `method` field in the request body. For each such API the\nrepository ships both per-method fragment YAMLs (used to render the\nMintlify reference pages) and an auto-generated `_combined.yaml` that\nmerges every method into a single OpenAPI document. In the combined\ndocuments, colliding paths are disambiguated with a URL-fragment suffix\n(e.g. `/#getAccountInfo`) and each operation carries an `x-actual-path`\nextension that records the real request path (`/`). The fragment syntax is\nschema-only — real calls still go to the `url` in `servers`.\n\nAll `specUrl` values below point to raw GitHub files on the `main` branch\nof `helius-labs/docs`. They are stable URLs suitable for downstream tools\nto pin or fetch.\n\n\nContact Support:\n Name: Helius Support\n Email: support@helius.dev",
+      "type": "text/plain"
+    }
+  }
+}

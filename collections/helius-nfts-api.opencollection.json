@@ -1,0 +1,242 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Helius API Catalog Addresses NFTs API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "NFTs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns all NFT related events associated with the given address.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v0/addresses/:address/nft-events",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Start searching backwards from this transaction signature."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "Search until this transaction signature."
+              },
+              {
+                "name": "commitment",
+                "value": "",
+                "type": "query",
+                "description": "How finalized a block must be to be included in the search. If not provided, will default to \"finalized\" commitment. Note that \"processed\" level commitment is not supported."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "The address to query for."
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "The TransactionSource to filter by. For a list of possible options, see the Transaction Types section."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The TransactionType to filter by. For a list of possible options, see the Transaction Types section."
+              }
+            ]
+          },
+          "docs": "Retrieve comprehensive NFT events data for any Solana address. Filter by event types, \ntransaction sources, and time ranges to get precise NFT activity including mints, \nsales, listings, and transfers.\n"
+        },
+        {
+          "info": {
+            "name": "Returns token metadata (whether NFT or Fungible) for a given token address.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/v0/tokens/metadata",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns token metadata (whether NFT or Fungible) for a given token address."
+        },
+        {
+          "info": {
+            "name": "Returns the NFTs held for a given address.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v0/addresses/:address/nfts",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "The address to query for."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The page number used for pagination."
+              }
+            ]
+          },
+          "docs": "Returns the NFTs held for a given address."
+        },
+        {
+          "info": {
+            "name": "Queries for NFT events.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/v1/nft-events",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Queries for NFT events."
+        },
+        {
+          "info": {
+            "name": "Describes the provided NFTs.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/v1/nfts",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Describes the provided NFTs."
+        },
+        {
+          "info": {
+            "name": "Returns a list of mint accounts for a given NFT collection.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/v1/mintlist",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a list of mint accounts for a given NFT collection."
+        },
+        {
+          "info": {
+            "name": "Query for active NFT listings.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/v1/active-listings",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Query for active NFT listings."
+        },
+        {
+          "info": {
+            "name": "Returns all metadata associated with an account, including data from the old token list.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/v0/token-metadata",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all metadata associated with an account, including data from the old token list."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

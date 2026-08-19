@@ -1,0 +1,3195 @@
+{
+  "item": [
+    {
+      "id": "2888fbe0-a5e5-44e0-af80-7d9f50fc526c",
+      "name": "Webhooks",
+      "description": {
+        "content": "Configure real-time blockchain notifications for any Solana address, transaction type, or on-chain event with customizable delivery options.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9ce41ab8-e7db-4841-adc6-cf3cc29ba374",
+          "name": "Returns all webhooks.",
+          "request": {
+            "name": "Returns all webhooks.",
+            "description": {
+              "content": "Retrieve a complete list of all configured webhooks for your API key with detailed\nconfiguration information including trigger conditions, delivery endpoints, and status.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v0",
+                "webhooks"
+              ],
+              "host": [
+                "api-mainnet",
+                "helius-rpc",
+                "com"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api-key",
+                  "value": "<string>",
+                  "description": "(Required) Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0727f2bf-1d1d-4ffa-868a-762cb0ad6c2f",
+              "name": "Webhooks for the given API key.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"webhookID\": \"string\",\n    \"wallet\": \"string\",\n    \"webhookURL\": \"string\",\n    \"transactionTypes\": [\n      \"ACTIVATE_TRANSACTION\",\n      \"CANDY_MACHINE_UNWRAP\"\n    ],\n    \"accountAddresses\": [\n      \"string\",\n      \"string\"\n    ],\n    \"webhookType\": \"enhancedDevnet\",\n    \"authHeader\": \"string\",\n    \"active\": false\n  },\n  {\n    \"webhookID\": \"string\",\n    \"wallet\": \"string\",\n    \"webhookURL\": \"string\",\n    \"transactionTypes\": [\n      \"NFT_RENT_END\",\n      \"CREATE_ORDER\"\n    ],\n    \"accountAddresses\": [\n      \"string\",\n      \"string\"\n    ],\n    \"webhookType\": \"enhanced\",\n    \"authHeader\": \"string\",\n    \"active\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c23e3a0d-314c-4743-8bf4-7d20ed4a9934",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32602,\n    \"message\": \"Invalid params\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69aa9e47-5736-4f6a-8212-88fb40c21dcf",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32001,\n    \"message\": \"Unauthorized\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2833cd67-7f7c-43c5-aa40-a9aadd03689a",
+              "name": "Request was forbidden.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Forbidden\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49ee0262-dc34-47df-84af-6045416662e5",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32601,\n    \"message\": \"Method not found\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e80ebd9-b013-404d-b7ef-8eb15c843b70",
+              "name": "Exceeded rate limit.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32005,\n    \"message\": \"Rate limit exceeded\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6afafbe-7242-431b-84cc-dd38f75ba2b0",
+              "name": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32603,\n    \"message\": \"Internal error\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b26e3e0-b0cb-4f18-9610-19307eaa952c",
+              "name": "The service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32002,\n    \"message\": \"Service unavailable\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae8f241e-a810-47a6-a037-cfecf3619867",
+              "name": "The request timed out.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Gateway timeout\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b98b8140-ca4a-4146-85aa-ad87d705f5ac",
+          "name": "Creates a webhook.",
+          "request": {
+            "name": "Creates a webhook.",
+            "description": {
+              "content": "Create a new webhook for real-time Solana blockchain notifications. Configure triggers \nbased on addresses, transaction types, or specific on-chain events. Customize delivery \noptions and notification formatting for seamless integration with your application.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v0",
+                "webhooks"
+              ],
+              "host": [
+                "api-mainnet",
+                "helius-rpc",
+                "com"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api-key",
+                  "value": "<string>",
+                  "description": "(Required) Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"webhookURL\": \"<string>\",\n  \"transactionTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"accountAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhookType\": \"<string>\",\n  \"authHeader\": \"<string>\",\n  \"encoding\": \"<string>\",\n  \"txnStatus\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c7353ebe-f6ef-4dc4-bdec-af8ec883a8ef",
+              "name": "The created webhook.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhookURL\": \"<string>\",\n  \"transactionTypes\": [\n    \"EXECUTE_CONFIG_TRANSACTION\",\n    \"UPDATE_RESERVE_CONFIG\"\n  ],\n  \"accountAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhookType\": \"rawDevnet\",\n  \"authHeader\": \"<string>\",\n  \"encoding\": \"<string>\",\n  \"txnStatus\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"webhookID\": \"string\",\n  \"wallet\": \"string\",\n  \"webhookURL\": \"string\",\n  \"transactionTypes\": [\n    \"INIT_POOL\",\n    \"INIT_REFERRER_TOKEN_STATE\"\n  ],\n  \"accountAddresses\": [\n    \"string\",\n    \"string\"\n  ],\n  \"webhookType\": \"discord\",\n  \"authHeader\": \"string\",\n  \"active\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbaf2a78-6b12-45b9-be46-6048c6f65dff",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhookURL\": \"<string>\",\n  \"transactionTypes\": [\n    \"EXECUTE_CONFIG_TRANSACTION\",\n    \"UPDATE_RESERVE_CONFIG\"\n  ],\n  \"accountAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhookType\": \"rawDevnet\",\n  \"authHeader\": \"<string>\",\n  \"encoding\": \"<string>\",\n  \"txnStatus\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32602,\n    \"message\": \"Invalid params\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62fd5714-e3fb-44b6-b2da-a9ea4de25080",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhookURL\": \"<string>\",\n  \"transactionTypes\": [\n    \"EXECUTE_CONFIG_TRANSACTION\",\n    \"UPDATE_RESERVE_CONFIG\"\n  ],\n  \"accountAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhookType\": \"rawDevnet\",\n  \"authHeader\": \"<string>\",\n  \"encoding\": \"<string>\",\n  \"txnStatus\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32001,\n    \"message\": \"Unauthorized\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5dbe6cf3-df91-406f-b51d-5df280b48ae8",
+              "name": "Exceeded rate limit.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhookURL\": \"<string>\",\n  \"transactionTypes\": [\n    \"EXECUTE_CONFIG_TRANSACTION\",\n    \"UPDATE_RESERVE_CONFIG\"\n  ],\n  \"accountAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhookType\": \"rawDevnet\",\n  \"authHeader\": \"<string>\",\n  \"encoding\": \"<string>\",\n  \"txnStatus\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32005,\n    \"message\": \"Rate limit exceeded\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c829d45d-15c8-43f8-b3b8-877ef2feabc0",
+              "name": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhookURL\": \"<string>\",\n  \"transactionTypes\": [\n    \"EXECUTE_CONFIG_TRANSACTION\",\n    \"UPDATE_RESERVE_CONFIG\"\n  ],\n  \"accountAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhookType\": \"rawDevnet\",\n  \"authHeader\": \"<string>\",\n  \"encoding\": \"<string>\",\n  \"txnStatus\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32603,\n    \"message\": \"Internal error\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8d1ad4c-a9cb-4c66-9ccc-e1c3632ff649",
+              "name": "The service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhookURL\": \"<string>\",\n  \"transactionTypes\": [\n    \"EXECUTE_CONFIG_TRANSACTION\",\n    \"UPDATE_RESERVE_CONFIG\"\n  ],\n  \"accountAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhookType\": \"rawDevnet\",\n  \"authHeader\": \"<string>\",\n  \"encoding\": \"<string>\",\n  \"txnStatus\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32002,\n    \"message\": \"Service unavailable\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "972e0b5e-c0e2-4eaa-bbb2-b359c198a0e5",
+              "name": "The request timed out.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhookURL\": \"<string>\",\n  \"transactionTypes\": [\n    \"EXECUTE_CONFIG_TRANSACTION\",\n    \"UPDATE_RESERVE_CONFIG\"\n  ],\n  \"accountAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhookType\": \"rawDevnet\",\n  \"authHeader\": \"<string>\",\n  \"encoding\": \"<string>\",\n  \"txnStatus\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Gateway timeout\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9684af2a-70f9-4f74-b635-171c8dfb83b0",
+          "name": "Returns given Webhook.",
+          "request": {
+            "name": "Returns given Webhook.",
+            "description": {
+              "content": "Retrieve detailed information about a specific webhook configuration by its unique ID.\nAccess complete webhook settings including trigger conditions, delivery endpoints, and status metrics.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v0",
+                "webhooks",
+                ":webhookID"
+              ],
+              "host": [
+                "api-mainnet",
+                "helius-rpc",
+                "com"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api-key",
+                  "value": "<string>",
+                  "description": "(Required) Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhookID",
+                  "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cad69970-35c1-404a-b6a5-6c308aaa34e6",
+              "name": "Returns details about the given webhook ID.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"webhookID\": \"string\",\n  \"wallet\": \"string\",\n  \"webhookURL\": \"string\",\n  \"transactionTypes\": [\n    \"INIT_POOL\",\n    \"INIT_REFERRER_TOKEN_STATE\"\n  ],\n  \"accountAddresses\": [\n    \"string\",\n    \"string\"\n  ],\n  \"webhookType\": \"discord\",\n  \"authHeader\": \"string\",\n  \"active\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6514bb22-640a-4bfe-9a90-b2e9e29c4309",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32602,\n    \"message\": \"Invalid params\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "96415ca1-b347-487e-9cc9-3ddaf7b8ccd9",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32001,\n    \"message\": \"Unauthorized\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1e04c7f-94c5-4e6c-9783-876c336c7f29",
+              "name": "Request was forbidden.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Forbidden\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa2a50d0-7de6-4fe7-95b8-a58a5579e1a4",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32601,\n    \"message\": \"Method not found\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d82d7e07-8166-4482-8360-e0cefcec2a50",
+              "name": "Exceeded rate limit.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32005,\n    \"message\": \"Rate limit exceeded\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b65ab65-be8c-4897-a610-750532526716",
+              "name": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32603,\n    \"message\": \"Internal error\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "548efade-9ebe-495d-b3b6-780c1e23a8b8",
+              "name": "The service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32002,\n    \"message\": \"Service unavailable\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a45aee1e-c503-4c04-b5c1-b2b628308fca",
+              "name": "The request timed out.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Gateway timeout\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f1cd5bf-c734-4cdd-bc90-a45b0d531521",
+          "name": "Edits a webhook.",
+          "request": {
+            "name": "Edits a webhook.",
+            "description": {
+              "content": "Update an existing webhook configuration with new trigger conditions, delivery endpoints,\nor notification formatting. Modify your real-time blockchain notification settings to adapt\nto changing application requirements without service interruption.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v0",
+                "webhooks",
+                ":webhookID"
+              ],
+              "host": [
+                "api-mainnet",
+                "helius-rpc",
+                "com"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api-key",
+                  "value": "<string>",
+                  "description": "(Required) Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhookID",
+                  "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"webhookURL\": \"<string>\",\n  \"transactionTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"accountAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhookType\": \"<string>\",\n  \"authHeader\": \"<string>\",\n  \"encoding\": \"<string>\",\n  \"txnStatus\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1976943f-7f14-4ab3-b312-6edbd2e1a7b7",
+              "name": "The edited webhook.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhookURL\": \"<string>\",\n  \"transactionTypes\": [\n    \"EXECUTE_CONFIG_TRANSACTION\",\n    \"UPDATE_RESERVE_CONFIG\"\n  ],\n  \"accountAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhookType\": \"rawDevnet\",\n  \"authHeader\": \"<string>\",\n  \"encoding\": \"<string>\",\n  \"txnStatus\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"webhookID\": \"string\",\n  \"wallet\": \"string\",\n  \"webhookURL\": \"string\",\n  \"transactionTypes\": [\n    \"INIT_POOL\",\n    \"INIT_REFERRER_TOKEN_STATE\"\n  ],\n  \"accountAddresses\": [\n    \"string\",\n    \"string\"\n  ],\n  \"webhookType\": \"discord\",\n  \"authHeader\": \"string\",\n  \"active\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f47e7faf-7d41-422b-9d42-67e7d651a1ac",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhookURL\": \"<string>\",\n  \"transactionTypes\": [\n    \"EXECUTE_CONFIG_TRANSACTION\",\n    \"UPDATE_RESERVE_CONFIG\"\n  ],\n  \"accountAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhookType\": \"rawDevnet\",\n  \"authHeader\": \"<string>\",\n  \"encoding\": \"<string>\",\n  \"txnStatus\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32602,\n    \"message\": \"Invalid params\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "622d887e-cc2a-49a9-baff-b922e5db52b1",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhookURL\": \"<string>\",\n  \"transactionTypes\": [\n    \"EXECUTE_CONFIG_TRANSACTION\",\n    \"UPDATE_RESERVE_CONFIG\"\n  ],\n  \"accountAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhookType\": \"rawDevnet\",\n  \"authHeader\": \"<string>\",\n  \"encoding\": \"<string>\",\n  \"txnStatus\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32001,\n    \"message\": \"Unauthorized\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6aef368-fb6c-464a-9c3b-11104bc6551e",
+              "name": "Request was forbidden.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhookURL\": \"<string>\",\n  \"transactionTypes\": [\n    \"EXECUTE_CONFIG_TRANSACTION\",\n    \"UPDATE_RESERVE_CONFIG\"\n  ],\n  \"accountAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhookType\": \"rawDevnet\",\n  \"authHeader\": \"<string>\",\n  \"encoding\": \"<string>\",\n  \"txnStatus\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Forbidden\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ebbc8e4c-7f57-4c91-bd63-70bb74a1c042",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhookURL\": \"<string>\",\n  \"transactionTypes\": [\n    \"EXECUTE_CONFIG_TRANSACTION\",\n    \"UPDATE_RESERVE_CONFIG\"\n  ],\n  \"accountAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhookType\": \"rawDevnet\",\n  \"authHeader\": \"<string>\",\n  \"encoding\": \"<string>\",\n  \"txnStatus\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32601,\n    \"message\": \"Method not found\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8abcc04c-c2e9-4e48-849f-7a59c8682100",
+              "name": "Exceeded rate limit.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhookURL\": \"<string>\",\n  \"transactionTypes\": [\n    \"EXECUTE_CONFIG_TRANSACTION\",\n    \"UPDATE_RESERVE_CONFIG\"\n  ],\n  \"accountAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhookType\": \"rawDevnet\",\n  \"authHeader\": \"<string>\",\n  \"encoding\": \"<string>\",\n  \"txnStatus\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32005,\n    \"message\": \"Rate limit exceeded\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d02e46a7-eeb6-4359-97c0-c11255e25f84",
+              "name": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhookURL\": \"<string>\",\n  \"transactionTypes\": [\n    \"EXECUTE_CONFIG_TRANSACTION\",\n    \"UPDATE_RESERVE_CONFIG\"\n  ],\n  \"accountAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhookType\": \"rawDevnet\",\n  \"authHeader\": \"<string>\",\n  \"encoding\": \"<string>\",\n  \"txnStatus\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32603,\n    \"message\": \"Internal error\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0671c014-2ac6-4120-bab7-cecbabbbc8cc",
+              "name": "The service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhookURL\": \"<string>\",\n  \"transactionTypes\": [\n    \"EXECUTE_CONFIG_TRANSACTION\",\n    \"UPDATE_RESERVE_CONFIG\"\n  ],\n  \"accountAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhookType\": \"rawDevnet\",\n  \"authHeader\": \"<string>\",\n  \"encoding\": \"<string>\",\n  \"txnStatus\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32002,\n    \"message\": \"Service unavailable\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70135e5d-680a-46b0-bf95-dcaf5d305d1f",
+              "name": "The request timed out.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhookURL\": \"<string>\",\n  \"transactionTypes\": [\n    \"EXECUTE_CONFIG_TRANSACTION\",\n    \"UPDATE_RESERVE_CONFIG\"\n  ],\n  \"accountAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhookType\": \"rawDevnet\",\n  \"authHeader\": \"<string>\",\n  \"encoding\": \"<string>\",\n  \"txnStatus\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Gateway timeout\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "34659152-9685-4afe-8646-6b57a6695937",
+          "name": "Deletes a webhook.",
+          "request": {
+            "name": "Deletes a webhook.",
+            "description": {
+              "content": "Permanently remove a webhook configuration from your account. Immediately stop\nreceiving notifications for the specified webhook trigger conditions and free up\nresources for other webhook configurations.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v0",
+                "webhooks",
+                ":webhookID"
+              ],
+              "host": [
+                "api-mainnet",
+                "helius-rpc",
+                "com"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api-key",
+                  "value": "<string>",
+                  "description": "(Required) Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhookID",
+                  "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "337be42d-e3c4-4189-8482-2d5a7213b6d7",
+              "name": "No content.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3cb730a4-404b-43a4-9429-07dbf1472a0c",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32602,\n    \"message\": \"Invalid params\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6fd86ec-ad52-4404-b7d5-e0b453229eed",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32001,\n    \"message\": \"Unauthorized\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2d549b7-2c0a-4b09-8789-87e60bfeeb75",
+              "name": "Request was forbidden.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Forbidden\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4555fa73-8d95-437b-a1e8-99380e3c3ac7",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32601,\n    \"message\": \"Method not found\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4ee186d-e06b-42ce-bfc1-d8dce405e49a",
+              "name": "Exceeded rate limit.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32005,\n    \"message\": \"Rate limit exceeded\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6b9551e-7244-4813-9efd-63e88c73013e",
+              "name": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32603,\n    \"message\": \"Internal error\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55c046b3-7323-4a7f-bf81-59cb46edc6b3",
+              "name": "The service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32002,\n    \"message\": \"Service unavailable\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "32d172b1-0aac-4e32-85c9-6be88cff11ec",
+              "name": "The request timed out.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Gateway timeout\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e7f691a-d13c-4b78-9c71-65f4a4807cb1",
+          "name": "Toggle a webhook on or off.",
+          "request": {
+            "name": "Toggle a webhook on or off.",
+            "description": {
+              "content": "Enable or disable a webhook without deleting it. Use this to re-enable a webhook that\nwas automatically disabled due to a high endpoint failure rate, or to temporarily pause\ndeliveries. After re-enabling, the webhook enters a 24-hour grace period during which it\nwill not be automatically disabled again.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v0",
+                "webhooks",
+                ":webhookID"
+              ],
+              "host": [
+                "api-mainnet",
+                "helius-rpc",
+                "com"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api-key",
+                  "value": "<string>",
+                  "description": "(Required) Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhookID",
+                  "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"active\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b822f787-7dc5-41c5-8044-5512865ed405",
+              "name": "The updated webhook.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"webhookID\": \"string\",\n  \"wallet\": \"string\",\n  \"webhookURL\": \"string\",\n  \"transactionTypes\": [\n    \"INIT_POOL\",\n    \"INIT_REFERRER_TOKEN_STATE\"\n  ],\n  \"accountAddresses\": [\n    \"string\",\n    \"string\"\n  ],\n  \"webhookType\": \"discord\",\n  \"authHeader\": \"string\",\n  \"active\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c06ace85-fa6b-4069-917f-2ac52765ca4b",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32602,\n    \"message\": \"Invalid params\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eadb2eec-75e0-4b9d-9849-d2672c2cade6",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32001,\n    \"message\": \"Unauthorized\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fabb3d3-fe56-49dd-a7e8-a3b6fdcdffe4",
+              "name": "Request was forbidden.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Forbidden\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16735c66-6f3b-4367-b1ac-5b849491504e",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32601,\n    \"message\": \"Method not found\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ca4766c-1089-45e0-b258-58efe56fbeaa",
+              "name": "Exceeded rate limit.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32005,\n    \"message\": \"Rate limit exceeded\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "719d369b-16eb-4925-9739-b8208bd3f7e1",
+              "name": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32603,\n    \"message\": \"Internal error\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df0e53f7-0681-4bb9-b7ba-8754bb9ff8a7",
+              "name": "The service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32002,\n    \"message\": \"Service unavailable\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c76b1308-2493-4ae7-b7c6-2851faa1a2d1",
+              "name": "The request timed out.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "webhooks",
+                    ":webhookID"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookID",
+                      "description": "(Required) The webhook ID — a UUIDv4 that uniquely identifies the webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Gateway timeout\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://mainnet.helius-rpc.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "15ef704d-966a-4506-b545-9692cf5aa2dd",
+    "name": "Helius API Catalog Addresses Webhooks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This document is a discovery catalog — not an operational spec. It exists so\nAI agents, codegen tools, and SDK generators can locate the canonical\nOpenAPI document for every Helius API in one request instead of crawling\nthe docs site.\n\nStart with the `x-apis` array: each entry links a Helius API surface to its\ncanonical OpenAPI spec (`specUrl`) and human-readable docs (`docsUrl`).\nFollow `externalDocs` for the full developer documentation site.\n\n## A note on JSON-RPC APIs\n\nSeveral Helius APIs (Solana RPC, DAS, Sender, Mint, Priority Fee,\nZK Compression) follow the JSON-RPC 2.0 convention where every method POSTs\nto `/` with a `method` field in the request body. For each such API the\nrepository ships both per-method fragment YAMLs (used to render the\nMintlify reference pages) and an auto-generated `_combined.yaml` that\nmerges every method into a single OpenAPI document. In the combined\ndocuments, colliding paths are disambiguated with a URL-fragment suffix\n(e.g. `/#getAccountInfo`) and each operation carries an `x-actual-path`\nextension that records the real request path (`/`). The fragment syntax is\nschema-only — real calls still go to the `url` in `servers`.\n\nAll `specUrl` values below point to raw GitHub files on the `main` branch\nof `helius-labs/docs`. They are stable URLs suitable for downstream tools\nto pin or fetch.\n\n\nContact Support:\n Name: Helius Support\n Email: support@helius.dev",
+      "type": "text/plain"
+    }
+  }
+}

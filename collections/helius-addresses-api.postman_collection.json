@@ -1,0 +1,1110 @@
+{
+  "item": [
+    {
+      "id": "bf377c28-588c-4ae1-b4c9-7c99939dca35",
+      "name": "Addresses",
+      "description": {
+        "content": "Enhanced on-chain identity data with complete wallet activity and ownership information.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8b12ded6-4791-4ccd-b210-226a9d0fca15",
+          "name": "Returns the Solana Naming Service name for a given address.",
+          "request": {
+            "name": "Returns the Solana Naming Service name for a given address.",
+            "description": {},
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v0",
+                "addresses",
+                ":address",
+                "names"
+              ],
+              "host": [
+                "api-mainnet",
+                "helius-rpc",
+                "com"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api-key",
+                  "value": "<string>",
+                  "description": "(Required) Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                  "key": "address",
+                  "description": "(Required) The address to query for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f0669fd2-383a-49b7-8e75-4e6588d7e48b",
+              "name": "Returns the Solana Naming Service name if exists. Otherwise returns null.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "names"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"domainNames\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd9b3432-a839-4c77-918a-23139b7f3652",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "names"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32602,\n    \"message\": \"Invalid params\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e3dc4ad-1861-4379-afb7-313b1a3f8aca",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "names"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32001,\n    \"message\": \"Unauthorized\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7c4912c-ff5d-433d-9c93-7d98040cc8bf",
+              "name": "Request was forbidden.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "names"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Forbidden\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9a05ecb-0280-4f61-bc50-cbff54ac227b",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "names"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32601,\n    \"message\": \"Method not found\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ad780e9-00a8-41fd-9b2e-27cfbe10b07d",
+              "name": "Exceeded rate limit.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "names"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32005,\n    \"message\": \"Rate limit exceeded\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "edb6c520-ece9-4705-92b5-9ba425171900",
+              "name": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "names"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32603,\n    \"message\": \"Internal error\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15bdcf06-e6ba-4051-b188-d85ab74ddaac",
+              "name": "The service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "names"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32002,\n    \"message\": \"Service unavailable\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38943bef-e4c7-4b3f-ada0-6ce8c4e423d3",
+              "name": "The request timed out.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "names"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Gateway timeout\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e3f3ed0-d9e1-47e8-a1cf-ed79a881fb6c",
+          "name": "Returns the native balance and token balances for a given address.",
+          "request": {
+            "name": "Returns the native balance and token balances for a given address.",
+            "description": {},
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v0",
+                "addresses",
+                ":address",
+                "balances"
+              ],
+              "host": [
+                "api-mainnet",
+                "helius-rpc",
+                "com"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api-key",
+                  "value": "<string>",
+                  "description": "(Required) Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                  "key": "address",
+                  "description": "(Required) The address to query for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "35d1f605-af02-4163-b332-76c2f3f01a2b",
+              "name": "Returns the native balance and the token balances for a given account.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "balances"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tokens\": [\n    {\n      \"mint\": \"string\",\n      \"amount\": 4768.7078865050535,\n      \"decimals\": 2435.9092470282253,\n      \"tokenAccount\": \"string\"\n    },\n    {\n      \"mint\": \"string\",\n      \"amount\": 8956.592915047706,\n      \"decimals\": 3231.3938772621163,\n      \"tokenAccount\": \"string\"\n    }\n  ],\n  \"nativeBalance\": 5814.021611762287\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43dac21c-fbd0-4783-97c9-6cd14a162e4e",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "balances"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32602,\n    \"message\": \"Invalid params\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43ea1b7b-22b9-4f32-9a21-099cd6e7e7a0",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "balances"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32001,\n    \"message\": \"Unauthorized\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5990bb4-791b-42f3-abf0-48e211a9623d",
+              "name": "Request was forbidden.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "balances"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Forbidden\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9edceb0a-7a76-451f-8966-3738b1d85828",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "balances"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32601,\n    \"message\": \"Method not found\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbf8262e-b2b1-42c4-907a-3f8b730fcfc2",
+              "name": "Exceeded rate limit.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "balances"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32005,\n    \"message\": \"Rate limit exceeded\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1859dbcd-fecd-4344-af4a-61f0aca833eb",
+              "name": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "balances"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32603,\n    \"message\": \"Internal error\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df0f8cfd-f711-49ea-8673-d18dc808ba94",
+              "name": "The service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "balances"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32002,\n    \"message\": \"Service unavailable\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "526f962b-61ee-4df5-92b1-b94b30d2fcac",
+              "name": "The request timed out.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "balances"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Gateway timeout\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://mainnet.helius-rpc.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c499b3d6-7b68-46be-82e5-6ae10c9ed924",
+    "name": "Helius API Catalog Addresses API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This document is a discovery catalog — not an operational spec. It exists so\nAI agents, codegen tools, and SDK generators can locate the canonical\nOpenAPI document for every Helius API in one request instead of crawling\nthe docs site.\n\nStart with the `x-apis` array: each entry links a Helius API surface to its\ncanonical OpenAPI spec (`specUrl`) and human-readable docs (`docsUrl`).\nFollow `externalDocs` for the full developer documentation site.\n\n## A note on JSON-RPC APIs\n\nSeveral Helius APIs (Solana RPC, DAS, Sender, Mint, Priority Fee,\nZK Compression) follow the JSON-RPC 2.0 convention where every method POSTs\nto `/` with a `method` field in the request body. For each such API the\nrepository ships both per-method fragment YAMLs (used to render the\nMintlify reference pages) and an auto-generated `_combined.yaml` that\nmerges every method into a single OpenAPI document. In the combined\ndocuments, colliding paths are disambiguated with a URL-fragment suffix\n(e.g. `/#getAccountInfo`) and each operation carries an `x-actual-path`\nextension that records the real request path (`/`). The fragment syntax is\nschema-only — real calls still go to the `url` in `servers`.\n\nAll `specUrl` values below point to raw GitHub files on the `main` branch\nof `helius-labs/docs`. They are stable URLs suitable for downstream tools\nto pin or fetch.\n\n\nContact Support:\n Name: Helius Support\n Email: support@helius.dev",
+      "type": "text/plain"
+    }
+  }
+}

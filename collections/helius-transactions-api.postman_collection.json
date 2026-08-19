@@ -1,0 +1,3573 @@
+{
+  "item": [
+    {
+      "id": "ac7798ca-d58e-458e-ab67-35c3efa0a708",
+      "name": "Transactions",
+      "description": {
+        "content": "Enhanced and human-readable transaction histories with decoded instruction data and detailed context.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ec873156-0cd2-4bee-8dc1-8ed2684f646a",
+          "name": "Returns an enhanced transaction history for a given address",
+          "request": {
+            "name": "Returns an enhanced transaction history for a given address",
+            "description": {
+              "content": "Access comprehensive transaction history for any Solana address with human-readable \ndecoded data. Filter by transaction types, sources, and time ranges to get detailed\ninsights into wallet activity with context and decoded instructions.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v0",
+                "addresses",
+                ":address",
+                "transactions"
+              ],
+              "host": [
+                "api-mainnet",
+                "helius-rpc",
+                "com"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api-key",
+                  "value": "<string>",
+                  "description": "(Required) Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+                },
+                {
+                  "disabled": false,
+                  "key": "before-signature",
+                  "value": "<string>",
+                  "description": "Start searching backwards from this transaction signature."
+                },
+                {
+                  "disabled": false,
+                  "key": "after-signature",
+                  "value": "<string>",
+                  "description": "Start searching forwards from this transaction signature."
+                },
+                {
+                  "disabled": false,
+                  "key": "commitment",
+                  "value": "<string>",
+                  "description": "How finalized a block must be to be included in the search. If not provided, will default to \"finalized\" commitment. Note that \"processed\" level commitment is not supported."
+                },
+                {
+                  "disabled": false,
+                  "key": "token-accounts",
+                  "value": "none",
+                  "description": "Filter transactions for related token accounts. Controls whether to include transactions involving token accounts owned by the address."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-order",
+                  "value": "desc",
+                  "description": "The order to sort the results in."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt-slot",
+                  "value": "<integer>",
+                  "description": "Only return transactions with a slot greater than this value."
+                },
+                {
+                  "disabled": false,
+                  "key": "gte-slot",
+                  "value": "<integer>",
+                  "description": "Only return transactions with a slot greater than or equal to this value."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt-slot",
+                  "value": "<integer>",
+                  "description": "Only return transactions with a slot less than this value."
+                },
+                {
+                  "disabled": false,
+                  "key": "lte-slot",
+                  "value": "<integer>",
+                  "description": "Only return transactions with a slot less than or equal to this value."
+                },
+                {
+                  "disabled": false,
+                  "key": "gt-time",
+                  "value": "<integer>",
+                  "description": "Only return transactions with a block time greater than this value."
+                },
+                {
+                  "disabled": false,
+                  "key": "gte-time",
+                  "value": "<integer>",
+                  "description": "Only return transactions with a block time greater than or equal to this value."
+                },
+                {
+                  "disabled": false,
+                  "key": "lt-time",
+                  "value": "<integer>",
+                  "description": "Only return transactions with a block time less than this value."
+                },
+                {
+                  "disabled": false,
+                  "key": "lte-time",
+                  "value": "<integer>",
+                  "description": "Only return transactions with a block time less than or equal to this value."
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>",
+                  "description": "The TransactionSource to filter by. For a list of possible options, see the Transaction Types section."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "The TransactionType to filter by. For a list of possible options, see the Transaction Types section."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of transactions to retrieve. The value should be between 1 and 100."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                  "key": "address",
+                  "description": "(Required) The address to query for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2341f363-2476-4f10-9d99-46206357fc40",
+              "name": "Returns an array of enhanced transactions.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before-signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after-signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    },
+                    {
+                      "key": "token-accounts",
+                      "value": "none"
+                    },
+                    {
+                      "key": "sort-order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "gt-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gte-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lte-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gte-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lte-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "UXD"
+                    },
+                    {
+                      "key": "type",
+                      "value": "CHANGE_COMIC_STATE"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"description\": \"Human readable interpretation of the transaction\",\n    \"type\": \"INIT_CUSTOMIZABLE_PERMISSIONLESS_CONSTANT_PRODUCT_POOL\",\n    \"source\": \"POLIS\",\n    \"fee\": 5000,\n    \"feePayer\": \"8cRrU1NzNpjL3k2BwjW3VixAcX6VFc29KHr4KZg8cs2Y\",\n    \"signature\": \"yy5BT9benHhx8fGCvhcAfTtLEHAtRJ3hRTzVL16bdrTCWm63t2vapfrZQZLJC3RcuagekaXjSs2zUGQvbcto8DK\",\n    \"slot\": 148277128,\n    \"timestamp\": 1656442333,\n    \"nativeTransfers\": [\n      {\n        \"fromUserAccount\": \"string\",\n        \"toUserAccount\": \"string\",\n        \"amount\": 989\n      },\n      {\n        \"fromUserAccount\": \"string\",\n        \"toUserAccount\": \"string\",\n        \"amount\": 8320\n      }\n    ],\n    \"tokenTransfers\": [\n      {\n        \"fromUserAccount\": \"string\",\n        \"toUserAccount\": \"string\",\n        \"fromTokenAccount\": \"string\",\n        \"toTokenAccount\": \"string\",\n        \"tokenAmount\": 229.6487530062963,\n        \"mint\": \"DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx\"\n      },\n      {\n        \"fromUserAccount\": \"string\",\n        \"toUserAccount\": \"string\",\n        \"fromTokenAccount\": \"string\",\n        \"toTokenAccount\": \"string\",\n        \"tokenAmount\": 3447.997861263601,\n        \"mint\": \"DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx\"\n      }\n    ],\n    \"accountData\": [\n      {\n        \"account\": \"string\",\n        \"nativeBalanceChange\": 8951.472346331251,\n        \"tokenBalanceChanges\": [\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      {\n        \"account\": \"string\",\n        \"nativeBalanceChange\": 3691.170051667174,\n        \"tokenBalanceChanges\": [\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    ],\n    \"transactionError\": {\n      \"error\": \"string\"\n    },\n    \"instructions\": [\n      {\n        \"accounts\": [\n          \"8uX6yiUuH4UjUb1gMGJAdkXorSuKshqsFGDCFShcK88B\",\n          \"8uX6yiUuH4UjUb1gMGJAdkXorSuKshqsFGDCFShcK88B\"\n        ],\n        \"data\": \"kdL8HQJrbbvQRGXmoadaja1Qvs\",\n        \"programId\": \"MEisE1HzehtrDpAAT8PnLHjpSSkRYakotTuJRPjTpo8\",\n        \"innerInstructions\": [\n          {\n            \"accounts\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"data\": \"string\",\n            \"programId\": \"string\"\n          },\n          {\n            \"accounts\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"data\": \"string\",\n            \"programId\": \"string\"\n          }\n        ]\n      },\n      {\n        \"accounts\": [\n          \"8uX6yiUuH4UjUb1gMGJAdkXorSuKshqsFGDCFShcK88B\",\n          \"8uX6yiUuH4UjUb1gMGJAdkXorSuKshqsFGDCFShcK88B\"\n        ],\n        \"data\": \"kdL8HQJrbbvQRGXmoadaja1Qvs\",\n        \"programId\": \"MEisE1HzehtrDpAAT8PnLHjpSSkRYakotTuJRPjTpo8\",\n        \"innerInstructions\": [\n          {\n            \"accounts\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"data\": \"string\",\n            \"programId\": \"string\"\n          },\n          {\n            \"accounts\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"data\": \"string\",\n            \"programId\": \"string\"\n          }\n        ]\n      }\n    ],\n    \"events\": {\n      \"nft\": {\n        \"description\": \"string\",\n        \"type\": \"NFT_RENT_UPDATE_LISTING\",\n        \"source\": \"MERCURIAL\",\n        \"amount\": 1000000,\n        \"fee\": 5000,\n        \"feePayer\": \"8cRrU1NzNpjL3k2BwjW3VixAcX6VFc29KHr4KZg8cs2Y\",\n        \"signature\": \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\",\n        \"slot\": 148277128,\n        \"timestamp\": 1656442333,\n        \"saleType\": \"AUCTION\",\n        \"buyer\": \"string\",\n        \"seller\": \"string\",\n        \"staker\": \"string\",\n        \"nfts\": [\n          {\n            \"mint\": \"DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx\",\n            \"tokenStandard\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"mint\": \"DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx\",\n            \"tokenStandard\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"swap\": {\n        \"nativeInput\": {\n          \"account\": \"2uySTNgvGT2kwqpfgLiSgeBLR3wQyye1i1A2iQWoPiFr\",\n          \"amount\": \"100000000\"\n        },\n        \"nativeOutput\": {\n          \"account\": \"2uySTNgvGT2kwqpfgLiSgeBLR3wQyye1i1A2iQWoPiFr\",\n          \"amount\": \"100000000\"\n        },\n        \"tokenInputs\": [\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"tokenOutputs\": [\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"tokenFees\": [\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"nativeFees\": [\n          {\n            \"account\": \"2uySTNgvGT2kwqpfgLiSgeBLR3wQyye1i1A2iQWoPiFr\",\n            \"amount\": \"100000000\"\n          },\n          {\n            \"account\": \"2uySTNgvGT2kwqpfgLiSgeBLR3wQyye1i1A2iQWoPiFr\",\n            \"amount\": \"100000000\"\n          }\n        ],\n        \"innerSwaps\": [\n          {\n            \"tokenInputs\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tokenOutputs\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tokenFees\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"nativeFees\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"programInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"tokenInputs\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tokenOutputs\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tokenFees\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"nativeFees\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"programInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"compressed\": {\n        \"type\": \"COMPRESSED_NFT_REDEEM\",\n        \"treeId\": \"string\",\n        \"assetId\": \"string\",\n        \"leafIndex\": 7447,\n        \"instructionIndex\": 7850,\n        \"innerInstructionIndex\": 1269,\n        \"newLeafOwner\": \"string\",\n        \"oldLeafOwner\": \"string\"\n      },\n      \"distributeCompressionRewards\": {\n        \"amount\": 1958\n      },\n      \"setAuthority\": {\n        \"account\": \"string\",\n        \"from\": \"string\",\n        \"to\": \"string\",\n        \"instructionIndex\": 1818,\n        \"innerInstructionIndex\": 4527\n      }\n    }\n  },\n  {\n    \"description\": \"Human readable interpretation of the transaction\",\n    \"type\": \"REQUEST_ELEVATION_GROUP\",\n    \"source\": \"INVICTUS\",\n    \"fee\": 5000,\n    \"feePayer\": \"8cRrU1NzNpjL3k2BwjW3VixAcX6VFc29KHr4KZg8cs2Y\",\n    \"signature\": \"yy5BT9benHhx8fGCvhcAfTtLEHAtRJ3hRTzVL16bdrTCWm63t2vapfrZQZLJC3RcuagekaXjSs2zUGQvbcto8DK\",\n    \"slot\": 148277128,\n    \"timestamp\": 1656442333,\n    \"nativeTransfers\": [\n      {\n        \"fromUserAccount\": \"string\",\n        \"toUserAccount\": \"string\",\n        \"amount\": 4473\n      },\n      {\n        \"fromUserAccount\": \"string\",\n        \"toUserAccount\": \"string\",\n        \"amount\": 9052\n      }\n    ],\n    \"tokenTransfers\": [\n      {\n        \"fromUserAccount\": \"string\",\n        \"toUserAccount\": \"string\",\n        \"fromTokenAccount\": \"string\",\n        \"toTokenAccount\": \"string\",\n        \"tokenAmount\": 5782.029745181368,\n        \"mint\": \"DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx\"\n      },\n      {\n        \"fromUserAccount\": \"string\",\n        \"toUserAccount\": \"string\",\n        \"fromTokenAccount\": \"string\",\n        \"toTokenAccount\": \"string\",\n        \"tokenAmount\": 5942.849105156463,\n        \"mint\": \"DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx\"\n      }\n    ],\n    \"accountData\": [\n      {\n        \"account\": \"string\",\n        \"nativeBalanceChange\": 9538.927792330489,\n        \"tokenBalanceChanges\": [\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      {\n        \"account\": \"string\",\n        \"nativeBalanceChange\": 6700.874209065186,\n        \"tokenBalanceChanges\": [\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    ],\n    \"transactionError\": {\n      \"error\": \"string\"\n    },\n    \"instructions\": [\n      {\n        \"accounts\": [\n          \"8uX6yiUuH4UjUb1gMGJAdkXorSuKshqsFGDCFShcK88B\",\n          \"8uX6yiUuH4UjUb1gMGJAdkXorSuKshqsFGDCFShcK88B\"\n        ],\n        \"data\": \"kdL8HQJrbbvQRGXmoadaja1Qvs\",\n        \"programId\": \"MEisE1HzehtrDpAAT8PnLHjpSSkRYakotTuJRPjTpo8\",\n        \"innerInstructions\": [\n          {\n            \"accounts\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"data\": \"string\",\n            \"programId\": \"string\"\n          },\n          {\n            \"accounts\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"data\": \"string\",\n            \"programId\": \"string\"\n          }\n        ]\n      },\n      {\n        \"accounts\": [\n          \"8uX6yiUuH4UjUb1gMGJAdkXorSuKshqsFGDCFShcK88B\",\n          \"8uX6yiUuH4UjUb1gMGJAdkXorSuKshqsFGDCFShcK88B\"\n        ],\n        \"data\": \"kdL8HQJrbbvQRGXmoadaja1Qvs\",\n        \"programId\": \"MEisE1HzehtrDpAAT8PnLHjpSSkRYakotTuJRPjTpo8\",\n        \"innerInstructions\": [\n          {\n            \"accounts\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"data\": \"string\",\n            \"programId\": \"string\"\n          },\n          {\n            \"accounts\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"data\": \"string\",\n            \"programId\": \"string\"\n          }\n        ]\n      }\n    ],\n    \"events\": {\n      \"nft\": {\n        \"description\": \"string\",\n        \"type\": \"NFT_PARTICIPATION_REWARD\",\n        \"source\": \"EXCHANGE_ART\",\n        \"amount\": 1000000,\n        \"fee\": 5000,\n        \"feePayer\": \"8cRrU1NzNpjL3k2BwjW3VixAcX6VFc29KHr4KZg8cs2Y\",\n        \"signature\": \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\",\n        \"slot\": 148277128,\n        \"timestamp\": 1656442333,\n        \"saleType\": \"AUCTION\",\n        \"buyer\": \"string\",\n        \"seller\": \"string\",\n        \"staker\": \"string\",\n        \"nfts\": [\n          {\n            \"mint\": \"DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx\",\n            \"tokenStandard\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"mint\": \"DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx\",\n            \"tokenStandard\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"swap\": {\n        \"nativeInput\": {\n          \"account\": \"2uySTNgvGT2kwqpfgLiSgeBLR3wQyye1i1A2iQWoPiFr\",\n          \"amount\": \"100000000\"\n        },\n        \"nativeOutput\": {\n          \"account\": \"2uySTNgvGT2kwqpfgLiSgeBLR3wQyye1i1A2iQWoPiFr\",\n          \"amount\": \"100000000\"\n        },\n        \"tokenInputs\": [\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"tokenOutputs\": [\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"tokenFees\": [\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"nativeFees\": [\n          {\n            \"account\": \"2uySTNgvGT2kwqpfgLiSgeBLR3wQyye1i1A2iQWoPiFr\",\n            \"amount\": \"100000000\"\n          },\n          {\n            \"account\": \"2uySTNgvGT2kwqpfgLiSgeBLR3wQyye1i1A2iQWoPiFr\",\n            \"amount\": \"100000000\"\n          }\n        ],\n        \"innerSwaps\": [\n          {\n            \"tokenInputs\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tokenOutputs\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tokenFees\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"nativeFees\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"programInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"tokenInputs\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tokenOutputs\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tokenFees\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"nativeFees\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"programInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"compressed\": {\n        \"type\": \"COMPRESSED_NFT_DELEGATE\",\n        \"treeId\": \"string\",\n        \"assetId\": \"string\",\n        \"leafIndex\": 2646,\n        \"instructionIndex\": 5668,\n        \"innerInstructionIndex\": 6635,\n        \"newLeafOwner\": \"string\",\n        \"oldLeafOwner\": \"string\"\n      },\n      \"distributeCompressionRewards\": {\n        \"amount\": 9567\n      },\n      \"setAuthority\": {\n        \"account\": \"string\",\n        \"from\": \"string\",\n        \"to\": \"string\",\n        \"instructionIndex\": 2233,\n        \"innerInstructionIndex\": 2825\n      }\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8947ed4-1bff-4273-96b3-bad370bafe55",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before-signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after-signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    },
+                    {
+                      "key": "token-accounts",
+                      "value": "none"
+                    },
+                    {
+                      "key": "sort-order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "gt-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gte-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lte-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gte-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lte-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "UXD"
+                    },
+                    {
+                      "key": "type",
+                      "value": "CHANGE_COMIC_STATE"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32602,\n    \"message\": \"Invalid params\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e288e762-1d92-4222-a451-f42a728ab397",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before-signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after-signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    },
+                    {
+                      "key": "token-accounts",
+                      "value": "none"
+                    },
+                    {
+                      "key": "sort-order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "gt-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gte-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lte-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gte-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lte-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "UXD"
+                    },
+                    {
+                      "key": "type",
+                      "value": "CHANGE_COMIC_STATE"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32001,\n    \"message\": \"Unauthorized\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "229c3915-c3be-4a57-9eeb-e593f60c5bf7",
+              "name": "Request was forbidden.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before-signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after-signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    },
+                    {
+                      "key": "token-accounts",
+                      "value": "none"
+                    },
+                    {
+                      "key": "sort-order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "gt-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gte-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lte-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gte-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lte-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "UXD"
+                    },
+                    {
+                      "key": "type",
+                      "value": "CHANGE_COMIC_STATE"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Forbidden\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83b202e0-1075-4733-aab0-a6d8d7b00d27",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before-signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after-signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    },
+                    {
+                      "key": "token-accounts",
+                      "value": "none"
+                    },
+                    {
+                      "key": "sort-order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "gt-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gte-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lte-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gte-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lte-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "UXD"
+                    },
+                    {
+                      "key": "type",
+                      "value": "CHANGE_COMIC_STATE"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32601,\n    \"message\": \"Method not found\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6637dda-5db4-4ef7-9710-3ba39f43b6e3",
+              "name": "Exceeded rate limit.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before-signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after-signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    },
+                    {
+                      "key": "token-accounts",
+                      "value": "none"
+                    },
+                    {
+                      "key": "sort-order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "gt-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gte-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lte-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gte-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lte-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "UXD"
+                    },
+                    {
+                      "key": "type",
+                      "value": "CHANGE_COMIC_STATE"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32005,\n    \"message\": \"Rate limit exceeded\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21f54128-e895-4798-87d5-3b87c9186943",
+              "name": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before-signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after-signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    },
+                    {
+                      "key": "token-accounts",
+                      "value": "none"
+                    },
+                    {
+                      "key": "sort-order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "gt-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gte-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lte-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gte-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lte-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "UXD"
+                    },
+                    {
+                      "key": "type",
+                      "value": "CHANGE_COMIC_STATE"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32603,\n    \"message\": \"Internal error\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2fc89f2-2641-4be9-8a11-c4a76e5b8cbe",
+              "name": "The service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before-signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after-signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    },
+                    {
+                      "key": "token-accounts",
+                      "value": "none"
+                    },
+                    {
+                      "key": "sort-order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "gt-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gte-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lte-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gte-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lte-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "UXD"
+                    },
+                    {
+                      "key": "type",
+                      "value": "CHANGE_COMIC_STATE"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32002,\n    \"message\": \"Service unavailable\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dcd034b0-6ca4-4909-a193-757830057ff0",
+              "name": "The request timed out.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before-signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after-signature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    },
+                    {
+                      "key": "token-accounts",
+                      "value": "none"
+                    },
+                    {
+                      "key": "sort-order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "gt-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gte-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lte-slot",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gt-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gte-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lt-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lte-time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "UXD"
+                    },
+                    {
+                      "key": "type",
+                      "value": "CHANGE_COMIC_STATE"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Gateway timeout\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f03a7364-69d6-4491-b2c3-fac55b815ceb",
+          "name": "Returns raw transaction history for a given address",
+          "request": {
+            "name": "Returns raw transaction history for a given address",
+            "description": {
+              "content": "Retrieve complete raw transaction data for any Solana address with full\ntransaction details in their original format. Access historical transaction \ndata with precise time filtering options.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v0",
+                "addresses",
+                ":address",
+                "raw-transactions"
+              ],
+              "host": [
+                "api-mainnet",
+                "helius-rpc",
+                "com"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api-key",
+                  "value": "<string>",
+                  "description": "(Required) Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "Start searching backwards from this transaction signature."
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<string>",
+                  "description": "Search until this transaction signature."
+                },
+                {
+                  "disabled": false,
+                  "key": "commitment",
+                  "value": "<string>",
+                  "description": "How finalized a block must be to be included in the search. If not provided, will default to \"finalized\" commitment. Note that \"processed\" level commitment is not supported."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                  "key": "address",
+                  "description": "(Required) The address to query for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "89a8f2e1-5e3c-4aec-a444-2bdee452ba51",
+              "name": "Returns an array of raw transactions.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"slot\": 1185,\n    \"blocktime\": 9010,\n    \"transaction\": {\n      \"signatures\": [\n        \"string\",\n        \"string\"\n      ],\n      \"message\": {\n        \"accountKeys\": [\n          \"string\",\n          \"string\"\n        ],\n        \"header\": {},\n        \"recentBlockhash\": \"string\",\n        \"instructions\": [\n          {\n            \"programIdIndex\": 6227,\n            \"accounts\": [\n              77,\n              8889\n            ],\n            \"data\": \"string\"\n          },\n          {\n            \"programIdIndex\": 9580,\n            \"accounts\": [\n              1371,\n              8304\n            ],\n            \"data\": \"string\"\n          }\n        ]\n      }\n    },\n    \"meta\": {\n      \"err\": {},\n      \"fee\": 2738,\n      \"preBalances\": [\n        5046,\n        2560\n      ],\n      \"postBalances\": [\n        6244,\n        5542\n      ],\n      \"preTokenBalances\": [\n        2719,\n        7183\n      ],\n      \"postTokenBalances\": [\n        7981,\n        4932\n      ],\n      \"logMessages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"loadedAddresses\": {}\n    }\n  },\n  {\n    \"slot\": 9134,\n    \"blocktime\": 3389,\n    \"transaction\": {\n      \"signatures\": [\n        \"string\",\n        \"string\"\n      ],\n      \"message\": {\n        \"accountKeys\": [\n          \"string\",\n          \"string\"\n        ],\n        \"header\": {},\n        \"recentBlockhash\": \"string\",\n        \"instructions\": [\n          {\n            \"programIdIndex\": 2233,\n            \"accounts\": [\n              2670,\n              1767\n            ],\n            \"data\": \"string\"\n          },\n          {\n            \"programIdIndex\": 4842,\n            \"accounts\": [\n              188,\n              8863\n            ],\n            \"data\": \"string\"\n          }\n        ]\n      }\n    },\n    \"meta\": {\n      \"err\": {},\n      \"fee\": 1973,\n      \"preBalances\": [\n        452,\n        8626\n      ],\n      \"postBalances\": [\n        8297,\n        1806\n      ],\n      \"preTokenBalances\": [\n        2884,\n        9235\n      ],\n      \"postTokenBalances\": [\n        9463,\n        2885\n      ],\n      \"logMessages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"loadedAddresses\": {}\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5995090-c602-4869-acab-f5fde1264180",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32602,\n    \"message\": \"Invalid params\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5d4c00b-51fb-408e-8b4d-e512f757f1eb",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32001,\n    \"message\": \"Unauthorized\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09121336-3a2e-408b-8a6d-8badd3c561d3",
+              "name": "Request was forbidden.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Forbidden\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39fd14e1-d560-4bdf-9f56-0a4f1f1a6411",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32601,\n    \"message\": \"Method not found\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3580ed14-d24d-42f6-8089-3fd8992a19ad",
+              "name": "Exceeded rate limit.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32005,\n    \"message\": \"Rate limit exceeded\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5100022d-97c4-4601-a86d-86587045e746",
+              "name": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32603,\n    \"message\": \"Internal error\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c156dbc-26fd-4861-9aeb-9b5ae1498841",
+              "name": "The service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32002,\n    \"message\": \"Service unavailable\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45ef3dca-2a69-4b0f-919d-dc14455f8181",
+              "name": "The request timed out.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "addresses",
+                    ":address",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+                      "key": "address",
+                      "description": "(Required) The address to query for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Gateway timeout\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8b78bf08-1598-422a-b540-547a757d158a",
+          "name": "Returns an array of enhanced, human-readable versions of the given transactions.",
+          "request": {
+            "name": "Returns an array of enhanced, human-readable versions of the given transactions.",
+            "description": {
+              "content": "Convert raw Solana transactions into enhanced, human-readable formats with\ndecoded instruction data and contextual information. Process multiple transactions\nin a single request for efficient data analysis and display.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v0",
+                "transactions"
+              ],
+              "host": [
+                "api-mainnet",
+                "helius-rpc",
+                "com"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api-key",
+                  "value": "<string>",
+                  "description": "(Required) Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+                },
+                {
+                  "disabled": false,
+                  "key": "commitment",
+                  "value": "<string>",
+                  "description": "How finalized a block must be to be included in the search. If not provided, will default to \"finalized\" commitment. Note that \"processed\" level commitment is not supported."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transactions\": [\n    \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "50fc9063-3d5a-489e-b65b-70c21fcfab7a",
+              "name": "Returns an array of enhanced transactions.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactions\": [\n    \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"description\": \"Human readable interpretation of the transaction\",\n    \"type\": \"INIT_CUSTOMIZABLE_PERMISSIONLESS_CONSTANT_PRODUCT_POOL\",\n    \"source\": \"POLIS\",\n    \"fee\": 5000,\n    \"feePayer\": \"8cRrU1NzNpjL3k2BwjW3VixAcX6VFc29KHr4KZg8cs2Y\",\n    \"signature\": \"yy5BT9benHhx8fGCvhcAfTtLEHAtRJ3hRTzVL16bdrTCWm63t2vapfrZQZLJC3RcuagekaXjSs2zUGQvbcto8DK\",\n    \"slot\": 148277128,\n    \"timestamp\": 1656442333,\n    \"nativeTransfers\": [\n      {\n        \"fromUserAccount\": \"string\",\n        \"toUserAccount\": \"string\",\n        \"amount\": 989\n      },\n      {\n        \"fromUserAccount\": \"string\",\n        \"toUserAccount\": \"string\",\n        \"amount\": 8320\n      }\n    ],\n    \"tokenTransfers\": [\n      {\n        \"fromUserAccount\": \"string\",\n        \"toUserAccount\": \"string\",\n        \"fromTokenAccount\": \"string\",\n        \"toTokenAccount\": \"string\",\n        \"tokenAmount\": 229.6487530062963,\n        \"mint\": \"DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx\"\n      },\n      {\n        \"fromUserAccount\": \"string\",\n        \"toUserAccount\": \"string\",\n        \"fromTokenAccount\": \"string\",\n        \"toTokenAccount\": \"string\",\n        \"tokenAmount\": 3447.997861263601,\n        \"mint\": \"DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx\"\n      }\n    ],\n    \"accountData\": [\n      {\n        \"account\": \"string\",\n        \"nativeBalanceChange\": 8951.472346331251,\n        \"tokenBalanceChanges\": [\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      {\n        \"account\": \"string\",\n        \"nativeBalanceChange\": 3691.170051667174,\n        \"tokenBalanceChanges\": [\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    ],\n    \"transactionError\": {\n      \"error\": \"string\"\n    },\n    \"instructions\": [\n      {\n        \"accounts\": [\n          \"8uX6yiUuH4UjUb1gMGJAdkXorSuKshqsFGDCFShcK88B\",\n          \"8uX6yiUuH4UjUb1gMGJAdkXorSuKshqsFGDCFShcK88B\"\n        ],\n        \"data\": \"kdL8HQJrbbvQRGXmoadaja1Qvs\",\n        \"programId\": \"MEisE1HzehtrDpAAT8PnLHjpSSkRYakotTuJRPjTpo8\",\n        \"innerInstructions\": [\n          {\n            \"accounts\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"data\": \"string\",\n            \"programId\": \"string\"\n          },\n          {\n            \"accounts\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"data\": \"string\",\n            \"programId\": \"string\"\n          }\n        ]\n      },\n      {\n        \"accounts\": [\n          \"8uX6yiUuH4UjUb1gMGJAdkXorSuKshqsFGDCFShcK88B\",\n          \"8uX6yiUuH4UjUb1gMGJAdkXorSuKshqsFGDCFShcK88B\"\n        ],\n        \"data\": \"kdL8HQJrbbvQRGXmoadaja1Qvs\",\n        \"programId\": \"MEisE1HzehtrDpAAT8PnLHjpSSkRYakotTuJRPjTpo8\",\n        \"innerInstructions\": [\n          {\n            \"accounts\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"data\": \"string\",\n            \"programId\": \"string\"\n          },\n          {\n            \"accounts\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"data\": \"string\",\n            \"programId\": \"string\"\n          }\n        ]\n      }\n    ],\n    \"events\": {\n      \"nft\": {\n        \"description\": \"string\",\n        \"type\": \"NFT_RENT_UPDATE_LISTING\",\n        \"source\": \"MERCURIAL\",\n        \"amount\": 1000000,\n        \"fee\": 5000,\n        \"feePayer\": \"8cRrU1NzNpjL3k2BwjW3VixAcX6VFc29KHr4KZg8cs2Y\",\n        \"signature\": \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\",\n        \"slot\": 148277128,\n        \"timestamp\": 1656442333,\n        \"saleType\": \"AUCTION\",\n        \"buyer\": \"string\",\n        \"seller\": \"string\",\n        \"staker\": \"string\",\n        \"nfts\": [\n          {\n            \"mint\": \"DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx\",\n            \"tokenStandard\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"mint\": \"DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx\",\n            \"tokenStandard\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"swap\": {\n        \"nativeInput\": {\n          \"account\": \"2uySTNgvGT2kwqpfgLiSgeBLR3wQyye1i1A2iQWoPiFr\",\n          \"amount\": \"100000000\"\n        },\n        \"nativeOutput\": {\n          \"account\": \"2uySTNgvGT2kwqpfgLiSgeBLR3wQyye1i1A2iQWoPiFr\",\n          \"amount\": \"100000000\"\n        },\n        \"tokenInputs\": [\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"tokenOutputs\": [\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"tokenFees\": [\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"nativeFees\": [\n          {\n            \"account\": \"2uySTNgvGT2kwqpfgLiSgeBLR3wQyye1i1A2iQWoPiFr\",\n            \"amount\": \"100000000\"\n          },\n          {\n            \"account\": \"2uySTNgvGT2kwqpfgLiSgeBLR3wQyye1i1A2iQWoPiFr\",\n            \"amount\": \"100000000\"\n          }\n        ],\n        \"innerSwaps\": [\n          {\n            \"tokenInputs\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tokenOutputs\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tokenFees\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"nativeFees\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"programInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"tokenInputs\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tokenOutputs\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tokenFees\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"nativeFees\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"programInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"compressed\": {\n        \"type\": \"COMPRESSED_NFT_REDEEM\",\n        \"treeId\": \"string\",\n        \"assetId\": \"string\",\n        \"leafIndex\": 7447,\n        \"instructionIndex\": 7850,\n        \"innerInstructionIndex\": 1269,\n        \"newLeafOwner\": \"string\",\n        \"oldLeafOwner\": \"string\"\n      },\n      \"distributeCompressionRewards\": {\n        \"amount\": 1958\n      },\n      \"setAuthority\": {\n        \"account\": \"string\",\n        \"from\": \"string\",\n        \"to\": \"string\",\n        \"instructionIndex\": 1818,\n        \"innerInstructionIndex\": 4527\n      }\n    }\n  },\n  {\n    \"description\": \"Human readable interpretation of the transaction\",\n    \"type\": \"REQUEST_ELEVATION_GROUP\",\n    \"source\": \"INVICTUS\",\n    \"fee\": 5000,\n    \"feePayer\": \"8cRrU1NzNpjL3k2BwjW3VixAcX6VFc29KHr4KZg8cs2Y\",\n    \"signature\": \"yy5BT9benHhx8fGCvhcAfTtLEHAtRJ3hRTzVL16bdrTCWm63t2vapfrZQZLJC3RcuagekaXjSs2zUGQvbcto8DK\",\n    \"slot\": 148277128,\n    \"timestamp\": 1656442333,\n    \"nativeTransfers\": [\n      {\n        \"fromUserAccount\": \"string\",\n        \"toUserAccount\": \"string\",\n        \"amount\": 4473\n      },\n      {\n        \"fromUserAccount\": \"string\",\n        \"toUserAccount\": \"string\",\n        \"amount\": 9052\n      }\n    ],\n    \"tokenTransfers\": [\n      {\n        \"fromUserAccount\": \"string\",\n        \"toUserAccount\": \"string\",\n        \"fromTokenAccount\": \"string\",\n        \"toTokenAccount\": \"string\",\n        \"tokenAmount\": 5782.029745181368,\n        \"mint\": \"DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx\"\n      },\n      {\n        \"fromUserAccount\": \"string\",\n        \"toUserAccount\": \"string\",\n        \"fromTokenAccount\": \"string\",\n        \"toTokenAccount\": \"string\",\n        \"tokenAmount\": 5942.849105156463,\n        \"mint\": \"DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx\"\n      }\n    ],\n    \"accountData\": [\n      {\n        \"account\": \"string\",\n        \"nativeBalanceChange\": 9538.927792330489,\n        \"tokenBalanceChanges\": [\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      {\n        \"account\": \"string\",\n        \"nativeBalanceChange\": 6700.874209065186,\n        \"tokenBalanceChanges\": [\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    ],\n    \"transactionError\": {\n      \"error\": \"string\"\n    },\n    \"instructions\": [\n      {\n        \"accounts\": [\n          \"8uX6yiUuH4UjUb1gMGJAdkXorSuKshqsFGDCFShcK88B\",\n          \"8uX6yiUuH4UjUb1gMGJAdkXorSuKshqsFGDCFShcK88B\"\n        ],\n        \"data\": \"kdL8HQJrbbvQRGXmoadaja1Qvs\",\n        \"programId\": \"MEisE1HzehtrDpAAT8PnLHjpSSkRYakotTuJRPjTpo8\",\n        \"innerInstructions\": [\n          {\n            \"accounts\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"data\": \"string\",\n            \"programId\": \"string\"\n          },\n          {\n            \"accounts\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"data\": \"string\",\n            \"programId\": \"string\"\n          }\n        ]\n      },\n      {\n        \"accounts\": [\n          \"8uX6yiUuH4UjUb1gMGJAdkXorSuKshqsFGDCFShcK88B\",\n          \"8uX6yiUuH4UjUb1gMGJAdkXorSuKshqsFGDCFShcK88B\"\n        ],\n        \"data\": \"kdL8HQJrbbvQRGXmoadaja1Qvs\",\n        \"programId\": \"MEisE1HzehtrDpAAT8PnLHjpSSkRYakotTuJRPjTpo8\",\n        \"innerInstructions\": [\n          {\n            \"accounts\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"data\": \"string\",\n            \"programId\": \"string\"\n          },\n          {\n            \"accounts\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"data\": \"string\",\n            \"programId\": \"string\"\n          }\n        ]\n      }\n    ],\n    \"events\": {\n      \"nft\": {\n        \"description\": \"string\",\n        \"type\": \"NFT_PARTICIPATION_REWARD\",\n        \"source\": \"EXCHANGE_ART\",\n        \"amount\": 1000000,\n        \"fee\": 5000,\n        \"feePayer\": \"8cRrU1NzNpjL3k2BwjW3VixAcX6VFc29KHr4KZg8cs2Y\",\n        \"signature\": \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\",\n        \"slot\": 148277128,\n        \"timestamp\": 1656442333,\n        \"saleType\": \"AUCTION\",\n        \"buyer\": \"string\",\n        \"seller\": \"string\",\n        \"staker\": \"string\",\n        \"nfts\": [\n          {\n            \"mint\": \"DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx\",\n            \"tokenStandard\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"mint\": \"DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx\",\n            \"tokenStandard\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"swap\": {\n        \"nativeInput\": {\n          \"account\": \"2uySTNgvGT2kwqpfgLiSgeBLR3wQyye1i1A2iQWoPiFr\",\n          \"amount\": \"100000000\"\n        },\n        \"nativeOutput\": {\n          \"account\": \"2uySTNgvGT2kwqpfgLiSgeBLR3wQyye1i1A2iQWoPiFr\",\n          \"amount\": \"100000000\"\n        },\n        \"tokenInputs\": [\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"tokenOutputs\": [\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"tokenFees\": [\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"userAccount\": \"F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ\",\n            \"tokenAccount\": \"2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn\",\n            \"mint\": \"DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ\",\n            \"rawTokenAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"nativeFees\": [\n          {\n            \"account\": \"2uySTNgvGT2kwqpfgLiSgeBLR3wQyye1i1A2iQWoPiFr\",\n            \"amount\": \"100000000\"\n          },\n          {\n            \"account\": \"2uySTNgvGT2kwqpfgLiSgeBLR3wQyye1i1A2iQWoPiFr\",\n            \"amount\": \"100000000\"\n          }\n        ],\n        \"innerSwaps\": [\n          {\n            \"tokenInputs\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tokenOutputs\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tokenFees\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"nativeFees\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"programInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"tokenInputs\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tokenOutputs\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tokenFees\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"nativeFees\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"programInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"compressed\": {\n        \"type\": \"COMPRESSED_NFT_DELEGATE\",\n        \"treeId\": \"string\",\n        \"assetId\": \"string\",\n        \"leafIndex\": 2646,\n        \"instructionIndex\": 5668,\n        \"innerInstructionIndex\": 6635,\n        \"newLeafOwner\": \"string\",\n        \"oldLeafOwner\": \"string\"\n      },\n      \"distributeCompressionRewards\": {\n        \"amount\": 9567\n      },\n      \"setAuthority\": {\n        \"account\": \"string\",\n        \"from\": \"string\",\n        \"to\": \"string\",\n        \"instructionIndex\": 2233,\n        \"innerInstructionIndex\": 2825\n      }\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de3e4e28-75e8-4fc3-a695-55ff087d6a9f",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactions\": [\n    \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32602,\n    \"message\": \"Invalid params\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03fd25dd-8488-497d-ae68-cd2919a4a185",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactions\": [\n    \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32001,\n    \"message\": \"Unauthorized\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6424c9f9-c269-4337-8963-f5f0da535139",
+              "name": "Request was forbidden.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactions\": [\n    \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Forbidden\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "198fca5b-f96d-45d9-a198-700c4bafedc4",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactions\": [\n    \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32601,\n    \"message\": \"Method not found\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b81b0252-55e6-45b7-b042-a0ff1872bd0d",
+              "name": "Exceeded rate limit.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactions\": [\n    \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32005,\n    \"message\": \"Rate limit exceeded\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9fbcff91-85e0-4b7a-9940-9bc389ff0b7d",
+              "name": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactions\": [\n    \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32603,\n    \"message\": \"Internal error\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed6ae362-3f21-4ce5-8528-8d4bbd67c00c",
+              "name": "The service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactions\": [\n    \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32002,\n    \"message\": \"Service unavailable\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4df12ac-660e-4e38-aaf6-624c757e3867",
+              "name": "The request timed out.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactions\": [\n    \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Gateway timeout\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f9f2da8-453c-4aa8-8ce1-1a44f39304f0",
+          "name": "Returns an array of raw (directly from RPC) transactions.",
+          "request": {
+            "name": "Returns an array of raw (directly from RPC) transactions.",
+            "description": {},
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v0",
+                "raw-transactions"
+              ],
+              "host": [
+                "api-mainnet",
+                "helius-rpc",
+                "com"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api-key",
+                  "value": "<string>",
+                  "description": "(Required) Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+                },
+                {
+                  "disabled": false,
+                  "key": "commitment",
+                  "value": "<string>",
+                  "description": "How finalized a block must be to be included in the search. If not provided, will default to \"finalized\" commitment. Note that \"processed\" level commitment is not supported."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transactions\": [\n    \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "41bb855a-5ab9-4b53-9aba-10aaf4a5ec71",
+              "name": "Returns an array of raw transactions.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactions\": [\n    \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"slot\": 1185,\n    \"blocktime\": 9010,\n    \"transaction\": {\n      \"signatures\": [\n        \"string\",\n        \"string\"\n      ],\n      \"message\": {\n        \"accountKeys\": [\n          \"string\",\n          \"string\"\n        ],\n        \"header\": {},\n        \"recentBlockhash\": \"string\",\n        \"instructions\": [\n          {\n            \"programIdIndex\": 6227,\n            \"accounts\": [\n              77,\n              8889\n            ],\n            \"data\": \"string\"\n          },\n          {\n            \"programIdIndex\": 9580,\n            \"accounts\": [\n              1371,\n              8304\n            ],\n            \"data\": \"string\"\n          }\n        ]\n      }\n    },\n    \"meta\": {\n      \"err\": {},\n      \"fee\": 2738,\n      \"preBalances\": [\n        5046,\n        2560\n      ],\n      \"postBalances\": [\n        6244,\n        5542\n      ],\n      \"preTokenBalances\": [\n        2719,\n        7183\n      ],\n      \"postTokenBalances\": [\n        7981,\n        4932\n      ],\n      \"logMessages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"loadedAddresses\": {}\n    }\n  },\n  {\n    \"slot\": 9134,\n    \"blocktime\": 3389,\n    \"transaction\": {\n      \"signatures\": [\n        \"string\",\n        \"string\"\n      ],\n      \"message\": {\n        \"accountKeys\": [\n          \"string\",\n          \"string\"\n        ],\n        \"header\": {},\n        \"recentBlockhash\": \"string\",\n        \"instructions\": [\n          {\n            \"programIdIndex\": 2233,\n            \"accounts\": [\n              2670,\n              1767\n            ],\n            \"data\": \"string\"\n          },\n          {\n            \"programIdIndex\": 4842,\n            \"accounts\": [\n              188,\n              8863\n            ],\n            \"data\": \"string\"\n          }\n        ]\n      }\n    },\n    \"meta\": {\n      \"err\": {},\n      \"fee\": 1973,\n      \"preBalances\": [\n        452,\n        8626\n      ],\n      \"postBalances\": [\n        8297,\n        1806\n      ],\n      \"preTokenBalances\": [\n        2884,\n        9235\n      ],\n      \"postTokenBalances\": [\n        9463,\n        2885\n      ],\n      \"logMessages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"loadedAddresses\": {}\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f55fbc6f-742e-4bae-b7ce-9148ad6ed6e0",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactions\": [\n    \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32602,\n    \"message\": \"Invalid params\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a4ee793-8853-4e94-98b2-631a0be17b27",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactions\": [\n    \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32001,\n    \"message\": \"Unauthorized\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e596fa7d-22d6-473a-96ee-18e3d8e198fa",
+              "name": "Request was forbidden.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactions\": [\n    \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Forbidden\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2fe4c03c-bb48-4c32-8807-d13a38b3d354",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactions\": [\n    \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32601,\n    \"message\": \"Method not found\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8c5a058-0917-46ab-b01b-93f060c92424",
+              "name": "Exceeded rate limit.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactions\": [\n    \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32005,\n    \"message\": \"Rate limit exceeded\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76e68e11-696e-45c5-b8dc-e4ddd4d39607",
+              "name": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactions\": [\n    \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32603,\n    \"message\": \"Internal error\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7bfed477-45d7-4291-abf7-f52cafdd8d67",
+              "name": "The service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactions\": [\n    \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32002,\n    \"message\": \"Service unavailable\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36f813e0-7caa-42cc-8b96-04409ebbd71e",
+              "name": "The request timed out.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "confirmed"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactions\": [\n    \"4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Gateway timeout\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eb1a5a3f-eaa7-4827-94df-5f8f81b43012",
+          "name": "Returns an array of raw transactions for the given accounts.",
+          "request": {
+            "name": "Returns an array of raw transactions for the given accounts.",
+            "description": {},
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v1",
+                "raw-transactions"
+              ],
+              "host": [
+                "api-mainnet",
+                "helius-rpc",
+                "com"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api-key",
+                  "value": "<string>",
+                  "description": "(Required) Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": {\n    \"accounts\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"startSlot\": \"<integer>\",\n    \"endSlot\": \"<integer>\",\n    \"startTime\": \"<integer>\",\n    \"endTime\": \"<integer>\"\n  },\n  \"options\": {\n    \"limit\": 100,\n    \"sortOrder\": \"DESC\",\n    \"paginationToken\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "af2e34c7-812b-4adb-8a75-583a5f7680e4",
+              "name": "Query result.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v1",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"accounts\": [\n      \"CyFyz1xR4YTG9CrY9jg5jG6GZfm2e8k97qscs2GFpjX1\",\n      \"CyFyz1xR4YTG9CrY9jg5jG6GZfm2e8k97qscs2GFpjX1\"\n    ],\n    \"startSlot\": 162368570,\n    \"endSlot\": 162368580,\n    \"startTime\": 1669055189,\n    \"endTime\": 1669070189\n  },\n  \"options\": {\n    \"limit\": 100,\n    \"sortOrder\": \"DESC\",\n    \"paginationToken\": \"V1_162262948_99\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": [\n    {\n      \"slot\": 1225,\n      \"blocktime\": 9337,\n      \"transaction\": {\n        \"signatures\": [\n          \"string\",\n          \"string\"\n        ],\n        \"message\": {\n          \"accountKeys\": [\n            \"string\",\n            \"string\"\n          ],\n          \"header\": {},\n          \"recentBlockhash\": \"string\",\n          \"instructions\": [\n            {\n              \"programIdIndex\": 6528,\n              \"accounts\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"data\": \"string\"\n            },\n            {\n              \"programIdIndex\": 7041,\n              \"accounts\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"data\": \"string\"\n            }\n          ]\n        }\n      },\n      \"meta\": {\n        \"err\": {},\n        \"fee\": 7553,\n        \"preBalances\": [\n          7952,\n          8781\n        ],\n        \"postBalances\": [\n          6795,\n          1248\n        ],\n        \"preTokenBalances\": [\n          4808,\n          2766\n        ],\n        \"postTokenBalances\": [\n          2345,\n          9269\n        ],\n        \"logMessages\": [\n          \"string\",\n          \"string\"\n        ],\n        \"loadedAddresses\": {}\n      }\n    },\n    {\n      \"slot\": 1112,\n      \"blocktime\": 4137,\n      \"transaction\": {\n        \"signatures\": [\n          \"string\",\n          \"string\"\n        ],\n        \"message\": {\n          \"accountKeys\": [\n            \"string\",\n            \"string\"\n          ],\n          \"header\": {},\n          \"recentBlockhash\": \"string\",\n          \"instructions\": [\n            {\n              \"programIdIndex\": 4963,\n              \"accounts\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"data\": \"string\"\n            },\n            {\n              \"programIdIndex\": 2355,\n              \"accounts\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"data\": \"string\"\n            }\n          ]\n        }\n      },\n      \"meta\": {\n        \"err\": {},\n        \"fee\": 5141,\n        \"preBalances\": [\n          5775,\n          7002\n        ],\n        \"postBalances\": [\n          3449,\n          8067\n        ],\n        \"preTokenBalances\": [\n          7808,\n          6457\n        ],\n        \"postTokenBalances\": [\n          8668,\n          3145\n        ],\n        \"logMessages\": [\n          \"string\",\n          \"string\"\n        ],\n        \"loadedAddresses\": {}\n      }\n    }\n  ],\n  \"paginationToken\": \"V1_162262948_99\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eef79c99-f7c4-43a7-8f54-93f6e81cb483",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v1",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"accounts\": [\n      \"CyFyz1xR4YTG9CrY9jg5jG6GZfm2e8k97qscs2GFpjX1\",\n      \"CyFyz1xR4YTG9CrY9jg5jG6GZfm2e8k97qscs2GFpjX1\"\n    ],\n    \"startSlot\": 162368570,\n    \"endSlot\": 162368580,\n    \"startTime\": 1669055189,\n    \"endTime\": 1669070189\n  },\n  \"options\": {\n    \"limit\": 100,\n    \"sortOrder\": \"DESC\",\n    \"paginationToken\": \"V1_162262948_99\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32602,\n    \"message\": \"Invalid params\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3500f25c-beea-4a40-8d13-f8ebdc4bcf0e",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v1",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"accounts\": [\n      \"CyFyz1xR4YTG9CrY9jg5jG6GZfm2e8k97qscs2GFpjX1\",\n      \"CyFyz1xR4YTG9CrY9jg5jG6GZfm2e8k97qscs2GFpjX1\"\n    ],\n    \"startSlot\": 162368570,\n    \"endSlot\": 162368580,\n    \"startTime\": 1669055189,\n    \"endTime\": 1669070189\n  },\n  \"options\": {\n    \"limit\": 100,\n    \"sortOrder\": \"DESC\",\n    \"paginationToken\": \"V1_162262948_99\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32001,\n    \"message\": \"Unauthorized\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28553d91-8d99-44d9-8735-70b151dc23e6",
+              "name": "Request was forbidden.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v1",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"accounts\": [\n      \"CyFyz1xR4YTG9CrY9jg5jG6GZfm2e8k97qscs2GFpjX1\",\n      \"CyFyz1xR4YTG9CrY9jg5jG6GZfm2e8k97qscs2GFpjX1\"\n    ],\n    \"startSlot\": 162368570,\n    \"endSlot\": 162368580,\n    \"startTime\": 1669055189,\n    \"endTime\": 1669070189\n  },\n  \"options\": {\n    \"limit\": 100,\n    \"sortOrder\": \"DESC\",\n    \"paginationToken\": \"V1_162262948_99\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Forbidden\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5f3fdb3-07c2-4365-93bc-ecf1a342def0",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v1",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"accounts\": [\n      \"CyFyz1xR4YTG9CrY9jg5jG6GZfm2e8k97qscs2GFpjX1\",\n      \"CyFyz1xR4YTG9CrY9jg5jG6GZfm2e8k97qscs2GFpjX1\"\n    ],\n    \"startSlot\": 162368570,\n    \"endSlot\": 162368580,\n    \"startTime\": 1669055189,\n    \"endTime\": 1669070189\n  },\n  \"options\": {\n    \"limit\": 100,\n    \"sortOrder\": \"DESC\",\n    \"paginationToken\": \"V1_162262948_99\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32601,\n    \"message\": \"Method not found\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a74de652-ba5c-44ee-8254-748bccf8da42",
+              "name": "Exceeded rate limit.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v1",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"accounts\": [\n      \"CyFyz1xR4YTG9CrY9jg5jG6GZfm2e8k97qscs2GFpjX1\",\n      \"CyFyz1xR4YTG9CrY9jg5jG6GZfm2e8k97qscs2GFpjX1\"\n    ],\n    \"startSlot\": 162368570,\n    \"endSlot\": 162368580,\n    \"startTime\": 1669055189,\n    \"endTime\": 1669070189\n  },\n  \"options\": {\n    \"limit\": 100,\n    \"sortOrder\": \"DESC\",\n    \"paginationToken\": \"V1_162262948_99\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32005,\n    \"message\": \"Rate limit exceeded\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de772771-8766-40f0-a71c-2e3cfb5511e7",
+              "name": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v1",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"accounts\": [\n      \"CyFyz1xR4YTG9CrY9jg5jG6GZfm2e8k97qscs2GFpjX1\",\n      \"CyFyz1xR4YTG9CrY9jg5jG6GZfm2e8k97qscs2GFpjX1\"\n    ],\n    \"startSlot\": 162368570,\n    \"endSlot\": 162368580,\n    \"startTime\": 1669055189,\n    \"endTime\": 1669070189\n  },\n  \"options\": {\n    \"limit\": 100,\n    \"sortOrder\": \"DESC\",\n    \"paginationToken\": \"V1_162262948_99\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32603,\n    \"message\": \"Internal error\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5863604b-dea8-410f-adc9-54240280ed39",
+              "name": "The service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v1",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"accounts\": [\n      \"CyFyz1xR4YTG9CrY9jg5jG6GZfm2e8k97qscs2GFpjX1\",\n      \"CyFyz1xR4YTG9CrY9jg5jG6GZfm2e8k97qscs2GFpjX1\"\n    ],\n    \"startSlot\": 162368570,\n    \"endSlot\": 162368580,\n    \"startTime\": 1669055189,\n    \"endTime\": 1669070189\n  },\n  \"options\": {\n    \"limit\": 100,\n    \"sortOrder\": \"DESC\",\n    \"paginationToken\": \"V1_162262948_99\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32002,\n    \"message\": \"Service unavailable\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "595f10fd-4cbd-40eb-8757-4d2f64c4c7fd",
+              "name": "The request timed out.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v1",
+                    "raw-transactions"
+                  ],
+                  "host": [
+                    "api-mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"accounts\": [\n      \"CyFyz1xR4YTG9CrY9jg5jG6GZfm2e8k97qscs2GFpjX1\",\n      \"CyFyz1xR4YTG9CrY9jg5jG6GZfm2e8k97qscs2GFpjX1\"\n    ],\n    \"startSlot\": 162368570,\n    \"endSlot\": 162368580,\n    \"startTime\": 1669055189,\n    \"endTime\": 1669070189\n  },\n  \"options\": {\n    \"limit\": 100,\n    \"sortOrder\": \"DESC\",\n    \"paginationToken\": \"V1_162262948_99\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32003,\n    \"message\": \"Gateway timeout\"\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://mainnet.helius-rpc.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "134cab73-4285-4742-bb73-5dc9d3ff2b78",
+    "name": "Helius API Catalog Addresses Transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This document is a discovery catalog — not an operational spec. It exists so\nAI agents, codegen tools, and SDK generators can locate the canonical\nOpenAPI document for every Helius API in one request instead of crawling\nthe docs site.\n\nStart with the `x-apis` array: each entry links a Helius API surface to its\ncanonical OpenAPI spec (`specUrl`) and human-readable docs (`docsUrl`).\nFollow `externalDocs` for the full developer documentation site.\n\n## A note on JSON-RPC APIs\n\nSeveral Helius APIs (Solana RPC, DAS, Sender, Mint, Priority Fee,\nZK Compression) follow the JSON-RPC 2.0 convention where every method POSTs\nto `/` with a `method` field in the request body. For each such API the\nrepository ships both per-method fragment YAMLs (used to render the\nMintlify reference pages) and an auto-generated `_combined.yaml` that\nmerges every method into a single OpenAPI document. In the combined\ndocuments, colliding paths are disambiguated with a URL-fragment suffix\n(e.g. `/#getAccountInfo`) and each operation carries an `x-actual-path`\nextension that records the real request path (`/`). The fragment syntax is\nschema-only — real calls still go to the `url` in `servers`.\n\nAll `specUrl` values below point to raw GitHub files on the `main` branch\nof `helius-labs/docs`. They are stable URLs suitable for downstream tools\nto pin or fetch.\n\n\nContact Support:\n Name: Helius Support\n Email: support@helius.dev",
+      "type": "text/plain"
+    }
+  }
+}

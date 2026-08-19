@@ -1,0 +1,354 @@
+{
+  "item": [
+    {
+      "id": "3e92ae7e-c088-4447-b844-52aa41bd89d8",
+      "name": "Helius API Catalog",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "601d09f3-8bb6-457e-95e7-d397181161ab",
+          "name": "Get Solana priority fee estimates",
+          "request": {
+            "name": "Get Solana priority fee estimates",
+            "description": {
+              "content": "Calculate optimal priority fee recommendations for Solana transactions based on real-time \nnetwork conditions. This advanced API analyzes historical fee data and current congestion \nlevels to provide precise fee estimates for different priority levels.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                ""
+              ],
+              "host": [
+                "mainnet",
+                "helius-rpc",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "query"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"1\",\n  \"method\": \"getPriorityFeeEstimate\",\n  \"params\": [\n    {\n      \"transaction\": \"LxzhDW7TapzziJVHEGPh1QjmZB6kjNqmvuJ9gmihBGEkzw2N8ospDq32UZdVmKWzRZqKuyvhp7xmLvsmmHa3MfxVKpYoLV9cPkw5isHnHgDUwLSMsDaZ4dLEULexXAvuV9k6fLD2LMhFKM6gqH6j69GQLAm1g4e3z5ZVZN6pmJdSmZ4PqKcwNn4sS7E3Abp1hV59uBJB9i4jEdEAh28rZ8WCeNizzEmrJZFhatFFFGSDsk23jDPEjbkMcoRWXKf1WthFScC2S6Wz284Dtjqp7kW8eybV3DpmN9DtBbcfFNQPtUwmiBZCKszdYym5AjJvRHiUKUdMwFpC3toPnMvTmKZ9iHQtzZRkg5xBufRtUN5eVYJfdw2DxzH6RfqhC2rAjfSbfJA4wmaq9f5eUe2iEjmqvne6r85PPcHBJzyqkVtAyUFtTc9DfU8UiM9rFhQ2UB71M6m5UCsC6EwowMw5k8iF8rL7iPCLdubVdy8S58DPLNG4E4rdosev1T63YdRWSgEwBZh7iX4zGBA9AKAm3B9itCSxLSL46Y6uZgVku9UXsMcWWz3URoa6hRbo55CYPLhrVeqjqX5DsXpaG6QkngbEaESQUnkakE1AFkYXmNXEd2m3sLRTYB2o5UTkwkJS2u5sJHyYqAvXr3vFZr7qAYFLD3LwS5tsdb45ZQVQwsbnNddMHgkpmSqLHS6Fv1epxqHbzpRCU1tgMsriApVWC3pj2LLD41HxkV8aKvkVyHgJFACUtbvRBZAasHf1F71Gz3qZNTdh3efWsZJRXnfxKPbATU7NTMaMUL8JjknfoVwp3\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4fa7fb7f-e7b0-4896-81b9-dfcc61bd59d1",
+              "name": "Successfully retrieved Solana priority fee estimates",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"1\",\n  \"method\": \"getPriorityFeeEstimate\",\n  \"params\": [\n    {\n      \"transaction\": \"LxzhDW7TapzziJVHEGPh1QjmZB6kjNqmvuJ9gmihBGEkzw2N8ospDq32UZdVmKWzRZqKuyvhp7xmLvsmmHa3MfxVKpYoLV9cPkw5isHnHgDUwLSMsDaZ4dLEULexXAvuV9k6fLD2LMhFKM6gqH6j69GQLAm1g4e3z5ZVZN6pmJdSmZ4PqKcwNn4sS7E3Abp1hV59uBJB9i4jEdEAh28rZ8WCeNizzEmrJZFhatFFFGSDsk23jDPEjbkMcoRWXKf1WthFScC2S6Wz284Dtjqp7kW8eybV3DpmN9DtBbcfFNQPtUwmiBZCKszdYym5AjJvRHiUKUdMwFpC3toPnMvTmKZ9iHQtzZRkg5xBufRtUN5eVYJfdw2DxzH6RfqhC2rAjfSbfJA4wmaq9f5eUe2iEjmqvne6r85PPcHBJzyqkVtAyUFtTc9DfU8UiM9rFhQ2UB71M6m5UCsC6EwowMw5k8iF8rL7iPCLdubVdy8S58DPLNG4E4rdosev1T63YdRWSgEwBZh7iX4zGBA9AKAm3B9itCSxLSL46Y6uZgVku9UXsMcWWz3URoa6hRbo55CYPLhrVeqjqX5DsXpaG6QkngbEaESQUnkakE1AFkYXmNXEd2m3sLRTYB2o5UTkwkJS2u5sJHyYqAvXr3vFZr7qAYFLD3LwS5tsdb45ZQVQwsbnNddMHgkpmSqLHS6Fv1epxqHbzpRCU1tgMsriApVWC3pj2LLD41HxkV8aKvkVyHgJFACUtbvRBZAasHf1F71Gz3qZNTdh3efWsZJRXnfxKPbATU7NTMaMUL8JjknfoVwp3/SsAUIMHFzjQMQmoiQMSL1q+S+r9dLR55BgaWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG3fbh12Whk9nL4UbO63msHLSF7V9bN5E6jPWFfv8AqQECAwABDAIAAAAEAAAAAAAA\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"result\": {\n    \"priorityFeeEstimate\": 120000\n  },\n  \"id\": \"1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfba47bf-ebde-4d0c-acfb-f4d08b6ae05b",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"1\",\n  \"method\": \"getPriorityFeeEstimate\",\n  \"params\": [\n    {\n      \"transaction\": \"LxzhDW7TapzziJVHEGPh1QjmZB6kjNqmvuJ9gmihBGEkzw2N8ospDq32UZdVmKWzRZqKuyvhp7xmLvsmmHa3MfxVKpYoLV9cPkw5isHnHgDUwLSMsDaZ4dLEULexXAvuV9k6fLD2LMhFKM6gqH6j69GQLAm1g4e3z5ZVZN6pmJdSmZ4PqKcwNn4sS7E3Abp1hV59uBJB9i4jEdEAh28rZ8WCeNizzEmrJZFhatFFFGSDsk23jDPEjbkMcoRWXKf1WthFScC2S6Wz284Dtjqp7kW8eybV3DpmN9DtBbcfFNQPtUwmiBZCKszdYym5AjJvRHiUKUdMwFpC3toPnMvTmKZ9iHQtzZRkg5xBufRtUN5eVYJfdw2DxzH6RfqhC2rAjfSbfJA4wmaq9f5eUe2iEjmqvne6r85PPcHBJzyqkVtAyUFtTc9DfU8UiM9rFhQ2UB71M6m5UCsC6EwowMw5k8iF8rL7iPCLdubVdy8S58DPLNG4E4rdosev1T63YdRWSgEwBZh7iX4zGBA9AKAm3B9itCSxLSL46Y6uZgVku9UXsMcWWz3URoa6hRbo55CYPLhrVeqjqX5DsXpaG6QkngbEaESQUnkakE1AFkYXmNXEd2m3sLRTYB2o5UTkwkJS2u5sJHyYqAvXr3vFZr7qAYFLD3LwS5tsdb45ZQVQwsbnNddMHgkpmSqLHS6Fv1epxqHbzpRCU1tgMsriApVWC3pj2LLD41HxkV8aKvkVyHgJFACUtbvRBZAasHf1F71Gz3qZNTdh3efWsZJRXnfxKPbATU7NTMaMUL8JjknfoVwp3/SsAUIMHFzjQMQmoiQMSL1q+S+r9dLR55BgaWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG3fbh12Whk9nL4UbO63msHLSF7V9bN5E6jPWFfv8AqQECAwABDAIAAAAEAAAAAAAA\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32602,\n    \"message\": \"Invalid params\"\n  },\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86fe61a5-9229-47d0-9347-a96d5e7037ed",
+              "name": "Unauthorized — missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"1\",\n  \"method\": \"getPriorityFeeEstimate\",\n  \"params\": [\n    {\n      \"transaction\": \"LxzhDW7TapzziJVHEGPh1QjmZB6kjNqmvuJ9gmihBGEkzw2N8ospDq32UZdVmKWzRZqKuyvhp7xmLvsmmHa3MfxVKpYoLV9cPkw5isHnHgDUwLSMsDaZ4dLEULexXAvuV9k6fLD2LMhFKM6gqH6j69GQLAm1g4e3z5ZVZN6pmJdSmZ4PqKcwNn4sS7E3Abp1hV59uBJB9i4jEdEAh28rZ8WCeNizzEmrJZFhatFFFGSDsk23jDPEjbkMcoRWXKf1WthFScC2S6Wz284Dtjqp7kW8eybV3DpmN9DtBbcfFNQPtUwmiBZCKszdYym5AjJvRHiUKUdMwFpC3toPnMvTmKZ9iHQtzZRkg5xBufRtUN5eVYJfdw2DxzH6RfqhC2rAjfSbfJA4wmaq9f5eUe2iEjmqvne6r85PPcHBJzyqkVtAyUFtTc9DfU8UiM9rFhQ2UB71M6m5UCsC6EwowMw5k8iF8rL7iPCLdubVdy8S58DPLNG4E4rdosev1T63YdRWSgEwBZh7iX4zGBA9AKAm3B9itCSxLSL46Y6uZgVku9UXsMcWWz3URoa6hRbo55CYPLhrVeqjqX5DsXpaG6QkngbEaESQUnkakE1AFkYXmNXEd2m3sLRTYB2o5UTkwkJS2u5sJHyYqAvXr3vFZr7qAYFLD3LwS5tsdb45ZQVQwsbnNddMHgkpmSqLHS6Fv1epxqHbzpRCU1tgMsriApVWC3pj2LLD41HxkV8aKvkVyHgJFACUtbvRBZAasHf1F71Gz3qZNTdh3efWsZJRXnfxKPbATU7NTMaMUL8JjknfoVwp3/SsAUIMHFzjQMQmoiQMSL1q+S+r9dLR55BgaWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG3fbh12Whk9nL4UbO63msHLSF7V9bN5E6jPWFfv8AqQECAwABDAIAAAAEAAAAAAAA\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32001,\n    \"message\": \"Unauthorized\"\n  },\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b2fdb69-5bcc-4873-a5c4-abc87cdbcdeb",
+              "name": "Too Many Requests — rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"1\",\n  \"method\": \"getPriorityFeeEstimate\",\n  \"params\": [\n    {\n      \"transaction\": \"LxzhDW7TapzziJVHEGPh1QjmZB6kjNqmvuJ9gmihBGEkzw2N8ospDq32UZdVmKWzRZqKuyvhp7xmLvsmmHa3MfxVKpYoLV9cPkw5isHnHgDUwLSMsDaZ4dLEULexXAvuV9k6fLD2LMhFKM6gqH6j69GQLAm1g4e3z5ZVZN6pmJdSmZ4PqKcwNn4sS7E3Abp1hV59uBJB9i4jEdEAh28rZ8WCeNizzEmrJZFhatFFFGSDsk23jDPEjbkMcoRWXKf1WthFScC2S6Wz284Dtjqp7kW8eybV3DpmN9DtBbcfFNQPtUwmiBZCKszdYym5AjJvRHiUKUdMwFpC3toPnMvTmKZ9iHQtzZRkg5xBufRtUN5eVYJfdw2DxzH6RfqhC2rAjfSbfJA4wmaq9f5eUe2iEjmqvne6r85PPcHBJzyqkVtAyUFtTc9DfU8UiM9rFhQ2UB71M6m5UCsC6EwowMw5k8iF8rL7iPCLdubVdy8S58DPLNG4E4rdosev1T63YdRWSgEwBZh7iX4zGBA9AKAm3B9itCSxLSL46Y6uZgVku9UXsMcWWz3URoa6hRbo55CYPLhrVeqjqX5DsXpaG6QkngbEaESQUnkakE1AFkYXmNXEd2m3sLRTYB2o5UTkwkJS2u5sJHyYqAvXr3vFZr7qAYFLD3LwS5tsdb45ZQVQwsbnNddMHgkpmSqLHS6Fv1epxqHbzpRCU1tgMsriApVWC3pj2LLD41HxkV8aKvkVyHgJFACUtbvRBZAasHf1F71Gz3qZNTdh3efWsZJRXnfxKPbATU7NTMaMUL8JjknfoVwp3/SsAUIMHFzjQMQmoiQMSL1q+S+r9dLR55BgaWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG3fbh12Whk9nL4UbO63msHLSF7V9bN5E6jPWFfv8AqQECAwABDAIAAAAEAAAAAAAA\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32005,\n    \"message\": \"Too many requests\"\n  },\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15062684-443b-43db-9311-68c0e6e267ac",
+              "name": "Internal server error. Retryable with exponential backoff.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "mainnet",
+                    "helius-rpc",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"1\",\n  \"method\": \"getPriorityFeeEstimate\",\n  \"params\": [\n    {\n      \"transaction\": \"LxzhDW7TapzziJVHEGPh1QjmZB6kjNqmvuJ9gmihBGEkzw2N8ospDq32UZdVmKWzRZqKuyvhp7xmLvsmmHa3MfxVKpYoLV9cPkw5isHnHgDUwLSMsDaZ4dLEULexXAvuV9k6fLD2LMhFKM6gqH6j69GQLAm1g4e3z5ZVZN6pmJdSmZ4PqKcwNn4sS7E3Abp1hV59uBJB9i4jEdEAh28rZ8WCeNizzEmrJZFhatFFFGSDsk23jDPEjbkMcoRWXKf1WthFScC2S6Wz284Dtjqp7kW8eybV3DpmN9DtBbcfFNQPtUwmiBZCKszdYym5AjJvRHiUKUdMwFpC3toPnMvTmKZ9iHQtzZRkg5xBufRtUN5eVYJfdw2DxzH6RfqhC2rAjfSbfJA4wmaq9f5eUe2iEjmqvne6r85PPcHBJzyqkVtAyUFtTc9DfU8UiM9rFhQ2UB71M6m5UCsC6EwowMw5k8iF8rL7iPCLdubVdy8S58DPLNG4E4rdosev1T63YdRWSgEwBZh7iX4zGBA9AKAm3B9itCSxLSL46Y6uZgVku9UXsMcWWz3URoa6hRbo55CYPLhrVeqjqX5DsXpaG6QkngbEaESQUnkakE1AFkYXmNXEd2m3sLRTYB2o5UTkwkJS2u5sJHyYqAvXr3vFZr7qAYFLD3LwS5tsdb45ZQVQwsbnNddMHgkpmSqLHS6Fv1epxqHbzpRCU1tgMsriApVWC3pj2LLD41HxkV8aKvkVyHgJFACUtbvRBZAasHf1F71Gz3qZNTdh3efWsZJRXnfxKPbATU7NTMaMUL8JjknfoVwp3/SsAUIMHFzjQMQmoiQMSL1q+S+r9dLR55BgaWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG3fbh12Whk9nL4UbO63msHLSF7V9bN5E6jPWFfv8AqQECAwABDAIAAAAEAAAAAAAA\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"error\": {\n    \"code\": -32603,\n    \"message\": \"Internal error\"\n  },\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://mainnet.helius-rpc.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8700ff57-eda5-475a-809f-db0a9556d75b",
+    "name": "Addresses Helius API Catalog API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This document is a discovery catalog — not an operational spec. It exists so\nAI agents, codegen tools, and SDK generators can locate the canonical\nOpenAPI document for every Helius API in one request instead of crawling\nthe docs site.\n\nStart with the `x-apis` array: each entry links a Helius API surface to its\ncanonical OpenAPI spec (`specUrl`) and human-readable docs (`docsUrl`).\nFollow `externalDocs` for the full developer documentation site.\n\n## A note on JSON-RPC APIs\n\nSeveral Helius APIs (Solana RPC, DAS, Sender, Mint, Priority Fee,\nZK Compression) follow the JSON-RPC 2.0 convention where every method POSTs\nto `/` with a `method` field in the request body. For each such API the\nrepository ships both per-method fragment YAMLs (used to render the\nMintlify reference pages) and an auto-generated `_combined.yaml` that\nmerges every method into a single OpenAPI document. In the combined\ndocuments, colliding paths are disambiguated with a URL-fragment suffix\n(e.g. `/#getAccountInfo`) and each operation carries an `x-actual-path`\nextension that records the real request path (`/`). The fragment syntax is\nschema-only — real calls still go to the `url` in `servers`.\n\nAll `specUrl` values below point to raw GitHub files on the `main` branch\nof `helius-labs/docs`. They are stable URLs suitable for downstream tools\nto pin or fetch.\n\n\nContact Support:\n Name: Helius Support\n Email: support@helius.dev",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Helius API Catalog Addresses Admin API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Admin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Project Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v0/admin/projects/:id/usage",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The project ID to retrieve usage for. Must match the project associated with the API key."
+              }
+            ]
+          },
+          "docs": "Retrieve credit usage, subscription details, and per-service request counts for a project within the current billing cycle.\n\nThe API key used for authentication must belong to the project specified in the path. Requests where the API key's project does not match the `id` parameter will return a `400` error.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

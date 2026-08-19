@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Helius API Catalog Addresses Identity API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Identity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get wallet identity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v1/wallet/:wallet/identity",
+            "params": [
+              {
+                "name": "wallet",
+                "value": "",
+                "type": "path",
+                "description": "Solana wallet address (base58 encoded) or SNS/ANS domain name (e.g. `toly.sol`,\n`miester.bonk`). Domain resolution is mainnet-only. Any non-`.sol` domain is treated\nas an ANS custom TLD — there is no fixed TLD whitelist.\n"
+              }
+            ]
+          },
+          "docs": "Retrieve identity information for a known wallet (exchanges, protocols, etc.). Accepts\neither a Solana wallet address or an SNS (`.sol`) / ANS custom TLD domain name\n(e.g. `toly.sol`, `miester.bonk`). Domain resolution is mainnet-only.\n\nThe response is the standard identity object for the **resolved address**. No domain\nmarker (`inputDomain`) is attached on this endpoint — use `POST /v1/wallet/batch-identity`\nif you need to correlate inputs with outputs.\n\nReturns `404` if the wallet has no ident"
+        },
+        {
+          "info": {
+            "name": "Batch identity lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/v1/wallet/batch-identity",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve identity information for multiple entries in a single request. Each entry may be\neither a Solana wallet address or an SNS (`.sol`) / ANS custom TLD domain name. Domain\nresolution is mainnet-only.\n\nUnresolvable domain entries do not fail the batch — they come back as\n`{ \"address\": null, \"type\": \"unknown\", \"inputDomain\": \"...\", \"unresolved\": true }`\nin request order. Resolved domain entries carry an `inputDomain` field so callers can\ncorrelate responses with the original input.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

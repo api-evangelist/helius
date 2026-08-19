@@ -1,0 +1,384 @@
+{
+  "item": [
+    {
+      "id": "42b2b8b8-13d6-4db6-8585-10b4bff40023",
+      "name": "Transfers",
+      "description": {
+        "content": "Token transfer activity",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2707d2b6-6572-474d-bbaa-552bad91079c",
+          "name": "Get token transfers",
+          "request": {
+            "name": "Get token transfers",
+            "description": {
+              "content": "Retrieve all token transfer activity for a wallet including sender/recipient information.\nReturns transfers in reverse chronological order (newest first).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v1",
+                "wallet",
+                ":wallet",
+                "transfers"
+              ],
+              "host": [
+                "api",
+                "helius",
+                "xyz"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of transfers to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Pagination cursor from previous response"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "wallet",
+                  "description": "(Required) Solana wallet address (base58 encoded)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fc38483d-5d3a-4124-83e9-6f977e347dcd",
+              "name": "Transfer history retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v1",
+                    "wallet",
+                    ":wallet",
+                    "transfers"
+                  ],
+                  "host": [
+                    "api",
+                    "helius",
+                    "xyz"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "wallet",
+                      "description": "(Required) Solana wallet address (base58 encoded)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"signature\": \"5wHu1qwD7Jsj3xqWjdSEJmYr3Q5f5RjXqjqQJ7jqEj7jqEj7jqEj7jqEj7jqEj7jqE\",\n      \"timestamp\": 1704067200,\n      \"direction\": \"in\",\n      \"counterparty\": \"HXsKP7wrBWaQ8T2Vtjry3Nj3oUgwYcqq9vrHDM12G664\",\n      \"mint\": \"So11111111111111111111111111111111111111112\",\n      \"amount\": 1.5,\n      \"amountRaw\": \"1500000000\",\n      \"decimals\": 9,\n      \"symbol\": \"SOL\"\n    },\n    {\n      \"signature\": \"5wHu1qwD7Jsj3xqWjdSEJmYr3Q5f5RjXqjqQJ7jqEj7jqEj7jqEj7jqEj7jqEj7jqE\",\n      \"timestamp\": 1704067200,\n      \"direction\": \"in\",\n      \"counterparty\": \"HXsKP7wrBWaQ8T2Vtjry3Nj3oUgwYcqq9vrHDM12G664\",\n      \"mint\": \"So11111111111111111111111111111111111111112\",\n      \"amount\": 1.5,\n      \"amountRaw\": \"1500000000\",\n      \"decimals\": 9,\n      \"symbol\": \"SOL\"\n    }\n  ],\n  \"pagination\": {\n    \"hasMore\": true,\n    \"nextCursor\": \"5wHu1qwD7Jsj3xqWjdSEJmYr3Q5f5RjXqjqQJ7jqEj7jqEj7jqEj7jqEj7jqEj7jqE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97a56d7e-5ca0-4a21-8ab7-c05c0affdf4f",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v1",
+                    "wallet",
+                    ":wallet",
+                    "transfers"
+                  ],
+                  "host": [
+                    "api",
+                    "helius",
+                    "xyz"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "wallet",
+                      "description": "(Required) Solana wallet address (base58 encoded)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Invalid wallet address\",\n  \"code\": 400,\n  \"details\": \"'invalid-address' is not a valid Solana address\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cb90987-9d04-49a6-acb2-bd7bac4a55da",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v1",
+                    "wallet",
+                    ":wallet",
+                    "transfers"
+                  ],
+                  "host": [
+                    "api",
+                    "helius",
+                    "xyz"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "wallet",
+                      "description": "(Required) Solana wallet address (base58 encoded)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"API key required. Pass via ?api-key=xxx or X-Api-Key header\",\n  \"code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97613692-891a-4ba6-b1f3-7d7d94d18a21",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v1",
+                    "wallet",
+                    ":wallet",
+                    "transfers"
+                  ],
+                  "host": [
+                    "api",
+                    "helius",
+                    "xyz"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "wallet",
+                      "description": "(Required) Solana wallet address (base58 encoded)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"RATE_LIMIT_EXCEEDED\",\n  \"code\": 429,\n  \"details\": \"Too many requests. Retry after 2 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4298966-5368-4889-a465-4cc93cddcff1",
+              "name": "Transient server error. Retryable with exponential backoff.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v1",
+                    "wallet",
+                    ":wallet",
+                    "transfers"
+                  ],
+                  "host": [
+                    "api",
+                    "helius",
+                    "xyz"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "wallet",
+                      "description": "(Required) Solana wallet address (base58 encoded)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"INTERNAL_ERROR\",\n  \"code\": 500,\n  \"details\": \"An unexpected error occurred. Please retry.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://mainnet.helius-rpc.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "31c1ccdb-188f-4528-a943-470d79233130",
+    "name": "Helius API Catalog Addresses Transfers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This document is a discovery catalog — not an operational spec. It exists so\nAI agents, codegen tools, and SDK generators can locate the canonical\nOpenAPI document for every Helius API in one request instead of crawling\nthe docs site.\n\nStart with the `x-apis` array: each entry links a Helius API surface to its\ncanonical OpenAPI spec (`specUrl`) and human-readable docs (`docsUrl`).\nFollow `externalDocs` for the full developer documentation site.\n\n## A note on JSON-RPC APIs\n\nSeveral Helius APIs (Solana RPC, DAS, Sender, Mint, Priority Fee,\nZK Compression) follow the JSON-RPC 2.0 convention where every method POSTs\nto `/` with a `method` field in the request body. For each such API the\nrepository ships both per-method fragment YAMLs (used to render the\nMintlify reference pages) and an auto-generated `_combined.yaml` that\nmerges every method into a single OpenAPI document. In the combined\ndocuments, colliding paths are disambiguated with a URL-fragment suffix\n(e.g. `/#getAccountInfo`) and each operation carries an `x-actual-path`\nextension that records the real request path (`/`). The fragment syntax is\nschema-only — real calls still go to the `url` in `servers`.\n\nAll `specUrl` values below point to raw GitHub files on the `main` branch\nof `helius-labs/docs`. They are stable URLs suitable for downstream tools\nto pin or fetch.\n\n\nContact Support:\n Name: Helius Support\n Email: support@helius.dev",
+      "type": "text/plain"
+    }
+  }
+}

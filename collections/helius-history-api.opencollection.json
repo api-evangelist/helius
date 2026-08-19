@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Helius API Catalog Addresses History API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "History",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get transaction history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v1/wallet/:wallet/history",
+            "params": [
+              {
+                "name": "wallet",
+                "value": "GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz",
+                "type": "path",
+                "description": "Solana wallet address (base58 encoded)"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "Maximum number of transactions per request"
+              },
+              {
+                "name": "before",
+                "value": "5wHu1qwD7Jsj3xqWjdSEJmYr3Q5f5RjXqjqQJ7jqEj7jqEj7jqEj7jqEj7jqEj7jqE",
+                "type": "query",
+                "description": "Fetch transactions before this signature (use `pagination.nextCursor` from previous response)"
+              },
+              {
+                "name": "after",
+                "value": "5wHu1qwD7Jsj3xqWjdSEJmYr3Q5f5RjXqjqQJ7jqEj7jqEj7jqEj7jqEj7jqEj7jqE",
+                "type": "query",
+                "description": "Fetch transactions after this signature (for ascending order pagination)"
+              },
+              {
+                "name": "type",
+                "value": "SWAP",
+                "type": "query",
+                "description": "Filter by transaction type. Available types: SWAP, TRANSFER, NFT_SALE, NFT_BID, NFT_LISTING,\nNFT_MINT, NFT_CANCEL_LISTING, TOKEN_MINT, BURN, COMPRESSED_NFT_MINT, COMPRESSED_NFT_TRANSFER,\nCOMPRESSED_NFT_BURN, CREATE_STORE, WHITELIST_CREATOR, ADD_TO_WHITELIST, REMOVE_FROM_WHITELIST,\nAUCTION_MANAGER_CLAIM_BID, EMPTY_PAYMENT_ACCOUNT, UPDATE_PRIMARY_SALE_METADATA, ADD_TOKEN_TO_VAULT,\nACTIVATE_VAULT, INIT_VAULT, INIT_BANK, INIT_STAKE, MERGE_STAKE, SPLIT_STAKE, CREATE_AUCTION_MANAGER,\nSTART_AUCTION, CREATE_AUCTION_MANAGER_V2, UPDATE_EXTERNAL_PRICE_ACCOUNT, EXECUTE_TRANSACTION\n"
+              },
+              {
+                "name": "tokenAccounts",
+                "value": "balanceChanged",
+                "type": "query",
+                "description": "Filter transactions involving token accounts owned by the wallet.\n- `balanceChanged` (recommended): Includes transactions that changed token balances, filters spam\n- `none`: Only transactions directly referencing the wallet\n- `all`: All transactions including token accounts (may include spam)\n"
+              }
+            ]
+          },
+          "docs": "Retrieve transaction history for a wallet using the Enhanced Transactions API.\nReturns human-readable, parsed transactions with balance changes for each transaction.\n**Pagination is manual** - the API returns up to 100 transactions per request.\n\nReturns transactions in reverse chronological order (newest first).\n\n**Associated Token Accounts (ATAs):** The `tokenAccounts` parameter controls whether transactions\ninvolving token accounts owned by the wallet are included:\n- `balanceChanged` (recommen"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

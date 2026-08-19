@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Addresses Helius API Catalog API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Helius API Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Solana priority fee estimates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "query"
+            }
+          },
+          "docs": "Calculate optimal priority fee recommendations for Solana transactions based on real-time \nnetwork conditions. This advanced API analyzes historical fee data and current congestion \nlevels to provide precise fee estimates for different priority levels.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

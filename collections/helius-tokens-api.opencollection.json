@@ -1,0 +1,64 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Helius API Catalog Addresses Tokens API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns token metadata (whether NFT or Fungible) for a given token address.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/v0/tokens/metadata",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns token metadata (whether NFT or Fungible) for a given token address."
+        },
+        {
+          "info": {
+            "name": "Returns all metadata associated with an account, including data from the old token list.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.helius-rpc.com/v0/token-metadata",
+            "params": [
+              {
+                "name": "api-key",
+                "value": "",
+                "type": "query",
+                "description": "Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all metadata associated with an account, including data from the old token list."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

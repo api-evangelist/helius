@@ -1,0 +1,382 @@
+{
+  "item": [
+    {
+      "id": "c30b0586-df1c-42bb-93f6-207115de5723",
+      "name": "Admin",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f4ef7190-5009-4432-8498-23d93ab10228",
+          "name": "Get Project Usage",
+          "request": {
+            "name": "Get Project Usage",
+            "description": {
+              "content": "Retrieve credit usage, subscription details, and per-service request counts for a project within the current billing cycle.\n\nThe API key used for authentication must belong to the project specified in the path. Requests where the API key's project does not match the `id` parameter will return a `400` error.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v0",
+                "admin",
+                "projects",
+                ":id",
+                "usage"
+              ],
+              "host": [
+                "admin-api",
+                "helius",
+                "xyz"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The project ID to retrieve usage for. Must match the project associated with the API key."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d009db5b-bbf8-4cb8-9dc4-60a8a71fbfbe",
+              "name": "Project usage retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "admin",
+                    "projects",
+                    ":id",
+                    "usage"
+                  ],
+                  "host": [
+                    "admin-api",
+                    "helius",
+                    "xyz"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The project ID to retrieve usage for. Must match the project associated with the API key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"creditsRemaining\": 487500,\n  \"creditsUsed\": 12500,\n  \"prepaidCreditsRemaining\": 50000,\n  \"prepaidCreditsUsed\": 0,\n  \"subscriptionDetails\": {\n    \"billingCycle\": {\n      \"start\": \"2026-04-01\",\n      \"end\": \"2026-05-01\"\n    },\n    \"creditsLimit\": 500000,\n    \"plan\": \"business\"\n  },\n  \"usage\": {\n    \"api\": 1200,\n    \"archival\": 0,\n    \"das\": 5000,\n    \"grpc\": 300,\n    \"grpcGeyser\": 0,\n    \"photon\": 0,\n    \"rpc\": 4500,\n    \"stream\": 100,\n    \"webhook\": 800,\n    \"websocket\": 600\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "749b9fac-5ea8-4679-879a-81b411f86d77",
+              "name": "Bad Request — the project ID in the path does not match the project associated with the API key.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "admin",
+                    "projects",
+                    ":id",
+                    "usage"
+                  ],
+                  "host": [
+                    "admin-api",
+                    "helius",
+                    "xyz"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The project ID to retrieve usage for. Must match the project associated with the API key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 400,\n  \"message\": \"Invalid project id\",\n  \"error\": \"Bad Request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e5c490d-333c-47aa-9831-f2fe0fe1c2a5",
+              "name": "Unauthorized — API key is missing, malformed, or not found.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "admin",
+                    "projects",
+                    ":id",
+                    "usage"
+                  ],
+                  "host": [
+                    "admin-api",
+                    "helius",
+                    "xyz"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The project ID to retrieve usage for. Must match the project associated with the API key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"message\": \"Missing or invalid API key\",\n  \"error\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3a8f853-29c3-4378-978f-0d580d3eed6e",
+              "name": "Forbidden — the Admin API is not enabled for this project.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "admin",
+                    "projects",
+                    ":id",
+                    "usage"
+                  ],
+                  "host": [
+                    "admin-api",
+                    "helius",
+                    "xyz"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The project ID to retrieve usage for. Must match the project associated with the API key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"message\": \"Admin API not enabled for this project\",\n  \"error\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8afd3751-a3ce-47a8-9ade-0d06ee0c711c",
+              "name": "Too Many Requests — rate limit of 5 requests per second exceeded.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "admin",
+                    "projects",
+                    ":id",
+                    "usage"
+                  ],
+                  "host": [
+                    "admin-api",
+                    "helius",
+                    "xyz"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The project ID to retrieve usage for. Must match the project associated with the API key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"message\": \"ThrottlerException: Too Many Requests\",\n  \"error\": \"Too Many Requests\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc179f1c-f670-4b8e-a4f8-8bc3d677e20a",
+              "name": "Internal Server Error — a server-side error occurred (e.g., missing billing data).",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v0",
+                    "admin",
+                    "projects",
+                    ":id",
+                    "usage"
+                  ],
+                  "host": [
+                    "admin-api",
+                    "helius",
+                    "xyz"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The project ID to retrieve usage for. Must match the project associated with the API key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"message\": \"Internal server error\",\n  \"error\": \"Internal Server Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://mainnet.helius-rpc.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "76185f7d-a896-4952-938b-e0fb6c4e4ba7",
+    "name": "Helius API Catalog Addresses Admin API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This document is a discovery catalog — not an operational spec. It exists so\nAI agents, codegen tools, and SDK generators can locate the canonical\nOpenAPI document for every Helius API in one request instead of crawling\nthe docs site.\n\nStart with the `x-apis` array: each entry links a Helius API surface to its\ncanonical OpenAPI spec (`specUrl`) and human-readable docs (`docsUrl`).\nFollow `externalDocs` for the full developer documentation site.\n\n## A note on JSON-RPC APIs\n\nSeveral Helius APIs (Solana RPC, DAS, Sender, Mint, Priority Fee,\nZK Compression) follow the JSON-RPC 2.0 convention where every method POSTs\nto `/` with a `method` field in the request body. For each such API the\nrepository ships both per-method fragment YAMLs (used to render the\nMintlify reference pages) and an auto-generated `_combined.yaml` that\nmerges every method into a single OpenAPI document. In the combined\ndocuments, colliding paths are disambiguated with a URL-fragment suffix\n(e.g. `/#getAccountInfo`) and each operation carries an `x-actual-path`\nextension that records the real request path (`/`). The fragment syntax is\nschema-only — real calls still go to the `url` in `servers`.\n\nAll `specUrl` values below point to raw GitHub files on the `main` branch\nof `helius-labs/docs`. They are stable URLs suitable for downstream tools\nto pin or fetch.\n\n\nContact Support:\n Name: Helius Support\n Email: support@helius.dev",
+      "type": "text/plain"
+    }
+  }
+}

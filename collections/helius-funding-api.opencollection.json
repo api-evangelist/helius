@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Helius API Catalog Addresses Funding API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Funding",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get wallet funding source",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mainnet.helius-rpc.com/v1/wallet/:wallet/funded-by",
+            "params": [
+              {
+                "name": "wallet",
+                "value": "GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz",
+                "type": "path",
+                "description": "Solana wallet address (base58 encoded)"
+              }
+            ]
+          },
+          "docs": "Discover the original funding source of a wallet by analyzing its first incoming SOL transfer.\nUseful for identifying if a wallet was funded by an exchange, another wallet, etc.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
