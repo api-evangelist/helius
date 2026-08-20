@@ -53,6 +53,9 @@ apis:
   baseURL: https://api.helius.xyz/v0
   tags:
   - REST
+  - Transaction
+  tags_raw:
+  - REST
   - Transactions
   properties:
   - type: Documentation
@@ -64,6 +67,9 @@ apis:
   humanURL: https://www.helius.dev/docs/webhooks
   baseURL: https://api.helius.xyz/v0/webhooks
   tags:
+  - REST
+  - Webhook
+  tags_raw:
   - REST
   - Webhooks
   properties:
@@ -87,6 +93,10 @@ apis:
   humanURL: https://www.helius.dev/docs/sender
   baseURL: https://sender.helius-rpc.com
   tags:
+  - JSON-RPC
+  - Transaction
+  - Jito
+  tags_raw:
   - JSON-RPC
   - Transactions
   - Jito
@@ -182,6 +192,8 @@ apis:
   humanURL: https://www.helius.dev/docs/rpc
   baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
   tags:
+  - NFT
+  tags_raw:
   - NFTs
   properties:
   - type: OpenAPI
@@ -215,6 +227,8 @@ apis:
   humanURL: https://www.helius.dev/docs/rpc
   baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
@@ -237,6 +251,8 @@ apis:
   humanURL: https://www.helius.dev/docs/rpc
   baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
