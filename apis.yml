@@ -204,7 +204,7 @@ apis:
   humanURL: https://www.helius.dev/docs/rpc
   baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
   tags:
-  - NFTs
+  - NFT
   tags_raw:
   - NFTs
   properties:
