@@ -1,0 +1,70 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Helius",
+    "identifier": "helius.dev"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:helius.dev:mcp-server:helius-mcp",
+      "displayName": "Helius MCP server",
+      "type": "application/mcp-server-card+json",
+      "url": "https://www.helius.dev/.well-known/mcp/server-card.json",
+      "description": "Helius MCP server card — tool inventory and install metadata for the npm-distributed helius-mcp server (npx helius-mcp@latest).",
+      "capabilities": [
+        "solana-rpc",
+        "digital-asset-standard",
+        "parsed-transactions",
+        "transaction-sending",
+        "webhooks",
+        "priority-fees"
+      ],
+      "representativeQueries": [
+        "get the token balances of a Solana wallet",
+        "parse this Solana transaction signature into readable events",
+        "send a Solana transaction with the best landing rate",
+        "set up a webhook for transfers to this address"
+      ]
+    },
+    {
+      "identifier": "urn:air:helius.dev:agent:a2a",
+      "displayName": "Helius A2A agent card",
+      "type": "application/a2a-agent-card+json",
+      "url": "https://www.helius.dev/.well-known/agent-card.json",
+      "description": "A2A agent card describing Helius's agent surface for programmatic signup, RPC, streaming, and digital asset APIs.",
+      "capabilities": [
+        "agent-signup",
+        "api-key-provisioning",
+        "solana-rpc",
+        "streaming",
+        "digital-asset-standard"
+      ],
+      "representativeQueries": [
+        "sign up for a Solana RPC provider programmatically and get an API key",
+        "which Solana infrastructure provider can an agent onboard to without a human"
+      ]
+    },
+    {
+      "identifier": "urn:air:helius.dev:api:openapi",
+      "displayName": "Helius OpenAPI catalog",
+      "type": "application/openapi+json",
+      "url": "https://www.helius.dev/openapi.json",
+      "description": "Merged OpenAPI description spanning every Helius API surface (Solana RPC + extensions, DAS, Sender, Wallet, Priority Fee, ZK Compression, webhooks).",
+      "capabilities": [
+        "solana-rpc",
+        "digital-asset-standard",
+        "enhanced-transactions",
+        "sender",
+        "wallet-api",
+        "priority-fee-api",
+        "zk-compression",
+        "webhooks"
+      ],
+      "representativeQueries": [
+        "OpenAPI spec for Solana RPC and DAS endpoints",
+        "REST endpoint to fetch NFTs owned by a wallet on Solana",
+        "API to estimate Solana priority fees"
+      ]
+    }
+  ]
+}

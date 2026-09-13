@@ -1,0 +1,55 @@
+generated: '2026-09-13'
+method: probed
+source: https://helius.dev/.well-known/ard.json
+description: 'AI Catalog manifest observed at /.well-known/ard.json on helius.dev. The AI Catalog Standard
+  is the publishing half of Agentic Resource Discovery (ARD): a JSON manifest listing the agentic resources
+  a domain offers — MCP servers, agent cards, skills, APIs — each typed by media type and identified by
+  a domain-anchored urn:air: URN. Two verdicts are recorded: a structural grade against the data model,
+  and the result of the ARD project''s own conformance CLI run against this exact body. Provider-published
+  by construction — served from the provider''s own host; nothing here is derived or generated.'
+discovery:
+  path: /.well-known/ard.json
+  canonical: true
+  predecessor_only: false
+  attempts:
+  - path: /.well-known/ard.json
+    http_status: 200
+  host: helius.dev
+conformance:
+  spec: AI Catalog 1.0 / ARD v0.91
+  grade: near-conformant
+  spec_version_declared: '1.0'
+  hard_failures: []
+  soft_gaps:
+  - content-type-not-ai-catalog-json
+  - host-identifier-not-did-web
+  official_tool:
+    tool: ARD conformance-test v0.9.1 (ards-project/ard-spec)
+    status: PASS
+    critical_errors: 0
+    errors: []
+    warnings: []
+    informational:
+    - '[Helius OpenAPI catalog] Media type ''application/openapi+json'' is a valid application extension
+      media type. ARD permits extension types without core registration.'
+catalog:
+  host_display_name: Helius
+  host_identifier: helius.dev
+  entry_count: 3
+  types:
+    application/a2a-agent-card+json: 1
+    application/mcp-server-card+json: 1
+    application/openapi+json: 1
+  representative_queries: 9
+  trust_manifests: 0
+  file: helius-ai-catalog.json
+transport:
+  http_status: 200
+  content_type: application/json
+  access_control_allow_origin: '*'
+x-evidence:
+  fetched: '2026-09-13'
+  url: https://helius.dev/.well-known/ard.json
+  http_status: 200
+  content_type: application/json
+  note: Verbatim body saved alongside this manifest. No field inferred.
