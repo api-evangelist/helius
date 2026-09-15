@@ -308,6 +308,8 @@ common:
     url: rate-limits/helius-rate-limits.yml
   - type: FinOps
     url: finops/helius-finops.yml
+  - type: Support
+    url: https://www.helius.dev/contact
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
