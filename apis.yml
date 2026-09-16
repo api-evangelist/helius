@@ -2,9 +2,9 @@ aid: helius
 url: https://raw.githubusercontent.com/api-evangelist/helius/refs/heads/main/apis.yml
 name: Helius
 kind: company
-description: Helius is a Solana developer platform offering Solana JSON-RPC, the Digital
-  Asset Standard (DAS) API for NFTs/tokens, Enhanced Transactions, Webhooks, LaserStream
-  gRPC streaming, Sender (transaction routing), Photon RPC, and Dedicated Nodes.
+description: Helius is a Solana developer platform offering Solana JSON-RPC, the Digital Asset Standard
+  (DAS) API for NFTs/tokens, Enhanced Transactions, Webhooks, LaserStream gRPC streaming, Sender (transaction
+  routing), Photon RPC, and Dedicated Nodes.
 deliveryModel:
   model: saas
   open_source: false
@@ -33,20 +33,20 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
-  - Web3
-  - Blockchain
-  - Solana
-  - RPC
-  - DAS
-  - Streams
+- Web3
+- Blockchain
+- Solana
+- RPC
+- DAS
+- Streams
 created: '2026-05-08'
-modified: '2026-05-29'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 apis:
 - aid: helius:rpc
   name: Helius Solana RPC
-  description: >-
-    Solana JSON-RPC and WebSocket endpoints with enhanced WebSockets, archival data, and staked connections.
+  description: Solana JSON-RPC and WebSocket endpoints with enhanced WebSockets, archival data, and staked
+    connections.
   humanURL: https://www.helius.dev/docs/rpc
   baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
   tags:
@@ -60,9 +60,8 @@ apis:
     url: asyncapi/helius-asyncapi.yml
 - aid: helius:das
   name: Helius Digital Asset Standard (DAS) API
-  description: >-
-    Solana JSON-RPC API for unified asset queries (compressed NFTs, regular NFTs, tokens) including getAsset,
-    getAssetsByOwner, searchAssets.
+  description: Solana JSON-RPC API for unified asset queries (compressed NFTs, regular NFTs, tokens) including
+    getAsset, getAssetsByOwner, searchAssets.
   humanURL: https://www.helius.dev/docs/das-api
   baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
   tags:
@@ -88,8 +87,8 @@ apis:
     url: https://www.helius.dev/docs/api-reference/enhanced-transactions-api
 - aid: helius:webhooks
   name: Helius Webhooks
-  description: >-
-    REST API for managing webhook subscriptions for Solana on-chain events with parsed transaction payloads.
+  description: REST API for managing webhook subscriptions for Solana on-chain events with parsed transaction
+    payloads.
   humanURL: https://www.helius.dev/docs/webhooks
   baseURL: https://api.helius.xyz/v0/webhooks
   tags:
@@ -103,8 +102,7 @@ apis:
     url: https://www.helius.dev/docs/webhooks
 - aid: helius:laserstream
   name: Helius LaserStream
-  description: >-
-    Low-latency gRPC streaming of Solana account, slot, transaction, and block updates (Geyser-compatible).
+  description: Low-latency gRPC streaming of Solana account, slot, transaction, and block updates (Geyser-compatible).
   humanURL: https://www.helius.dev/docs/laserstream
   baseURL: grpc://laserstream-mainnet.helius-rpc.com
   tags:
@@ -181,7 +179,7 @@ apis:
   - type: OpenAPI
     url: openapi/helius-funding-api-openapi.yml
 - aid: helius:helius-helius-api-catalog-api
-  name: Helius Helius API Catalog API
+  name: Helius API Catalog API
   description: The Helius API Catalog API from Helius — 1 operation(s) for helius api catalog.
   humanURL: https://www.helius.dev/docs/rpc
   baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
@@ -212,9 +210,8 @@ apis:
     url: openapi/helius-identity-api-openapi.yml
 - aid: helius:helius-nfts-api
   name: Helius NFTs API
-  description: >-
-    Access comprehensive NFT data including events, collection aggregations, real-time stats, and complete
-    historical activity on Solana.
+  description: Access comprehensive NFT data including events, collection aggregations, real-time stats,
+    and complete historical activity on Solana.
   humanURL: https://www.helius.dev/docs/rpc
   baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
   tags:
@@ -236,9 +233,8 @@ apis:
     url: openapi/helius-sender-api-openapi.yml
 - aid: helius:helius-tokens-api
   name: Helius Tokens API
-  description: >-
-    Complete token account data, on-chain and off-chain metadata, and detailed information for both fungible
-    and non-fungible Solana tokens.
+  description: Complete token account data, on-chain and off-chain metadata, and detailed information
+    for both fungible and non-fungible Solana tokens.
   humanURL: https://www.helius.dev/docs/rpc
   baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
   tags:
@@ -248,8 +244,8 @@ apis:
     url: openapi/helius-tokens-api-openapi.yml
 - aid: helius:helius-transactions-api
   name: Helius Transactions API
-  description: >-
-    Enhanced and human-readable transaction histories with decoded instruction data and detailed context.
+  description: Enhanced and human-readable transaction histories with decoded instruction data and detailed
+    context.
   humanURL: https://www.helius.dev/docs/rpc
   baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
   tags:
@@ -271,9 +267,8 @@ apis:
     url: openapi/helius-transfers-api-openapi.yml
 - aid: helius:helius-webhooks-api
   name: Helius Webhooks API
-  description: >-
-    Configure real-time blockchain notifications for any Solana address, transaction type, or on-chain
-    event with customizable delivery options.
+  description: Configure real-time blockchain notifications for any Solana address, transaction type,
+    or on-chain event with customizable delivery options.
   humanURL: https://www.helius.dev/docs/rpc
   baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
   tags:
@@ -284,32 +279,32 @@ apis:
   - type: OpenAPI
     url: openapi/helius-webhooks-api-openapi.yml
 common:
-  - type: AgentCard
-    url: a2a/helius-a2a.yml
-    name: A2A Agent Card
-    description: Agent Card served at /.well-known/agent-card.json (near-conformant against A2A 1.0.0).
-  - type: AgenticAccess
-    url: agentic-access/helius-agentic-access.yml
-  - type: VulnerabilityDisclosure
-    url: security/helius-vulnerability-disclosure.yml
-  - type: DomainSecurity
-    url: security/helius-domain-security.yml
-  - type: Authentication
-    url: authentication/helius-authentication.yml
-  - type: GitHubOrganization
-    url: https://github.com/helius-labs
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/heliusapi
-  - type: Website
-    url: https://www.helius.dev/
-  - type: Plans
-    url: plans/helius-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/helius-rate-limits.yml
-  - type: FinOps
-    url: finops/helius-finops.yml
-  - type: Support
-    url: https://www.helius.dev/contact
+- type: AgentCard
+  url: a2a/helius-a2a.yml
+  name: A2A Agent Card
+  description: Agent Card served at /.well-known/agent-card.json (near-conformant against A2A 1.0.0).
+- type: AgenticAccess
+  url: agentic-access/helius-agentic-access.yml
+- type: VulnerabilityDisclosure
+  url: security/helius-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/helius-domain-security.yml
+- type: Authentication
+  url: authentication/helius-authentication.yml
+- type: GitHubOrganization
+  url: https://github.com/helius-labs
+- type: LinkedIn
+  url: https://www.linkedin.com/company/heliusapi
+- type: Website
+  url: https://www.helius.dev/
+- type: Plans
+  url: plans/helius-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/helius-rate-limits.yml
+- type: FinOps
+  url: finops/helius-finops.yml
+- type: Support
+  url: https://www.helius.dev/contact
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
