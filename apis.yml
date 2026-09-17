@@ -45,8 +45,8 @@ specificationVersion: '0.23'
 apis:
 - aid: helius:rpc
   name: Helius Solana RPC
-  description: Solana JSON-RPC and WebSocket endpoints with enhanced WebSockets, archival data, and staked
-    connections.
+  description: >-
+    Solana JSON-RPC and WebSocket endpoints with enhanced WebSockets, archival data, and staked connections.
   humanURL: https://www.helius.dev/docs/rpc
   baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
   tags:
@@ -60,8 +60,9 @@ apis:
     url: asyncapi/helius-asyncapi.yml
 - aid: helius:das
   name: Helius Digital Asset Standard (DAS) API
-  description: Solana JSON-RPC API for unified asset queries (compressed NFTs, regular NFTs, tokens) including
-    getAsset, getAssetsByOwner, searchAssets.
+  description: >-
+    Solana JSON-RPC API for unified asset queries (compressed NFTs, regular NFTs, tokens) including getAsset,
+    getAssetsByOwner, searchAssets.
   humanURL: https://www.helius.dev/docs/das-api
   baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
   tags:
@@ -87,8 +88,8 @@ apis:
     url: https://www.helius.dev/docs/api-reference/enhanced-transactions-api
 - aid: helius:webhooks
   name: Helius Webhooks
-  description: REST API for managing webhook subscriptions for Solana on-chain events with parsed transaction
-    payloads.
+  description: >-
+    REST API for managing webhook subscriptions for Solana on-chain events with parsed transaction payloads.
   humanURL: https://www.helius.dev/docs/webhooks
   baseURL: https://api.helius.xyz/v0/webhooks
   tags:
@@ -102,7 +103,8 @@ apis:
     url: https://www.helius.dev/docs/webhooks
 - aid: helius:laserstream
   name: Helius LaserStream
-  description: Low-latency gRPC streaming of Solana account, slot, transaction, and block updates (Geyser-compatible).
+  description: >-
+    Low-latency gRPC streaming of Solana account, slot, transaction, and block updates (Geyser-compatible).
   humanURL: https://www.helius.dev/docs/laserstream
   baseURL: grpc://laserstream-mainnet.helius-rpc.com
   tags:
@@ -208,19 +210,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/helius-identity-api-openapi.yml
-- aid: helius:helius-nfts-api
-  name: Helius NFTs API
-  description: Access comprehensive NFT data including events, collection aggregations, real-time stats,
-    and complete historical activity on Solana.
-  humanURL: https://www.helius.dev/docs/rpc
-  baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
-  tags:
-  - NFT
-  tags_raw:
-  - NFTs
-  properties:
-  - type: OpenAPI
-    url: openapi/helius-nfts-api-openapi.yml
 - aid: helius:helius-sender-api
   name: Helius Sender API
   description: The Sender API from Helius — 2 operation(s) for sender.
@@ -233,8 +222,9 @@ apis:
     url: openapi/helius-sender-api-openapi.yml
 - aid: helius:helius-tokens-api
   name: Helius Tokens API
-  description: Complete token account data, on-chain and off-chain metadata, and detailed information
-    for both fungible and non-fungible Solana tokens.
+  description: >-
+    Complete token account data, on-chain and off-chain metadata, and detailed information for both fungible
+    and non-fungible Solana tokens.
   humanURL: https://www.helius.dev/docs/rpc
   baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
   tags:
@@ -244,8 +234,8 @@ apis:
     url: openapi/helius-tokens-api-openapi.yml
 - aid: helius:helius-transactions-api
   name: Helius Transactions API
-  description: Enhanced and human-readable transaction histories with decoded instruction data and detailed
-    context.
+  description: >-
+    Enhanced and human-readable transaction histories with decoded instruction data and detailed context.
   humanURL: https://www.helius.dev/docs/rpc
   baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
   tags:
@@ -267,8 +257,9 @@ apis:
     url: openapi/helius-transfers-api-openapi.yml
 - aid: helius:helius-webhooks-api
   name: Helius Webhooks API
-  description: Configure real-time blockchain notifications for any Solana address, transaction type,
-    or on-chain event with customizable delivery options.
+  description: >-
+    Configure real-time blockchain notifications for any Solana address, transaction type, or on-chain
+    event with customizable delivery options.
   humanURL: https://www.helius.dev/docs/rpc
   baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
   tags:
@@ -278,6 +269,18 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/helius-webhooks-api-openapi.yml
+- aid: helius:helius-nfts-api
+  name: Helius NF Ts API
+  description: >-
+    Access comprehensive NFT data including events, collection aggregations, real-time stats, and complete
+    historical activity on Solana.
+  humanURL: https://www.helius.dev/docs/rpc
+  baseURL: https://mainnet.helius-rpc.com/?api-key={apiKey}
+  tags:
+  - NFTs
+  properties:
+  - type: OpenAPI
+    url: openapi/helius-nfts-api-openapi.yml
 common:
 - type: AgentCard
   url: a2a/helius-a2a.yml
