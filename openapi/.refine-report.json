@@ -1,19 +1,7 @@
 {
   "provider": "helius",
   "sources": [
-    "helius-addresses-api-openapi.yml",
-    "helius-admin-api-openapi.yml",
-    "helius-balances-api-openapi.yml",
-    "helius-funding-api-openapi.yml",
-    "helius-helius-api-catalog-api-openapi.yml",
-    "helius-history-api-openapi.yml",
-    "helius-identity-api-openapi.yml",
-    "helius-nfts-api-openapi.yml",
-    "helius-sender-api-openapi.yml",
-    "helius-tokens-api-openapi.yml",
-    "helius-transactions-api-openapi.yml",
-    "helius-transfers-api-openapi.yml",
-    "helius-webhooks-api-openapi.yml"
+    "_original/helius-openapi.json"
   ],
   "outputs": [
     "helius-addresses-api-openapi.yml",
@@ -30,9 +18,34 @@
     "helius-transfers-api-openapi.yml",
     "helius-webhooks-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "helius-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "helius-openapi.json: tagged paths POST / -> Helius API Catalog",
+    "helius-openapi.json: declared missing tag: Admin",
+    "helius-openapi.json: declared missing tag: Helius API Catalog",
+    "helius-openapi.json: declared missing tag: Sender",
+    "superseded outputs removed: helius-nf-ts-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 20 total)"
+  ],
+  "skipped": [
+    "helius-addresses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "helius-admin-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "helius-balances-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "helius-funding-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "helius-helius-api-catalog-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "helius-history-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "helius-identity-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "helius-nf-ts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "helius-sender-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "helius-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "helius-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "helius-transfers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "helius-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

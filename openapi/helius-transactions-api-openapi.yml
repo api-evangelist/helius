@@ -1,55 +1,9 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Helius API Catalog Addresses Transactions API
+  title: Helius API Catalog Transactions API
   version: 1.0.0
   summary: Machine-readable discovery document for every Helius API surface on Solana.
-  description: 'This document is a discovery catalog — not an operational spec. It exists so
-
-    AI agents, codegen tools, and SDK generators can locate the canonical
-
-    OpenAPI document for every Helius API in one request instead of crawling
-
-    the docs site.
-
-
-    Start with the `x-apis` array: each entry links a Helius API surface to its
-
-    canonical OpenAPI spec (`specUrl`) and human-readable docs (`docsUrl`).
-
-    Follow `externalDocs` for the full developer documentation site.
-
-
-    ## A note on JSON-RPC APIs
-
-
-    Several Helius APIs (Solana RPC, DAS, Sender, Mint, Priority Fee,
-
-    ZK Compression) follow the JSON-RPC 2.0 convention where every method POSTs
-
-    to `/` with a `method` field in the request body. For each such API the
-
-    repository ships both per-method fragment YAMLs (used to render the
-
-    Mintlify reference pages) and an auto-generated `_combined.yaml` that
-
-    merges every method into a single OpenAPI document. In the combined
-
-    documents, colliding paths are disambiguated with a URL-fragment suffix
-
-    (e.g. `/#getAccountInfo`) and each operation carries an `x-actual-path`
-
-    extension that records the real request path (`/`). The fragment syntax is
-
-    schema-only — real calls still go to the `url` in `servers`.
-
-
-    All `specUrl` values below point to raw GitHub files on the `main` branch
-
-    of `helius-labs/docs`. They are stable URLs suitable for downstream tools
-
-    to pin or fetch.
-
-    '
+  description: This document is a discovery catalog — not an operational spec.
   contact:
     name: Helius Support
     url: https://www.helius.dev/contact
@@ -96,7 +50,11 @@ paths:
       - Transactions
       summary: Returns an enhanced transaction history for a given address
       operationId: enhancedApi_getEnhancedTransactions
-      description: "Access comprehensive transaction history for any Solana address with human-readable \ndecoded data. Filter by transaction types, sources, and time ranges to get detailed\ninsights into wallet activity with context and decoded instructions.\n"
+      description: 'Access comprehensive transaction history for any Solana address with human-readable
+
+        decoded data. Filter by transaction types, sources, and time ranges to get detailed
+
+        insights into wallet activity with context and decoded instructions.'
       parameters:
       - $ref: '#/components/parameters/apiKeyParam'
       - $ref: '#/components/parameters/EnhancedApi_beforeSigParam'
@@ -160,7 +118,11 @@ paths:
       - Transactions
       summary: Returns raw transaction history for a given address
       operationId: enhancedApi_getRawTransactionHistory
-      description: "Retrieve complete raw transaction data for any Solana address with full\ntransaction details in their original format. Access historical transaction \ndata with precise time filtering options.\n"
+      description: 'Retrieve complete raw transaction data for any Solana address with full
+
+        transaction details in their original format. Access historical transaction
+
+        data with precise time filtering options.'
       parameters:
       - $ref: '#/components/parameters/apiKeyParam'
       - $ref: '#/components/parameters/EnhancedApi_beforeParam'
@@ -209,14 +171,12 @@ paths:
     post:
       tags:
       - Transactions
-      summary: Returns an array of enhanced, human-readable versions of the given transactions.
+      summary: Returns an array of enhanced, human-readable versions of the given transactions
       description: 'Convert raw Solana transactions into enhanced, human-readable formats with
 
         decoded instruction data and contextual information. Process multiple transactions
 
-        in a single request for efficient data analysis and display.
-
-        '
+        in a single request for efficient data analysis and display.'
       operationId: enhancedApi_getEnhancedTransaction
       parameters:
       - $ref: '#/components/parameters/apiKeyParam'
@@ -267,7 +227,7 @@ paths:
     post:
       tags:
       - Transactions
-      summary: Returns an array of raw (directly from RPC) transactions.
+      summary: Returns an array of raw (directly from RPC) transactions
       operationId: enhancedApi_getRawTransactions
       parameters:
       - $ref: '#/components/parameters/apiKeyParam'
@@ -318,7 +278,7 @@ paths:
     post:
       tags:
       - Transactions
-      summary: Returns an array of raw transactions for the given accounts.
+      summary: Returns an array of raw transactions for the given accounts
       operationId: enhancedApi_queryRawTxns
       parameters:
       - $ref: '#/components/parameters/apiKeyParam'
@@ -363,62 +323,250 @@ paths:
       - url: https://api-devnet.helius-rpc.com
         description: Devnet RPC endpoint
 components:
+  parameters:
+    EnhancedApi_afterSigParam:
+      name: after-signature
+      in: query
+      description: Start searching forwards from this transaction signature.
+      required: false
+      schema:
+        type: string
+    EnhancedApi_limitNewParam:
+      name: limit
+      in: query
+      description: The number of transactions to retrieve. The value should be between 1 and 100.
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+    EnhancedApi_transactionSourceParam:
+      name: source
+      in: query
+      description: The TransactionSource to filter by. For a list of possible options, see the Transaction Types section.
+      required: false
+      schema:
+        $ref: '#/components/schemas/EnhancedApi_TransactionSource'
+    EnhancedApi_commitmentParam:
+      name: commitment
+      in: query
+      description: How finalized a block must be to be included in the search. If not provided, will default to "finalized" commitment. Note that "processed" level commitment is not supported.
+      required: false
+      schema:
+        $ref: '#/components/schemas/EnhancedApi_Commitment'
+    EnhancedApi_lteTimeParam:
+      name: lte-time
+      in: query
+      description: Only return transactions with a block time less than or equal to this value.
+      required: false
+      schema:
+        type: integer
+    EnhancedApi_ltTimeParam:
+      name: lt-time
+      in: query
+      description: Only return transactions with a block time less than this value.
+      required: false
+      schema:
+        type: integer
+    EnhancedApi_beforeParam:
+      name: before
+      in: query
+      description: Start searching backwards from this transaction signature.
+      required: false
+      schema:
+        type: string
+    EnhancedApi_gteTimeParam:
+      name: gte-time
+      in: query
+      description: Only return transactions with a block time greater than or equal to this value.
+      required: false
+      schema:
+        type: integer
+    EnhancedApi_gtSlotParam:
+      name: gt-slot
+      in: query
+      description: Only return transactions with a slot greater than this value.
+      required: false
+      schema:
+        type: integer
+    EnhancedApi_tokenAccountsParam:
+      name: token-accounts
+      in: query
+      description: Filter transactions for related token accounts. Controls whether to include transactions involving token accounts owned by the address.
+      required: false
+      schema:
+        type: string
+        enum:
+        - none
+        - balanceChanged
+        - all
+        default: none
+    EnhancedApi_sortOrderParam:
+      name: sort-order
+      in: query
+      description: The order to sort the results in.
+      required: false
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+        default: desc
+    EnhancedApi_addressParam:
+      name: address
+      in: path
+      description: The address to query for.
+      required: true
+      schema:
+        type: string
+        example: 86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY
+        default: 86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY
+    EnhancedApi_beforeSigParam:
+      name: before-signature
+      in: query
+      description: Start searching backwards from this transaction signature.
+      required: false
+      schema:
+        type: string
+    EnhancedApi_gtTimeParam:
+      name: gt-time
+      in: query
+      description: Only return transactions with a block time greater than this value.
+      required: false
+      schema:
+        type: integer
+    apiKeyParam:
+      name: api-key
+      in: query
+      required: true
+      description: Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`.
+      schema:
+        type: string
+    EnhancedApi_transactionTypeParam:
+      name: type
+      in: query
+      description: The TransactionType to filter by. For a list of possible options, see the Transaction Types section.
+      required: false
+      schema:
+        $ref: '#/components/schemas/EnhancedApi_TransactionType'
+    EnhancedApi_gteSlotParam:
+      name: gte-slot
+      in: query
+      description: Only return transactions with a slot greater than or equal to this value.
+      required: false
+      schema:
+        type: integer
+    EnhancedApi_ltSlotParam:
+      name: lt-slot
+      in: query
+      description: Only return transactions with a slot less than this value.
+      required: false
+      schema:
+        type: integer
+    EnhancedApi_lteSlotParam:
+      name: lte-slot
+      in: query
+      description: Only return transactions with a slot less than or equal to this value.
+      required: false
+      schema:
+        type: integer
+    EnhancedApi_untilParam:
+      name: until
+      in: query
+      description: Search until this transaction signature.
+      required: false
+      schema:
+        type: string
   schemas:
-    EnhancedApi_SetAuthorityEvent:
+    EnhancedApi_Meta:
+      type: object
+      properties:
+        err:
+          type: object
+        fee:
+          type: integer
+        preBalances:
+          type: array
+          items:
+            type: integer
+        postBalances:
+          type: array
+          items:
+            type: integer
+        preTokenBalances:
+          type: array
+          items:
+            type: integer
+        postTokenBalances:
+          type: array
+          items:
+            type: integer
+        logMessages:
+          type: array
+          items:
+            type: string
+        rewards:
+          type: array
+          items:
+            type: object
+        loadedAddresses:
+          type: object
+    EnhancedApi_NFTEvent:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Human readable interpretation of the transaction
+        type:
+          $ref: '#/components/schemas/EnhancedApi_NFTEventType'
+        source:
+          $ref: '#/components/schemas/EnhancedApi_TransactionSource'
+        amount:
+          type: integer
+          example: 1000000
+          description: The amount of the NFT transaction (in lamports).
+        fee:
+          type: integer
+          example: 5000
+        feePayer:
+          type: string
+          example: 8cRrU1NzNpjL3k2BwjW3VixAcX6VFc29KHr4KZg8cs2Y
+        signature:
+          type: string
+          example: 4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf
+        slot:
+          type: integer
+          example: 148277128
+        timestamp:
+          type: integer
+          example: 1656442333
+        saleType:
+          $ref: '#/components/schemas/EnhancedApi_SaleType'
+        buyer:
+          type: string
+          description: The buyer of the NFT.
+        seller:
+          type: string
+          description: The seller of the NFT.
+        staker:
+          type: string
+          description: The staker of the NFT.
+        nfts:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnhancedApi_Token'
+          description: NFTs that are a part of this NFT event.
+    EnhancedApi_NativeBalanceChange:
       type: object
       properties:
         account:
           type: string
-          description: Tthe account whose authority is changing.
-        from:
+          description: The account the native balance change is for
+          example: 2uySTNgvGT2kwqpfgLiSgeBLR3wQyye1i1A2iQWoPiFr
+        amount:
           type: string
-          description: Current authority.
-        to:
-          type: string
-          description: New authority.
-        instructionIndex:
-          type: integer
-          description: The index of the parsed instruction in the transaction.
-        innerInstructionIndex:
-          type: integer
-          description: The index of the parsed inner instruction in the transaction.
-    EnhancedApi_TokenBalanceChange:
-      type: object
-      properties:
-        userAccount:
-          type: string
-          example: F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ
-        tokenAccount:
-          type: string
-          example: 2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn
-        mint:
-          type: string
-          example: DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ
-        rawTokenAmount:
-          $ref: '#/components/schemas/EnhancedApi_RawTokenAmount'
-    EnhancedApi_Instruction:
-      type: object
-      description: Individual instruction data in a transaction.
-      properties:
-        accounts:
-          type: array
-          description: The accounts used in instruction.
-          items:
-            type: string
-            example: 8uX6yiUuH4UjUb1gMGJAdkXorSuKshqsFGDCFShcK88B
-        data:
-          type: string
-          description: Data passed into the instruction
-          example: kdL8HQJrbbvQRGXmoadaja1Qvs
-        programId:
-          type: string
-          description: Program used in instruction
-          example: MEisE1HzehtrDpAAT8PnLHjpSSkRYakotTuJRPjTpo8
-        innerInstructions:
-          type: array
-          description: Inner instructions used in instruction
-          items:
-            $ref: '#/components/schemas/EnhancedApi_InnerInstruction'
+          description: The amount of the balance change as a string
+          example: '100000000'
     EnhancedApi_TransactionType:
       type: string
       enum:
@@ -993,84 +1141,269 @@ components:
       - WITHDRAW_SOL_FROM_FLASH_LOAN_POOL
       - WITHDRAW_TREASURY
       - WITHDRAW_UNSTAKED_DEPOSITS
-    EnhancedApi_AccountData:
+    EnhancedApi_ParseTransactionsRequest:
       type: object
-      description: Sol and token transfers involving the account are referenced in this object.
       properties:
-        account:
-          type: string
-          description: The account that this data is provided for.
-        nativeBalanceChange:
-          type: number
-          description: Native (SOL) balance change of the account.
-        tokenBalanceChanges:
+        transactions:
           type: array
+          default:
+          - 4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf
           items:
-            $ref: '#/components/schemas/EnhancedApi_TokenBalanceChange'
-          description: Token balance changes of the account.
-    EnhancedApi_NFTEvent:
+            type: string
+            description: The transaction IDs/signatures to parse for.
+          maxItems: 100
+    EnhancedApi_NFTEventType:
+      type: string
+      enum:
+      - NFT_BID
+      - NFT_BID_CANCELLED
+      - NFT_GLOBAL_BID
+      - NFT_GLOBAL_BID_CANCELLED
+      - NFT_LISTING
+      - NFT_CANCEL_LISTING
+      - NFT_SALE
+      - NFT_MINT
+      - NFT_MINT_REJECTED
+      - NFT_AUCTION_CREATED
+      - NFT_AUCTION_UPDATED
+      - NFT_AUCTION_CANCELLED
+      - NFT_PARTICIPATION_REWARD
+      - BURN_NFT
+      - NFT_RENT_LISTING
+      - NFT_RENT_CANCEL_LISTING
+      - NFT_RENT_UPDATE_LISTING
+      - NFT_RENT_ACTIVATE
+      - NFT_RENT_END
+      - ATTACH_METADATA
+      - MIGRATE_TO_PNFT
+      - CREATE_POOL
+    EnhancedApi_DistributeCompressionRewardsEvent:
       type: object
       properties:
-        description:
-          type: string
-          description: Human readable interpretation of the transaction
-        type:
-          $ref: '#/components/schemas/EnhancedApi_NFTEventType'
-        source:
-          $ref: '#/components/schemas/EnhancedApi_TransactionSource'
         amount:
           type: integer
-          example: 1000000
-          description: The amount of the NFT transaction (in lamports).
-        fee:
-          type: integer
-          example: 5000
-        feePayer:
-          type: string
-          example: 8cRrU1NzNpjL3k2BwjW3VixAcX6VFc29KHr4KZg8cs2Y
-        signature:
-          type: string
-          example: 4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf
+          description: Amount transfered in the DistributeCompressionRewardsV0 instruction.
+    EnhancedApi_RawTransaction:
+      type: object
+      properties:
         slot:
           type: integer
-          example: 148277128
-        timestamp:
+        blocktime:
           type: integer
-          example: 1656442333
-        saleType:
-          $ref: '#/components/schemas/EnhancedApi_SaleType'
-        buyer:
+        transaction:
+          $ref: '#/components/schemas/EnhancedApi_InnerTransaction'
+        meta:
+          $ref: '#/components/schemas/EnhancedApi_Meta'
+    EnhancedApi_CompressedNFTEvent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/EnhancedApi_CompressedNFTEventType'
+        treeId:
           type: string
-          description: The buyer of the NFT.
-        seller:
+          description: The address of the related merkle tree.
+        assetId:
           type: string
-          description: The seller of the NFT.
-        staker:
+          description: The id of the compressed nft.
+        leafIndex:
+          type: integer
+          description: The index of the leaf being appended or modified.
+        instructionIndex:
+          type: integer
+          description: The index of the parsed instruction in the transaction.
+        innerInstructionIndex:
+          type: integer
+          description: The index of the parsed inner instruction in the transaction.
+        newLeafOwner:
           type: string
-          description: The staker of the NFT.
-        nfts:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnhancedApi_Token'
-          description: NFTs that are a part of this NFT event.
-    EnhancedApi_NativeBalanceChange:
+          description: The new owner of the leaf.
+        oldLeafOwner:
+          type: string
+          description: The previous owner of the leaf.
+    EnhancedApi_ProgramInfo:
+      type: object
+      properties:
+        source:
+          type: string
+          example: ORCA
+        account:
+          type: string
+          description: The account of the program
+          example: whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc
+        programName:
+          type: string
+          description: The name of the program
+          example: ORCA_WHIRLPOOLS
+        instructionName:
+          type: string
+          description: The name of the instruction creating this swap. It is the value of instruction name from the Anchor IDL, if it is available.
+          example: whirlpoolSwap
+    EnhancedApi_SetAuthorityEvent:
       type: object
       properties:
         account:
           type: string
-          description: The account the native balance change is for
-          example: 2uySTNgvGT2kwqpfgLiSgeBLR3wQyye1i1A2iQWoPiFr
-        amount:
+          description: Tthe account whose authority is changing.
+        from:
           type: string
-          description: The amount of the balance change as a string
-          example: '100000000'
-    EnhancedApi_SortOrder:
+          description: Current authority.
+        to:
+          type: string
+          description: New authority.
+        instructionIndex:
+          type: integer
+          description: The index of the parsed instruction in the transaction.
+        innerInstructionIndex:
+          type: integer
+          description: The index of the parsed inner instruction in the transaction.
+    EnhancedApi_Instruction:
+      type: object
+      description: Individual instruction data in a transaction.
+      properties:
+        accounts:
+          type: array
+          description: The accounts used in instruction.
+          items:
+            type: string
+            example: 8uX6yiUuH4UjUb1gMGJAdkXorSuKshqsFGDCFShcK88B
+        data:
+          type: string
+          description: Data passed into the instruction
+          example: kdL8HQJrbbvQRGXmoadaja1Qvs
+        programId:
+          type: string
+          description: Program used in instruction
+          example: MEisE1HzehtrDpAAT8PnLHjpSSkRYakotTuJRPjTpo8
+        innerInstructions:
+          type: array
+          description: Inner instructions used in instruction
+          items:
+            $ref: '#/components/schemas/EnhancedApi_InnerInstruction'
+    EnhancedApi_InnerTransaction:
+      type: object
+      properties:
+        signatures:
+          type: array
+          items:
+            type: string
+        message:
+          type: object
+          properties:
+            accountKeys:
+              type: array
+              items:
+                type: string
+            header:
+              type: object
+            recentBlockhash:
+              type: string
+            instructions:
+              type: array
+              items:
+                type: object
+                properties:
+                  programIdIndex:
+                    type: integer
+                  accounts:
+                    type: array
+                    items:
+                      type: integer
+                  data:
+                    type: string
+    EnhancedApi_Commitment:
       type: string
-      description: Order of the returned results. Must be 'ASC' or 'DESC'. Results are descending by default.
       enum:
-      - ASC
-      - DESC
-      default: DESC
+      - finalized
+      - confirmed
+    EnhancedApi_RawTokenAmount:
+      type: object
+      properties:
+        tokenAmount:
+          type: string
+        decimals:
+          type: integer
+    EnhancedApi_TokenSwap:
+      type: object
+      properties:
+        tokenInputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnhancedApi_TokenTransfer'
+          description: The token inputs of this swap.
+        tokenOutputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnhancedApi_TokenTransfer'
+          description: The token outputs of this swap.
+        tokenFees:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnhancedApi_TokenTransfer'
+          description: Fees charged with tokens for this swap.
+        nativeFees:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnhancedApi_NativeTransfer'
+          description: Fees charged in SOL for this swap.
+        programInfo:
+          $ref: '#/components/schemas/EnhancedApi_ProgramInfo'
+          description: Information about the program creating this swap.
+    EnhancedApi_PaginationToken:
+      type: string
+      description: Token used for pagination. Provide the token to the API to retrieve the results from the next page. If no token exists, the query has no results remaining.
+      example: V1_162262948_99
+    EnhancedApi_RawTransactionsV1Response:
+      type: object
+      properties:
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnhancedApi_RawTransaction'
+        paginationToken:
+          $ref: '#/components/schemas/EnhancedApi_PaginationToken'
+    EnhancedApi_Token:
+      type: object
+      properties:
+        mint:
+          type: string
+          example: DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx
+          description: The mint account of the token.
+        tokenStandard:
+          $ref: '#/components/schemas/EnhancedApi_TokenStandard'
+    EnhancedApi_TokenStandard:
+      type: string
+      enum:
+      - NonFungible
+      - FungibleAsset
+      - Fungible
+      - NonFungibleEdition
+    EnhancedApi_ErrorResponse:
+      type: object
+      description: JSON-RPC error response format
+      properties:
+        jsonrpc:
+          type: string
+          example: '2.0'
+          description: JSON-RPC version
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: Error code
+              example: -32602
+            message:
+              type: string
+              description: Error message
+              example: Invalid params
+        id:
+          type: string
+          description: Request identifier
+          example: '1'
+      required:
+      - jsonrpc
+      - error
+      - id
     EnhancedApi_TokenTransfer:
       type: object
       properties:
@@ -1093,50 +1426,73 @@ components:
           type: string
           description: The mint account of the token.
           example: DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx
-    EnhancedApi_ParseTransactionsRequest:
+    EnhancedApi_RawTransactionsV1Request:
       type: object
       properties:
-        transactions:
-          type: array
-          default:
-          - 4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf
-          items:
-            type: string
-            description: The transaction IDs/signatures to parse for.
-          maxItems: 100
-    EnhancedApi_Meta:
-      type: object
-      properties:
-        err:
+        query:
           type: object
-        fee:
-          type: integer
-        preBalances:
-          type: array
-          items:
-            type: integer
-        postBalances:
-          type: array
-          items:
-            type: integer
-        preTokenBalances:
-          type: array
-          items:
-            type: integer
-        postTokenBalances:
-          type: array
-          items:
-            type: integer
-        logMessages:
-          type: array
-          items:
-            type: string
-        rewards:
-          type: array
-          items:
-            type: object
-        loadedAddresses:
+          properties:
+            accounts:
+              type: array
+              items:
+                type: string
+                example: CyFyz1xR4YTG9CrY9jg5jG6GZfm2e8k97qscs2GFpjX1
+                description: Array of accounts to find transactions for. Limit of 1000 accounts".
+            startSlot:
+              type: integer
+              example: 162368570
+              description: Earliest slot to include in the query (inclusive). Cannot be combined with "startTime".
+            endSlot:
+              type: integer
+              example: 162368580
+              description: Latest slot to include in the query (inclusive). Cannot be combined with "endTime".
+            startTime:
+              type: integer
+              example: 1669055189
+              description: Earliest event time (unix seconds). Cannot be combined with "startSlot".
+            endTime:
+              type: integer
+              example: 1669070189
+              description: Latest event time (unix seconds). Cannot be combined with "endSlot".
+        options:
           type: object
+          properties:
+            limit:
+              description: Maximum number of items to return. Must be between 1 and 500. Default is 100.
+              type: integer
+              minimum: 1
+              maximum: 500
+              default: 100
+            sortOrder:
+              $ref: '#/components/schemas/EnhancedApi_SortOrder'
+            paginationToken:
+              $ref: '#/components/schemas/EnhancedApi_PaginationToken'
+    EnhancedApi_SortOrder:
+      type: string
+      description: Order of the returned results. Must be 'ASC' or 'DESC'. Results are descending by default.
+      enum:
+      - ASC
+      - DESC
+      default: DESC
+    EnhancedApi_CompressedNFTEventType:
+      type: string
+      enum:
+      - CREATE_MERKLE_TREE
+      - COMPRESSED_NFT_MINT
+      - COMPRESSED_NFT_TRANSFER
+      - COMPRESSED_NFT_REDEEM
+      - COMPRESSED_NFT_CANCEL_REDEEM
+      - COMPRESSED_NFT_BURN
+      - COMPRESSED_NFT_DELEGATE
+    EnhancedApi_SaleType:
+      type: string
+      enum:
+      - AUCTION
+      - INSTANT_SALE
+      - OFFER
+      - GLOBAL_OFFER
+      - MINT
+      - UNKNOWN
     EnhancedApi_NativeTransfer:
       type: object
       properties:
@@ -1239,19 +1595,20 @@ components:
       - TRTLS
       - RUNNER
       - INVICTUS
-    EnhancedApi_Token:
+    EnhancedApi_TokenBalanceChange:
       type: object
       properties:
+        userAccount:
+          type: string
+          example: F54ZGuxyb2gA7vRjzWKLWEMQqCfJxDY1whtqtjdq4CJ
+        tokenAccount:
+          type: string
+          example: 2kvmbRybhrcptDnwyNv6oiFGFEnRVv7MvVyqsxkirgdn
         mint:
           type: string
-          example: DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx
-          description: The mint account of the token.
-        tokenStandard:
-          $ref: '#/components/schemas/EnhancedApi_TokenStandard'
-    EnhancedApi_PaginationToken:
-      type: string
-      description: Token used for pagination. Provide the token to the API to retrieve the results from the next page. If no token exists, the query has no results remaining.
-      example: V1_162262948_99
+          example: DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ
+        rawTokenAmount:
+          $ref: '#/components/schemas/EnhancedApi_RawTokenAmount'
     EnhancedApi_SwapEvent:
       type: object
       properties:
@@ -1286,31 +1643,6 @@ components:
           items:
             $ref: '#/components/schemas/EnhancedApi_TokenSwap'
           description: The inner swaps occurring to make this swap happen. Eg. a swap of wSOL <-> USDC may be make of multiple swaps from wSOL <-> DUST, DUST <-> USDC
-    EnhancedApi_ProgramInfo:
-      type: object
-      properties:
-        source:
-          type: string
-          example: ORCA
-        account:
-          type: string
-          description: The account of the program
-          example: whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc
-        programName:
-          type: string
-          description: The name of the program
-          example: ORCA_WHIRLPOOLS
-        instructionName:
-          type: string
-          description: The name of the instruction creating this swap. It is the value of instruction name from the Anchor IDL, if it is available.
-          example: whirlpoolSwap
-    EnhancedApi_TokenStandard:
-      type: string
-      enum:
-      - NonFungible
-      - FungibleAsset
-      - Fungible
-      - NonFungibleEdition
     EnhancedApi_EnhancedTransaction:
       type: object
       properties:
@@ -1371,187 +1703,21 @@ components:
             setAuthority:
               $ref: '#/components/schemas/EnhancedApi_SetAuthorityEvent'
           description: Events associated with this transaction. These provide fine-grained information about the transaction. They match the types returned from the event APIs.
-    EnhancedApi_RawTokenAmount:
+    EnhancedApi_AccountData:
       type: object
+      description: Sol and token transfers involving the account are referenced in this object.
       properties:
-        tokenAmount:
+        account:
           type: string
-        decimals:
-          type: integer
-    EnhancedApi_SaleType:
-      type: string
-      enum:
-      - AUCTION
-      - INSTANT_SALE
-      - OFFER
-      - GLOBAL_OFFER
-      - MINT
-      - UNKNOWN
-    EnhancedApi_RawTransactionsV1Request:
-      type: object
-      properties:
-        query:
-          type: object
-          properties:
-            accounts:
-              type: array
-              items:
-                type: string
-                example: CyFyz1xR4YTG9CrY9jg5jG6GZfm2e8k97qscs2GFpjX1
-                description: Array of accounts to find transactions for. Limit of 1000 accounts".
-            startSlot:
-              type: integer
-              example: 162368570
-              description: Earliest slot to include in the query (inclusive). Cannot be combined with "startTime".
-            endSlot:
-              type: integer
-              example: 162368580
-              description: Latest slot to include in the query (inclusive). Cannot be combined with "endTime".
-            startTime:
-              type: integer
-              example: 1669055189
-              description: Earliest event time (unix seconds). Cannot be combined with "startSlot".
-            endTime:
-              type: integer
-              example: 1669070189
-              description: Latest event time (unix seconds). Cannot be combined with "endSlot".
-        options:
-          type: object
-          properties:
-            limit:
-              description: Maximum number of items to return. Must be between 1 and 500. Default is 100.
-              type: integer
-              minimum: 1
-              maximum: 500
-              default: 100
-            sortOrder:
-              $ref: '#/components/schemas/EnhancedApi_SortOrder'
-            paginationToken:
-              $ref: '#/components/schemas/EnhancedApi_PaginationToken'
-    EnhancedApi_CompressedNFTEvent:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/EnhancedApi_CompressedNFTEventType'
-        treeId:
-          type: string
-          description: The address of the related merkle tree.
-        assetId:
-          type: string
-          description: The id of the compressed nft.
-        leafIndex:
-          type: integer
-          description: The index of the leaf being appended or modified.
-        instructionIndex:
-          type: integer
-          description: The index of the parsed instruction in the transaction.
-        innerInstructionIndex:
-          type: integer
-          description: The index of the parsed inner instruction in the transaction.
-        newLeafOwner:
-          type: string
-          description: The new owner of the leaf.
-        oldLeafOwner:
-          type: string
-          description: The previous owner of the leaf.
-    EnhancedApi_Commitment:
-      type: string
-      enum:
-      - finalized
-      - confirmed
-    EnhancedApi_NFTEventType:
-      type: string
-      enum:
-      - NFT_BID
-      - NFT_BID_CANCELLED
-      - NFT_GLOBAL_BID
-      - NFT_GLOBAL_BID_CANCELLED
-      - NFT_LISTING
-      - NFT_CANCEL_LISTING
-      - NFT_SALE
-      - NFT_MINT
-      - NFT_MINT_REJECTED
-      - NFT_AUCTION_CREATED
-      - NFT_AUCTION_UPDATED
-      - NFT_AUCTION_CANCELLED
-      - NFT_PARTICIPATION_REWARD
-      - BURN_NFT
-      - NFT_RENT_LISTING
-      - NFT_RENT_CANCEL_LISTING
-      - NFT_RENT_UPDATE_LISTING
-      - NFT_RENT_ACTIVATE
-      - NFT_RENT_END
-      - ATTACH_METADATA
-      - MIGRATE_TO_PNFT
-      - CREATE_POOL
-    EnhancedApi_InnerTransaction:
-      type: object
-      properties:
-        signatures:
+          description: The account that this data is provided for.
+        nativeBalanceChange:
+          type: number
+          description: Native (SOL) balance change of the account.
+        tokenBalanceChanges:
           type: array
           items:
-            type: string
-        message:
-          type: object
-          properties:
-            accountKeys:
-              type: array
-              items:
-                type: string
-            header:
-              type: object
-            recentBlockhash:
-              type: string
-            instructions:
-              type: array
-              items:
-                type: object
-                properties:
-                  programIdIndex:
-                    type: integer
-                  accounts:
-                    type: array
-                    items:
-                      type: integer
-                  data:
-                    type: string
-    EnhancedApi_TokenSwap:
-      type: object
-      properties:
-        tokenInputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnhancedApi_TokenTransfer'
-          description: The token inputs of this swap.
-        tokenOutputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnhancedApi_TokenTransfer'
-          description: The token outputs of this swap.
-        tokenFees:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnhancedApi_TokenTransfer'
-          description: Fees charged with tokens for this swap.
-        nativeFees:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnhancedApi_NativeTransfer'
-          description: Fees charged in SOL for this swap.
-        programInfo:
-          $ref: '#/components/schemas/EnhancedApi_ProgramInfo'
-          description: Information about the program creating this swap.
-    EnhancedApi_RawTransaction:
-      type: object
-      properties:
-        slot:
-          type: integer
-        blocktime:
-          type: integer
-        transaction:
-          $ref: '#/components/schemas/EnhancedApi_InnerTransaction'
-        meta:
-          $ref: '#/components/schemas/EnhancedApi_Meta'
+            $ref: '#/components/schemas/EnhancedApi_TokenBalanceChange'
+          description: Token balance changes of the account.
     EnhancedApi_InnerInstruction:
       type: object
       description: Inner instructions for each instruction
@@ -1564,237 +1730,7 @@ components:
           type: string
         programId:
           type: string
-    EnhancedApi_DistributeCompressionRewardsEvent:
-      type: object
-      properties:
-        amount:
-          type: integer
-          description: Amount transfered in the DistributeCompressionRewardsV0 instruction.
-    EnhancedApi_RawTransactionsV1Response:
-      type: object
-      properties:
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnhancedApi_RawTransaction'
-        paginationToken:
-          $ref: '#/components/schemas/EnhancedApi_PaginationToken'
-    EnhancedApi_CompressedNFTEventType:
-      type: string
-      enum:
-      - CREATE_MERKLE_TREE
-      - COMPRESSED_NFT_MINT
-      - COMPRESSED_NFT_TRANSFER
-      - COMPRESSED_NFT_REDEEM
-      - COMPRESSED_NFT_CANCEL_REDEEM
-      - COMPRESSED_NFT_BURN
-      - COMPRESSED_NFT_DELEGATE
-    EnhancedApi_ErrorResponse:
-      type: object
-      description: JSON-RPC error response format
-      properties:
-        jsonrpc:
-          type: string
-          example: '2.0'
-          description: JSON-RPC version
-        error:
-          type: object
-          properties:
-            code:
-              type: integer
-              description: Error code
-              example: -32602
-            message:
-              type: string
-              description: Error message
-              example: Invalid params
-        id:
-          type: string
-          description: Request identifier
-          example: '1'
-      required:
-      - jsonrpc
-      - error
-      - id
-  parameters:
-    EnhancedApi_gteTimeParam:
-      name: gte-time
-      in: query
-      description: Only return transactions with a block time greater than or equal to this value.
-      required: false
-      schema:
-        type: integer
-    EnhancedApi_transactionTypeParam:
-      name: type
-      in: query
-      description: The TransactionType to filter by. For a list of possible options, see the Transaction Types section.
-      required: false
-      schema:
-        $ref: '#/components/schemas/EnhancedApi_TransactionType'
-    EnhancedApi_ltSlotParam:
-      name: lt-slot
-      in: query
-      description: Only return transactions with a slot less than this value.
-      required: false
-      schema:
-        type: integer
-    EnhancedApi_sortOrderParam:
-      name: sort-order
-      in: query
-      description: The order to sort the results in.
-      required: false
-      schema:
-        type: string
-        enum:
-        - asc
-        - desc
-        default: desc
-    EnhancedApi_afterSigParam:
-      name: after-signature
-      in: query
-      description: Start searching forwards from this transaction signature.
-      required: false
-      schema:
-        type: string
-    EnhancedApi_tokenAccountsParam:
-      name: token-accounts
-      in: query
-      description: Filter transactions for related token accounts. Controls whether to include transactions involving token accounts owned by the address.
-      required: false
-      schema:
-        type: string
-        enum:
-        - none
-        - balanceChanged
-        - all
-        default: none
-    EnhancedApi_addressParam:
-      name: address
-      in: path
-      description: The address to query for.
-      required: true
-      schema:
-        type: string
-        example: 86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY
-        default: 86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY
-    EnhancedApi_gtTimeParam:
-      name: gt-time
-      in: query
-      description: Only return transactions with a block time greater than this value.
-      required: false
-      schema:
-        type: integer
-    EnhancedApi_transactionSourceParam:
-      name: source
-      in: query
-      description: The TransactionSource to filter by. For a list of possible options, see the Transaction Types section.
-      required: false
-      schema:
-        $ref: '#/components/schemas/EnhancedApi_TransactionSource'
-    EnhancedApi_lteSlotParam:
-      name: lte-slot
-      in: query
-      description: Only return transactions with a slot less than or equal to this value.
-      required: false
-      schema:
-        type: integer
-    EnhancedApi_gteSlotParam:
-      name: gte-slot
-      in: query
-      description: Only return transactions with a slot greater than or equal to this value.
-      required: false
-      schema:
-        type: integer
-    EnhancedApi_beforeParam:
-      name: before
-      in: query
-      description: Start searching backwards from this transaction signature.
-      required: false
-      schema:
-        type: string
-    EnhancedApi_lteTimeParam:
-      name: lte-time
-      in: query
-      description: Only return transactions with a block time less than or equal to this value.
-      required: false
-      schema:
-        type: integer
-    EnhancedApi_ltTimeParam:
-      name: lt-time
-      in: query
-      description: Only return transactions with a block time less than this value.
-      required: false
-      schema:
-        type: integer
-    apiKeyParam:
-      name: api-key
-      in: query
-      required: true
-      description: Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`.
-      schema:
-        type: string
-    EnhancedApi_commitmentParam:
-      name: commitment
-      in: query
-      description: How finalized a block must be to be included in the search. If not provided, will default to "finalized" commitment. Note that "processed" level commitment is not supported.
-      required: false
-      schema:
-        $ref: '#/components/schemas/EnhancedApi_Commitment'
-    EnhancedApi_beforeSigParam:
-      name: before-signature
-      in: query
-      description: Start searching backwards from this transaction signature.
-      required: false
-      schema:
-        type: string
-    EnhancedApi_gtSlotParam:
-      name: gt-slot
-      in: query
-      description: Only return transactions with a slot greater than this value.
-      required: false
-      schema:
-        type: integer
-    EnhancedApi_limitNewParam:
-      name: limit
-      in: query
-      description: The number of transactions to retrieve. The value should be between 1 and 100.
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-    EnhancedApi_untilParam:
-      name: until
-      in: query
-      description: Search until this transaction signature.
-      required: false
-      schema:
-        type: string
   responses:
-    EnhancedApi_401-Unauthorized:
-      description: Unauthorized request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32001
-              message: Unauthorized
-            id: '1'
-    EnhancedApi_400-BadRequest:
-      description: Invalid request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32602
-              message: Invalid params
-            id: '1'
     EnhancedApi_404-NotFound:
       description: The specified resource was not found.
       content:
@@ -1806,18 +1742,6 @@ components:
             error:
               code: -32601
               message: Method not found
-            id: '1'
-    EnhancedApi_503-ServiceUnavailable:
-      description: The service is temporarily unavailable.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32002
-              message: Service unavailable
             id: '1'
     EnhancedApi_500-InternalServerError:
       description: The server encountered an unexpected condition that prevented it from fulfilling the request.
@@ -1831,6 +1755,18 @@ components:
               code: -32603
               message: Internal error
             id: '1'
+    EnhancedApi_401-Unauthorized:
+      description: Unauthorized request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32001
+              message: Unauthorized
+            id: '1'
     EnhancedApi_504-GatewayTimeout:
       description: The request timed out.
       content:
@@ -1843,6 +1779,18 @@ components:
               code: -32003
               message: Gateway timeout
             id: '1'
+    EnhancedApi_503-ServiceUnavailable:
+      description: The service is temporarily unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32002
+              message: Service unavailable
+            id: '1'
     EnhancedApi_403-Forbidden:
       description: Request was forbidden.
       content:
@@ -1854,6 +1802,18 @@ components:
             error:
               code: -32003
               message: Forbidden
+            id: '1'
+    EnhancedApi_400-BadRequest:
+      description: Invalid request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32602
+              message: Invalid params
             id: '1'
     EnhancedApi_429-TooManyRequests:
       description: Exceeded rate limit.

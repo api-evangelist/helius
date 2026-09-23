@@ -1,55 +1,9 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Helius API Catalog Addresses NFTs API
+  title: Helius API Catalog NF Ts API
   version: 1.0.0
   summary: Machine-readable discovery document for every Helius API surface on Solana.
-  description: 'This document is a discovery catalog — not an operational spec. It exists so
-
-    AI agents, codegen tools, and SDK generators can locate the canonical
-
-    OpenAPI document for every Helius API in one request instead of crawling
-
-    the docs site.
-
-
-    Start with the `x-apis` array: each entry links a Helius API surface to its
-
-    canonical OpenAPI spec (`specUrl`) and human-readable docs (`docsUrl`).
-
-    Follow `externalDocs` for the full developer documentation site.
-
-
-    ## A note on JSON-RPC APIs
-
-
-    Several Helius APIs (Solana RPC, DAS, Sender, Mint, Priority Fee,
-
-    ZK Compression) follow the JSON-RPC 2.0 convention where every method POSTs
-
-    to `/` with a `method` field in the request body. For each such API the
-
-    repository ships both per-method fragment YAMLs (used to render the
-
-    Mintlify reference pages) and an auto-generated `_combined.yaml` that
-
-    merges every method into a single OpenAPI document. In the combined
-
-    documents, colliding paths are disambiguated with a URL-fragment suffix
-
-    (e.g. `/#getAccountInfo`) and each operation carries an `x-actual-path`
-
-    extension that records the real request path (`/`). The fragment syntax is
-
-    schema-only — real calls still go to the `url` in `servers`.
-
-
-    All `specUrl` values below point to raw GitHub files on the `main` branch
-
-    of `helius-labs/docs`. They are stable URLs suitable for downstream tools
-
-    to pin or fetch.
-
-    '
+  description: This document is a discovery catalog — not an operational spec.
   contact:
     name: Helius Support
     url: https://www.helius.dev/contact
@@ -94,9 +48,13 @@ paths:
     get:
       tags:
       - NFTs
-      summary: Returns all NFT related events associated with the given address.
+      summary: Returns all NFT related events associated with the given address
       operationId: enhancedApi_getNftEvents
-      description: "Retrieve comprehensive NFT events data for any Solana address. Filter by event types, \ntransaction sources, and time ranges to get precise NFT activity including mints, \nsales, listings, and transfers.\n"
+      description: 'Retrieve comprehensive NFT events data for any Solana address. Filter by event types,
+
+        transaction sources, and time ranges to get precise NFT activity including mints,
+
+        sales, listings, and transfers.'
       parameters:
       - $ref: '#/components/parameters/apiKeyParam'
       - $ref: '#/components/parameters/EnhancedApi_beforeParam'
@@ -147,7 +105,7 @@ paths:
     post:
       tags:
       - NFTs
-      summary: Returns token metadata (whether NFT or Fungible) for a given token address.
+      summary: Returns token metadata (whether NFT or Fungible) for a given token address
       operationId: enhancedApi_getTokenMetadata
       parameters:
       - $ref: '#/components/parameters/apiKeyParam'
@@ -197,7 +155,7 @@ paths:
     get:
       tags:
       - NFTs
-      summary: Returns the NFTs held for a given address.
+      summary: Returns the NFTs held for a given address
       operationId: enhancedApi_getNFTs
       parameters:
       - $ref: '#/components/parameters/apiKeyParam'
@@ -243,7 +201,7 @@ paths:
     post:
       tags:
       - NFTs
-      summary: Queries for NFT events.
+      summary: Queries for NFT events
       operationId: enhancedApi_queryNftEvents
       parameters:
       - $ref: '#/components/parameters/apiKeyParam'
@@ -291,7 +249,7 @@ paths:
     post:
       tags:
       - NFTs
-      summary: Describes the provided NFTs.
+      summary: Describes the provided NFTs
       operationId: enhancedApi_describeNfts
       parameters:
       - $ref: '#/components/parameters/apiKeyParam'
@@ -339,7 +297,7 @@ paths:
     post:
       tags:
       - NFTs
-      summary: Returns a list of mint accounts for a given NFT collection.
+      summary: Returns a list of mint accounts for a given NFT collection
       operationId: enhancedApi_mintlist
       parameters:
       - $ref: '#/components/parameters/apiKeyParam'
@@ -387,7 +345,7 @@ paths:
     post:
       tags:
       - NFTs
-      summary: Query for active NFT listings.
+      summary: Query for active NFT listings
       operationId: enhancedApi_queryActiveListings
       parameters:
       - $ref: '#/components/parameters/apiKeyParam'
@@ -435,7 +393,7 @@ paths:
     post:
       tags:
       - NFTs
-      summary: Returns all metadata associated with an account, including data from the old token list.
+      summary: Returns all metadata associated with an account, including data from the old…
       operationId: enhancedApi_queryMetadataV1
       parameters:
       - $ref: '#/components/parameters/apiKeyParam'
@@ -481,6 +439,24 @@ paths:
         description: Devnet RPC endpoint
 components:
   schemas:
+    EnhancedApi_QueryNftEventsResponse:
+      type: object
+      properties:
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnhancedApi_NftEventV2'
+        paginationToken:
+          $ref: '#/components/schemas/EnhancedApi_PaginationToken'
+    EnhancedApi_OffChainMetadataResult:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/EnhancedApi_OffChainMetadata'
+        uri:
+          type: string
+        error:
+          $ref: '#/components/schemas/EnhancedApi_AccountErrorType'
     EnhancedApi_ActiveListing:
       type: object
       properties:
@@ -498,6 +474,73 @@ components:
           type: string
           description: Address of the NFT seller.
           example: 3ngLS7Y64DoMAHJ6k6XYh8vo5nSiG66AP1yLvbckfKrc
+    EnhancedApi_NFTEvent:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Human readable interpretation of the transaction
+        type:
+          $ref: '#/components/schemas/EnhancedApi_NFTEventType'
+        source:
+          $ref: '#/components/schemas/EnhancedApi_TransactionSource'
+        amount:
+          type: integer
+          example: 1000000
+          description: The amount of the NFT transaction (in lamports).
+        fee:
+          type: integer
+          example: 5000
+        feePayer:
+          type: string
+          example: 8cRrU1NzNpjL3k2BwjW3VixAcX6VFc29KHr4KZg8cs2Y
+        signature:
+          type: string
+          example: 4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf
+        slot:
+          type: integer
+          example: 148277128
+        timestamp:
+          type: integer
+          example: 1656442333
+        saleType:
+          $ref: '#/components/schemas/EnhancedApi_SaleType'
+        buyer:
+          type: string
+          description: The buyer of the NFT.
+        seller:
+          type: string
+          description: The seller of the NFT.
+        staker:
+          type: string
+          description: The staker of the NFT.
+        nfts:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnhancedApi_Token'
+          description: NFTs that are a part of this NFT event.
+    EnhancedApi_LegacyMetadata:
+      type: object
+      description: Data from the old SPL token list.
+      properties:
+        chainId:
+          type: integer
+        address:
+          type: string
+        symbol:
+          type: string
+        name:
+          type: string
+        decimals:
+          type: integer
+        logoURI:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        extensions:
+          type: object
     EnhancedApi_TransactionType:
       type: string
       enum:
@@ -1072,178 +1115,48 @@ components:
       - WITHDRAW_SOL_FROM_FLASH_LOAN_POOL
       - WITHDRAW_TREASURY
       - WITHDRAW_UNSTAKED_DEPOSITS
-    EnhancedApi_DescribeNftsRequest:
+    EnhancedApi_NftV2:
       type: object
       properties:
-        mints:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnhancedApi_NftMintAccount'
-    EnhancedApi_ActiveListingsRequest:
-      type: object
-      properties:
-        query:
-          type: object
-          properties:
-            marketplaces:
-              items:
-                $ref: '#/components/schemas/EnhancedApi_Marketplace'
-            firstVerifiedCreators:
-              type: array
-              items:
-                $ref: '#/components/schemas/EnhancedApi_FirstVerifiedCreator'
-            verifiedCollectionAddresses:
-              type: array
-              items:
-                $ref: '#/components/schemas/EnhancedApi_VerifiedCollectionAddress'
-        options:
-          type: object
-          properties:
-            limit:
-              type: integer
-              description: Maximum number of items to return. Must be between 1 and 1000. Default is 100.
-              minimum: 1
-              maximum: 1000
-              default: 100
-            paginationToken:
-              $ref: '#/components/schemas/EnhancedApi_PaginationToken'
-    EnhancedApi_OffChainMetadata:
-      type: object
-      description: Metaplex metadata that is stored off-chain.
-      properties:
-        name:
-          type: string
-        symbol:
-          type: string
-        attributes:
-          type: array
-          items:
-            properties:
-              traitType:
-                type: string
-              value:
-                type: string
-        sellerFeeBasisPoints:
-          type: integer
-        image:
-          type: string
-        properties:
-          type: object
-          properties:
-            category:
-              type: string
-            files:
-              type: array
-              items:
-                properties:
-                  uri:
-                    type: string
-                  type:
-                    type: string
-            creators:
-              type: array
-              items:
-                properties:
-                  address:
-                    type: string
-                  share:
-                    type: string
-    EnhancedApi_NFTsResponse:
-      type: object
-      properties:
-        numberOfPages:
-          type: number
-        nfts:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnhancedApi_Asset'
-    EnhancedApi_NFTEvent:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Human readable interpretation of the transaction
-        type:
-          $ref: '#/components/schemas/EnhancedApi_NFTEventType'
-        source:
-          $ref: '#/components/schemas/EnhancedApi_TransactionSource'
-        amount:
-          type: integer
-          example: 1000000
-          description: The amount of the NFT transaction (in lamports).
-        fee:
-          type: integer
-          example: 5000
-        feePayer:
-          type: string
-          example: 8cRrU1NzNpjL3k2BwjW3VixAcX6VFc29KHr4KZg8cs2Y
-        signature:
-          type: string
-          example: 4jzQxVTaJ4Fe4Fct9y1aaT9hmVyEjpCqE2bL8JMnuLZbzHZwaL4kZZvNEZ6bEj6fGmiAdCPjmNQHCf8v994PAgDf
-        slot:
-          type: integer
-          example: 148277128
-        timestamp:
-          type: integer
-          example: 1656442333
-        saleType:
-          $ref: '#/components/schemas/EnhancedApi_SaleType'
-        buyer:
-          type: string
-          description: The buyer of the NFT.
-        seller:
-          type: string
-          description: The seller of the NFT.
-        staker:
-          type: string
-          description: The staker of the NFT.
-        nfts:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnhancedApi_Token'
-          description: NFTs that are a part of this NFT event.
-    EnhancedApi_NftName:
-      type: string
-      description: The name of the NFT.
-      example: 'y00t #2940'
-    EnhancedApi_TokenTransfer:
-      type: object
-      properties:
-        fromUserAccount:
-          type: string
-          description: The user account the tokens are sent from.
-        toUserAccount:
-          type: string
-          description: The user account the tokens are sent to.
-        fromTokenAccount:
-          type: string
-          description: The token account the tokens are sent from.
-        toTokenAccount:
-          type: string
-          description: The token account the tokens are sent to.
-        tokenAmount:
-          type: number
-          description: The number of tokens sent.
         mint:
-          type: string
-          description: The mint account of the token.
-          example: DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx
-    EnhancedApi_SortOrder:
+          $ref: '#/components/schemas/EnhancedApi_NftMintAccount'
+        name:
+          $ref: '#/components/schemas/EnhancedApi_NftName'
+        burned:
+          $ref: '#/components/schemas/EnhancedApi_NftBurned'
+        firstVerifiedCreator:
+          $ref: '#/components/schemas/EnhancedApi_FirstVerifiedCreator'
+        verifiedCollectionAddress:
+          $ref: '#/components/schemas/EnhancedApi_VerifiedCollectionAddress'
+    EnhancedApi_NFTEventType:
       type: string
-      description: Order of the returned results. Must be 'ASC' or 'DESC'. Results are descending by default.
       enum:
-      - ASC
-      - DESC
-      default: DESC
-    EnhancedApi_TokensMetadataRequest:
-      type: object
-      properties:
-        mintAccounts:
-          type: array
-          items:
-            type: string
-            description: The mint account of the token to retrieve metadata for.
-          maxItems: 100
+      - NFT_BID
+      - NFT_BID_CANCELLED
+      - NFT_GLOBAL_BID
+      - NFT_GLOBAL_BID_CANCELLED
+      - NFT_LISTING
+      - NFT_CANCEL_LISTING
+      - NFT_SALE
+      - NFT_MINT
+      - NFT_MINT_REJECTED
+      - NFT_AUCTION_CREATED
+      - NFT_AUCTION_UPDATED
+      - NFT_AUCTION_CANCELLED
+      - NFT_PARTICIPATION_REWARD
+      - BURN_NFT
+      - NFT_RENT_LISTING
+      - NFT_RENT_CANCEL_LISTING
+      - NFT_RENT_UPDATE_LISTING
+      - NFT_RENT_ACTIVATE
+      - NFT_RENT_END
+      - ATTACH_METADATA
+      - MIGRATE_TO_PNFT
+      - CREATE_POOL
+    EnhancedApi_VerifiedCollectionAddress:
+      type: string
+      description: Verified Metaplex collection address. Does not exist for all NFT collections.
+      example: 4mKSoDDqApmF1DqXvVTSL6tu2zixrSSNjqMxUnwvVzy2
     EnhancedApi_NftEventV2:
       type: object
       properties:
@@ -1297,18 +1210,125 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EnhancedApi_TokenTransfer'
-    EnhancedApi_NativeTransfer:
+    EnhancedApi_NftBurned:
+      type: boolean
+      description: If the NFT was was burned. Burned NFTs have no name, firstVerifiedCreator, or verifiedCollectionAddress.
+      example: false
+    EnhancedApi_ActiveListingsRequest:
       type: object
       properties:
-        fromUserAccount:
+        query:
+          type: object
+          properties:
+            marketplaces:
+              items:
+                $ref: '#/components/schemas/EnhancedApi_Marketplace'
+            firstVerifiedCreators:
+              type: array
+              items:
+                $ref: '#/components/schemas/EnhancedApi_FirstVerifiedCreator'
+            verifiedCollectionAddresses:
+              type: array
+              items:
+                $ref: '#/components/schemas/EnhancedApi_VerifiedCollectionAddress'
+        options:
+          type: object
+          properties:
+            limit:
+              type: integer
+              description: Maximum number of items to return. Must be between 1 and 1000. Default is 100.
+              minimum: 1
+              maximum: 1000
+              default: 100
+            paginationToken:
+              $ref: '#/components/schemas/EnhancedApi_PaginationToken'
+    EnhancedApi_TokenMetadataResponse:
+      type: object
+      description: Metaplex metadata stored both on-chain and off-chain.
+      properties:
+        mint:
           type: string
-          description: The user account the sol is sent from.
-        toUserAccount:
+        onChainData:
+          $ref: '#/components/schemas/EnhancedApi_OnChainMetadata'
+        offChainData:
+          $ref: '#/components/schemas/EnhancedApi_OffChainMetadata'
+    EnhancedApi_Commitment:
+      type: string
+      enum:
+      - finalized
+      - confirmed
+    EnhancedApi_OnChainMetadata:
+      type: object
+      description: Metaplex metadata that is stored on-chain.
+      properties:
+        key:
           type: string
-          description: The user account the sol is sent to.
-        amount:
+        mint:
+          type: string
+        updateAuthority:
+          type: string
+        data:
+          type: object
+          properties:
+            name:
+              type: string
+            symbol:
+              type: string
+            uri:
+              type: string
+            sellerFeeBasisPoints:
+              type: integer
+            creators:
+              type: array
+              items:
+                type: object
+                properties:
+                  address:
+                    type: string
+                  share:
+                    type: string
+                  verified:
+                    type: boolean
+        tokenStandard:
+          type: string
+        primarySaleHappened:
+          type: boolean
+        isMutable:
+          type: boolean
+        editionNonce:
           type: integer
-          description: The amount of sol sent (in lamports).
+        collection:
+          type: object
+          properties:
+            key:
+              type: string
+            verified:
+              type: boolean
+        collectionDetails:
+          type: object
+          properties:
+            size:
+              type: integer
+        uses:
+          type: object
+          properties:
+            useMethod:
+              type: string
+            remaining:
+              type: integer
+            total:
+              type: integer
+    EnhancedApi_PaginationToken:
+      type: string
+      description: Token used for pagination. Provide the token to the API to retrieve the results from the next page. If no token exists, the query has no results remaining.
+      example: V1_162262948_99
+    EnhancedApi_DescribeNftsRequest:
+      type: object
+      properties:
+        mints:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnhancedApi_NftMintAccount'
     EnhancedApi_TokensMetadataResponseV1:
       type: array
       items:
@@ -1325,6 +1345,249 @@ components:
             $ref: '#/components/schemas/EnhancedApi_OffChainMetadataResult'
           legacyMetadata:
             $ref: '#/components/schemas/EnhancedApi_LegacyMetadata'
+    EnhancedApi_DescribeNftsResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          mint:
+            $ref: '#/components/schemas/EnhancedApi_NftMintAccount'
+          name:
+            $ref: '#/components/schemas/EnhancedApi_NftName'
+          burned:
+            $ref: '#/components/schemas/EnhancedApi_NftBurned'
+          firstVerifiedCreator:
+            $ref: '#/components/schemas/EnhancedApi_FirstVerifiedCreator'
+          verifiedCollectionAddress:
+            $ref: '#/components/schemas/EnhancedApi_VerifiedCollectionAddress'
+          activeListings:
+            type: array
+            items:
+              $ref: '#/components/schemas/EnhancedApi_ActiveListing'
+    EnhancedApi_ErrorResponse:
+      type: object
+      description: JSON-RPC error response format
+      properties:
+        jsonrpc:
+          type: string
+          example: '2.0'
+          description: JSON-RPC version
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: Error code
+              example: -32602
+            message:
+              type: string
+              description: Error message
+              example: Invalid params
+        id:
+          type: string
+          description: Request identifier
+          example: '1'
+      required:
+      - jsonrpc
+      - error
+      - id
+    EnhancedApi_Token:
+      type: object
+      properties:
+        mint:
+          type: string
+          example: DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx
+          description: The mint account of the token.
+        tokenStandard:
+          $ref: '#/components/schemas/EnhancedApi_TokenStandard'
+    EnhancedApi_TokenStandard:
+      type: string
+      enum:
+      - NonFungible
+      - FungibleAsset
+      - Fungible
+      - NonFungibleEdition
+    EnhancedApi_NFTsResponse:
+      type: object
+      properties:
+        numberOfPages:
+          type: number
+        nfts:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnhancedApi_Asset'
+    EnhancedApi_TokenTransfer:
+      type: object
+      properties:
+        fromUserAccount:
+          type: string
+          description: The user account the tokens are sent from.
+        toUserAccount:
+          type: string
+          description: The user account the tokens are sent to.
+        fromTokenAccount:
+          type: string
+          description: The token account the tokens are sent from.
+        toTokenAccount:
+          type: string
+          description: The token account the tokens are sent to.
+        tokenAmount:
+          type: number
+          description: The number of tokens sent.
+        mint:
+          type: string
+          description: The mint account of the token.
+          example: DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx
+    EnhancedApi_SortOrder:
+      type: string
+      description: Order of the returned results. Must be 'ASC' or 'DESC'. Results are descending by default.
+      enum:
+      - ASC
+      - DESC
+      default: DESC
+    EnhancedApi_NftMintAccount:
+      type: string
+      description: NFT mint account address.
+      example: KG6f4Fa6YxAW8cG2Dhb18DiMn3rQ3rSLa1Eo2FYM4gi
+    EnhancedApi_TokensMetadataRequestV1:
+      type: object
+      properties:
+        mintAccounts:
+          type: array
+          items:
+            type: string
+            description: The mint account of the token to retrieve metadata for.
+          maxItems: 100
+        includeOffChain:
+          type: boolean
+          default: false
+          description: Include offchain data referenced in the uri of the metadata account. Omitting defaults to false.
+        disableCache:
+          type: boolean
+          default: false
+          description: Disable usage of cache, useful for monitoring metadata changes.
+    EnhancedApi_AccountErrorType:
+      type: string
+      example: ''
+      enum:
+      - UNKNOWN
+      - EMPTY_ACCOUNT
+      - TIMEOUT
+      - INVALID_ACCOUNT
+      - INVALID_PUBKEY
+    EnhancedApi_FirstVerifiedCreator:
+      type: string
+      description: First verified creator of the NFT. Used to reference NFT collections.
+      example: A4FM6h8T5Fmh9z2g3fKUrKfZn6BNFEgByR8QGpdbQhk1
+    EnhancedApi_OffChainMetadata:
+      type: object
+      description: Metaplex metadata that is stored off-chain.
+      properties:
+        name:
+          type: string
+        symbol:
+          type: string
+        attributes:
+          type: array
+          items:
+            properties:
+              traitType:
+                type: string
+              value:
+                type: string
+        sellerFeeBasisPoints:
+          type: integer
+        image:
+          type: string
+        properties:
+          type: object
+          properties:
+            category:
+              type: string
+            files:
+              type: array
+              items:
+                properties:
+                  uri:
+                    type: string
+                  type:
+                    type: string
+            creators:
+              type: array
+              items:
+                properties:
+                  address:
+                    type: string
+                  share:
+                    type: string
+    EnhancedApi_SaleType:
+      type: string
+      enum:
+      - AUCTION
+      - INSTANT_SALE
+      - OFFER
+      - GLOBAL_OFFER
+      - MINT
+      - UNKNOWN
+    EnhancedApi_NativeTransfer:
+      type: object
+      properties:
+        fromUserAccount:
+          type: string
+          description: The user account the sol is sent from.
+        toUserAccount:
+          type: string
+          description: The user account the sol is sent to.
+        amount:
+          type: integer
+          description: The amount of sol sent (in lamports).
+    EnhancedApi_MintlistRequest:
+      type: object
+      properties:
+        query:
+          type: object
+          properties:
+            firstVerifiedCreators:
+              type: array
+              items:
+                $ref: '#/components/schemas/EnhancedApi_FirstVerifiedCreator'
+            verifiedCollectionAddresses:
+              type: array
+              items:
+                $ref: '#/components/schemas/EnhancedApi_VerifiedCollectionAddress'
+        options:
+          type: object
+          properties:
+            limit:
+              type: integer
+              description: Maximum number of items to return. Must be between 1 and 10,000. Default is 1000.
+              minimum: 1
+              maximum: '10_000'
+              default: 1000
+            paginationToken:
+              $ref: '#/components/schemas/EnhancedApi_PaginationToken'
+    EnhancedApi_ActiveListingsResponse:
+      type: object
+      properties:
+        result:
+          type: array
+          items:
+            type: object
+            properties:
+              mint:
+                $ref: '#/components/schemas/EnhancedApi_NftMintAccount'
+              name:
+                $ref: '#/components/schemas/EnhancedApi_NftName'
+              firstVerifiedCreator:
+                $ref: '#/components/schemas/EnhancedApi_FirstVerifiedCreator'
+              verifiedCollectionAddress:
+                $ref: '#/components/schemas/EnhancedApi_VerifiedCollectionAddress'
+              activeListings:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnhancedApi_ActiveListing'
+        paginationToken:
+          $ref: '#/components/schemas/EnhancedApi_PaginationToken'
     EnhancedApi_TransactionSource:
       type: string
       enum:
@@ -1415,147 +1678,7 @@ components:
       - TRTLS
       - RUNNER
       - INVICTUS
-    EnhancedApi_Token:
-      type: object
-      properties:
-        mint:
-          type: string
-          example: DsfCsbbPH77p6yeLS1i4ag9UA5gP9xWSvdCx72FJjLsx
-          description: The mint account of the token.
-        tokenStandard:
-          $ref: '#/components/schemas/EnhancedApi_TokenStandard'
-    EnhancedApi_PaginationToken:
-      type: string
-      description: Token used for pagination. Provide the token to the API to retrieve the results from the next page. If no token exists, the query has no results remaining.
-      example: V1_162262948_99
-    EnhancedApi_MintlistResponse:
-      type: object
-      properties:
-        result:
-          type: array
-          items:
-            type: object
-            properties:
-              mint:
-                $ref: '#/components/schemas/EnhancedApi_NftMintAccount'
-              name:
-                $ref: '#/components/schemas/EnhancedApi_NftName'
-        paginationToken:
-          $ref: '#/components/schemas/EnhancedApi_PaginationToken'
-    EnhancedApi_OnChainMetadata:
-      type: object
-      description: Metaplex metadata that is stored on-chain.
-      properties:
-        key:
-          type: string
-        mint:
-          type: string
-        updateAuthority:
-          type: string
-        data:
-          type: object
-          properties:
-            name:
-              type: string
-            symbol:
-              type: string
-            uri:
-              type: string
-            sellerFeeBasisPoints:
-              type: integer
-            creators:
-              type: array
-              items:
-                type: object
-                properties:
-                  address:
-                    type: string
-                  share:
-                    type: string
-                  verified:
-                    type: boolean
-        tokenStandard:
-          type: string
-        primarySaleHappened:
-          type: boolean
-        isMutable:
-          type: boolean
-        editionNonce:
-          type: integer
-        collection:
-          type: object
-          properties:
-            key:
-              type: string
-            verified:
-              type: boolean
-        collectionDetails:
-          type: object
-          properties:
-            size:
-              type: integer
-        uses:
-          type: object
-          properties:
-            useMethod:
-              type: string
-            remaining:
-              type: integer
-            total:
-              type: integer
-    EnhancedApi_OnChainAccountInfoResult:
-      type: object
-      properties:
-        accountInfo:
-          $ref: '#/components/schemas/EnhancedApi_OnChainAccountInfo'
-        error:
-          $ref: '#/components/schemas/EnhancedApi_AccountErrorType'
-    EnhancedApi_ActiveListingsResponse:
-      type: object
-      properties:
-        result:
-          type: array
-          items:
-            type: object
-            properties:
-              mint:
-                $ref: '#/components/schemas/EnhancedApi_NftMintAccount'
-              name:
-                $ref: '#/components/schemas/EnhancedApi_NftName'
-              firstVerifiedCreator:
-                $ref: '#/components/schemas/EnhancedApi_FirstVerifiedCreator'
-              verifiedCollectionAddress:
-                $ref: '#/components/schemas/EnhancedApi_VerifiedCollectionAddress'
-              activeListings:
-                type: array
-                items:
-                  $ref: '#/components/schemas/EnhancedApi_ActiveListing'
-        paginationToken:
-          $ref: '#/components/schemas/EnhancedApi_PaginationToken'
-    EnhancedApi_OnChainMetadataResult:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/EnhancedApi_OnChainMetadata'
-        error:
-          $ref: '#/components/schemas/EnhancedApi_AccountErrorType'
-    EnhancedApi_TokenStandard:
-      type: string
-      enum:
-      - NonFungible
-      - FungibleAsset
-      - Fungible
-      - NonFungibleEdition
-    EnhancedApi_SaleType:
-      type: string
-      enum:
-      - AUCTION
-      - INSTANT_SALE
-      - OFFER
-      - GLOBAL_OFFER
-      - MINT
-      - UNKNOWN
-    EnhancedApi_TokensMetadataRequestV1:
+    EnhancedApi_TokensMetadataRequest:
       type: object
       properties:
         mintAccounts:
@@ -1564,66 +1687,63 @@ components:
             type: string
             description: The mint account of the token to retrieve metadata for.
           maxItems: 100
-        includeOffChain:
-          type: boolean
-          default: false
-          description: Include offchain data referenced in the uri of the metadata account. Omitting defaults to false.
-        disableCache:
-          type: boolean
-          default: false
-          description: Disable usage of cache, useful for monitoring metadata changes.
-    EnhancedApi_LegacyMetadata:
+    EnhancedApi_OnChainMetadataResult:
       type: object
-      description: Data from the old SPL token list.
       properties:
-        chainId:
+        metadata:
+          $ref: '#/components/schemas/EnhancedApi_OnChainMetadata'
+        error:
+          $ref: '#/components/schemas/EnhancedApi_AccountErrorType'
+    EnhancedApi_OnChainAccountInfo:
+      type: object
+      description: Account data that is stored on-chain.
+      properties:
+        key:
+          type: string
+        isSigner:
+          type: boolean
+        isWritable:
+          type: boolean
+        lamports:
           type: integer
-        address:
-          type: string
-        symbol:
-          type: string
-        name:
-          type: string
-        decimals:
-          type: integer
-        logoURI:
-          type: string
-        tags:
-          type: array
-          items:
-            type: string
-        extensions:
+        data:
           type: object
-    EnhancedApi_Commitment:
-      type: string
-      enum:
-      - finalized
-      - confirmed
-    EnhancedApi_NFTEventType:
-      type: string
-      enum:
-      - NFT_BID
-      - NFT_BID_CANCELLED
-      - NFT_GLOBAL_BID
-      - NFT_GLOBAL_BID_CANCELLED
-      - NFT_LISTING
-      - NFT_CANCEL_LISTING
-      - NFT_SALE
-      - NFT_MINT
-      - NFT_MINT_REJECTED
-      - NFT_AUCTION_CREATED
-      - NFT_AUCTION_UPDATED
-      - NFT_AUCTION_CANCELLED
-      - NFT_PARTICIPATION_REWARD
-      - BURN_NFT
-      - NFT_RENT_LISTING
-      - NFT_RENT_CANCEL_LISTING
-      - NFT_RENT_UPDATE_LISTING
-      - NFT_RENT_ACTIVATE
-      - NFT_RENT_END
-      - ATTACH_METADATA
-      - MIGRATE_TO_PNFT
-      - CREATE_POOL
+          properties:
+            parsed:
+              type: object
+              properties:
+                info:
+                  type: object
+                  properties:
+                    decimals:
+                      type: integer
+                    freezeAuthority:
+                      type: string
+                    isInitialized:
+                      type: boolean
+                    mintAuthority:
+                      type: string
+                    supply:
+                      type: string
+                type:
+                  type: string
+            program:
+              type: string
+            space:
+              type: integer
+        owner:
+          type: string
+        executable:
+          type: boolean
+        rentEpoch:
+          type: integer
+    EnhancedApi_OnChainAccountInfoResult:
+      type: object
+      properties:
+        accountInfo:
+          $ref: '#/components/schemas/EnhancedApi_OnChainAccountInfo'
+        error:
+          $ref: '#/components/schemas/EnhancedApi_AccountErrorType'
     EnhancedApi_QueryNftEventsRequest:
       type: object
       properties:
@@ -1684,14 +1804,10 @@ components:
               $ref: '#/components/schemas/EnhancedApi_SortOrder'
             paginationToken:
               $ref: '#/components/schemas/EnhancedApi_PaginationToken'
-    EnhancedApi_NftBurned:
-      type: boolean
-      description: If the NFT was was burned. Burned NFTs have no name, firstVerifiedCreator, or verifiedCollectionAddress.
-      example: false
-    EnhancedApi_VerifiedCollectionAddress:
+    EnhancedApi_NftName:
       type: string
-      description: Verified Metaplex collection address. Does not exist for all NFT collections.
-      example: 4mKSoDDqApmF1DqXvVTSL6tu2zixrSSNjqMxUnwvVzy2
+      description: The name of the NFT.
+      example: 'y00t #2940'
     EnhancedApi_Asset:
       type: object
       properties:
@@ -1714,6 +1830,20 @@ components:
                 type: string
               value:
                 type: string
+    EnhancedApi_MintlistResponse:
+      type: object
+      properties:
+        result:
+          type: array
+          items:
+            type: object
+            properties:
+              mint:
+                $ref: '#/components/schemas/EnhancedApi_NftMintAccount'
+              name:
+                $ref: '#/components/schemas/EnhancedApi_NftName'
+        paginationToken:
+          $ref: '#/components/schemas/EnhancedApi_PaginationToken'
     EnhancedApi_Marketplace:
       type: string
       description: Marketplace where the NFT is being listed.
@@ -1733,193 +1863,28 @@ components:
       - DIGITAL_EYES
       - CORAL_CUBE
       - UNKNOWN
-    EnhancedApi_AccountErrorType:
-      type: string
-      example: ''
-      enum:
-      - UNKNOWN
-      - EMPTY_ACCOUNT
-      - TIMEOUT
-      - INVALID_ACCOUNT
-      - INVALID_PUBKEY
-    EnhancedApi_OffChainMetadataResult:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/EnhancedApi_OffChainMetadata'
-        uri:
-          type: string
-        error:
-          $ref: '#/components/schemas/EnhancedApi_AccountErrorType'
-    EnhancedApi_QueryNftEventsResponse:
-      type: object
-      properties:
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnhancedApi_NftEventV2'
-        paginationToken:
-          $ref: '#/components/schemas/EnhancedApi_PaginationToken'
-    EnhancedApi_DescribeNftsResponse:
-      type: array
-      items:
-        type: object
-        properties:
-          mint:
-            $ref: '#/components/schemas/EnhancedApi_NftMintAccount'
-          name:
-            $ref: '#/components/schemas/EnhancedApi_NftName'
-          burned:
-            $ref: '#/components/schemas/EnhancedApi_NftBurned'
-          firstVerifiedCreator:
-            $ref: '#/components/schemas/EnhancedApi_FirstVerifiedCreator'
-          verifiedCollectionAddress:
-            $ref: '#/components/schemas/EnhancedApi_VerifiedCollectionAddress'
-          activeListings:
-            type: array
-            items:
-              $ref: '#/components/schemas/EnhancedApi_ActiveListing'
-    EnhancedApi_NftV2:
-      type: object
-      properties:
-        mint:
-          $ref: '#/components/schemas/EnhancedApi_NftMintAccount'
-        name:
-          $ref: '#/components/schemas/EnhancedApi_NftName'
-        burned:
-          $ref: '#/components/schemas/EnhancedApi_NftBurned'
-        firstVerifiedCreator:
-          $ref: '#/components/schemas/EnhancedApi_FirstVerifiedCreator'
-        verifiedCollectionAddress:
-          $ref: '#/components/schemas/EnhancedApi_VerifiedCollectionAddress'
-    EnhancedApi_TokenMetadataResponse:
-      type: object
-      description: Metaplex metadata stored both on-chain and off-chain.
-      properties:
-        mint:
-          type: string
-        onChainData:
-          $ref: '#/components/schemas/EnhancedApi_OnChainMetadata'
-        offChainData:
-          $ref: '#/components/schemas/EnhancedApi_OffChainMetadata'
-    EnhancedApi_OnChainAccountInfo:
-      type: object
-      description: Account data that is stored on-chain.
-      properties:
-        key:
-          type: string
-        isSigner:
-          type: boolean
-        isWritable:
-          type: boolean
-        lamports:
-          type: integer
-        data:
-          type: object
-          properties:
-            parsed:
-              type: object
-              properties:
-                info:
-                  type: object
-                  properties:
-                    decimals:
-                      type: integer
-                    freezeAuthority:
-                      type: string
-                    isInitialized:
-                      type: boolean
-                    mintAuthority:
-                      type: string
-                    supply:
-                      type: string
-                type:
-                  type: string
-            program:
-              type: string
-            space:
-              type: integer
-        owner:
-          type: string
-        executable:
-          type: boolean
-        rentEpoch:
-          type: integer
-    EnhancedApi_ErrorResponse:
-      type: object
-      description: JSON-RPC error response format
-      properties:
-        jsonrpc:
-          type: string
-          example: '2.0'
-          description: JSON-RPC version
-        error:
-          type: object
-          properties:
-            code:
-              type: integer
-              description: Error code
-              example: -32602
-            message:
-              type: string
-              description: Error message
-              example: Invalid params
-        id:
-          type: string
-          description: Request identifier
-          example: '1'
-      required:
-      - jsonrpc
-      - error
-      - id
-    EnhancedApi_MintlistRequest:
-      type: object
-      properties:
-        query:
-          type: object
-          properties:
-            firstVerifiedCreators:
-              type: array
-              items:
-                $ref: '#/components/schemas/EnhancedApi_FirstVerifiedCreator'
-            verifiedCollectionAddresses:
-              type: array
-              items:
-                $ref: '#/components/schemas/EnhancedApi_VerifiedCollectionAddress'
-        options:
-          type: object
-          properties:
-            limit:
-              type: integer
-              description: Maximum number of items to return. Must be between 1 and 10,000. Default is 1000.
-              minimum: 1
-              maximum: '10_000'
-              default: 1000
-            paginationToken:
-              $ref: '#/components/schemas/EnhancedApi_PaginationToken'
-    EnhancedApi_FirstVerifiedCreator:
-      type: string
-      description: First verified creator of the NFT. Used to reference NFT collections.
-      example: A4FM6h8T5Fmh9z2g3fKUrKfZn6BNFEgByR8QGpdbQhk1
-    EnhancedApi_NftMintAccount:
-      type: string
-      description: NFT mint account address.
-      example: KG6f4Fa6YxAW8cG2Dhb18DiMn3rQ3rSLa1Eo2FYM4gi
   parameters:
-    EnhancedApi_pageNumberParam:
-      name: pageNumber
+    EnhancedApi_transactionSourceParam:
+      name: source
       in: query
-      description: The page number used for pagination.
+      description: The TransactionSource to filter by. For a list of possible options, see the Transaction Types section.
       required: false
       schema:
-        type: number
-    EnhancedApi_transactionTypeParam:
-      name: type
+        $ref: '#/components/schemas/EnhancedApi_TransactionSource'
+    EnhancedApi_commitmentParam:
+      name: commitment
       in: query
-      description: The TransactionType to filter by. For a list of possible options, see the Transaction Types section.
+      description: How finalized a block must be to be included in the search. If not provided, will default to "finalized" commitment. Note that "processed" level commitment is not supported.
       required: false
       schema:
-        $ref: '#/components/schemas/EnhancedApi_TransactionType'
+        $ref: '#/components/schemas/EnhancedApi_Commitment'
+    EnhancedApi_beforeParam:
+      name: before
+      in: query
+      description: Start searching backwards from this transaction signature.
+      required: false
+      schema:
+        type: string
     EnhancedApi_addressParam:
       name: address
       in: path
@@ -1929,20 +1894,13 @@ components:
         type: string
         example: 86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY
         default: 86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY
-    EnhancedApi_transactionSourceParam:
-      name: source
+    EnhancedApi_transactionTypeParam:
+      name: type
       in: query
-      description: The TransactionSource to filter by. For a list of possible options, see the Transaction Types section.
+      description: The TransactionType to filter by. For a list of possible options, see the Transaction Types section.
       required: false
       schema:
-        $ref: '#/components/schemas/EnhancedApi_TransactionSource'
-    EnhancedApi_beforeParam:
-      name: before
-      in: query
-      description: Start searching backwards from this transaction signature.
-      required: false
-      schema:
-        type: string
+        $ref: '#/components/schemas/EnhancedApi_TransactionType'
     apiKeyParam:
       name: api-key
       in: query
@@ -1950,13 +1908,13 @@ components:
       description: Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`.
       schema:
         type: string
-    EnhancedApi_commitmentParam:
-      name: commitment
+    EnhancedApi_pageNumberParam:
+      name: pageNumber
       in: query
-      description: How finalized a block must be to be included in the search. If not provided, will default to "finalized" commitment. Note that "processed" level commitment is not supported.
+      description: The page number used for pagination.
       required: false
       schema:
-        $ref: '#/components/schemas/EnhancedApi_Commitment'
+        type: number
     EnhancedApi_untilParam:
       name: until
       in: query
@@ -1965,18 +1923,6 @@ components:
       schema:
         type: string
   responses:
-    EnhancedApi_401-Unauthorized:
-      description: Unauthorized request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32001
-              message: Unauthorized
-            id: '1'
     EnhancedApi_404-NotFound:
       description: The specified resource was not found.
       content:
@@ -1988,42 +1934,6 @@ components:
             error:
               code: -32601
               message: Method not found
-            id: '1'
-    EnhancedApi_400-BadRequest:
-      description: Invalid request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32602
-              message: Invalid params
-            id: '1'
-    EnhancedApi_503-ServiceUnavailable:
-      description: The service is temporarily unavailable.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32002
-              message: Service unavailable
-            id: '1'
-    EnhancedApi_504-GatewayTimeout:
-      description: The request timed out.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32003
-              message: Gateway timeout
             id: '1'
     EnhancedApi_500-InternalServerError:
       description: The server encountered an unexpected condition that prevented it from fulfilling the request.
@@ -2037,6 +1947,42 @@ components:
               code: -32603
               message: Internal error
             id: '1'
+    EnhancedApi_401-Unauthorized:
+      description: Unauthorized request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32001
+              message: Unauthorized
+            id: '1'
+    EnhancedApi_504-GatewayTimeout:
+      description: The request timed out.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32003
+              message: Gateway timeout
+            id: '1'
+    EnhancedApi_503-ServiceUnavailable:
+      description: The service is temporarily unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32002
+              message: Service unavailable
+            id: '1'
     EnhancedApi_403-Forbidden:
       description: Request was forbidden.
       content:
@@ -2048,6 +1994,18 @@ components:
             error:
               code: -32003
               message: Forbidden
+            id: '1'
+    EnhancedApi_400-BadRequest:
+      description: Invalid request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32602
+              message: Invalid params
             id: '1'
     EnhancedApi_429-TooManyRequests:
       description: Exceeded rate limit.
