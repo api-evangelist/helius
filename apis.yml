@@ -39,6 +39,8 @@ tags:
 - RPC
 - DAS
 - Streams
+- Real-Time
+- A2A
 created: '2026-05-08'
 modified: '2026-09-16'
 specificationVersion: '0.23'
@@ -313,3 +315,10 @@ common:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-a2a:
+  verified: true
+  probed: '2026-09-26'
+  url: "https://www.helius.dev/.well-known/agent-card.json"
+  grade: "near-conformant"
+  protocol_version: "0.3.0"
+  control: 404

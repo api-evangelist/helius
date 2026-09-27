@@ -80,6 +80,46 @@ paths:
       - url: https://api.helius.xyz
         description: Production server
 components:
+  responses:
+    WalletApi_BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: Invalid wallet address
+            code: 400
+            details: '''invalid-address'' is not a valid Solana address'
+    WalletApi_Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: API key required. Pass via ?api-key=xxx or X-Api-Key header
+            code: 401
+    WalletApi_RateLimited:
+      description: Rate limit exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: RATE_LIMIT_EXCEEDED
+            code: 429
+            details: Too many requests. Retry after 2 seconds.
+    WalletApi_InternalError:
+      description: Transient server error. Retryable with exponential backoff.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: INTERNAL_ERROR
+            code: 500
+            details: An unexpected error occurred. Please retry.
   schemas:
     WalletApi_FundingSource:
       type: object
@@ -169,46 +209,6 @@ components:
       required:
       - error
       - code
-  responses:
-    WalletApi_InternalError:
-      description: Transient server error. Retryable with exponential backoff.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: INTERNAL_ERROR
-            code: 500
-            details: An unexpected error occurred. Please retry.
-    WalletApi_BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: Invalid wallet address
-            code: 400
-            details: '''invalid-address'' is not a valid Solana address'
-    WalletApi_RateLimited:
-      description: Rate limit exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: RATE_LIMIT_EXCEEDED
-            code: 429
-            details: Too many requests. Retry after 2 seconds.
-    WalletApi_Unauthorized:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: API key required. Pass via ?api-key=xxx or X-Api-Key header
-            code: 401
   parameters:
     WalletApi_WalletAddress:
       name: wallet

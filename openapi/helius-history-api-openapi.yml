@@ -187,7 +187,73 @@ paths:
       - url: https://api.helius.xyz
         description: Production server
 components:
+  responses:
+    WalletApi_BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: Invalid wallet address
+            code: 400
+            details: '''invalid-address'' is not a valid Solana address'
+    WalletApi_Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: API key required. Pass via ?api-key=xxx or X-Api-Key header
+            code: 401
+    WalletApi_RateLimited:
+      description: Rate limit exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: RATE_LIMIT_EXCEEDED
+            code: 429
+            details: Too many requests. Retry after 2 seconds.
+    WalletApi_InternalError:
+      description: Transient server error. Retryable with exponential backoff.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: INTERNAL_ERROR
+            code: 500
+            details: An unexpected error occurred. Please retry.
   schemas:
+    WalletApi_HistoryResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletApi_HistoryTransaction'
+        pagination:
+          $ref: '#/components/schemas/WalletApi_Pagination'
+      required:
+      - data
+      - pagination
+    WalletApi_Pagination:
+      type: object
+      properties:
+        hasMore:
+          type: boolean
+          description: Whether more results are available
+          example: true
+        nextCursor:
+          type: string
+          nullable: true
+          description: Cursor to fetch the next page of results
+          example: 5wHu1qwD7Jsj3xqWjdSEJmYr3Q5f5RjXqjqQJ7jqEj7jqEj7jqEj7jqEj7jqEj7jqE
+      required:
+      - hasMore
     WalletApi_HistoryTransaction:
       type: object
       properties:
@@ -228,20 +294,24 @@ components:
       - fee
       - feePayer
       - balanceChanges
-    WalletApi_Pagination:
+    WalletApi_Error:
       type: object
       properties:
-        hasMore:
-          type: boolean
-          description: Whether more results are available
-          example: true
-        nextCursor:
+        error:
           type: string
-          nullable: true
-          description: Cursor to fetch the next page of results
-          example: 5wHu1qwD7Jsj3xqWjdSEJmYr3Q5f5RjXqjqQJ7jqEj7jqEj7jqEj7jqEj7jqEj7jqE
+          description: Error message
+          example: Invalid wallet address
+        code:
+          type: integer
+          description: HTTP status code
+          example: 400
+        details:
+          type: string
+          description: Additional error details
+          example: '''invalid-address'' is not a valid Solana address'
       required:
-      - hasMore
+      - error
+      - code
     WalletApi_BalanceChange:
       type: object
       properties:
@@ -261,76 +331,6 @@ components:
       - mint
       - amount
       - decimals
-    WalletApi_HistoryResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletApi_HistoryTransaction'
-        pagination:
-          $ref: '#/components/schemas/WalletApi_Pagination'
-      required:
-      - data
-      - pagination
-    WalletApi_Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-          example: Invalid wallet address
-        code:
-          type: integer
-          description: HTTP status code
-          example: 400
-        details:
-          type: string
-          description: Additional error details
-          example: '''invalid-address'' is not a valid Solana address'
-      required:
-      - error
-      - code
-  responses:
-    WalletApi_InternalError:
-      description: Transient server error. Retryable with exponential backoff.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: INTERNAL_ERROR
-            code: 500
-            details: An unexpected error occurred. Please retry.
-    WalletApi_BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: Invalid wallet address
-            code: 400
-            details: '''invalid-address'' is not a valid Solana address'
-    WalletApi_RateLimited:
-      description: Rate limit exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: RATE_LIMIT_EXCEEDED
-            code: 429
-            details: Too many requests. Retry after 2 seconds.
-    WalletApi_Unauthorized:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: API key required. Pass via ?api-key=xxx or X-Api-Key header
-            code: 401
   parameters:
     WalletApi_WalletAddress:
       name: wallet

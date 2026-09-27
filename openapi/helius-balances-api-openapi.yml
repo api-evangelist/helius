@@ -115,25 +115,47 @@ paths:
       - url: https://api.helius.xyz
         description: Production server
 components:
+  responses:
+    WalletApi_BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: Invalid wallet address
+            code: 400
+            details: '''invalid-address'' is not a valid Solana address'
+    WalletApi_Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: API key required. Pass via ?api-key=xxx or X-Api-Key header
+            code: 401
+    WalletApi_RateLimited:
+      description: Rate limit exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: RATE_LIMIT_EXCEEDED
+            code: 429
+            details: Too many requests. Retry after 2 seconds.
+    WalletApi_InternalError:
+      description: Transient server error. Retryable with exponential backoff.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: INTERNAL_ERROR
+            code: 500
+            details: An unexpected error occurred. Please retry.
   schemas:
-    WalletApi_Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-          example: Invalid wallet address
-        code:
-          type: integer
-          description: HTTP status code
-          example: 400
-        details:
-          type: string
-          description: Additional error details
-          example: '''invalid-address'' is not a valid Solana address'
-      required:
-      - error
-      - code
     WalletApi_Nft:
       type: object
       properties:
@@ -168,53 +190,6 @@ components:
       required:
       - mint
       - compressed
-    WalletApi_BalancesResponse:
-      type: object
-      properties:
-        balances:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletApi_TokenBalance'
-          description: 'Array of token balances for the current page, including native SOL.
-
-            When showNative=true, SOL appears as the first element with mint address So11111111111111111111111111111111111111112.
-
-            Other tokens are sorted by USD value (descending).
-
-            '
-        nfts:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletApi_Nft'
-          description: Array of NFT holdings (only included if showNfts=true, max 100, first page only)
-        totalUsdValue:
-          type: number
-          description: Total USD value of balances on this page (not total portfolio value)
-          example: 217.98
-        pagination:
-          type: object
-          description: Pagination metadata. Users must manually request additional pages using the page parameter.
-          properties:
-            page:
-              type: integer
-              description: Current page number
-              example: 1
-            limit:
-              type: integer
-              description: Number of items per page
-              example: 100
-            hasMore:
-              type: boolean
-              description: True if more results are available. Increment the page parameter to fetch the next page.
-              example: true
-          required:
-          - page
-          - limit
-          - hasMore
-      required:
-      - balances
-      - totalUsdValue
-      - pagination
     WalletApi_TokenBalance:
       type: object
       properties:
@@ -267,46 +242,71 @@ components:
       - balance
       - decimals
       - tokenProgram
-  responses:
-    WalletApi_InternalError:
-      description: Transient server error. Retryable with exponential backoff.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: INTERNAL_ERROR
-            code: 500
-            details: An unexpected error occurred. Please retry.
-    WalletApi_BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: Invalid wallet address
-            code: 400
-            details: '''invalid-address'' is not a valid Solana address'
-    WalletApi_RateLimited:
-      description: Rate limit exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: RATE_LIMIT_EXCEEDED
-            code: 429
-            details: Too many requests. Retry after 2 seconds.
-    WalletApi_Unauthorized:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: API key required. Pass via ?api-key=xxx or X-Api-Key header
-            code: 401
+    WalletApi_BalancesResponse:
+      type: object
+      properties:
+        balances:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletApi_TokenBalance'
+          description: 'Array of token balances for the current page, including native SOL.
+
+            When showNative=true, SOL appears as the first element with mint address So11111111111111111111111111111111111111112.
+
+            Other tokens are sorted by USD value (descending).
+
+            '
+        nfts:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletApi_Nft'
+          description: Array of NFT holdings (only included if showNfts=true, max 100, first page only)
+        totalUsdValue:
+          type: number
+          description: Total USD value of balances on this page (not total portfolio value)
+          example: 217.98
+        pagination:
+          type: object
+          description: Pagination metadata. Users must manually request additional pages using the page parameter.
+          properties:
+            page:
+              type: integer
+              description: Current page number
+              example: 1
+            limit:
+              type: integer
+              description: Number of items per page
+              example: 100
+            hasMore:
+              type: boolean
+              description: True if more results are available. Increment the page parameter to fetch the next page.
+              example: true
+          required:
+          - page
+          - limit
+          - hasMore
+      required:
+      - balances
+      - totalUsdValue
+      - pagination
+    WalletApi_Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+          example: Invalid wallet address
+        code:
+          type: integer
+          description: HTTP status code
+          example: 400
+        details:
+          type: string
+          description: Additional error details
+          example: '''invalid-address'' is not a valid Solana address'
+      required:
+      - error
+      - code
   parameters:
     WalletApi_WalletAddress:
       name: wallet

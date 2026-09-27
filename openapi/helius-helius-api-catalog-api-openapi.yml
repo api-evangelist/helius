@@ -206,43 +206,6 @@ paths:
       - Helius API Catalog
 components:
   schemas:
-    PriorityFeeApi_PriorityFeeOptions:
-      type: object
-      description: Advanced options for customizing Solana priority fee estimation based on network conditions
-      properties:
-        transactionEncoding:
-          type: string
-          enum:
-          - Base58
-          - Base64
-          description: Encoding format of the provided Solana transaction
-        priorityLevel:
-          type: string
-          enum:
-          - Min
-          - Low
-          - Medium
-          - High
-          - VeryHigh
-          - UnsafeMax
-          description: Specific priority level to estimate fees for based on current Solana network congestion
-        includeAllPriorityFeeLevels:
-          type: boolean
-          description: When true, returns comprehensive estimates for all priority levels from minimum to maximum
-        lookbackSlots:
-          type: integer
-          minimum: 1
-          maximum: 150
-          description: Number of recent Solana blockchain slots to analyze for accurate fee estimation (1-150)
-        includeVote:
-          type: boolean
-          description: When true, includes vote transactions in the fee calculation for more comprehensive analysis
-        recommended:
-          type: boolean
-          description: When true, returns the recommended optimal fee based on current Solana network conditions
-        evaluateEmptySlotAsZero:
-          type: boolean
-          description: When true, slots with no transactions are counted as zero-fee slots in the calculation
     PriorityFeeApi_PriorityFeeEstimateRequest:
       type: object
       properties:
@@ -366,6 +329,43 @@ components:
                     an upper bound during extreme congestion (fastest possible confirmation, but potentially unnecessarily high)
 
                     '
+    PriorityFeeApi_PriorityFeeOptions:
+      type: object
+      description: Advanced options for customizing Solana priority fee estimation based on network conditions
+      properties:
+        transactionEncoding:
+          type: string
+          enum:
+          - Base58
+          - Base64
+          description: Encoding format of the provided Solana transaction
+        priorityLevel:
+          type: string
+          enum:
+          - Min
+          - Low
+          - Medium
+          - High
+          - VeryHigh
+          - UnsafeMax
+          description: Specific priority level to estimate fees for based on current Solana network congestion
+        includeAllPriorityFeeLevels:
+          type: boolean
+          description: When true, returns comprehensive estimates for all priority levels from minimum to maximum
+        lookbackSlots:
+          type: integer
+          minimum: 1
+          maximum: 150
+          description: Number of recent Solana blockchain slots to analyze for accurate fee estimation (1-150)
+        includeVote:
+          type: boolean
+          description: When true, includes vote transactions in the fee calculation for more comprehensive analysis
+        recommended:
+          type: boolean
+          description: When true, returns the recommended optimal fee based on current Solana network conditions
+        evaluateEmptySlotAsZero:
+          type: boolean
+          description: When true, slots with no transactions are counted as zero-fee slots in the calculation
   securitySchemes:
     ApiKeyQuery:
       type: apiKey

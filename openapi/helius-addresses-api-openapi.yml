@@ -148,6 +148,30 @@ components:
               code: -32001
               message: Unauthorized
             id: '1'
+    EnhancedApi_500-InternalServerError:
+      description: The server encountered an unexpected condition that prevented it from fulfilling the request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32603
+              message: Internal error
+            id: '1'
+    EnhancedApi_503-ServiceUnavailable:
+      description: The service is temporarily unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32002
+              message: Service unavailable
+            id: '1'
     EnhancedApi_429-TooManyRequests:
       description: Exceeded rate limit.
       content:
@@ -172,8 +196,8 @@ components:
               code: -32003
               message: Gateway timeout
             id: '1'
-    EnhancedApi_503-ServiceUnavailable:
-      description: The service is temporarily unavailable.
+    EnhancedApi_400-BadRequest:
+      description: Invalid request.
       content:
         application/json:
           schema:
@@ -181,20 +205,8 @@ components:
           example:
             jsonrpc: '2.0'
             error:
-              code: -32002
-              message: Service unavailable
-            id: '1'
-    EnhancedApi_404-NotFound:
-      description: The specified resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32601
-              message: Method not found
+              code: -32602
+              message: Invalid params
             id: '1'
     EnhancedApi_403-Forbidden:
       description: Request was forbidden.
@@ -208,8 +220,8 @@ components:
               code: -32003
               message: Forbidden
             id: '1'
-    EnhancedApi_500-InternalServerError:
-      description: The server encountered an unexpected condition that prevented it from fulfilling the request.
+    EnhancedApi_404-NotFound:
+      description: The specified resource was not found.
       content:
         application/json:
           schema:
@@ -217,21 +229,26 @@ components:
           example:
             jsonrpc: '2.0'
             error:
-              code: -32603
-              message: Internal error
+              code: -32601
+              message: Method not found
             id: '1'
-    EnhancedApi_400-BadRequest:
-      description: Invalid request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32602
-              message: Invalid params
-            id: '1'
+  parameters:
+    EnhancedApi_addressParam:
+      name: address
+      in: path
+      description: The address to query for.
+      required: true
+      schema:
+        type: string
+        example: 86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY
+        default: 86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY
+    apiKeyParam:
+      name: api-key
+      in: query
+      required: true
+      description: Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`.
+      schema:
+        type: string
   schemas:
     EnhancedApi_BalancesResponse:
       type: object
@@ -243,24 +260,6 @@ components:
         nativeBalance:
           type: number
           description: In Lamports
-    EnhancedApi_NamesResponse:
-      type: object
-      properties:
-        domainNames:
-          type: array
-          items:
-            type: string
-    EnhancedApi_Balance:
-      type: object
-      properties:
-        mint:
-          type: string
-        amount:
-          type: number
-        decimals:
-          type: number
-        tokenAccount:
-          type: string
     EnhancedApi_ErrorResponse:
       type: object
       description: JSON-RPC error response format
@@ -288,23 +287,24 @@ components:
       - jsonrpc
       - error
       - id
-  parameters:
-    EnhancedApi_addressParam:
-      name: address
-      in: path
-      description: The address to query for.
-      required: true
-      schema:
-        type: string
-        example: 86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY
-        default: 86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY
-    apiKeyParam:
-      name: api-key
-      in: query
-      required: true
-      description: Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`.
-      schema:
-        type: string
+    EnhancedApi_Balance:
+      type: object
+      properties:
+        mint:
+          type: string
+        amount:
+          type: number
+        decimals:
+          type: number
+        tokenAccount:
+          type: string
+    EnhancedApi_NamesResponse:
+      type: object
+      properties:
+        domainNames:
+          type: array
+          items:
+            type: string
   securitySchemes:
     ApiKeyQuery:
       type: apiKey
