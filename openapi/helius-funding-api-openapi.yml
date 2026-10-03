@@ -81,6 +81,15 @@ paths:
         description: Production server
 components:
   responses:
+    WalletApi_Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: API key required. Pass via ?api-key=xxx or X-Api-Key header
+            code: 401
     WalletApi_BadRequest:
       description: Invalid request parameters
       content:
@@ -91,25 +100,6 @@ components:
             error: Invalid wallet address
             code: 400
             details: '''invalid-address'' is not a valid Solana address'
-    WalletApi_Unauthorized:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: API key required. Pass via ?api-key=xxx or X-Api-Key header
-            code: 401
-    WalletApi_RateLimited:
-      description: Rate limit exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: RATE_LIMIT_EXCEEDED
-            code: 429
-            details: Too many requests. Retry after 2 seconds.
     WalletApi_InternalError:
       description: Transient server error. Retryable with exponential backoff.
       content:
@@ -120,7 +110,35 @@ components:
             error: INTERNAL_ERROR
             code: 500
             details: An unexpected error occurred. Please retry.
+    WalletApi_RateLimited:
+      description: Rate limit exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: RATE_LIMIT_EXCEEDED
+            code: 429
+            details: Too many requests. Retry after 2 seconds.
   schemas:
+    WalletApi_Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+          example: Invalid wallet address
+        code:
+          type: integer
+          description: HTTP status code
+          example: 400
+        details:
+          type: string
+          description: Additional error details
+          example: '''invalid-address'' is not a valid Solana address'
+      required:
+      - error
+      - code
     WalletApi_FundingSource:
       type: object
       properties:
@@ -191,24 +209,6 @@ components:
       - date
       - slot
       - explorerUrl
-    WalletApi_Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-          example: Invalid wallet address
-        code:
-          type: integer
-          description: HTTP status code
-          example: 400
-        details:
-          type: string
-          description: Additional error details
-          example: '''invalid-address'' is not a valid Solana address'
-      required:
-      - error
-      - code
   parameters:
     WalletApi_WalletAddress:
       name: wallet

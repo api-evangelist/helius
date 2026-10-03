@@ -143,208 +143,7 @@ paths:
       - url: https://api-devnet.helius-rpc.com
         description: Devnet RPC endpoint
 components:
-  responses:
-    EnhancedApi_500-InternalServerError:
-      description: The server encountered an unexpected condition that prevented it from fulfilling the request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32603
-              message: Internal error
-            id: '1'
-    EnhancedApi_401-Unauthorized:
-      description: Unauthorized request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32001
-              message: Unauthorized
-            id: '1'
-    EnhancedApi_429-TooManyRequests:
-      description: Exceeded rate limit.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32005
-              message: Rate limit exceeded
-            id: '1'
-    EnhancedApi_503-ServiceUnavailable:
-      description: The service is temporarily unavailable.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32002
-              message: Service unavailable
-            id: '1'
-    EnhancedApi_504-GatewayTimeout:
-      description: The request timed out.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32003
-              message: Gateway timeout
-            id: '1'
-    EnhancedApi_400-BadRequest:
-      description: Invalid request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32602
-              message: Invalid params
-            id: '1'
-    EnhancedApi_403-Forbidden:
-      description: Request was forbidden.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32003
-              message: Forbidden
-            id: '1'
-    EnhancedApi_404-NotFound:
-      description: The specified resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32601
-              message: Method not found
-            id: '1'
   schemas:
-    EnhancedApi_LegacyMetadata:
-      type: object
-      description: Data from the old SPL token list.
-      properties:
-        chainId:
-          type: integer
-        address:
-          type: string
-        symbol:
-          type: string
-        name:
-          type: string
-        decimals:
-          type: integer
-        logoURI:
-          type: string
-        tags:
-          type: array
-          items:
-            type: string
-        extensions:
-          type: object
-    EnhancedApi_OnChainAccountInfoResult:
-      type: object
-      properties:
-        accountInfo:
-          $ref: '#/components/schemas/EnhancedApi_OnChainAccountInfo'
-        error:
-          $ref: '#/components/schemas/EnhancedApi_AccountErrorType'
-    EnhancedApi_OffChainMetadataResult:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/EnhancedApi_OffChainMetadata'
-        uri:
-          type: string
-        error:
-          $ref: '#/components/schemas/EnhancedApi_AccountErrorType'
-    EnhancedApi_OnChainAccountInfo:
-      type: object
-      description: Account data that is stored on-chain.
-      properties:
-        key:
-          type: string
-        isSigner:
-          type: boolean
-        isWritable:
-          type: boolean
-        lamports:
-          type: integer
-        data:
-          type: object
-          properties:
-            parsed:
-              type: object
-              properties:
-                info:
-                  type: object
-                  properties:
-                    decimals:
-                      type: integer
-                    freezeAuthority:
-                      type: string
-                    isInitialized:
-                      type: boolean
-                    mintAuthority:
-                      type: string
-                    supply:
-                      type: string
-                type:
-                  type: string
-            program:
-              type: string
-            space:
-              type: integer
-        owner:
-          type: string
-        executable:
-          type: boolean
-        rentEpoch:
-          type: integer
-    EnhancedApi_OnChainMetadataResult:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/EnhancedApi_OnChainMetadata'
-        error:
-          $ref: '#/components/schemas/EnhancedApi_AccountErrorType'
-    EnhancedApi_TokensMetadataResponseV1:
-      type: array
-      items:
-        type: object
-        description: Token metadata stored both on-chain and in the old token list.
-        properties:
-          account:
-            type: string
-          onChainAccountInfo:
-            $ref: '#/components/schemas/EnhancedApi_OnChainAccountInfoResult'
-          onChainMetadata:
-            $ref: '#/components/schemas/EnhancedApi_OnChainMetadataResult'
-          offChainMetadata:
-            $ref: '#/components/schemas/EnhancedApi_OffChainMetadataResult'
-          legacyMetadata:
-            $ref: '#/components/schemas/EnhancedApi_LegacyMetadata'
     EnhancedApi_OnChainMetadata:
       type: object
       description: Metaplex metadata that is stored on-chain.
@@ -406,16 +205,13 @@ components:
               type: integer
             total:
               type: integer
-    EnhancedApi_TokenMetadataResponse:
+    EnhancedApi_OnChainAccountInfoResult:
       type: object
-      description: Metaplex metadata stored both on-chain and off-chain.
       properties:
-        mint:
-          type: string
-        onChainData:
-          $ref: '#/components/schemas/EnhancedApi_OnChainMetadata'
-        offChainData:
-          $ref: '#/components/schemas/EnhancedApi_OffChainMetadata'
+        accountInfo:
+          $ref: '#/components/schemas/EnhancedApi_OnChainAccountInfo'
+        error:
+          $ref: '#/components/schemas/EnhancedApi_AccountErrorType'
     EnhancedApi_TokensMetadataRequest:
       type: object
       properties:
@@ -425,32 +221,15 @@ components:
             type: string
             description: The mint account of the token to retrieve metadata for.
           maxItems: 100
-    EnhancedApi_TokensMetadataRequestV1:
+    EnhancedApi_OffChainMetadataResult:
       type: object
       properties:
-        mintAccounts:
-          type: array
-          items:
-            type: string
-            description: The mint account of the token to retrieve metadata for.
-          maxItems: 100
-        includeOffChain:
-          type: boolean
-          default: false
-          description: Include offchain data referenced in the uri of the metadata account. Omitting defaults to false.
-        disableCache:
-          type: boolean
-          default: false
-          description: Disable usage of cache, useful for monitoring metadata changes.
-    EnhancedApi_AccountErrorType:
-      type: string
-      example: ''
-      enum:
-      - UNKNOWN
-      - EMPTY_ACCOUNT
-      - TIMEOUT
-      - INVALID_ACCOUNT
-      - INVALID_PUBKEY
+        metadata:
+          $ref: '#/components/schemas/EnhancedApi_OffChainMetadata'
+        uri:
+          type: string
+        error:
+          $ref: '#/components/schemas/EnhancedApi_AccountErrorType'
     EnhancedApi_ErrorResponse:
       type: object
       description: JSON-RPC error response format
@@ -478,6 +257,46 @@ components:
       - jsonrpc
       - error
       - id
+    EnhancedApi_TokensMetadataResponseV1:
+      type: array
+      items:
+        type: object
+        description: Token metadata stored both on-chain and in the old token list.
+        properties:
+          account:
+            type: string
+          onChainAccountInfo:
+            $ref: '#/components/schemas/EnhancedApi_OnChainAccountInfoResult'
+          onChainMetadata:
+            $ref: '#/components/schemas/EnhancedApi_OnChainMetadataResult'
+          offChainMetadata:
+            $ref: '#/components/schemas/EnhancedApi_OffChainMetadataResult'
+          legacyMetadata:
+            $ref: '#/components/schemas/EnhancedApi_LegacyMetadata'
+    EnhancedApi_OnChainMetadataResult:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/EnhancedApi_OnChainMetadata'
+        error:
+          $ref: '#/components/schemas/EnhancedApi_AccountErrorType'
+    EnhancedApi_TokensMetadataRequestV1:
+      type: object
+      properties:
+        mintAccounts:
+          type: array
+          items:
+            type: string
+            description: The mint account of the token to retrieve metadata for.
+          maxItems: 100
+        includeOffChain:
+          type: boolean
+          default: false
+          description: Include offchain data referenced in the uri of the metadata account. Omitting defaults to false.
+        disableCache:
+          type: boolean
+          default: false
+          description: Disable usage of cache, useful for monitoring metadata changes.
     EnhancedApi_OffChainMetadata:
       type: object
       description: Metaplex metadata that is stored off-chain.
@@ -519,6 +338,187 @@ components:
                     type: string
                   share:
                     type: string
+    EnhancedApi_TokenMetadataResponse:
+      type: object
+      description: Metaplex metadata stored both on-chain and off-chain.
+      properties:
+        mint:
+          type: string
+        onChainData:
+          $ref: '#/components/schemas/EnhancedApi_OnChainMetadata'
+        offChainData:
+          $ref: '#/components/schemas/EnhancedApi_OffChainMetadata'
+    EnhancedApi_LegacyMetadata:
+      type: object
+      description: Data from the old SPL token list.
+      properties:
+        chainId:
+          type: integer
+        address:
+          type: string
+        symbol:
+          type: string
+        name:
+          type: string
+        decimals:
+          type: integer
+        logoURI:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        extensions:
+          type: object
+    EnhancedApi_OnChainAccountInfo:
+      type: object
+      description: Account data that is stored on-chain.
+      properties:
+        key:
+          type: string
+        isSigner:
+          type: boolean
+        isWritable:
+          type: boolean
+        lamports:
+          type: integer
+        data:
+          type: object
+          properties:
+            parsed:
+              type: object
+              properties:
+                info:
+                  type: object
+                  properties:
+                    decimals:
+                      type: integer
+                    freezeAuthority:
+                      type: string
+                    isInitialized:
+                      type: boolean
+                    mintAuthority:
+                      type: string
+                    supply:
+                      type: string
+                type:
+                  type: string
+            program:
+              type: string
+            space:
+              type: integer
+        owner:
+          type: string
+        executable:
+          type: boolean
+        rentEpoch:
+          type: integer
+    EnhancedApi_AccountErrorType:
+      type: string
+      example: ''
+      enum:
+      - UNKNOWN
+      - EMPTY_ACCOUNT
+      - TIMEOUT
+      - INVALID_ACCOUNT
+      - INVALID_PUBKEY
+  responses:
+    EnhancedApi_404-NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32601
+              message: Method not found
+            id: '1'
+    EnhancedApi_400-BadRequest:
+      description: Invalid request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32602
+              message: Invalid params
+            id: '1'
+    EnhancedApi_401-Unauthorized:
+      description: Unauthorized request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32001
+              message: Unauthorized
+            id: '1'
+    EnhancedApi_500-InternalServerError:
+      description: The server encountered an unexpected condition that prevented it from fulfilling the request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32603
+              message: Internal error
+            id: '1'
+    EnhancedApi_504-GatewayTimeout:
+      description: The request timed out.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32003
+              message: Gateway timeout
+            id: '1'
+    EnhancedApi_429-TooManyRequests:
+      description: Exceeded rate limit.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32005
+              message: Rate limit exceeded
+            id: '1'
+    EnhancedApi_503-ServiceUnavailable:
+      description: The service is temporarily unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32002
+              message: Service unavailable
+            id: '1'
+    EnhancedApi_403-Forbidden:
+      description: Request was forbidden.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32003
+              message: Forbidden
+            id: '1'
   parameters:
     apiKeyParam:
       name: api-key

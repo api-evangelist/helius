@@ -88,6 +88,15 @@ paths:
         description: Production server
 components:
   responses:
+    WalletApi_Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: API key required. Pass via ?api-key=xxx or X-Api-Key header
+            code: 401
     WalletApi_BadRequest:
       description: Invalid request parameters
       content:
@@ -98,25 +107,6 @@ components:
             error: Invalid wallet address
             code: 400
             details: '''invalid-address'' is not a valid Solana address'
-    WalletApi_Unauthorized:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: API key required. Pass via ?api-key=xxx or X-Api-Key header
-            code: 401
-    WalletApi_RateLimited:
-      description: Rate limit exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: RATE_LIMIT_EXCEEDED
-            code: 429
-            details: Too many requests. Retry after 2 seconds.
     WalletApi_InternalError:
       description: Transient server error. Retryable with exponential backoff.
       content:
@@ -127,7 +117,43 @@ components:
             error: INTERNAL_ERROR
             code: 500
             details: An unexpected error occurred. Please retry.
+    WalletApi_RateLimited:
+      description: Rate limit exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: RATE_LIMIT_EXCEEDED
+            code: 429
+            details: Too many requests. Retry after 2 seconds.
   schemas:
+    WalletApi_TransfersResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletApi_Transfer'
+        pagination:
+          $ref: '#/components/schemas/WalletApi_Pagination'
+      required:
+      - data
+      - pagination
+    WalletApi_Pagination:
+      type: object
+      properties:
+        hasMore:
+          type: boolean
+          description: Whether more results are available
+          example: true
+        nextCursor:
+          type: string
+          nullable: true
+          description: Cursor to fetch the next page of results
+          example: 5wHu1qwD7Jsj3xqWjdSEJmYr3Q5f5RjXqjqQJ7jqEj7jqEj7jqEj7jqEj7jqEj7jqE
+      required:
+      - hasMore
     WalletApi_Transfer:
       type: object
       properties:
@@ -180,32 +206,6 @@ components:
       - amount
       - amountRaw
       - decimals
-    WalletApi_Pagination:
-      type: object
-      properties:
-        hasMore:
-          type: boolean
-          description: Whether more results are available
-          example: true
-        nextCursor:
-          type: string
-          nullable: true
-          description: Cursor to fetch the next page of results
-          example: 5wHu1qwD7Jsj3xqWjdSEJmYr3Q5f5RjXqjqQJ7jqEj7jqEj7jqEj7jqEj7jqEj7jqE
-      required:
-      - hasMore
-    WalletApi_TransfersResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletApi_Transfer'
-        pagination:
-          $ref: '#/components/schemas/WalletApi_Pagination'
-      required:
-      - data
-      - pagination
     WalletApi_Error:
       type: object
       properties:

@@ -157,6 +157,15 @@ paths:
         description: Production server
 components:
   responses:
+    WalletApi_Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: API key required. Pass via ?api-key=xxx or X-Api-Key header
+            code: 401
     WalletApi_BadRequest:
       description: Invalid request parameters
       content:
@@ -167,25 +176,6 @@ components:
             error: Invalid wallet address
             code: 400
             details: '''invalid-address'' is not a valid Solana address'
-    WalletApi_Unauthorized:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: API key required. Pass via ?api-key=xxx or X-Api-Key header
-            code: 401
-    WalletApi_RateLimited:
-      description: Rate limit exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: RATE_LIMIT_EXCEEDED
-            code: 429
-            details: Too many requests. Retry after 2 seconds.
     WalletApi_InternalError:
       description: Transient server error. Retryable with exponential backoff.
       content:
@@ -196,7 +186,30 @@ components:
             error: INTERNAL_ERROR
             code: 500
             details: An unexpected error occurred. Please retry.
+    WalletApi_RateLimited:
+      description: Rate limit exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: RATE_LIMIT_EXCEEDED
+            code: 429
+            details: Too many requests. Retry after 2 seconds.
   schemas:
+    WalletApi_BatchIdentityEntry:
+      description: 'One element of the array returned by `POST /v1/wallet/batch-identity`. Resolved entries
+
+        match `BatchResolvedIdentity` (possibly with `inputDomain`); unresolvable domain entries
+
+        match `UnresolvedDomainEntry`. Distinguish at runtime by checking `unresolved === true`
+
+        or `address === null`.
+
+        '
+      oneOf:
+      - $ref: '#/components/schemas/WalletApi_BatchResolvedIdentity'
+      - $ref: '#/components/schemas/WalletApi_UnresolvedDomainEntry'
     WalletApi_UnresolvedDomainEntry:
       description: 'A batch entry returned when a domain name could not be resolved. Only appears as an
 
@@ -232,19 +245,6 @@ components:
       - type
       - inputDomain
       - unresolved
-    WalletApi_BatchIdentityEntry:
-      description: 'One element of the array returned by `POST /v1/wallet/batch-identity`. Resolved entries
-
-        match `BatchResolvedIdentity` (possibly with `inputDomain`); unresolvable domain entries
-
-        match `UnresolvedDomainEntry`. Distinguish at runtime by checking `unresolved === true`
-
-        or `address === null`.
-
-        '
-      oneOf:
-      - $ref: '#/components/schemas/WalletApi_BatchResolvedIdentity'
-      - $ref: '#/components/schemas/WalletApi_UnresolvedDomainEntry'
     WalletApi_BatchResolvedIdentity:
       description: 'A resolved entry in a batch identity response. Extends `Identity` with an optional
 

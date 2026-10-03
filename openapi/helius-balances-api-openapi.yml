@@ -115,81 +115,7 @@ paths:
       - url: https://api.helius.xyz
         description: Production server
 components:
-  responses:
-    WalletApi_BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: Invalid wallet address
-            code: 400
-            details: '''invalid-address'' is not a valid Solana address'
-    WalletApi_Unauthorized:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: API key required. Pass via ?api-key=xxx or X-Api-Key header
-            code: 401
-    WalletApi_RateLimited:
-      description: Rate limit exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: RATE_LIMIT_EXCEEDED
-            code: 429
-            details: Too many requests. Retry after 2 seconds.
-    WalletApi_InternalError:
-      description: Transient server error. Retryable with exponential backoff.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: INTERNAL_ERROR
-            code: 500
-            details: An unexpected error occurred. Please retry.
   schemas:
-    WalletApi_Nft:
-      type: object
-      properties:
-        mint:
-          type: string
-          description: NFT mint address
-          example: 7Xq8wXyXVqfBPPqVJjPDwG9zN5wCVxBYZ6z7vPYBzr6F
-        name:
-          type: string
-          nullable: true
-          description: NFT name
-          example: Degen Ape
-        imageUri:
-          type: string
-          nullable: true
-          description: NFT image URI
-          example: https://example.com/nft.png
-        collectionName:
-          type: string
-          nullable: true
-          description: Collection name
-          example: Degen Ape Academy
-        collectionAddress:
-          type: string
-          nullable: true
-          description: Collection address
-          example: DegN1dXmU2uYa4n7U9qTh7YNYpK4u8L9qXx7XqYqJfGH
-        compressed:
-          type: boolean
-          description: Whether this is a compressed NFT
-          example: false
-      required:
-      - mint
-      - compressed
     WalletApi_TokenBalance:
       type: object
       properties:
@@ -289,6 +215,40 @@ components:
       - balances
       - totalUsdValue
       - pagination
+    WalletApi_Nft:
+      type: object
+      properties:
+        mint:
+          type: string
+          description: NFT mint address
+          example: 7Xq8wXyXVqfBPPqVJjPDwG9zN5wCVxBYZ6z7vPYBzr6F
+        name:
+          type: string
+          nullable: true
+          description: NFT name
+          example: Degen Ape
+        imageUri:
+          type: string
+          nullable: true
+          description: NFT image URI
+          example: https://example.com/nft.png
+        collectionName:
+          type: string
+          nullable: true
+          description: Collection name
+          example: Degen Ape Academy
+        collectionAddress:
+          type: string
+          nullable: true
+          description: Collection address
+          example: DegN1dXmU2uYa4n7U9qTh7YNYpK4u8L9qXx7XqYqJfGH
+        compressed:
+          type: boolean
+          description: Whether this is a compressed NFT
+          example: false
+      required:
+      - mint
+      - compressed
     WalletApi_Error:
       type: object
       properties:
@@ -307,6 +267,46 @@ components:
       required:
       - error
       - code
+  responses:
+    WalletApi_Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: API key required. Pass via ?api-key=xxx or X-Api-Key header
+            code: 401
+    WalletApi_BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: Invalid wallet address
+            code: 400
+            details: '''invalid-address'' is not a valid Solana address'
+    WalletApi_InternalError:
+      description: Transient server error. Retryable with exponential backoff.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: INTERNAL_ERROR
+            code: 500
+            details: An unexpected error occurred. Please retry.
+    WalletApi_RateLimited:
+      description: Rate limit exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: RATE_LIMIT_EXCEEDED
+            code: 429
+            details: Too many requests. Retry after 2 seconds.
   parameters:
     WalletApi_WalletAddress:
       name: wallet

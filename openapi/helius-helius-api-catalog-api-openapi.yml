@@ -206,50 +206,6 @@ paths:
       - Helius API Catalog
 components:
   schemas:
-    PriorityFeeApi_PriorityFeeEstimateRequest:
-      type: object
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-          default: '2.0'
-          description: JSON-RPC version identifier for the Solana RPC API request, must be "2.0"
-        id:
-          type: string
-          default: '1'
-          description: Client-generated identifier for the request
-        method:
-          type: string
-          enum:
-          - getPriorityFeeEstimate
-          default: getPriorityFeeEstimate
-          description: The RPC method name
-        params:
-          type: array
-          description: Parameters for the method call
-          default:
-          - transaction: LxzhDW7TapzziJVHEGPh1QjmZB6kjNqmvuJ9gmihBGEkzw2N8ospDq32UZdVmKWzRZqKuyvhp7xmLvsmmHa3MfxVKpYoLV9cPkw5isHnHgDUwLSMsDaZ4dLEULexXAvuV9k6fLD2LMhFKM6gqH6j69GQLAm1g4e3z5ZVZN6pmJdSmZ4PqKcwNn4sS7E3Abp1hV59uBJB9i4jEdEAh28rZ8WCeNizzEmrJZFhatFFFGSDsk23jDPEjbkMcoRWXKf1WthFScC2S6Wz284Dtjqp7kW8eybV3DpmN9DtBbcfFNQPtUwmiBZCKszdYym5AjJvRHiUKUdMwFpC3toPnMvTmKZ9iHQtzZRkg5xBufRtUN5eVYJfdw2DxzH6RfqhC2rAjfSbfJA4wmaq9f5eUe2iEjmqvne6r85PPcHBJzyqkVtAyUFtTc9DfU8UiM9rFhQ2UB71M6m5UCsC6EwowMw5k8iF8rL7iPCLdubVdy8S58DPLNG4E4rdosev1T63YdRWSgEwBZh7iX4zGBA9AKAm3B9itCSxLSL46Y6uZgVku9UXsMcWWz3URoa6hRbo55CYPLhrVeqjqX5DsXpaG6QkngbEaESQUnkakE1AFkYXmNXEd2m3sLRTYB2o5UTkwkJS2u5sJHyYqAvXr3vFZr7qAYFLD3LwS5tsdb45ZQVQwsbnNddMHgkpmSqLHS6Fv1epxqHbzpRCU1tgMsriApVWC3pj2LLD41HxkV8aKvkVyHgJFACUtbvRBZAasHf1F71Gz3qZNTdh3efWsZJRXnfxKPbATU7NTMaMUL8JjknfoVwp3
-          items:
-            type: object
-            properties:
-              transaction:
-                type: string
-                description: 'Base58 or Base64 encoded Solana transaction for which to estimate optimal priority fees.
-
-                  The API will analyze the specific instructions and accounts in this transaction to provide
-
-                  accurate fee estimates based on current network conditions and computational complexity.
-
-                  '
-              accountKeys:
-                type: array
-                description: Array of Solana account public keys to estimate priority fees for (alternative to providing a transaction)
-                items:
-                  type: string
-                  description: Base58 encoded public key of a Solana account
-              options:
-                $ref: '#/components/schemas/PriorityFeeApi_PriorityFeeOptions'
     PriorityFeeApi_PriorityFeeEstimateResponse:
       type: object
       properties:
@@ -366,6 +322,50 @@ components:
         evaluateEmptySlotAsZero:
           type: boolean
           description: When true, slots with no transactions are counted as zero-fee slots in the calculation
+    PriorityFeeApi_PriorityFeeEstimateRequest:
+      type: object
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          default: '2.0'
+          description: JSON-RPC version identifier for the Solana RPC API request, must be "2.0"
+        id:
+          type: string
+          default: '1'
+          description: Client-generated identifier for the request
+        method:
+          type: string
+          enum:
+          - getPriorityFeeEstimate
+          default: getPriorityFeeEstimate
+          description: The RPC method name
+        params:
+          type: array
+          description: Parameters for the method call
+          default:
+          - transaction: LxzhDW7TapzziJVHEGPh1QjmZB6kjNqmvuJ9gmihBGEkzw2N8ospDq32UZdVmKWzRZqKuyvhp7xmLvsmmHa3MfxVKpYoLV9cPkw5isHnHgDUwLSMsDaZ4dLEULexXAvuV9k6fLD2LMhFKM6gqH6j69GQLAm1g4e3z5ZVZN6pmJdSmZ4PqKcwNn4sS7E3Abp1hV59uBJB9i4jEdEAh28rZ8WCeNizzEmrJZFhatFFFGSDsk23jDPEjbkMcoRWXKf1WthFScC2S6Wz284Dtjqp7kW8eybV3DpmN9DtBbcfFNQPtUwmiBZCKszdYym5AjJvRHiUKUdMwFpC3toPnMvTmKZ9iHQtzZRkg5xBufRtUN5eVYJfdw2DxzH6RfqhC2rAjfSbfJA4wmaq9f5eUe2iEjmqvne6r85PPcHBJzyqkVtAyUFtTc9DfU8UiM9rFhQ2UB71M6m5UCsC6EwowMw5k8iF8rL7iPCLdubVdy8S58DPLNG4E4rdosev1T63YdRWSgEwBZh7iX4zGBA9AKAm3B9itCSxLSL46Y6uZgVku9UXsMcWWz3URoa6hRbo55CYPLhrVeqjqX5DsXpaG6QkngbEaESQUnkakE1AFkYXmNXEd2m3sLRTYB2o5UTkwkJS2u5sJHyYqAvXr3vFZr7qAYFLD3LwS5tsdb45ZQVQwsbnNddMHgkpmSqLHS6Fv1epxqHbzpRCU1tgMsriApVWC3pj2LLD41HxkV8aKvkVyHgJFACUtbvRBZAasHf1F71Gz3qZNTdh3efWsZJRXnfxKPbATU7NTMaMUL8JjknfoVwp3
+          items:
+            type: object
+            properties:
+              transaction:
+                type: string
+                description: 'Base58 or Base64 encoded Solana transaction for which to estimate optimal priority fees.
+
+                  The API will analyze the specific instructions and accounts in this transaction to provide
+
+                  accurate fee estimates based on current network conditions and computational complexity.
+
+                  '
+              accountKeys:
+                type: array
+                description: Array of Solana account public keys to estimate priority fees for (alternative to providing a transaction)
+                items:
+                  type: string
+                  description: Base58 encoded public key of a Solana account
+              options:
+                $ref: '#/components/schemas/PriorityFeeApi_PriorityFeeOptions'
   securitySchemes:
     ApiKeyQuery:
       type: apiKey
