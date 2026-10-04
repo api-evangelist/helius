@@ -115,7 +115,109 @@ paths:
       - url: https://api.helius.xyz
         description: Production server
 components:
+  parameters:
+    WalletApi_WalletAddress:
+      name: wallet
+      in: path
+      required: true
+      description: Solana wallet address (base58 encoded)
+      schema:
+        type: string
+        pattern: ^[1-9A-HJ-NP-Za-km-z]{32,44}$
+      example: GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz
+  responses:
+    WalletApi_InternalError:
+      description: Transient server error. Retryable with exponential backoff.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: INTERNAL_ERROR
+            code: 500
+            details: An unexpected error occurred. Please retry.
+    WalletApi_Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: API key required. Pass via ?api-key=xxx or X-Api-Key header
+            code: 401
+    WalletApi_BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: Invalid wallet address
+            code: 400
+            details: '''invalid-address'' is not a valid Solana address'
+    WalletApi_RateLimited:
+      description: Rate limit exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: RATE_LIMIT_EXCEEDED
+            code: 429
+            details: Too many requests. Retry after 2 seconds.
   schemas:
+    WalletApi_Nft:
+      type: object
+      properties:
+        mint:
+          type: string
+          description: NFT mint address
+          example: 7Xq8wXyXVqfBPPqVJjPDwG9zN5wCVxBYZ6z7vPYBzr6F
+        name:
+          type: string
+          nullable: true
+          description: NFT name
+          example: Degen Ape
+        imageUri:
+          type: string
+          nullable: true
+          description: NFT image URI
+          example: https://example.com/nft.png
+        collectionName:
+          type: string
+          nullable: true
+          description: Collection name
+          example: Degen Ape Academy
+        collectionAddress:
+          type: string
+          nullable: true
+          description: Collection address
+          example: DegN1dXmU2uYa4n7U9qTh7YNYpK4u8L9qXx7XqYqJfGH
+        compressed:
+          type: boolean
+          description: Whether this is a compressed NFT
+          example: false
+      required:
+      - mint
+      - compressed
+    WalletApi_Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+          example: Invalid wallet address
+        code:
+          type: integer
+          description: HTTP status code
+          example: 400
+        details:
+          type: string
+          description: Additional error details
+          example: '''invalid-address'' is not a valid Solana address'
+      required:
+      - error
+      - code
     WalletApi_TokenBalance:
       type: object
       properties:
@@ -215,108 +317,6 @@ components:
       - balances
       - totalUsdValue
       - pagination
-    WalletApi_Nft:
-      type: object
-      properties:
-        mint:
-          type: string
-          description: NFT mint address
-          example: 7Xq8wXyXVqfBPPqVJjPDwG9zN5wCVxBYZ6z7vPYBzr6F
-        name:
-          type: string
-          nullable: true
-          description: NFT name
-          example: Degen Ape
-        imageUri:
-          type: string
-          nullable: true
-          description: NFT image URI
-          example: https://example.com/nft.png
-        collectionName:
-          type: string
-          nullable: true
-          description: Collection name
-          example: Degen Ape Academy
-        collectionAddress:
-          type: string
-          nullable: true
-          description: Collection address
-          example: DegN1dXmU2uYa4n7U9qTh7YNYpK4u8L9qXx7XqYqJfGH
-        compressed:
-          type: boolean
-          description: Whether this is a compressed NFT
-          example: false
-      required:
-      - mint
-      - compressed
-    WalletApi_Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-          example: Invalid wallet address
-        code:
-          type: integer
-          description: HTTP status code
-          example: 400
-        details:
-          type: string
-          description: Additional error details
-          example: '''invalid-address'' is not a valid Solana address'
-      required:
-      - error
-      - code
-  responses:
-    WalletApi_Unauthorized:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: API key required. Pass via ?api-key=xxx or X-Api-Key header
-            code: 401
-    WalletApi_BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: Invalid wallet address
-            code: 400
-            details: '''invalid-address'' is not a valid Solana address'
-    WalletApi_InternalError:
-      description: Transient server error. Retryable with exponential backoff.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: INTERNAL_ERROR
-            code: 500
-            details: An unexpected error occurred. Please retry.
-    WalletApi_RateLimited:
-      description: Rate limit exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: RATE_LIMIT_EXCEEDED
-            code: 429
-            details: Too many requests. Retry after 2 seconds.
-  parameters:
-    WalletApi_WalletAddress:
-      name: wallet
-      in: path
-      required: true
-      description: Solana wallet address (base58 encoded)
-      schema:
-        type: string
-        pattern: ^[1-9A-HJ-NP-Za-km-z]{32,44}$
-      example: GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz
   securitySchemes:
     ApiKeyQuery:
       type: apiKey

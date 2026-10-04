@@ -157,6 +157,16 @@ paths:
         description: Production server
 components:
   responses:
+    WalletApi_InternalError:
+      description: Transient server error. Retryable with exponential backoff.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: INTERNAL_ERROR
+            code: 500
+            details: An unexpected error occurred. Please retry.
     WalletApi_Unauthorized:
       description: Missing or invalid API key
       content:
@@ -176,16 +186,6 @@ components:
             error: Invalid wallet address
             code: 400
             details: '''invalid-address'' is not a valid Solana address'
-    WalletApi_InternalError:
-      description: Transient server error. Retryable with exponential backoff.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: INTERNAL_ERROR
-            code: 500
-            details: An unexpected error occurred. Please retry.
     WalletApi_RateLimited:
       description: Rate limit exceeded.
       content:
@@ -210,41 +210,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/WalletApi_BatchResolvedIdentity'
       - $ref: '#/components/schemas/WalletApi_UnresolvedDomainEntry'
-    WalletApi_UnresolvedDomainEntry:
-      description: 'A batch entry returned when a domain name could not be resolved. Only appears as an
-
-        element of the array returned by `POST /v1/wallet/batch-identity` — the single-endpoint
-
-        returns `404` instead of this shape.
-
-        '
-      type: object
-      properties:
-        address:
-          type: string
-          nullable: true
-          enum:
-          - null
-          description: Always `null` for unresolved entries.
-        type:
-          type: string
-          enum:
-          - unknown
-          description: Always the literal string `"unknown"` for unresolved entries.
-        inputDomain:
-          type: string
-          description: The domain name the caller queried that could not be resolved.
-          example: nonexistent-xyz.sol
-        unresolved:
-          type: boolean
-          enum:
-          - true
-          description: Always `true` for unresolved entries.
-      required:
-      - address
-      - type
-      - inputDomain
-      - unresolved
     WalletApi_BatchResolvedIdentity:
       description: 'A resolved entry in a batch identity response. Extends `Identity` with an optional
 
@@ -301,6 +266,41 @@ components:
       - name
       - category
       - tags
+    WalletApi_UnresolvedDomainEntry:
+      description: 'A batch entry returned when a domain name could not be resolved. Only appears as an
+
+        element of the array returned by `POST /v1/wallet/batch-identity` — the single-endpoint
+
+        returns `404` instead of this shape.
+
+        '
+      type: object
+      properties:
+        address:
+          type: string
+          nullable: true
+          enum:
+          - null
+          description: Always `null` for unresolved entries.
+        type:
+          type: string
+          enum:
+          - unknown
+          description: Always the literal string `"unknown"` for unresolved entries.
+        inputDomain:
+          type: string
+          description: The domain name the caller queried that could not be resolved.
+          example: nonexistent-xyz.sol
+        unresolved:
+          type: boolean
+          enum:
+          - true
+          description: Always `true` for unresolved entries.
+      required:
+      - address
+      - type
+      - inputDomain
+      - unresolved
     WalletApi_Error:
       type: object
       properties:

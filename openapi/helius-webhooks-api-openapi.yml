@@ -327,22 +327,6 @@ paths:
       servers:
       - url: https://api-mainnet.helius-rpc.com
 components:
-  parameters:
-    apiKeyParam:
-      name: api-key
-      in: query
-      required: true
-      description: Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`.
-      schema:
-        type: string
-    Webhooks_webhookIDParam:
-      name: webhookID
-      in: path
-      description: The webhook ID — a UUIDv4 that uniquely identifies the webhook.
-      required: true
-      schema:
-        type: string
-        example: 123e4567-e89b-12d3-a456-426614174000
   schemas:
     Webhooks_ToggleWebhookRequest:
       type: object
@@ -352,28 +336,45 @@ components:
         active:
           type: boolean
           description: Set to true to enable the webhook or false to disable it.
-    Webhooks_CreateWebhookRequest:
+    Webhooks_Webhook:
       type: object
       properties:
+        webhookID:
+          type: string
+          description: Unique identifier for the webhook.
+        wallet:
+          type: string
+          description: The wallet address (API key owner) that created this webhook.
         webhookURL:
           type: string
+          description: The URL that receives webhook POST deliveries.
         transactionTypes:
           type: array
+          description: Transaction types that trigger this webhook. Only applies to enhanced webhooks.
           items:
             $ref: '#/components/schemas/Webhooks_TransactionType'
         accountAddresses:
           type: array
+          description: Solana account addresses monitored by this webhook. Transactions involving any of these addresses trigger a delivery.
           items:
             type: string
-          maxItems: '100_000'
         webhookType:
           $ref: '#/components/schemas/Webhooks_WebhookType'
         authHeader:
           type: string
-        encoding:
-          type: string
-        txnStatus:
-          type: string
+          description: Optional authorization header value included in webhook deliveries for verifying the sender.
+        active:
+          type: boolean
+          description: Whether the webhook is actively receiving deliveries. Defaults to true. Webhooks may be automatically disabled if the endpoint has a high failure rate.
+    Webhooks_WebhookType:
+      type: string
+      enum:
+      - enhanced
+      - raw
+      - discord
+      - enhancedDevnet
+      - rawDevnet
+      - discordDevnet
     Webhooks_TransactionType:
       type: string
       enum:
@@ -949,45 +950,6 @@ components:
       - WITHDRAW_SOL_FROM_FLASH_LOAN_POOL
       - WITHDRAW_TREASURY
       - WITHDRAW_UNSTAKED_DEPOSITS
-    Webhooks_Webhook:
-      type: object
-      properties:
-        webhookID:
-          type: string
-          description: Unique identifier for the webhook.
-        wallet:
-          type: string
-          description: The wallet address (API key owner) that created this webhook.
-        webhookURL:
-          type: string
-          description: The URL that receives webhook POST deliveries.
-        transactionTypes:
-          type: array
-          description: Transaction types that trigger this webhook. Only applies to enhanced webhooks.
-          items:
-            $ref: '#/components/schemas/Webhooks_TransactionType'
-        accountAddresses:
-          type: array
-          description: Solana account addresses monitored by this webhook. Transactions involving any of these addresses trigger a delivery.
-          items:
-            type: string
-        webhookType:
-          $ref: '#/components/schemas/Webhooks_WebhookType'
-        authHeader:
-          type: string
-          description: Optional authorization header value included in webhook deliveries for verifying the sender.
-        active:
-          type: boolean
-          description: Whether the webhook is actively receiving deliveries. Defaults to true. Webhooks may be automatically disabled if the endpoint has a high failure rate.
-    Webhooks_WebhookType:
-      type: string
-      enum:
-      - enhanced
-      - raw
-      - discord
-      - enhancedDevnet
-      - rawDevnet
-      - discordDevnet
     Webhooks_ErrorResponse:
       type: object
       properties:
@@ -1014,7 +976,41 @@ components:
           type: string
           description: Identifier matching the request.
           example: '1'
+    Webhooks_CreateWebhookRequest:
+      type: object
+      properties:
+        webhookURL:
+          type: string
+        transactionTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Webhooks_TransactionType'
+        accountAddresses:
+          type: array
+          items:
+            type: string
+          maxItems: '100_000'
+        webhookType:
+          $ref: '#/components/schemas/Webhooks_WebhookType'
+        authHeader:
+          type: string
+        encoding:
+          type: string
+        txnStatus:
+          type: string
   responses:
+    Webhooks_500-InternalServerError:
+      description: The server encountered an unexpected condition that prevented it from fulfilling the request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Webhooks_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32603
+              message: Internal error
+            id: '1'
     Webhooks_400-BadRequest:
       description: Invalid request.
       content:
@@ -1026,18 +1022,6 @@ components:
             error:
               code: -32602
               message: Invalid params
-            id: '1'
-    Webhooks_404-NotFound:
-      description: The specified resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Webhooks_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32601
-              message: Method not found
             id: '1'
     Webhooks_503-ServiceUnavailable:
       description: The service is temporarily unavailable.
@@ -1051,18 +1035,6 @@ components:
               code: -32002
               message: Service unavailable
             id: '1'
-    Webhooks_401-Unauthorized:
-      description: Unauthorized request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Webhooks_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32001
-              message: Unauthorized
-            id: '1'
     Webhooks_200-NoContent:
       description: No content.
       content:
@@ -1072,8 +1044,8 @@ components:
             properties:
               message:
                 type: string
-    Webhooks_500-InternalServerError:
-      description: The server encountered an unexpected condition that prevented it from fulfilling the request.
+    Webhooks_404-NotFound:
+      description: The specified resource was not found.
       content:
         application/json:
           schema:
@@ -1081,32 +1053,8 @@ components:
           example:
             jsonrpc: '2.0'
             error:
-              code: -32603
-              message: Internal error
-            id: '1'
-    Webhooks_403-Forbidden:
-      description: Request was forbidden.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Webhooks_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32003
-              message: Forbidden
-            id: '1'
-    Webhooks_504-GatewayTimeout:
-      description: The request timed out.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Webhooks_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32003
-              message: Gateway timeout
+              code: -32601
+              message: Method not found
             id: '1'
     Webhooks_429-TooManyRequests:
       description: Exceeded rate limit.
@@ -1120,6 +1068,58 @@ components:
               code: -32005
               message: Rate limit exceeded
             id: '1'
+    Webhooks_401-Unauthorized:
+      description: Unauthorized request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Webhooks_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32001
+              message: Unauthorized
+            id: '1'
+    Webhooks_504-GatewayTimeout:
+      description: The request timed out.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Webhooks_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32003
+              message: Gateway timeout
+            id: '1'
+    Webhooks_403-Forbidden:
+      description: Request was forbidden.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Webhooks_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32003
+              message: Forbidden
+            id: '1'
+  parameters:
+    Webhooks_webhookIDParam:
+      name: webhookID
+      in: path
+      description: The webhook ID — a UUIDv4 that uniquely identifies the webhook.
+      required: true
+      schema:
+        type: string
+        example: 123e4567-e89b-12d3-a456-426614174000
+    apiKeyParam:
+      name: api-key
+      in: query
+      required: true
+      description: Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`.
+      schema:
+        type: string
   securitySchemes:
     ApiKeyQuery:
       type: apiKey

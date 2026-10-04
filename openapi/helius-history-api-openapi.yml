@@ -187,16 +187,17 @@ paths:
       - url: https://api.helius.xyz
         description: Production server
 components:
+  parameters:
+    WalletApi_WalletAddress:
+      name: wallet
+      in: path
+      required: true
+      description: Solana wallet address (base58 encoded)
+      schema:
+        type: string
+        pattern: ^[1-9A-HJ-NP-Za-km-z]{32,44}$
+      example: GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz
   responses:
-    WalletApi_Unauthorized:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/WalletApi_Error'
-          example:
-            error: API key required. Pass via ?api-key=xxx or X-Api-Key header
-            code: 401
     WalletApi_InternalError:
       description: Transient server error. Retryable with exponential backoff.
       content:
@@ -207,6 +208,15 @@ components:
             error: INTERNAL_ERROR
             code: 500
             details: An unexpected error occurred. Please retry.
+    WalletApi_Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WalletApi_Error'
+          example:
+            error: API key required. Pass via ?api-key=xxx or X-Api-Key header
+            code: 401
     WalletApi_BadRequest:
       description: Invalid request parameters
       content:
@@ -228,20 +238,25 @@ components:
             code: 429
             details: Too many requests. Retry after 2 seconds.
   schemas:
-    WalletApi_Pagination:
+    WalletApi_BalanceChange:
       type: object
       properties:
-        hasMore:
-          type: boolean
-          description: Whether more results are available
-          example: true
-        nextCursor:
+        mint:
           type: string
-          nullable: true
-          description: Cursor to fetch the next page of results
-          example: 5wHu1qwD7Jsj3xqWjdSEJmYr3Q5f5RjXqjqQJ7jqEj7jqEj7jqEj7jqEj7jqEj7jqE
+          description: Token mint address (or 'SOL' for native)
+          example: So11111111111111111111111111111111111111112
+        amount:
+          type: number
+          description: Change amount (positive for increase, negative for decrease)
+          example: -0.05
+        decimals:
+          type: integer
+          description: Token decimals
+          example: 9
       required:
-      - hasMore
+      - mint
+      - amount
+      - decimals
     WalletApi_HistoryTransaction:
       type: object
       properties:
@@ -282,6 +297,20 @@ components:
       - fee
       - feePayer
       - balanceChanges
+    WalletApi_Pagination:
+      type: object
+      properties:
+        hasMore:
+          type: boolean
+          description: Whether more results are available
+          example: true
+        nextCursor:
+          type: string
+          nullable: true
+          description: Cursor to fetch the next page of results
+          example: 5wHu1qwD7Jsj3xqWjdSEJmYr3Q5f5RjXqjqQJ7jqEj7jqEj7jqEj7jqEj7jqEj7jqE
+      required:
+      - hasMore
     WalletApi_HistoryResponse:
       type: object
       properties:
@@ -294,25 +323,6 @@ components:
       required:
       - data
       - pagination
-    WalletApi_BalanceChange:
-      type: object
-      properties:
-        mint:
-          type: string
-          description: Token mint address (or 'SOL' for native)
-          example: So11111111111111111111111111111111111111112
-        amount:
-          type: number
-          description: Change amount (positive for increase, negative for decrease)
-          example: -0.05
-        decimals:
-          type: integer
-          description: Token decimals
-          example: 9
-      required:
-      - mint
-      - amount
-      - decimals
     WalletApi_Error:
       type: object
       properties:
@@ -331,16 +341,6 @@ components:
       required:
       - error
       - code
-  parameters:
-    WalletApi_WalletAddress:
-      name: wallet
-      in: path
-      required: true
-      description: Solana wallet address (base58 encoded)
-      schema:
-        type: string
-        pattern: ^[1-9A-HJ-NP-Za-km-z]{32,44}$
-      example: GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz
   securitySchemes:
     ApiKeyQuery:
       type: apiKey
