@@ -286,6 +286,9 @@ apis:
   - type: OpenAPI
     url: openapi/helius-nfts-api-openapi.yml
 common:
+- type: CapabilityMap
+  url: capabilities/helius-capability-edges.yml
+  name: Helius Business Capability Map
 - type: AgentCard
   url: a2a/helius-a2a.yml
   name: A2A Agent Card
