@@ -1,98 +1,24 @@
-generated: '2026-07-15'
+generated: '2026-09-23'
 method: generated
-source: openapi/helius-openapi.json
+source: openapi/helius-addresses-api-openapi.yml, openapi/helius-admin-api-openapi.yml, openapi/helius-balances-api-openapi.yml,
+  openapi/helius-funding-api-openapi.yml, openapi/helius-helius-api-catalog-api-openapi.yml,
+  openapi/helius-history-api-openapi.yml, openapi/helius-identity-api-openapi.yml, openapi/helius-nfts-api-openapi.yml,
+  openapi/helius-sender-api-openapi.yml, openapi/helius-tokens-api-openapi.yml, openapi/helius-transactions-api-openapi.yml,
+  openapi/helius-transfers-api-openapi.yml, openapi/helius-webhooks-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 31
+  operations: 33
   by_action_class:
-    connected: 15
+    connected: 17
     acting: 16
   by_consequence:
-    read: 15
+    read: 17
     write: 15
     physical: 1
   human_in_the_loop_required: 0
 operations:
-- path: /v0/addresses/{address}/nft-events
-  method: get
-  operationId: enhancedApi_getNftEvents
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v0/addresses/{address}/transactions
-  method: get
-  operationId: enhancedApi_getEnhancedTransactions
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v0/addresses/{address}/raw-transactions
-  method: get
-  operationId: enhancedApi_getRawTransactionHistory
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v0/transactions
-  method: post
-  operationId: enhancedApi_getEnhancedTransaction
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v0/raw-transactions
-  method: post
-  operationId: enhancedApi_getRawTransactions
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v0/tokens/metadata
-  method: post
-  operationId: enhancedApi_getTokenMetadata
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /v0/addresses/{address}/names
   method: get
   operationId: enhancedApi_getAddressName
@@ -113,6 +39,108 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /v0/admin/projects/{id}/usage
+  method: get
+  operationId: adminApi_getProjectUsage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/wallet/{wallet}/balances
+  method: get
+  operationId: walletApi_getWalletBalances
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/wallet/{wallet}/funded-by
+  method: get
+  operationId: walletApi_getWalletFundingSource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /
+  method: post
+  operationId: priorityFeeApi_getPriorityFeeEstimate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/wallet/{wallet}/history
+  method: get
+  operationId: walletApi_getWalletHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/wallet/{wallet}/identity
+  method: get
+  operationId: walletApi_getWalletIdentity
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/wallet/batch-identity
+  method: post
+  operationId: walletApi_batchIdentityLookup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v0/addresses/{address}/nft-events
+  method: get
+  operationId: enhancedApi_getNftEvents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v0/tokens/metadata
+  method: post
+  operationId: enhancedApi_getTokenMetadata
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /v0/addresses/{address}/nfts
   method: get
   operationId: enhancedApi_getNFTs
@@ -175,6 +203,16 @@ operations:
   method: post
   operationId: enhancedApi_queryActiveListings
   x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v0/token-metadata
+  method: post
+  operationId: enhancedApi_queryMetadataV1
+  x-agentic-access:
     action-class: acting
     consequence: write
     subject: required
@@ -187,9 +225,37 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/raw-transactions
+- path: /fast
   method: post
-  operationId: enhancedApi_queryRawTxns
+  operationId: senderApi_sendTransaction
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /ping
+  method: get
+  operationId: senderApi_ping
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v0/tokens/metadata
+  method: post
+  operationId: enhancedApi_getTokenMetadata
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -219,6 +285,84 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /v0/addresses/{address}/transactions
+  method: get
+  operationId: enhancedApi_getEnhancedTransactions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v0/addresses/{address}/raw-transactions
+  method: get
+  operationId: enhancedApi_getRawTransactionHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v0/transactions
+  method: post
+  operationId: enhancedApi_getEnhancedTransaction
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v0/raw-transactions
+  method: post
+  operationId: enhancedApi_getRawTransactions
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/raw-transactions
+  method: post
+  operationId: enhancedApi_queryRawTxns
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/wallet/{wallet}/transfers
+  method: get
+  operationId: walletApi_getWalletTransfers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /v0/webhooks
   method: get
   operationId: webhooks_getWebhooks
@@ -303,123 +447,3 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/wallet/{wallet}/identity
-  method: get
-  operationId: walletApi_getWalletIdentity
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/wallet/batch-identity
-  method: post
-  operationId: walletApi_batchIdentityLookup
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/wallet/{wallet}/balances
-  method: get
-  operationId: walletApi_getWalletBalances
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/wallet/{wallet}/history
-  method: get
-  operationId: walletApi_getWalletHistory
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/wallet/{wallet}/transfers
-  method: get
-  operationId: walletApi_getWalletTransfers
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/wallet/{wallet}/funded-by
-  method: get
-  operationId: walletApi_getWalletFundingSource
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /fast
-  method: post
-  operationId: senderApi_sendTransaction
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /ping
-  method: get
-  operationId: senderApi_ping
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /
-  method: post
-  operationId: priorityFeeApi_getPriorityFeeEstimate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v0/admin/projects/{id}/usage
-  method: get
-  operationId: adminApi_getProjectUsage
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
