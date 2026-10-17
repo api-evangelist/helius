@@ -87,16 +87,6 @@ paths:
       - url: https://api.helius.xyz
         description: Production server
 components:
-  parameters:
-    WalletApi_WalletAddress:
-      name: wallet
-      in: path
-      required: true
-      description: Solana wallet address (base58 encoded)
-      schema:
-        type: string
-        pattern: ^[1-9A-HJ-NP-Za-km-z]{32,44}$
-      example: GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz
   responses:
     WalletApi_InternalError:
       description: Transient server error. Retryable with exponential backoff.
@@ -138,18 +128,6 @@ components:
             code: 429
             details: Too many requests. Retry after 2 seconds.
   schemas:
-    WalletApi_TransfersResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletApi_Transfer'
-        pagination:
-          $ref: '#/components/schemas/WalletApi_Pagination'
-      required:
-      - data
-      - pagination
     WalletApi_Pagination:
       type: object
       properties:
@@ -164,6 +142,18 @@ components:
           example: 5wHu1qwD7Jsj3xqWjdSEJmYr3Q5f5RjXqjqQJ7jqEj7jqEj7jqEj7jqEj7jqEj7jqE
       required:
       - hasMore
+    WalletApi_TransfersResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletApi_Transfer'
+        pagination:
+          $ref: '#/components/schemas/WalletApi_Pagination'
+      required:
+      - data
+      - pagination
     WalletApi_Error:
       type: object
       properties:
@@ -234,6 +224,16 @@ components:
       - amount
       - amountRaw
       - decimals
+  parameters:
+    WalletApi_WalletAddress:
+      name: wallet
+      in: path
+      required: true
+      description: Solana wallet address (base58 encoded)
+      schema:
+        type: string
+        pattern: ^[1-9A-HJ-NP-Za-km-z]{32,44}$
+      example: GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz
   securitySchemes:
     ApiKeyQuery:
       type: apiKey

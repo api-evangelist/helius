@@ -146,6 +146,18 @@ paths:
         description: Production server
 components:
   schemas:
+    AdminApi_ErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable error message.
+        error:
+          type: string
+          description: HTTP error name.
     AdminApi_ProjectUsageResponse:
       type: object
       properties:
@@ -233,18 +245,6 @@ components:
               type: number
               description: Number of WebSocket subscription requests.
               example: 600
-    AdminApi_ErrorResponse:
-      type: object
-      properties:
-        statusCode:
-          type: integer
-          description: HTTP status code.
-        message:
-          type: string
-          description: Human-readable error message.
-        error:
-          type: string
-          description: HTTP error name.
   securitySchemes:
     ApiKeyQuery:
       type: apiKey

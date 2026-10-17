@@ -136,23 +136,17 @@ paths:
         description: Devnet RPC endpoint
 components:
   schemas:
-    EnhancedApi_NamesResponse:
+    EnhancedApi_Balance:
       type: object
       properties:
-        domainNames:
-          type: array
-          items:
-            type: string
-    EnhancedApi_BalancesResponse:
-      type: object
-      properties:
-        tokens:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnhancedApi_Balance'
-        nativeBalance:
+        mint:
+          type: string
+        amount:
           type: number
-          description: In Lamports
+        decimals:
+          type: number
+        tokenAccount:
+          type: string
     EnhancedApi_ErrorResponse:
       type: object
       description: JSON-RPC error response format
@@ -180,17 +174,23 @@ components:
       - jsonrpc
       - error
       - id
-    EnhancedApi_Balance:
+    EnhancedApi_BalancesResponse:
       type: object
       properties:
-        mint:
-          type: string
-        amount:
+        tokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnhancedApi_Balance'
+        nativeBalance:
           type: number
-        decimals:
-          type: number
-        tokenAccount:
-          type: string
+          description: In Lamports
+    EnhancedApi_NamesResponse:
+      type: object
+      properties:
+        domainNames:
+          type: array
+          items:
+            type: string
   responses:
     EnhancedApi_403-Forbidden:
       description: Request was forbidden.
@@ -204,30 +204,6 @@ components:
               code: -32003
               message: Forbidden
             id: '1'
-    EnhancedApi_429-TooManyRequests:
-      description: Exceeded rate limit.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32005
-              message: Rate limit exceeded
-            id: '1'
-    EnhancedApi_504-GatewayTimeout:
-      description: The request timed out.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32003
-              message: Gateway timeout
-            id: '1'
     EnhancedApi_404-NotFound:
       description: The specified resource was not found.
       content:
@@ -239,30 +215,6 @@ components:
             error:
               code: -32601
               message: Method not found
-            id: '1'
-    EnhancedApi_500-InternalServerError:
-      description: The server encountered an unexpected condition that prevented it from fulfilling the request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32603
-              message: Internal error
-            id: '1'
-    EnhancedApi_503-ServiceUnavailable:
-      description: The service is temporarily unavailable.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32002
-              message: Service unavailable
             id: '1'
     EnhancedApi_400-BadRequest:
       description: Invalid request.
@@ -276,6 +228,42 @@ components:
               code: -32602
               message: Invalid params
             id: '1'
+    EnhancedApi_503-ServiceUnavailable:
+      description: The service is temporarily unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32002
+              message: Service unavailable
+            id: '1'
+    EnhancedApi_429-TooManyRequests:
+      description: Exceeded rate limit.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32005
+              message: Rate limit exceeded
+            id: '1'
+    EnhancedApi_500-InternalServerError:
+      description: The server encountered an unexpected condition that prevented it from fulfilling the request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32603
+              message: Internal error
+            id: '1'
     EnhancedApi_401-Unauthorized:
       description: Unauthorized request.
       content:
@@ -288,14 +276,19 @@ components:
               code: -32001
               message: Unauthorized
             id: '1'
+    EnhancedApi_504-GatewayTimeout:
+      description: The request timed out.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnhancedApi_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32003
+              message: Gateway timeout
+            id: '1'
   parameters:
-    apiKeyParam:
-      name: api-key
-      in: query
-      required: true
-      description: Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`.
-      schema:
-        type: string
     EnhancedApi_addressParam:
       name: address
       in: path
@@ -305,6 +298,13 @@ components:
         type: string
         example: 86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY
         default: 86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY
+    apiKeyParam:
+      name: api-key
+      in: query
+      required: true
+      description: Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`.
+      schema:
+        type: string
   securitySchemes:
     ApiKeyQuery:
       type: apiKey

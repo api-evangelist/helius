@@ -196,36 +196,31 @@ components:
             error: RATE_LIMIT_EXCEEDED
             code: 429
             details: Too many requests. Retry after 2 seconds.
+  parameters:
+    WalletApi_WalletOrDomain:
+      name: wallet
+      in: path
+      required: true
+      description: 'Solana wallet address (base58 encoded) or SNS/ANS domain name (e.g. `toly.sol`,
+
+        `miester.bonk`). Domain resolution is mainnet-only. Any non-`.sol` domain is treated
+
+        as an ANS custom TLD — there is no fixed TLD whitelist.
+
+        '
+      schema:
+        type: string
+      examples:
+        address:
+          summary: Solana address
+          value: GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz
+        snsDomain:
+          summary: SNS (.sol) domain
+          value: toly.sol
+        ansDomain:
+          summary: ANS custom TLD
+          value: miester.bonk
   schemas:
-    WalletApi_BatchIdentityEntry:
-      description: 'One element of the array returned by `POST /v1/wallet/batch-identity`. Resolved entries
-
-        match `BatchResolvedIdentity` (possibly with `inputDomain`); unresolvable domain entries
-
-        match `UnresolvedDomainEntry`. Distinguish at runtime by checking `unresolved === true`
-
-        or `address === null`.
-
-        '
-      oneOf:
-      - $ref: '#/components/schemas/WalletApi_BatchResolvedIdentity'
-      - $ref: '#/components/schemas/WalletApi_UnresolvedDomainEntry'
-    WalletApi_BatchResolvedIdentity:
-      description: 'A resolved entry in a batch identity response. Extends `Identity` with an optional
-
-        `inputDomain` field that is present when the original batch input for this entry was a
-
-        domain name. Returned only from `POST /v1/wallet/batch-identity`.
-
-        '
-      allOf:
-      - $ref: '#/components/schemas/WalletApi_Identity'
-      - type: object
-        properties:
-          inputDomain:
-            type: string
-            description: The domain name the caller queried. Present only when a domain (not an address) was provided as input for this batch entry.
-            example: toly.sol
     WalletApi_Identity:
       type: object
       properties:
@@ -266,6 +261,24 @@ components:
       - name
       - category
       - tags
+    WalletApi_Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+          example: Invalid wallet address
+        code:
+          type: integer
+          description: HTTP status code
+          example: 400
+        details:
+          type: string
+          description: Additional error details
+          example: '''invalid-address'' is not a valid Solana address'
+      required:
+      - error
+      - code
     WalletApi_UnresolvedDomainEntry:
       description: 'A batch entry returned when a domain name could not be resolved. Only appears as an
 
@@ -301,48 +314,35 @@ components:
       - type
       - inputDomain
       - unresolved
-    WalletApi_Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-          example: Invalid wallet address
-        code:
-          type: integer
-          description: HTTP status code
-          example: 400
-        details:
-          type: string
-          description: Additional error details
-          example: '''invalid-address'' is not a valid Solana address'
-      required:
-      - error
-      - code
-  parameters:
-    WalletApi_WalletOrDomain:
-      name: wallet
-      in: path
-      required: true
-      description: 'Solana wallet address (base58 encoded) or SNS/ANS domain name (e.g. `toly.sol`,
+    WalletApi_BatchResolvedIdentity:
+      description: 'A resolved entry in a batch identity response. Extends `Identity` with an optional
 
-        `miester.bonk`). Domain resolution is mainnet-only. Any non-`.sol` domain is treated
+        `inputDomain` field that is present when the original batch input for this entry was a
 
-        as an ANS custom TLD — there is no fixed TLD whitelist.
+        domain name. Returned only from `POST /v1/wallet/batch-identity`.
 
         '
-      schema:
-        type: string
-      examples:
-        address:
-          summary: Solana address
-          value: GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz
-        snsDomain:
-          summary: SNS (.sol) domain
-          value: toly.sol
-        ansDomain:
-          summary: ANS custom TLD
-          value: miester.bonk
+      allOf:
+      - $ref: '#/components/schemas/WalletApi_Identity'
+      - type: object
+        properties:
+          inputDomain:
+            type: string
+            description: The domain name the caller queried. Present only when a domain (not an address) was provided as input for this batch entry.
+            example: toly.sol
+    WalletApi_BatchIdentityEntry:
+      description: 'One element of the array returned by `POST /v1/wallet/batch-identity`. Resolved entries
+
+        match `BatchResolvedIdentity` (possibly with `inputDomain`); unresolvable domain entries
+
+        match `UnresolvedDomainEntry`. Distinguish at runtime by checking `unresolved === true`
+
+        or `address === null`.
+
+        '
+      oneOf:
+      - $ref: '#/components/schemas/WalletApi_BatchResolvedIdentity'
+      - $ref: '#/components/schemas/WalletApi_UnresolvedDomainEntry'
   securitySchemes:
     ApiKeyQuery:
       type: apiKey

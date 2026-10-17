@@ -327,15 +327,113 @@ paths:
       servers:
       - url: https://api-mainnet.helius-rpc.com
 components:
+  responses:
+    Webhooks_403-Forbidden:
+      description: Request was forbidden.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Webhooks_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32003
+              message: Forbidden
+            id: '1'
+    Webhooks_400-BadRequest:
+      description: Invalid request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Webhooks_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32602
+              message: Invalid params
+            id: '1'
+    Webhooks_429-TooManyRequests:
+      description: Exceeded rate limit.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Webhooks_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32005
+              message: Rate limit exceeded
+            id: '1'
+    Webhooks_200-NoContent:
+      description: No content.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+    Webhooks_504-GatewayTimeout:
+      description: The request timed out.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Webhooks_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32003
+              message: Gateway timeout
+            id: '1'
+    Webhooks_401-Unauthorized:
+      description: Unauthorized request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Webhooks_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32001
+              message: Unauthorized
+            id: '1'
+    Webhooks_404-NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Webhooks_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32601
+              message: Method not found
+            id: '1'
+    Webhooks_503-ServiceUnavailable:
+      description: The service is temporarily unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Webhooks_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32002
+              message: Service unavailable
+            id: '1'
+    Webhooks_500-InternalServerError:
+      description: The server encountered an unexpected condition that prevented it from fulfilling the request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Webhooks_ErrorResponse'
+          example:
+            jsonrpc: '2.0'
+            error:
+              code: -32603
+              message: Internal error
+            id: '1'
   schemas:
-    Webhooks_ToggleWebhookRequest:
-      type: object
-      required:
-      - active
-      properties:
-        active:
-          type: boolean
-          description: Set to true to enable the webhook or false to disable it.
     Webhooks_Webhook:
       type: object
       properties:
@@ -950,6 +1048,14 @@ components:
       - WITHDRAW_SOL_FROM_FLASH_LOAN_POOL
       - WITHDRAW_TREASURY
       - WITHDRAW_UNSTAKED_DEPOSITS
+    Webhooks_ToggleWebhookRequest:
+      type: object
+      required:
+      - active
+      properties:
+        active:
+          type: boolean
+          description: Set to true to enable the webhook or false to disable it.
     Webhooks_ErrorResponse:
       type: object
       properties:
@@ -998,113 +1104,14 @@ components:
           type: string
         txnStatus:
           type: string
-  responses:
-    Webhooks_500-InternalServerError:
-      description: The server encountered an unexpected condition that prevented it from fulfilling the request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Webhooks_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32603
-              message: Internal error
-            id: '1'
-    Webhooks_400-BadRequest:
-      description: Invalid request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Webhooks_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32602
-              message: Invalid params
-            id: '1'
-    Webhooks_503-ServiceUnavailable:
-      description: The service is temporarily unavailable.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Webhooks_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32002
-              message: Service unavailable
-            id: '1'
-    Webhooks_200-NoContent:
-      description: No content.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              message:
-                type: string
-    Webhooks_404-NotFound:
-      description: The specified resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Webhooks_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32601
-              message: Method not found
-            id: '1'
-    Webhooks_429-TooManyRequests:
-      description: Exceeded rate limit.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Webhooks_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32005
-              message: Rate limit exceeded
-            id: '1'
-    Webhooks_401-Unauthorized:
-      description: Unauthorized request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Webhooks_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32001
-              message: Unauthorized
-            id: '1'
-    Webhooks_504-GatewayTimeout:
-      description: The request timed out.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Webhooks_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32003
-              message: Gateway timeout
-            id: '1'
-    Webhooks_403-Forbidden:
-      description: Request was forbidden.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Webhooks_ErrorResponse'
-          example:
-            jsonrpc: '2.0'
-            error:
-              code: -32003
-              message: Forbidden
-            id: '1'
   parameters:
+    apiKeyParam:
+      name: api-key
+      in: query
+      required: true
+      description: Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`.
+      schema:
+        type: string
     Webhooks_webhookIDParam:
       name: webhookID
       in: path
@@ -1113,13 +1120,6 @@ components:
       schema:
         type: string
         example: 123e4567-e89b-12d3-a456-426614174000
-    apiKeyParam:
-      name: api-key
-      in: query
-      required: true
-      description: Helius API key. Obtain from https://dashboard.helius.dev or via `helius signup --json`.
-      schema:
-        type: string
   securitySchemes:
     ApiKeyQuery:
       type: apiKey

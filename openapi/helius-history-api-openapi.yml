@@ -187,16 +187,6 @@ paths:
       - url: https://api.helius.xyz
         description: Production server
 components:
-  parameters:
-    WalletApi_WalletAddress:
-      name: wallet
-      in: path
-      required: true
-      description: Solana wallet address (base58 encoded)
-      schema:
-        type: string
-        pattern: ^[1-9A-HJ-NP-Za-km-z]{32,44}$
-      example: GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz
   responses:
     WalletApi_InternalError:
       description: Transient server error. Retryable with exponential backoff.
@@ -238,65 +228,6 @@ components:
             code: 429
             details: Too many requests. Retry after 2 seconds.
   schemas:
-    WalletApi_BalanceChange:
-      type: object
-      properties:
-        mint:
-          type: string
-          description: Token mint address (or 'SOL' for native)
-          example: So11111111111111111111111111111111111111112
-        amount:
-          type: number
-          description: Change amount (positive for increase, negative for decrease)
-          example: -0.05
-        decimals:
-          type: integer
-          description: Token decimals
-          example: 9
-      required:
-      - mint
-      - amount
-      - decimals
-    WalletApi_HistoryTransaction:
-      type: object
-      properties:
-        signature:
-          type: string
-          description: Transaction signature
-          example: 5wHu1qwD7Jsj3xqWjdSEJmYr3Q5f5RjXqjqQJ7jqEj7jqEj7jqEj7jqEj7jqEj7jqE
-        timestamp:
-          type: integer
-          nullable: true
-          description: Unix timestamp in seconds
-          example: 1704067200
-        slot:
-          type: integer
-          description: Slot number
-          example: 250000000
-        fee:
-          type: number
-          description: Transaction fee in SOL
-          example: 5.0e-06
-        feePayer:
-          type: string
-          description: Address that paid the transaction fee
-          example: GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz
-        error:
-          type: string
-          nullable: true
-          description: Error message if transaction failed
-          example: null
-        balanceChanges:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletApi_BalanceChange'
-          description: All balance changes in this transaction
-      required:
-      - signature
-      - slot
-      - fee
-      - feePayer
-      - balanceChanges
     WalletApi_Pagination:
       type: object
       properties:
@@ -341,6 +272,75 @@ components:
       required:
       - error
       - code
+    WalletApi_HistoryTransaction:
+      type: object
+      properties:
+        signature:
+          type: string
+          description: Transaction signature
+          example: 5wHu1qwD7Jsj3xqWjdSEJmYr3Q5f5RjXqjqQJ7jqEj7jqEj7jqEj7jqEj7jqEj7jqE
+        timestamp:
+          type: integer
+          nullable: true
+          description: Unix timestamp in seconds
+          example: 1704067200
+        slot:
+          type: integer
+          description: Slot number
+          example: 250000000
+        fee:
+          type: number
+          description: Transaction fee in SOL
+          example: 5.0e-06
+        feePayer:
+          type: string
+          description: Address that paid the transaction fee
+          example: GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz
+        error:
+          type: string
+          nullable: true
+          description: Error message if transaction failed
+          example: null
+        balanceChanges:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletApi_BalanceChange'
+          description: All balance changes in this transaction
+      required:
+      - signature
+      - slot
+      - fee
+      - feePayer
+      - balanceChanges
+    WalletApi_BalanceChange:
+      type: object
+      properties:
+        mint:
+          type: string
+          description: Token mint address (or 'SOL' for native)
+          example: So11111111111111111111111111111111111111112
+        amount:
+          type: number
+          description: Change amount (positive for increase, negative for decrease)
+          example: -0.05
+        decimals:
+          type: integer
+          description: Token decimals
+          example: 9
+      required:
+      - mint
+      - amount
+      - decimals
+  parameters:
+    WalletApi_WalletAddress:
+      name: wallet
+      in: path
+      required: true
+      description: Solana wallet address (base58 encoded)
+      schema:
+        type: string
+        pattern: ^[1-9A-HJ-NP-Za-km-z]{32,44}$
+      example: GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz
   securitySchemes:
     ApiKeyQuery:
       type: apiKey

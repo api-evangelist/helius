@@ -80,16 +80,6 @@ paths:
       - url: https://api.helius.xyz
         description: Production server
 components:
-  parameters:
-    WalletApi_WalletAddress:
-      name: wallet
-      in: path
-      required: true
-      description: Solana wallet address (base58 encoded)
-      schema:
-        type: string
-        pattern: ^[1-9A-HJ-NP-Za-km-z]{32,44}$
-      example: GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz
   responses:
     WalletApi_InternalError:
       description: Transient server error. Retryable with exponential backoff.
@@ -130,7 +120,35 @@ components:
             error: RATE_LIMIT_EXCEEDED
             code: 429
             details: Too many requests. Retry after 2 seconds.
+  parameters:
+    WalletApi_WalletAddress:
+      name: wallet
+      in: path
+      required: true
+      description: Solana wallet address (base58 encoded)
+      schema:
+        type: string
+        pattern: ^[1-9A-HJ-NP-Za-km-z]{32,44}$
+      example: GQUtvPx89ZNCwmvQqFmH59bJcU8fW8siETpaxod7Aydz
   schemas:
+    WalletApi_Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+          example: Invalid wallet address
+        code:
+          type: integer
+          description: HTTP status code
+          example: 400
+        details:
+          type: string
+          description: Additional error details
+          example: '''invalid-address'' is not a valid Solana address'
+      required:
+      - error
+      - code
     WalletApi_FundingSource:
       type: object
       properties:
@@ -201,24 +219,6 @@ components:
       - date
       - slot
       - explorerUrl
-    WalletApi_Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-          example: Invalid wallet address
-        code:
-          type: integer
-          description: HTTP status code
-          example: 400
-        details:
-          type: string
-          description: Additional error details
-          example: '''invalid-address'' is not a valid Solana address'
-      required:
-      - error
-      - code
   securitySchemes:
     ApiKeyQuery:
       type: apiKey
