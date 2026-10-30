@@ -1,4 +1,4 @@
-# Helius (helius)
+# Helius
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,164 +66,175 @@
 
 Helius is a Solana developer platform offering Solana JSON-RPC, the Digital Asset Standard (DAS) API for NFTs/tokens, Enhanced Transactions, Webhooks, LaserStream gRPC streaming, Sender (transaction routing), Photon RPC, and Dedicated Nodes.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/helius/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/helius/refs/heads/main/apis.yml)
+**Areas:** Web3 · Blockchain · Solana · RPC · DAS · Streams · Real-Time · A2A
 
-## Tags
+## Helius on APIs.io
 
-- Web3
-- Blockchain
-- Solana
-- RPC
-- DAS
-- Streams
+Everything profiled for Helius is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/helius/](https://apis.io/providers/helius/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (20)
 
-- **Created:** 2026-05-08
-- **Modified:** 2026-05-29
+- [Helius Solana RPC](https://apis.io/apis/helius/rpc/) — Solana JSON-RPC and WebSocket endpoints with enhanced WebSockets, archival data, and staked connections.
+- [Helius Digital Asset Standard (DAS) API](https://apis.io/apis/helius/das/) — Solana JSON-RPC API for unified asset queries (compressed NFTs, regular NFTs, tokens) including getAsset, getAssetsByOwner, searchAssets.
+- [Helius Enhanced Transactions API](https://apis.io/apis/helius/enhanced-tx/) — REST API for parsed and human-readable Solana transaction history with token metadata.
+- [Helius Webhooks](https://apis.io/apis/helius/webhooks/) — REST API for managing webhook subscriptions for Solana on-chain events with parsed transaction payloads.
+- [Helius LaserStream](https://apis.io/apis/helius/laserstream/) — Low-latency gRPC streaming of Solana account, slot, transaction, and block updates (Geyser-compatible).
+- [Helius Sender](https://apis.io/apis/helius/sender/) — Parallel transaction routing through Helius and Jito for inclusion latency optimization.
+- [Helius Photon RPC (ZK Compression)](https://apis.io/apis/helius/photon/) — Indexed RPC for Solana ZK compression (compressed accounts).
+- [Helius Addresses API](https://apis.io/apis/helius/helius-addresses-api/) — Enhanced on-chain identity data with complete wallet activity and ownership information.
+- [Helius Admin API](https://apis.io/apis/helius/helius-admin-api/) — The Admin API from Helius — 1 operation(s) for admin.
+- [Helius Balances API](https://apis.io/apis/helius/helius-balances-api/) — Query token and NFT balances
+- [Helius Funding API](https://apis.io/apis/helius/helius-funding-api/) — Wallet funding information
+- [Helius API Catalog API](https://apis.io/apis/helius/helius-helius-api-catalog-api/) — The Helius API Catalog API from Helius — 1 operation(s) for helius api catalog.
+- [Helius History API](https://apis.io/apis/helius/helius-history-api/) — Transaction history and balance changes
+- [Helius Identity API](https://apis.io/apis/helius/helius-identity-api/) — Lookup wallet identities and known addresses
+- [Helius Sender API](https://apis.io/apis/helius/helius-sender-api/) — The Sender API from Helius — 2 operation(s) for sender.
+- [Helius Tokens API](https://apis.io/apis/helius/helius-tokens-api/) — Complete token account data, on-chain and off-chain metadata, and detailed information for both fungible and non-fungible Solana tokens.
+- [Helius Transactions API](https://apis.io/apis/helius/helius-transactions-api/) — Enhanced and human-readable transaction histories with decoded instruction data and detailed context.
+- [Helius Transfers API](https://apis.io/apis/helius/helius-transfers-api/) — Token transfer activity
+- [Helius Webhooks API](https://apis.io/apis/helius/helius-webhooks-api/) — Configure real-time blockchain notifications for any Solana address, transaction type, or on-chain event with customizable delivery options.
+- [Helius NF Ts API](https://apis.io/apis/helius/helius-nfts-api/) — Access comprehensive NFT data including events, collection aggregations, real-time stats, and complete historical activity on Solana.
 
-## APIs
+### Published properties
 
-### Helius Solana RPC
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Solana JSON-RPC and WebSocket endpoints with enhanced WebSockets, archival data, and staked connections.
+#### AsyncAPI (1)
 
-- **Human URL:** [https://www.helius.dev/docs/rpc](https://www.helius.dev/docs/rpc)
-- **Base URL:** `https://mainnet.helius-rpc.com/?api-key={apiKey}`
+Event-driven and webhook contracts.
 
-#### Tags
+- [Helius WebSocket APIs](https://apis.io/asyncapis/helius/helius-asyncapi/)
 
-- JSON-RPC
-- Solana
-- WebSocket
+#### Event channels (10)
 
-#### Properties
+Individual events and webhooks the provider emits.
 
-- [Documentation](https://www.helius.dev/docs/rpc)
-- [AsyncAPI](asyncapi/helius-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Postman Collection](collections/helius.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/helius.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [accountSubscribe](https://apis.io/channels/helius/accountsubscribe/)
+- [blockSubscribe](https://apis.io/channels/helius/blocksubscribe/)
+- [logsSubscribe](https://apis.io/channels/helius/logssubscribe/)
+- [programSubscribe](https://apis.io/channels/helius/programsubscribe/)
+- [rootSubscribe](https://apis.io/channels/helius/rootsubscribe/)
+- [signatureSubscribe](https://apis.io/channels/helius/signaturesubscribe/)
+- [slotSubscribe](https://apis.io/channels/helius/slotsubscribe/)
+- [slotsUpdatesSubscribe](https://apis.io/channels/helius/slotsupdatessubscribe/)
+- [transactionSubscribe](https://apis.io/channels/helius/transactionsubscribe/)
+- [voteSubscribe](https://apis.io/channels/helius/votesubscribe/)
 
-### Helius Digital Asset Standard (DAS) API
+#### Agentic access (1)
 
-Solana JSON-RPC API for unified asset queries (compressed NFTs, regular NFTs, tokens) including getAsset, getAssetsByOwner, searchAssets.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://www.helius.dev/docs/das-api](https://www.helius.dev/docs/das-api)
-- **Base URL:** `https://mainnet.helius-rpc.com/?api-key={apiKey}`
+- [Helius Agentic Access](https://apis.io/agentic-access/helius/helius-agentic-access/)
 
-#### Tags
+#### Collections (14)
 
-- JSON-RPC
-- DAS
-- NFT
+Postman and Open Collection request collections.
 
-#### Properties
+- [Helius API Catalog](https://apis.io/collections/helius/open-helius/)
+- [Helius API Catalog Addresses API](https://apis.io/collections/helius/open-helius-addresses-api/)
+- [Helius API Catalog Addresses Admin API](https://apis.io/collections/helius/open-helius-admin-api/)
+- [Helius API Catalog Addresses Balances API](https://apis.io/collections/helius/open-helius-balances-api/)
+- [Helius API Catalog Addresses Funding API](https://apis.io/collections/helius/open-helius-funding-api/)
+- [Addresses Helius API Catalog API](https://apis.io/collections/helius/open-helius-helius-api-catalog-api/)
+- [Helius API Catalog Addresses History API](https://apis.io/collections/helius/open-helius-history-api/)
+- [Helius API Catalog Addresses Identity API](https://apis.io/collections/helius/open-helius-identity-api/)
+- [Helius API Catalog Addresses NFTs API](https://apis.io/collections/helius/open-helius-nfts-api/)
+- [Helius API Catalog Addresses Sender API](https://apis.io/collections/helius/open-helius-sender-api/)
+- [Helius API Catalog Addresses Tokens API](https://apis.io/collections/helius/open-helius-tokens-api/)
+- [Helius API Catalog Addresses Transactions API](https://apis.io/collections/helius/open-helius-transactions-api/)
+- [Helius API Catalog Addresses Transfers API](https://apis.io/collections/helius/open-helius-transfers-api/)
+- [Helius API Catalog Addresses Webhooks API](https://apis.io/collections/helius/open-helius-webhooks-api/)
 
-- [Documentation](https://www.helius.dev/docs/das-api)
-- [Postman Collection](collections/helius.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/helius.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Governance rules (1)
 
-### Helius Enhanced Transactions API
+Spectral rulesets for the provider's contracts.
 
-REST API for parsed and human-readable Solana transaction history with token metadata.
+- [Helius — asyncapi rules](https://apis.io/rules/helius/helius-asyncapi-spectral-rules/)
 
-- **Human URL:** [https://www.helius.dev/docs/api-reference/enhanced-transactions-api](https://www.helius.dev/docs/api-reference/enhanced-transactions-api)
-- **Base URL:** `https://api.helius.xyz/v0`
+#### Security (3)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- REST
-- Transactions
+- [Helius Authentication](https://apis.io/security/helius/helius-authentication/)
+- [Helius Domain Security](https://apis.io/security/helius/helius-domain-security/)
+- [Helius Vulnerability Disclosure](https://apis.io/security/helius/helius-vulnerability-disclosure/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://www.helius.dev/docs/api-reference/enhanced-transactions-api)
-- [Postman Collection](collections/helius.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/helius.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published plans, tiers and prices.
 
-### Helius Webhooks
+- [Helius Plans Pricing](https://apis.io/plans/helius/helius-plans-pricing/)
 
-REST API for managing webhook subscriptions for Solana on-chain events with parsed transaction payloads.
+#### Rate limits (1)
 
-- **Human URL:** [https://www.helius.dev/docs/webhooks](https://www.helius.dev/docs/webhooks)
-- **Base URL:** `https://api.helius.xyz/v0/webhooks`
+Published request limits.
 
-#### Tags
+- [Helius Rate Limits](https://apis.io/rate-limits/helius/helius-rate-limits/)
 
-- REST
-- Webhooks
+#### FinOps (1)
 
-#### Properties
+What the API costs to run, by operation.
 
-- [Documentation](https://www.helius.dev/docs/webhooks)
-- [Postman Collection](collections/helius.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/helius.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Helius Finops](https://apis.io/finops/helius/helius-finops/)
 
-### Helius LaserStream
+## Where to find this API
 
-Low-latency gRPC streaming of Solana account, slot, transaction, and block updates (Geyser-compatible).
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- **Human URL:** [https://www.helius.dev/docs/laserstream](https://www.helius.dev/docs/laserstream)
-- **Base URL:** `grpc://laserstream-mainnet.helius-rpc.com`
-
-#### Tags
-
-- gRPC
-- Streaming
-
-#### Properties
-
-- [Documentation](https://www.helius.dev/docs/laserstream)
-- [Postman Collection](collections/helius.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/helius.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Helius Sender
-
-Parallel transaction routing through Helius and Jito for inclusion latency optimization.
-
-- **Human URL:** [https://www.helius.dev/docs/sender](https://www.helius.dev/docs/sender)
-- **Base URL:** `https://sender.helius-rpc.com`
-
-#### Tags
-
-- JSON-RPC
-- Transactions
-- Jito
-
-#### Properties
-
-- [Documentation](https://www.helius.dev/docs/sender)
-- [Postman Collection](collections/helius.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/helius.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Helius Photon RPC (ZK Compression)
-
-Indexed RPC for Solana ZK compression (compressed accounts).
-
-- **Human URL:** [https://www.helius.dev/docs/photon](https://www.helius.dev/docs/photon)
-- **Base URL:** `https://mainnet.helius-rpc.com`
-
-#### Tags
-
-- JSON-RPC
-- ZK Compression
-
-#### Properties
-
-- [Documentation](https://www.helius.dev/docs/photon)
-- [Postman Collection](collections/helius.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/helius.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/helius-labs)
-- [LinkedIn](https://www.linkedin.com/company/heliusapi)
 - [Website](https://www.helius.dev/)
-- [Plans](plans/helius-plans-pricing.yml)
-- [Rate Limits](rate-limits/helius-rate-limits.yml)
-- [Fin Ops](finops/helius-finops.yml)
+- [Support](https://www.helius.dev/contact)
+- [Blog](https://www.helius.dev/blog)
+- [GitHub](https://github.com/helius-labs)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 31.0** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 57.6 |
+| Contract governance | 13.6 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 28.6 |
+| Access clarity | 7.9 |
+
+**Agent readiness 30.7** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | near-conformant (partial credit) |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 17.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/helius/](https://apis.io/providers/helius/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Helius: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/helius/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
